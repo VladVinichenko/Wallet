@@ -1,6 +1,6 @@
 import { GlobalStyle, Fonts } from './stylesheet'
 import { Fragment } from 'react'
-import ButtonAddTransaction from '../src/modules/common/ButtonAddTransactions'
+import ButtonAddTransaction from 'ButtonAddTransactions'
 
 function App() {
 	return (
