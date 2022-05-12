@@ -1,6 +1,6 @@
 import { GlobalStyle, Fonts } from './stylesheet'
 import { Fragment } from 'react'
-import Currency from './modules/components/Currency/Currency'
+import { Currency } from 'modules/components/Currency'
 
 function App() {
 	return (

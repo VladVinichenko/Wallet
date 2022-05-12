@@ -3,7 +3,7 @@ import fetchCourse from '../../../servises/fetchCourse'
 import Spinner from '../../../Spinner/Spinner'
 import styles from './Currency.module.css'
 
-function Currency() {
+export const Currency = () => {
 	const [currency, setCurrency] = useState([])
 	useEffect(() => {
 		const fetchCurrency = async () => {
@@ -69,5 +69,3 @@ function Currency() {
 		</div>
 	)
 }
-
-export default Currency
