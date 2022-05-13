@@ -36,6 +36,7 @@ export const vars = {
 	},
 	filter: {
 		pageBackgroundFilter: 'blur(50px)',
+		shadowButton: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
 	},
 	animation: {
 		duration: '250ms',

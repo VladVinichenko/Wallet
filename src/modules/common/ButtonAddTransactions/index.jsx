@@ -12,7 +12,7 @@ const Button = styled.button`
 	cursor: pointer;
 	background-color: ${vars.color.accent.primary};
 	border-radius: 50%;
-	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+	filter: ${vars.filter.shadowButton};
 
 	@media screen and (min-width: 768px) {
 		right: 40px;
@@ -28,7 +28,7 @@ const Button = styled.button`
 
 export const ButtonAddTransactios = ({ openModal }) => {
 	return (
-		<Button type='button' onClick={openModal}>
+		<Button type='button' onClickButton={openModal}>
 			<BsPlusLg />
 		</Button>
 	)
