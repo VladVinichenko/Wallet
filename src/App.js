@@ -1,9 +1,6 @@
-import { GlobalStyle, Fonts } from './stylesheet'
 import { Fragment } from 'react'
-import { Container } from 'modules'
+// import { ButtonAddTransactios } from 'modules'
 
-function App() {
-	return <Container>meow</Container>
+export default function App() {
+	return <Fragment>{/* <ButtonAddTransactios /> */}</Fragment>
 }
-
-export default App
