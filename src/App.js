@@ -1,15 +1,6 @@
-import { GlobalStyle, Fonts } from './stylesheet'
 import { Fragment } from 'react'
-import { Currency } from 'modules/components/Currency'
+// import { ButtonAddTransactios } from 'modules'
 
-function App() {
-	return (
-		<Fragment>
-			<Fonts />
-			<GlobalStyle />
-			<Currency />
-		</Fragment>
-	)
+export default function App() {
+	return <Fragment>{/* <ButtonAddTransactios /> */}</Fragment>
 }
-
-export default App
