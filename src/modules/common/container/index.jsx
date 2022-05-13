@@ -6,6 +6,7 @@ export const Container = styled.div`
 	position: relative;
 	overflow-x: hidden;
 	min-width: 320px;
+
 	@media screen and (min-width: 320px) and (max-width: 767px) {
 		padding-left: 20px;
 		padding-right: 20px;
