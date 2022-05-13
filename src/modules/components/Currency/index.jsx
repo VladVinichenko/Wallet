@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import Spinner from 'Spinner'
 import styled from 'styled-components'
 import fetchCourse from 'servises/fetchCourse'
+import { animation, vars } from 'stylesheet'
 
-import Spinner from 'Spinner'
-
-import currency_mob from 'images/currency/currency_mob.png'
-import currency_tab from 'images/currency/currency_tab.png'
-import currency_desk from 'images/currency/currency_desk.png'
+import currency_mob from 'assets/images/currency/currency_mob.svg'
+import currency_tab from 'assets/images/currency/currency_tab.svg'
+import currency_desk from 'assets/images/currency/currency_desk.svg'
 
 const Currenc = styled.div`
 	position: relative;
@@ -14,9 +14,9 @@ const Currenc = styled.div`
 	height: 174px;
 	margin: 0 auto;
 	margin-top: 30px;
-	border-radius: 30px;
-	color: #ffffff;
-	background-color: #4a56e2;
+	border-radius: ${vars.borderRadius.seconary};
+	color: ${vars.color.background.primary};
+	background-color: ${vars.color.background.card};
 	background-image: url(${currency_mob});
 	background-repeat: no-repeat;
 	background-position: right bottom;
@@ -46,17 +46,17 @@ const Currenc = styled.div`
 	}
 
 	thead td:nth-child(1) {
-		border-top-left-radius: 30px;
-		background-color: rgba(255, 255, 255, 0.2);
+		border-top-left-radius: ${vars.borderRadius.seconary};
+		background-color: ${vars.color.background.currency};
 	}
 
 	thead td:nth-child(2) {
-		background-color: rgba(255, 255, 255, 0.2);
+		background-color: ${vars.color.background.currency};
 	}
 
 	thead td:nth-child(3) {
-		border-top-right-radius: 30px;
-		background-color: rgba(255, 255, 255, 0.2);
+		border-top-right-radius: ${vars.borderRadius.seconary};
+		background-color: ${vars.color.background.currency};
 	}
 
 	td {
@@ -82,7 +82,7 @@ const Currenc = styled.div`
 		background-image: url(${currency_tab});
 
 		currencyShow {
-			animation: currency-show 0.5s forwards;
+			animation: ${animation.show.currency};
 		}
 	}
 
@@ -161,9 +161,9 @@ export const Currency = () => {
 				<table>
 					<thead>
 						<tr>
-							<td>Валюта</td>
-							<td>Купівля</td>
-							<td>Продаж</td>
+							<td>Сurrency</td>
+							<td>Buy</td>
+							<td>Sell</td>
 						</tr>
 					</thead>
 					<tbody>
