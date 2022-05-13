@@ -54,4 +54,11 @@ export const vars = {
 		firstLine: `0px 1px 0px rgba(255, 255, 255, 0.6)`,
 		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px rgba(255, 255, 255, 0.6)`,
 	},
+	breakpoints: {
+		mobile: '320px',
+		mobileUp: '767px',
+		tablet: '768px',
+		tabletUp: '1279px',
+		desktop: '1280px',
+	},
 }
