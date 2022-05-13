@@ -161,7 +161,7 @@ export const Currency = () => {
 				<table>
 					<thead>
 						<tr>
-							<td>Сurrency</td>
+							<td>Currency</td>
 							<td>Buy</td>
 							<td>Sell</td>
 						</tr>
