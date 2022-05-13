@@ -55,18 +55,22 @@ export const Backdrop = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: rgba(0, 0, 0, 0.25);
+	background-color: ${vars.color.background.backdrop};
 `
 
 export const ModalContent = styled.div`
 	position: relative;
 	min-width: 100px;
 	min-height: 100px;
-	width: 540px;
 	border-radius: ${vars.borderRadius.primary};
 	background-color: ${vars.color.background.primary};
-
 	overflow: auto;
+
+	@media screen and (max-width: ${vars.breakpoints.mobileUp}) {
+		border-radius: 0;
+		width: 100%;
+		height: 100%;
+	}
 `
 export const IconButton = styled.button`
 	position: absolute;
@@ -80,6 +84,10 @@ export const IconButton = styled.button`
 
 	border: 1px solid transparent;
 	cursor: pointer;
+
+	@media screen and (max-width: ${vars.breakpoints.mobileUp}) {
+		display: none;
+	}
 
 	svg {
 		width: 30px;
