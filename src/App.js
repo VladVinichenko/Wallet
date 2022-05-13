@@ -1,15 +1,15 @@
-import { GlobalStyle, Fonts } from './stylesheet'
 import { Fragment } from 'react'
+// import { ButtonAddTransactios } from 'modules'
 import { AddTransaction } from 'modules/components/addTransaction'
+// исправить импорт
 
-function App() {
+export default function App() {
 	return (
 		<Fragment>
-			<Fonts />
-			<GlobalStyle />
-			<AddTransaction />
+			{
+				/* <ButtonAddTransactios /> */
+				<AddTransaction />
+			}
 		</Fragment>
 	)
 }
-
-export default App

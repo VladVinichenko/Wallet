@@ -1,18 +1,18 @@
 {
-  "parser": "@babel/eslint-parser",
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "rules": {
-    "react/prop-types": "off"
-  }
+	"parser": "@babel/eslint-parser",
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"rules": {
+		"react/prop-types": "off"
+	}
 }
