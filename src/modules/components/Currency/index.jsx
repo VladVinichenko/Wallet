@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import fetchCourse from 'servises/fetchCourse'
 import { animation, vars } from 'stylesheet'
 
+// import { sprite } from 'assets'
 import currency_mob from 'assets/images/currency/currency_mob.svg'
 import currency_tab from 'assets/images/currency/currency_tab.svg'
 import currency_desk from 'assets/images/currency/currency_desk.svg'
@@ -102,20 +103,7 @@ const Currenc = styled.div`
 			padding-top: 23px;
 		}
 	}
-	@keyframes currency-show {
-		0% {
-			opacity: 0;
-			transform: translateX(-50px);
-		}
-
-		50% {
-			opacity: 1;
-		}
-
-		100% {
-			transform: translateX(0);
-		}
-	}
+	@keyframes ${animation.keyframes.currencyShow};
 `
 
 export const Currency = () => {

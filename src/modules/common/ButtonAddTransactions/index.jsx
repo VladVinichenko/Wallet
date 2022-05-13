@@ -8,6 +8,9 @@ const Button = styled.button`
 	bottom: 20px;
 	width: 44px;
 	height: 44px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	padding: 0;
 	cursor: pointer;
 	background-color: ${vars.color.accent.primary};
@@ -26,9 +29,9 @@ const Button = styled.button`
 	}
 `
 
-export const ButtonAddTransactios = ({ openModal }) => {
+export const ButtonAddTransactios = ({ onClickButton }) => {
 	return (
-		<Button type='button' onClickButton={openModal}>
+		<Button type='button' onClick={onClickButton}>
 			<BsPlusLg />
 		</Button>
 	)
