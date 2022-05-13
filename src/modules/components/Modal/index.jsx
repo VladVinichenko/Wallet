@@ -1,36 +1,46 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { VscClose } from 'react-icons/vsc'
+import { vars } from 'stylesheet'
 
 const modalRoot = document.querySelector('#root-modal')
 
-const Modal = ({ onClose, children }) => {
+const Modal = ({ children }) => {
+	const [isModalOpen, setIsModalOpen] = useState(true)
+
+	const toggleModal = () => {
+		setIsModalOpen(!isModalOpen)
+	}
+
 	useEffect(() => {
 		function handleKeyDown(e) {
-			onClose() ? e.code === 'Escape' : window.addEventListener('keydown', handleKeyDown)
+			e.code === 'Escape' && toggleModal()
 		}
+		window.addEventListener('keydown', handleKeyDown)
 
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown)
 		}
-	}, [onClose, children])
+	}, [children, toggleModal])
 
 	const handleBackdropClick = (e) => {
-		if (e.target === e.currentTarget) onClose()
+		e.target === e.currentTarget && toggleModal()
 	}
 
 	return createPortal(
-		<Backdrop onClick={handleBackdropClick}>
-			<ModalContent>
-				<IconButton onClick={onClose} aria-label='Close Modal Button'>
-					<div>
-						<VscClose size={24} />
-					</div>
-				</IconButton>
-				{children}
-			</ModalContent>
-		</Backdrop>,
+		<>
+			{isModalOpen && (
+				<Backdrop onClick={handleBackdropClick}>
+					<ModalContent>
+						<IconButton type='button' onClick={toggleModal}>
+							<VscClose />
+						</IconButton>
+						{children}
+					</ModalContent>
+				</Backdrop>
+			)}
+		</>,
 		modalRoot
 	)
 }
@@ -50,10 +60,11 @@ export const Backdrop = styled.div`
 
 export const ModalContent = styled.div`
 	position: relative;
-	padding: 40px;
+	min-width: 100px;
+	min-height: 100px;
 	width: 540px;
-	border-radius: 20px;
-	background-color: #ffffff;
+	border-radius: ${vars.borderRadius.primary};
+	background-color: ${vars.color.background.primary};
 
 	overflow: auto;
 `
@@ -65,11 +76,15 @@ export const IconButton = styled.button`
 	align-items: center;
 	justify-content: center;
 	z-index: 201;
-	width: 24px;
-	height: 24px;
 	background-color: transparent;
-	border-radius: 50%;
+
 	border: 1px solid transparent;
+	cursor: pointer;
+
+	svg {
+		width: 30px;
+		height: 30px;
+	}
 `
 
 export default Modal
