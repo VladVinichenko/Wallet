@@ -22,9 +22,6 @@ export const vars = {
 			firstEllipse: '#FFD8D0',
 			secondEllipse: '#C5BAFF',
 		},
-		line: {
-			boxShadow: 'rgba(255, 255, 255, 0.6)',
-		},
 		chart: {
 			basic: '#FED057',
 			products: '#FFD8D0',
@@ -51,10 +48,10 @@ export const vars = {
 	border: {
 		firstLine: '1px solid #DCDCDF',
 		secondLine: '1px solid #E7E5F2',
-		thirdLine: `1px solid ${this.color.font.third}`,
+		thirdLine: '1px solid #BDBDBD',
 	},
 	boxShadow: {
-		firstLine: `0px 1px 0px ${this.color.line.boxShadow}`,
-		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px ${this.color.line.boxShadow}`,
+		firstLine: `0px 1px 0px rgba(255, 255, 255, 0.6)`,
+		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px rgba(255, 255, 255, 0.6)`,
 	},
 }
