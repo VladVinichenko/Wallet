@@ -2,14 +2,15 @@ import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
 body {
-  font-size: 12px;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 400;
   margin: 0;
 }
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Circe-Regular', sans-serif;
   
   &::before, &::after {
     box-sizing: border-box;
