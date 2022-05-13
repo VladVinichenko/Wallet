@@ -1,5 +1,6 @@
 import { BsPlusLg } from 'react-icons/bs'
 import styled from 'styled-components'
+import { vars } from 'stylesheet'
 
 const Button = styled.button`
 	position: absolute;
@@ -9,7 +10,7 @@ const Button = styled.button`
 	height: 44px;
 	padding: 0;
 	cursor: pointer;
-	background-color: #24cca7;
+	background-color: ${vars.color.accent.primary};
 	border-radius: 50%;
 	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
@@ -21,13 +22,13 @@ const Button = styled.button`
 	svg {
 		width: 20px;
 		height: 20px;
-		fill: white;
+		fill: ${vars.color.background.primary};
 	}
 `
 
-export const ButtonAddTransactios = () => {
+export const ButtonAddTransactios = ({ openModal }) => {
 	return (
-		<Button>
+		<Button type='button' onClick={openModal}>
 			<BsPlusLg />
 		</Button>
 	)
