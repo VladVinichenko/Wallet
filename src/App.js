@@ -1,9 +1,9 @@
+import styled from 'styled-components'
 import { GlobalStyle, Fonts } from './stylesheet'
 import { Fragment } from 'react'
 import { Container } from 'modules'
-import styled from 'styled-components'
-import { FormRegistration } from './modules/components/formRegistration'
-
+import { FormRegistration } from './modules/pages/registration/formRegistration'
+import { FormLogin } from './modules/pages/login/formLogin'
 const Div = styled.div`
 	width: 100%;
 	height: 800px;
@@ -17,6 +17,7 @@ function App() {
 			<GlobalStyle />
 			<Container>
 				<FormRegistration />
+				<FormLogin />
 				{/* <Div>meow</Div> */}
 			</Container>
 		</Fragment>
