@@ -1,24 +1,18 @@
-import { GlobalStyle, Fonts } from './stylesheet'
 import { Fragment } from 'react'
-import { Container } from 'modules'
-import styled from 'styled-components'
+// import { ButtonAddTransactios } from 'modules'
+// import Modal from 'modules/components/Modal'
+// import { Logo } from 'modules'
+// import { ButtonAddTransactios } from 'modules'
+// import { Currency } from 'modules'
 
-const Div = styled.div`
-	width: 100%;
-	height: 800px;
-	background-color: red;
-`
-
-function App() {
+export default function App() {
 	return (
 		<Fragment>
-			<Fonts />
-			<GlobalStyle />
-			<Container>
-				<Div>meow</Div>
-			</Container>
+			{/* <ButtonAddTransactios /> */}
+			{/* <Modal></Modal> */}
+			{/* <ButtonAddTransactios />*/}
+			{/* <Currency /> */}
+			{/* <Logo /> */}
 		</Fragment>
 	)
 }
-
-export default App
