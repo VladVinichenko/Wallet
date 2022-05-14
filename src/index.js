@@ -10,12 +10,14 @@ import './stylesheet/vars.js'
 
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import { Background } from 'modules/components/background'
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Fonts />
 			<GlobalStyle />
+			<Background />
 			<App />
 		</BrowserRouter>
 	</React.StrictMode>,
