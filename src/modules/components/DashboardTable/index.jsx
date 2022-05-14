@@ -163,12 +163,27 @@ const Column = styled.th`
 	width: ${(prop) => prop.width};
 `
 
-export const DashboardTable = ({ viewport = 760 }) => {
+export const DashboardTable = ({ viewport = 740 }) => {
 	const [inView, setInView] = useState(false)
 
 	useEffect(() => {
 		if (inView) console.log(111) //dispatch
 	}, [inView])
+
+	const BodyRowRender = () => {
+		return example.map((data, idx) => (
+			<Row key={nanoid()}>
+				<ColumnBody
+					data={data}
+					tableColumns={tableColumns}
+					type={data.type}
+					viewport={viewport}
+					setInView={setInView}
+					isLast={example.length === idx + 1}
+				/>
+			</Row>
+		))
+	}
 	return (
 		<Component>
 			<Title>Dashboard Table</Title>
@@ -185,20 +200,13 @@ export const DashboardTable = ({ viewport = 760 }) => {
 			)}
 
 			<BodyTable inView={inView}>
-				<Scrollbars autoHide autoHideTimeout={1500} autoHideDuration={200}>
-					{example.map((data, idx) => (
-						<Row key={nanoid()}>
-							<ColumnBody
-								data={data}
-								tableColumns={tableColumns}
-								type={data.type}
-								viewport={viewport}
-								setInView={setInView}
-								isLast={example.length === idx + 1}
-							/>
-						</Row>
-					))}
-				</Scrollbars>
+				{viewport >= 760 ? (
+					<Scrollbars autoHide autoHideTimeout={1500} autoHideDuration={200}>
+						{BodyRowRender()}
+					</Scrollbars>
+				) : (
+					BodyRowRender()
+				)}
 			</BodyTable>
 		</Component>
 	)

@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { nanoid } from 'nanoid'
 import styled from 'styled-components'
 import { InView } from 'react-intersection-observer'
 
 const Component = styled.td`
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	padding: 0 20px;
@@ -18,6 +19,11 @@ const Component = styled.td`
 		justify-content: ${(prop) => prop.justifyContent};
 		border-left: none;
 		padding: 0;
+	}
+	div {
+		position: absolute;
+		height: 1px;
+		width: 1px;
 	}
 `
 const Title = styled.span`
@@ -52,26 +58,28 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 				return data[elem.value]
 		}
 	}
-	return (
-		<>
-			{tableColumns.map((el, idx) => {
-				return (
-					<>
-						<Component
-							key={nanoid()}
-							colorBorder={typeAction ? '#24CCA7' : '#FF6596'}
-							color={el.type === 'Summa' ? (typeAction ? '#24CCA7' : '#FF6596') : '#000000'}
-							width={viewport >= 760 && el.style.width}
-							justifyContent={el.style.justifyContent}
-						>
-							{isLast&&<InView onChange={setInView}/>}
-							{viewport <= 759 && <Title>{el.label}</Title>}
-							{formateData(el)}
-						</Component>
-					</>
-				)
-			})}
-		</>
-	)
+	return useMemo(() => {
+		return (
+			<>
+				{tableColumns.map((el, idx) => {
+					return (
+						<>
+							<Component
+								key={nanoid()}
+								colorBorder={typeAction ? '#24CCA7' : '#FF6596'}
+								color={el.type === 'Summa' ? (typeAction ? '#24CCA7' : '#FF6596') : '#000000'}
+								width={viewport >= 760 ? el.style.width: undefined}
+								justifyContent={el.style.justifyContent}
+							>
+								{isLast && el.type === 'Summa' && <InView onChange={setInView} />}
+								{viewport <= 759 && <Title>{el.label}</Title>}
+								{formateData(el)}
+							</Component>
+						</>
+					)
+				})}
+			</>
+		)
+	}, [typeAction])
 }
 ColumnBody.className = Component
