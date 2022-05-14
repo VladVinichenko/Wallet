@@ -1,8 +1,9 @@
 import { nanoid } from 'nanoid'
-import { useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { ColumnBody } from './ColumnBody'
 import { tableColumns } from './config/tableConfig'
+
 const example = [
 	{
 		data: 1600547654,
@@ -118,7 +119,7 @@ const BodyTable = styled.tbody`
 	@media screen and (min-width: 760px) {
 		width: 704px;
 		height: 285px;
-    overflow: auto;
+		overflow: auto;
 		tr {
 			border-bottom: 1px solid #dcdcdf;
 		}
@@ -160,10 +161,14 @@ const Column = styled.th`
 	display: flex;
 	justify-content: ${(prop) => prop.justifyContent};
 	width: ${(prop) => prop.width};
-	
 `
 
 export const DashboardTable = ({ viewport = 760 }) => {
+	const [inView, setInView] = useState(false)
+
+	useEffect(() => {
+		if(inView)console.log(111)
+	}, [inView]);
 	return (
 		<Component>
 			<Title>Dashboard Table</Title>
@@ -179,10 +184,17 @@ export const DashboardTable = ({ viewport = 760 }) => {
 				</HederTable>
 			)}
 
-			<BodyTable>
-				{example.map((data) => (
+			<BodyTable inView={inView}>
+				{example.map((data, idx) => (
 					<Row key={nanoid()}>
-						<ColumnBody data={data} tableColumns={tableColumns} type={data.type} viewport={viewport} />
+						<ColumnBody
+							data={data}
+							tableColumns={tableColumns}
+							type={data.type}
+							viewport={viewport}
+							setInView={setInView}
+							isLast={example.length === idx + 1}
+						/>
 					</Row>
 				))}
 			</BodyTable>
