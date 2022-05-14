@@ -9,12 +9,12 @@ const Wrapper = styled.div`
 const LogoSvg = styled.svg`
 	width: 30px;
 	height: 30px;
-	margin: 15px 15px 15px 0;
+	margin-right: 15px;
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		width: 40px;
 		height: 40px;
-		margin: 20px 20px 20px 0;
+		margin-right: 20px;
 	}
 `
 
@@ -32,7 +32,7 @@ const LogoName = styled.span`
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		font-size: 30px;
-		line-height: 1.5;
+		line-height: 1.33;
 	}
 `
 
