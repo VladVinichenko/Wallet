@@ -5,7 +5,9 @@ export const vars = {
 			seconary: '#E7EAF2',
 			page: 'rgba(255, 255, 255, 0.4)',
 			card: '#4A56E2',
+			currency: 'rgba(255, 255, 255, 0.2)',
 			cardGradient: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) -8.67%, rgba(255, 255, 255, 0) 116.22%)',
+			backdrop: 'rgba(0, 0, 0, 0.25)',
 		},
 		font: {
 			primary: '#000000',
@@ -36,6 +38,7 @@ export const vars = {
 	},
 	filter: {
 		pageBackgroundFilter: 'blur(50px)',
+		shadowButton: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
 	},
 	animation: {
 		duration: '250ms',
@@ -53,5 +56,12 @@ export const vars = {
 	boxShadow: {
 		firstLine: `0px 1px 0px rgba(255, 255, 255, 0.6)`,
 		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px rgba(255, 255, 255, 0.6)`,
+	},
+	breakpoints: {
+		mobile: '320px',
+		mobileUp: '767px',
+		tablet: '768px',
+		tabletUp: '1279px',
+		desktop: '1280px',
 	},
 }
