@@ -77,4 +77,10 @@ ul, ol {
 textarea {
   outline: none;
 }
+
+thead{
+  display: block;
+}
 `
+
+
