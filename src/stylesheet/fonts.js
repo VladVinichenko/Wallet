@@ -11,9 +11,14 @@ export const Fonts = createGlobalStyle`
   src: url('../assets/fonts/Circe-Regular.otf') format('otf'),
 }
 
-@font-face {
+/* @font-face {
   font-family: 'Poppins-Bold';
-  src: url('../assets/fonts/Poppins-Bold.ttf') format('ttf'),
+  src: url('../assets/fonts/Poppins-Bold.ttf') format('truetype'),
+} */
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype'),
 }
 
 @font-face {

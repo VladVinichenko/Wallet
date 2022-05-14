@@ -4,6 +4,8 @@ import { Fragment } from 'react'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
+// import { Header } from 'modules'
+// import { Logout } from 'modules'
 
 export default function App() {
 	return (
@@ -13,6 +15,13 @@ export default function App() {
 			{/* <ButtonAddTransactios />*/}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
+			{/* <Header openModal={() => console.log('Open modal')} /> */}
+			{/* <Modal>
+				<Logout
+					name='Bayraktar'
+					onCancel={() => console.log('Don"t logout')}
+					onLogout={() => console.log("Logout")} />
+			</Modal> */}
 		</Fragment>
 	)
 }
