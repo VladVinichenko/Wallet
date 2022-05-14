@@ -32,7 +32,7 @@ const LogoName = styled.span`
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		font-size: 30px;
-		line-height: 1.5;
+		line-height: 1.33;
 	}
 `
 
