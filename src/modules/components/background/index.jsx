@@ -2,8 +2,6 @@ import styled from 'styled-components'
 import { vars } from 'stylesheet'
 import { sprite } from 'assets'
 
-console.log(sprite)
-
 const Back = styled.div`
 	background-color: ${vars.color.background.seconary};
 	position: absolute;
@@ -22,9 +20,7 @@ const Ellipse1 = styled.svg`
 	position: absolute;
 
 	@media screen and (min-width: ${vars.breakpoints.mobile}) and (max-width: ${vars.breakpoints.mobileUp}) {
-		padding-left: 20px;
-		padding-right: 20px;
-		max-width: ${vars.breakpoints.mobileUp};
+		display: none;
 	}
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		bottom: -280px;
@@ -32,6 +28,16 @@ const Ellipse1 = styled.svg`
 	}
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		bottom: -280px;
+		left: -150px;
+	}
+	@media screen and (min-width: ${vars.breakpoints.FHD}) {
+		height: 1000px;
+		width: 800px;
+	}
+	@media screen and (min-width: ${vars.breakpoints.QHD}) {
+		height: 1400px;
+		width: 1200px;
+		bottom: -480px;
 		left: -150px;
 	}
 `
@@ -43,9 +49,7 @@ const Ellipse2 = styled.svg`
 	position: absolute;
 
 	@media screen and (min-width: ${vars.breakpoints.mobile}) and (max-width: ${vars.breakpoints.mobileUp}) {
-		padding-left: 20px;
-		padding-right: 20px;
-		max-width: ${vars.breakpoints.mobileUp};
+		display: none;
 	}
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		top: -220px;
@@ -53,6 +57,16 @@ const Ellipse2 = styled.svg`
 	}
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		top: -220px;
+		right: -100px;
+	}
+	@media screen and (min-width: ${vars.breakpoints.FHD}) {
+		height: 1000px;
+		width: 800px;
+	}
+	@media screen and (min-width: ${vars.breakpoints.QHD}) {
+		height: 1400px;
+		width: 1200px;
+		top: -420px;
 		right: -100px;
 	}
 `
