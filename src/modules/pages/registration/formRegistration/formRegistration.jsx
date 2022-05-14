@@ -5,7 +5,7 @@ import { LogoAuth } from '../../../components/logo'
 import { ButtonAuth } from '../../../components/buttonAuth'
 import { sprite } from '../../../../assets/images/index.js'
 import { useDispatch } from 'react-redux'
-// import authOperations from '../../redux/auth/auth-operations'
+import authOperations from '../../../../store/auth/auth-operations'
 
 const StyledFormRegistration = styled.form`
 	display: flex;
@@ -21,6 +21,7 @@ const StyledFormRegistration = styled.form`
 	@media screen and (min-width: 768px) {
 		width: 530px;
 		padding: 40px 58px 66px 65px;
+		border-radius: 20px;
 	}
 `
 
@@ -54,14 +55,14 @@ export const FormRegistration = ({ text }) => {
 		password: '',
 		passwordConfirm: '',
 	})
-	// const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
 	const handleChange = ({ target: { name, value } }) => {
 		setContact((prev) => ({ ...prev, [name]: value }))
 	}
 	const handleSubmit = (el) => {
 		el.preventDefault()
-		// dispatch(authOperations.register({ ...contact }))
+		dispatch(authOperations.register({ ...contact }))
 		reset()
 	}
 

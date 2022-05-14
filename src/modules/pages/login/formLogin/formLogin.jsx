@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import { nanoid } from 'nanoid'
 import { sprite } from '../../../../assets/images/index.js'
 import { ButtonAuth } from 'modules/components/buttonAuth/index.js'
+import { LogoAuth } from 'modules/components/logo/index.js'
 import { useDispatch } from 'react-redux'
-// import authOperations from '../../redux/auth/auth-operations'
+import authOperations from '../../../../store/auth/auth-operations'
 
 const StyledFormRegistration = styled.form`
 	display: flex;
@@ -14,24 +15,23 @@ const StyledFormRegistration = styled.form`
 	padding: 38px 20px 36px 20px;
 	margin-left: auto;
 	margin-right: auto;
-	width: 320px;
+	background: aqua;
 	color: #e0e0e0;
 
-	@media screen and (min-width: 768px) {
-		width: 530px;
-		padding: 40px 58px 66px 65px;
+	@media screen and (max-width: 767px) {
+		max-width: 320px;
 	}
-`
-const StyledLogo = styled.div`
-	margin-bottom: 60px;
-`
-const StyledLogoSvg = styled.svg`
-	width: 120px;
-	height: 30px;
 
 	@media screen and (min-width: 768px) {
-		width: 180px;
-		height: 30px;
+		width: 533px;
+		padding: 40px 58px 66px 65px;
+		border-radius: 20px;
+	}
+	@media screen and (min-width: 1280px) {
+		margin-top: 136px;
+		margin-bottom: 116px;
+		margin-left: 0;
+		margin-right: 0;
 	}
 `
 
@@ -54,33 +54,6 @@ const StyledInput = styled.input`
 	padding-left: 54px;
 `
 
-const StyledButton = styled.button`
-	font-style: normal;
-	font-weight: 400;
-	font-size: 18px;
-	line-height: 1.5;
-	text-align: center;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-
-	padding: 13px 55px 13px 61px;
-	width: 280px;
-	height: 50px;
-	background: #ffffff;
-	border: 1px solid #4a56e2;
-	border-radius: 20px;
-	cursor: pointer;
-	&:not(:last-child) {
-		margin-bottom: 20px;
-	}
-	&:hover {
-		background: #24cca7;
-		border-radius: 20px;
-		border: none;
-		color: #ffffff;
-	}
-`
-
 export const FormLogin = () => {
 	const [password, setPassword] = useState('')
 	const [email, setEmail] = useState('')
@@ -88,14 +61,15 @@ export const FormLogin = () => {
 		email: '',
 		password: '',
 	})
-	// const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
 	const handleChange = ({ target: { name, value } }) => {
 		setContact((prev) => ({ ...prev, [name]: value }))
+		console.log(contact)
 	}
 	const handleSubmit = (el) => {
 		el.preventDefault()
-		// dispatch(authOperations.register({ ...contact }))
+		dispatch(authOperations.register({ ...contact }))
 		reset()
 	}
 
@@ -108,11 +82,7 @@ export const FormLogin = () => {
 
 	return (
 		<StyledFormRegistration onSubmit={handleSubmit}>
-			<StyledLogo>
-				<StyledLogoSvg>
-					<use href={sprite + '#icon-logo-form'} />
-				</StyledLogoSvg>
-			</StyledLogo>
+			<LogoAuth />
 			<StyleIconInput>
 				<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
 					<use href={sprite + '#icon-e-mail'} />
