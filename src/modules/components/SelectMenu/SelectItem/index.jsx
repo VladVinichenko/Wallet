@@ -1,12 +1,12 @@
-import { MenuItem } from '@material-ui/core'
-import { styles } from '@material-ui/pickers/views/Calendar/Calendar'
+// import { MenuItem } from '@material-ui/core'
+// import { styles } from '@material-ui/pickers/views/Calendar/Calendar'
 
-export const SelectItem = (array) => {
-	return array.map((option) => {
-		return (
-			<MenuItem key={option.value} value={option.value} width='100%' color='red' className={styles.select}>
-				{option.label}
-			</MenuItem>
-		)
-	})
-}
+// export const SelectItem = (array) => {
+// 	return array.map((option) => {
+// 		return (
+// 			<MenuItem key={option.value} value={option.value} width='100%' color='red' className={styles.select}>
+// 				{option.label}
+// 			</MenuItem>
+// 		)
+// 	})
+// }

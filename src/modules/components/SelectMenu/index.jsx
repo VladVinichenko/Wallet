@@ -1,95 +1,109 @@
-import { makeStyles } from '@material-ui/core/styles'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-import { SelectItem } from './SelectItem'
+// import { makeStyles } from '@material-ui/core/styles'
+// import InputLabel from '@material-ui/core/InputLabel'
+// import FormControl from '@material-ui/core/FormControl'
+// import Select from '@material-ui/core/Select'
+// import { SelectItem } from './SelectItem'
+// import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
-	formControl: {
-		margin: theme.spacing(1),
-		width: '97%',
-		color: 'white',
-	},
-	selectEmpty: {
-		marginTop: theme.spacing(2),
-	},
-	select: {
-		color: 'white',
-		background: 'inherit',
-	},
+// const theme = createTheme({
+// 	palette: {
+// 		background: {
+// 			paper: 'rgba(255, 255, 255, 0.7)', //your color
+// 		},
+// 		action: {
+// 			hover: 'red',
+// 		},
+// 	},
+// 	typography: { fontSize: 18 },
+// })
 
-	padding: {
-		padding: '0px',
-	},
+// const useStyles = makeStyles((theme) => ({
+// 	formControl: {
+// 		margin: theme.spacing(3),
+// 		width: '97%',
+// 	},
+// 	selectEmpty: {
+// 		marginTop: theme.spacing(10),
+// 	},
+// 	select: {
+// 		color: '#BDBDBD',
+// 		background: 'inherit',
+// 	},
 
-	button: {
-		background: 'red',
-	},
-}))
+// 	padding: {
+// 		padding: '0',
+// 	},
 
-export const SelectMenu = ({ isIncome, category, handleChange }) => {
-	const classes = useStyles()
-	return (
-		<>
-			<FormControl className={classes.formControl}>
-				<InputLabel id='demo-simple-select-label'>Category</InputLabel>
-				<Select
-					labelId='demo-simple-select-label'
-					id='demo-simple-select'
-					value={category}
-					onChange={handleChange}
-					className={classes.select}
-					defaultValue=''
-				>
-					{isIncome ? SelectItem(rangesExpense) : SelectItem(rangesIncome)}
-				</Select>
-			</FormControl>
-		</>
-	)
-}
+// 	button: {
+// 		color: 'green',
+// 	},
+// }))
 
-const rangesExpense = [
-	{
-		value: 'Basic',
-		label: 'Basic',
-	},
-	{
-		value: 'Food',
-		label: 'Food',
-	},
-	{
-		value: 'Auto',
-		label: 'Auto',
-	},
-	{
-		value: 'Development',
-		label: 'Development',
-	},
-	{
-		value: 'Children',
-		label: 'Children',
-	},
-	{
-		value: 'House',
-		label: 'House',
-	},
-	{
-		value: 'Education',
-		label: 'Education',
-	},
-	{
-		value: 'The other',
-		label: 'The other',
-	},
-]
+// export const SelectMenu = ({ isIncome = true, category, handleChange }) => {
+// 	const classes = useStyles()
+// 	return (
+// 		<>
+// 			<ThemeProvider theme={theme}>
+// 				<FormControl className={classes.formControl}>
+// 					<InputLabel id='demo-simple-select-label'>Select category</InputLabel>
+// 					<Select
+// 						labelId='demo-simple-select-label'
+// 						id='demo-simple-select'
+// 						value={category}
+// 						onChange={handleChange}
+// 						className={classes.select}
+// 						defaultValue=''
+// 					>
+// 						{isIncome ? SelectItem(rangesExpense) : SelectItem(rangesIncome)}
+// 					</Select>
+// 				</FormControl>
+// 			</ThemeProvider>
+// 		</>
+// 	)
+// }
 
-const rangesIncome = [
-	{
-		value: 'Regular income',
-		label: 'Regular income',
-	},
-	{
-		value: 'Non-regular income',
-		label: 'Non-regular income',
-	},
-]
+// const rangesExpense = [
+// 	{
+// 		value: 'Basic',
+// 		label: 'Basic',
+// 	},
+// 	{
+// 		value: 'Food',
+// 		label: 'Food',
+// 	},
+// 	{
+// 		value: 'Auto',
+// 		label: 'Auto',
+// 	},
+// 	{
+// 		value: 'Development',
+// 		label: 'Development',
+// 	},
+// 	{
+// 		value: 'Children',
+// 		label: 'Children',
+// 	},
+// 	{
+// 		value: 'House',
+// 		label: 'House',
+// 	},
+// 	{
+// 		value: 'Education',
+// 		label: 'Education',
+// 	},
+// 	{
+// 		value: 'The other',
+// 		label: 'The other',
+// 	},
+// ]
+
+// const rangesIncome = [
+// 	{
+// 		value: 'Regular income',
+// 		label: 'Regular income',
+// 	},
+// 	{
+// 		value: 'Non-regular income',
+// 		label: 'Non-regular income',
+// 	},
+// ]

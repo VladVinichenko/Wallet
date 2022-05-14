@@ -3,12 +3,12 @@ import { Fragment } from 'react'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
-import { SelectMenu } from 'modules'
+import { OpenMenu } from 'modules'
 
 export default function App() {
 	return (
 		<Fragment>
-			<SelectMenu />
+			<OpenMenu />
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
