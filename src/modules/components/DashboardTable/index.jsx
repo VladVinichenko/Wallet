@@ -2,8 +2,8 @@ import { nanoid } from 'nanoid'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { ColumnBody } from './ColumnBody'
-import { tableColumns } from './config/tableConfig'
-
+import { tableColumns } from 'config'
+import { Scrollbars } from 'react-custom-scrollbars-2'
 const example = [
 	{
 		data: 1600547654,
@@ -167,8 +167,8 @@ export const DashboardTable = ({ viewport = 760 }) => {
 	const [inView, setInView] = useState(false)
 
 	useEffect(() => {
-		if(inView)console.log(111)
-	}, [inView]);
+		if (inView) console.log(111) //dispatch
+	}, [inView])
 	return (
 		<Component>
 			<Title>Dashboard Table</Title>
@@ -185,18 +185,20 @@ export const DashboardTable = ({ viewport = 760 }) => {
 			)}
 
 			<BodyTable inView={inView}>
-				{example.map((data, idx) => (
-					<Row key={nanoid()}>
-						<ColumnBody
-							data={data}
-							tableColumns={tableColumns}
-							type={data.type}
-							viewport={viewport}
-							setInView={setInView}
-							isLast={example.length === idx + 1}
-						/>
-					</Row>
-				))}
+				<Scrollbars autoHide autoHideTimeout={1500} autoHideDuration={200}>
+					{example.map((data, idx) => (
+						<Row key={nanoid()}>
+							<ColumnBody
+								data={data}
+								tableColumns={tableColumns}
+								type={data.type}
+								viewport={viewport}
+								setInView={setInView}
+								isLast={example.length === idx + 1}
+							/>
+						</Row>
+					))}
+				</Scrollbars>
 			</BodyTable>
 		</Component>
 	)

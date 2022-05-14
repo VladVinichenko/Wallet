@@ -12,6 +12,7 @@
 		"nanoid": "^3.3.4",
 		"react": "^17.0.2",
 		"react-chartjs-2": "^4.1.0",
+		"react-custom-scrollbars-2": "^4.4.0",
 		"react-datetime": "^3.1.1",
 		"react-dom": "^17.0.2",
 		"react-ellipsis-text": "^1.2.1",
