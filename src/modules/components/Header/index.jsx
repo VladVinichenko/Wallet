@@ -9,8 +9,15 @@ const Head = styled.header`
     top: 0;
     left: 0;
     z-index: 1100;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     background-color: ${vars.color.background.primary};
+
+    @media screen and (min-width: ${vars.breakpoints.tablet}) {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 `
 
 const HeaderContainer = styled.div`
