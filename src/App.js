@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
-import { Header } from 'modules'
+// import { Header } from 'modules'
 
 export default function App() {
 	return (
@@ -14,7 +14,7 @@ export default function App() {
 			{/* <ButtonAddTransactios />*/}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			<Header />
+			{/* <Header openModal={() => console.log('Open modal')} /> */}
 		</Fragment>
 	)
 }

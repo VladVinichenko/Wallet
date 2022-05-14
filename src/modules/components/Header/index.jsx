@@ -9,12 +9,14 @@ const Head = styled.header`
     top: 0;
     left: 0;
     z-index: 1100;
+    max-height: 60px;
     padding-top: 15px;
     padding-bottom: 15px;
 
     background-color: ${vars.color.background.primary};
 
     @media screen and (min-width: ${vars.breakpoints.tablet}) {
+        max-height: 80px;
         padding-top: 20px;
         padding-bottom: 20px;
     }
@@ -25,15 +27,10 @@ const HeaderContainer = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    max-height: 60px;
     overflow: hidden;
-
-    @media screen and (min-width: ${vars.breakpoints.tablet}) {
-        max-height: 80px;
-    }
 `
 
-const Menu = styled.div`
+const UserMenu = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -44,7 +41,7 @@ const Name = styled.span`
     margin-right: 8px;
     margin-left: 12px;
     max-width: calc(100vw - 200px);
-    overflow: hidden;
+    
     text-overflow: ellipsis;
     white-space: nowrap;
 
@@ -94,7 +91,7 @@ const ExitButton = styled.button`
 
     cursor: pointer;
 
-    transition: all $transition-duration $timing-function;
+    transition: all ${vars.animation.duration} ${vars.animation.function};
 
     &:hover,
     &:focus {
@@ -130,7 +127,7 @@ export const Header = ({ openModal }) => {
             <Container>
                 <HeaderContainer>
                     <Logo />
-                    <Menu>
+                    <UserMenu>
                         <Name>{name}</Name>
                         <ExitButton
                             onClick={openModal}
@@ -141,10 +138,9 @@ export const Header = ({ openModal }) => {
                             </ButtonSvg>
                             <ButtonLabel>Log out</ButtonLabel>
                         </ExitButton>
-                    </Menu>
+                    </UserMenu>
                 </HeaderContainer>
             </Container>
         </Head>
     );
 }
-
