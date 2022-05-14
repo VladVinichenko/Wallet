@@ -4,7 +4,8 @@ import { Fragment } from 'react'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
-
+import { Login } from 'modules'
+import { Registration } from 'modules/pages/registration/registration'
 export default function App() {
 	return (
 		<Fragment>
