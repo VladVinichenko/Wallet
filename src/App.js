@@ -35,18 +35,18 @@ export default function App() {
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
-			<NavLink to='/'>
-				<Button>Home</Button>
+			<NavLink to='/currency'>
+				<Button>Currency</Button>
 			</NavLink>
-			<NavLink to='/'>
-				<Button>Home</Button>
+			<NavLink to='/balance'>
+				<Button>Balance</Button>
 			</NavLink>
 
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			<Home />
+			{/* <Home /> */}
 			{/* <Balance /> */}
 
 			<Outlet />
@@ -55,39 +55,40 @@ export default function App() {
 				<Route
 					path='/'
 					element={
-						<NavLink to='/currency'>
-							<Button color={false}>Currency</Button>
-							<Outlet />
-						</NavLink>
+						<>
+							<Home /> <Outlet />
+						</>
 					}
-				>
-					<Route
-						path='currency'
-						element={
-							<>
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-							</>
-						}
-					/>
-					<Route
-						path='dashboard'
-						element={
-							<>
-								<Currency />
-							</>
-						}
-					/>
-					<Route
+				/>
+				<Route
+					path='/currency'
+					element={
+						<>
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Outlet />
+						</>
+					}
+				/>
+				<Route
+					path='/balance'
+					element={
+						<>
+							<Balance />
+							<Outlet />
+						</>
+					}
+				/>
+				{/* <Route
 						path='*'
 						element={
 							<main style={{ padding: '1rem', color: 'red' }}>
@@ -95,8 +96,8 @@ export default function App() {
 								<Outlet />
 							</main>
 						}
-					/>
-				</Route>
+					/> */}
+				{/* </Route> */}
 			</Routes>
 		</Fragment>
 	)
