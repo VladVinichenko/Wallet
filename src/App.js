@@ -1,17 +1,19 @@
 import { Fragment } from 'react'
 import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Home } from 'modules'
+import { Header, Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
-import { Header, Modal, Logout } from 'modules'
+import { Modal } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
+import { setIsModalLogoutOpen } from 'store'
+import { setIsModalAddTransactionOpen } from 'store'
 
 import { Button } from 'modules'
 import { Currency } from 'modules'
@@ -29,12 +31,18 @@ import { Balance } from 'modules'
 
 export default function App() {
 	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
-	const isModalLogoutOpen = useSelector(selectorsGlobal.getIsModalLogoutOpen)
+	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
+	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
+	const dispatch = useDispatch()
+	const showModalLogout = () => {
+		dispatch(setIsModalLogoutOpen(true))
+	}
+	const showModalAddTransaction = () => {
+		dispatch(setIsModalAddTransactionOpen(true))
+	}
 	return (
 		<Fragment>
-			{isModalLogoutOpen &&
-				<Modal><Logout name='Bayraktar' /></Modal>}
-			<Header />
+			<Header/>
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
@@ -44,7 +52,12 @@ export default function App() {
 			<NavLink to='/balance'>
 				<Button>Balance</Button>
 			</NavLink>
-
+			<Button onClickButton={showModalLogout} color={false}>
+				Modal 1
+			</Button>
+			<Button onClickButton={showModalAddTransaction} color={false}>
+				Modal 1
+			</Button>
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
@@ -53,6 +66,18 @@ export default function App() {
 			{/* <Balance /> */}
 
 			<Outlet />
+
+			{isModalLogOut && (
+				<Modal>
+					Logout
+				</Modal>
+			)}
+			{isModalAddTransaction && (
+				<Modal>
+					<Balance />
+				</Modal>
+			)}
+
 			<ToastContainer autoClose={2000} />
 			<Routes>
 				<Route
