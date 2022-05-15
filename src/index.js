@@ -2,10 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import { store, persistor } from './redux/store'
+import { persistor } from './redux/store'
 
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalStyle, Fonts } from './stylesheet'
+import { store } from 'store'
 import './index.css'
 import './stylesheet/fonts.js'
 import './stylesheet/animation.js'
@@ -14,18 +15,19 @@ import './stylesheet/vars.js'
 
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import { Background } from 'modules/components/background'
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<PersistGate loading={null} persistor={persistor}>
-				<BrowserRouter>
-					<Fonts />
-					<GlobalStyle />
-					<App />
-				</BrowserRouter>
-			</PersistGate>
-		</Provider>
+		<BrowserRouter>
+			<Provider loading={null} persistor={persistor}>
+				<Fonts />
+				<GlobalStyle />
+				<Background />
+				<App />
+			</Provider>
+		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById('root')
 )
