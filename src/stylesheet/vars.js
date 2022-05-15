@@ -54,6 +54,7 @@ export const vars = {
 		firstLine: '1px solid #DCDCDF',
 		secondLine: '1px solid #E7E5F2',
 		thirdLine: '1px solid #BDBDBD',
+		button: '1px solid #4A56E2',
 	},
 	boxShadow: {
 		firstLine: `0px 1px 0px rgba(255, 255, 255, 0.6)`,
@@ -65,5 +66,9 @@ export const vars = {
 		tablet: '768px',
 		tabletUp: '1279px',
 		desktop: '1280px',
+		tabletUp: '1279px',
+		FHD: '1920px',
+		FHDUp: '1919px',
+		QHD: '2560px',
 	},
 }
