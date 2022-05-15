@@ -1,5 +1,7 @@
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { vars } from 'stylesheet';
+import { setIsModalLogoutOpen } from 'store'
+import { vars } from 'stylesheet'
 
 const Form = styled.div`
     max-width: 100vh;
@@ -86,7 +88,11 @@ const Button = styled.button`
     }
 `
 
-export const Logout = ({ name, onCancel, onLogout }) => {
+export const Logout = ({ onLogout }) => {
+    const dispatch = useDispatch()
+
+    const name = 'Bayraktar'
+
     return (
         <>
             <Form>
@@ -94,7 +100,7 @@ export const Logout = ({ name, onCancel, onLogout }) => {
                 <Message>{<Name>{name}</Name>} are you sure you want to logout?</Message>
                 <Buttons>
                     <Button
-                        onClick={onCancel}
+                        onClick={() => dispatch(setIsModalLogoutOpen())}
                         type="button"
                         title={"Do not logout"}
                         arial-label={"Do not logout"}>
