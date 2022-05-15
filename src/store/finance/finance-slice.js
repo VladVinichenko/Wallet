@@ -87,6 +87,7 @@ const initialState = {
 	isLoading: false,
 	error: null,
 	data: [...example],
+	totalBalance: '6900.00'
 }
 
 const financeSlice = createSlice({

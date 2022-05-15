@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { vars } from 'stylesheet'
 import { selectorsFinance } from 'store'
-const { color,borderRadius, breakpoints } = vars
+const { color, borderRadius, breakpoints } = vars
 const Component = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -13,7 +13,7 @@ const Component = styled.div`
 	padding: 8px 0 12px 32px;
 
 	background: ${color.background.primary};
-	border-radius:${borderRadius.seconary};
+	border-radius: ${borderRadius.seconary};
 
 	@media screen and (min-width: ${breakpoints.tablet}) {
 		width: 336px;
@@ -40,16 +40,16 @@ const Counter = styled.p`
 	font-size: 30px;
 	line-height: 1.5;
 
-	color: #000000;
+	color: ${color.font.primary};
 `
 
 export const Balance = () => {
-	const totalValue = useSelector(selectorsFinance.getData)
+	const totalValue = useSelector(selectorsFinance.getTotal)
 	return (
 		<Component>
 			<Title>Your balance</Title>
 			<Counter>
-				<Currency> &#x20b4;</Currency> {totalValue[0].total}
+				<Currency> &#x20b4;</Currency> {totalValue}
 			</Counter>
 		</Component>
 	)
