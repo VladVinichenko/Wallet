@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+import { vars } from 'stylesheet'
+import { selectorsFinance } from 'store'
 
 const Component = styled.div`
 	display: flex;
@@ -11,7 +14,7 @@ const Component = styled.div`
 
 	background: #FFFFFF; 
 	border-radius: 30px;
-  border: 1px solid #000;
+
   @media screen and (min-width: 768px) {
     width: 336px;
     padding: 8px 0 12px 40px;
