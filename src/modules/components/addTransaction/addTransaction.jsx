@@ -8,7 +8,6 @@ import { vars } from 'stylesheet'
 
 import 'react-datetime/css/react-datetime.css'
 import { sprite } from 'assets'
-// import { sprite } from 'assets'
 
 const FormContainer = styled.div`
 	padding: 10px 20px;
@@ -64,22 +63,15 @@ const FormContainer = styled.div`
 	}
 
 	form {
-		// max-width: 320px;
-
 		display: flex;
 		align-items: center;
 		flex-direction: column;
-
-		// flex-wrap: wrap;
-
-		@media screen and (min-width: 768px) {
-			// max-width: 400px;
-		}
 	}
 
 	input,
 	select {
 		margin-bottom: 40px;
+		padding-left: 20px;
 		width: 280px;
 
 		font-size: 18px;
@@ -109,6 +101,16 @@ const FormContainer = styled.div`
 
 	.error-message {
 		color: red;
+	}
+
+	.dateInputWrapper {
+		position: relative;
+	}
+
+	.calendarIcon {
+		position: absolute;
+		top: 4px;
+		right: 10px;
 	}
 `
 
@@ -200,17 +202,19 @@ export const AddTransaction = (toggleModal) => {
 							/>
 							{/* {errors.summ && touched.summ && errors.summ} */}
 							{/* <ErrorMessage name='summ' component='div' /> */}
-							<Datetime
-								name='date'
-								dateFormat='DD.MM.YYYY'
-								timeFormat={false}
-								initialValue={values.date}
-								onChange={handletDateChange}
-								className='groupItem'
-							/>
-							<svg className='calendar' width='24' height='24'>
-								<use href={sprite + '#icon-calendar'}></use>
-							</svg>
+							<span className='dateInputWrapper'>
+								<Datetime
+									name='date'
+									dateFormat='DD.MM.YYYY'
+									timeFormat={false}
+									initialValue={values.date}
+									onChange={handletDateChange}
+									className='groupItem'
+								/>
+								<svg className='calendarIcon' width='24' height='24'>
+									<use href={sprite + '#icon-calendar'}></use>
+								</svg>
+							</span>
 						</div>
 						{errors.date && touched.date && errors.date}
 						<input
