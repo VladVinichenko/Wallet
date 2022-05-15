@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Registration } from 'modules/pages/registration/registration'
 import { ROUTES } from 'lib'
 import { Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
@@ -57,6 +58,7 @@ export default function App() {
 			<Button onClickButton={meow2} color={false}>
 				Modal 1
 			</Button>
+			<Registration />
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}

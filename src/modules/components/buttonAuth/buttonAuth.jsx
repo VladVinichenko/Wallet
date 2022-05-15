@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { useState } from 'react'
 const StyledButton = styled.button`
 	font-style: normal;
 	font-weight: 400;

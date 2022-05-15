@@ -16,16 +16,19 @@ import './stylesheet/vars.js'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Background } from 'modules/components/background'
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<Provider loading={null} persistor={persistor}>
-				<Fonts />
-				<GlobalStyle />
-				<Background />
-				<App />
+			<Provider store={store}>
+				<PersistGate loading={null} persistor={persistor}>
+					<BrowserRouter>
+						<Fonts />
+						<GlobalStyle />
+						<App />
+					</BrowserRouter>
+				</PersistGate>
 			</Provider>
 		</BrowserRouter>
 	</React.StrictMode>,
