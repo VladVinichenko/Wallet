@@ -1,5 +1,8 @@
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { vars } from 'stylesheet'
+import { setIsModalLogoutOpen } from 'store'
 import { Container } from 'modules/common'
 import { Logo } from 'modules/common'
 import { sprite } from 'assets'
@@ -120,17 +123,21 @@ const ButtonLabel = styled.span`
     }
 `
 
-export const Header = ({ openModal }) => {
+export const Header = () => {
+    const dispatch = useDispatch();
+
     const name = 'Bayraktar Javelin'
     return (
         <Head>
             <Container>
                 <HeaderContainer>
-                    <Logo />
+                    <Link to='/'>
+                        <Logo />
+                    </Link>
                     <UserMenu>
                         <Name>{name}</Name>
                         <ExitButton
-                            onClick={openModal}
+                            onClick={() => dispatch(setIsModalLogoutOpen(true))}
                             type="button"
                             arial-label="Log out">
                             <ButtonSvg width="18" height="18">

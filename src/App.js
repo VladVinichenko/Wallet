@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 
 // import { ButtonAddTransactios } from 'modules'
-// import { Modal } from 'modules'
+import { Header, Modal } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 import { Button } from 'modules'
@@ -27,13 +27,15 @@ import { Balance } from 'modules'
 
 export default function App() {
 	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
-
+	const isModalLogoutOpen = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	return (
 		<Fragment>
+			{isModalLogoutOpen &&
+				<Modal>Logout</Modal>}
+			<Header />
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
-			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
