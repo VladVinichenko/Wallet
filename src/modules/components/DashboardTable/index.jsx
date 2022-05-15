@@ -57,10 +57,9 @@ const BodyTable = styled.tbody`
 const Row = styled.tr`
 	display: flex;
 	flex-direction: column;
-	background: ${color.background.primary};
-	background-color: ${(prop) => {
+	background: ${(prop) => 
 		prop.background
-	}};
+	};
 
 	@media screen and (max-width: ${breakpoints.mobileUp}) {
 		border-radius: ${borderRadius.fourth};
@@ -100,8 +99,9 @@ export const DashboardTable = ({ viewport }) => {
 	}, [inView])
 
 	const BodyRowRender = useCallback(() => {
+		console.log(viewport.anotherScreen);
 		return dataTable.map((data, idx) => (
-			<Row key={nanoid()} background={viewport.anotherScreen ? 'transparent' : `${color.background.primary}`}>
+			<Row key={nanoid()} background={viewport.anotherScreen ? `transparent` : `${color.background.primary}`}>
 				<ColumnBody
 					data={data}
 					tableColumns={tableColumns}
