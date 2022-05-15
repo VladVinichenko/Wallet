@@ -14,6 +14,7 @@ export const StyledLoginPage = styled.div`
 	@media screen and (min-width: 1280px) {
 		flex-direction: row;
 		align-items: center;
+		justify-content: space-evenly;
 	}
 `
 

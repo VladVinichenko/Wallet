@@ -15,7 +15,7 @@ const StyledFormRegistration = styled.form`
 	padding: 38px 20px 36px 20px;
 	margin-left: auto;
 	margin-right: auto;
-	background: aqua;
+
 	color: #e0e0e0;
 
 	@media screen and (max-width: 767px) {
@@ -65,7 +65,6 @@ export const FormLogin = () => {
 
 	const handleChange = ({ target: { name, value } }) => {
 		setContact((prev) => ({ ...prev, [name]: value }))
-		console.log(contact)
 	}
 	const handleSubmit = (el) => {
 		el.preventDefault()
@@ -112,7 +111,10 @@ export const FormLogin = () => {
 					placeholder='Password'
 				/>
 			</StyleIconInput>
-			<ButtonAuth text='Вход' />
+			<ButtonAuth
+				text='Вход'
+				style={{ background: '#24cca7', borderRadius: '20px', border: 'none', color: '#ffffff' }}
+			/>
 			<ButtonAuth text='Регистрация' />
 		</StyledFormRegistration>
 	)

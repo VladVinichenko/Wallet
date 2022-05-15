@@ -8,7 +8,6 @@ export const StyledPageSvg = styled.svg`
 		margin-right: 0;
 		width: 435px;
 		height: 419px;
-		margin-bottom: 28px;
 	}
 `
 export const StyledBlockSvg = styled.div`
@@ -25,7 +24,6 @@ export const StyledBlockSvg = styled.div`
 		flex-direction: column;
 		margin-bottom: 0;
 		margin-top: 40px;
-		margin-right: 140px;
 	}
 `
 export const SvgFormPage = ({ props }) => {

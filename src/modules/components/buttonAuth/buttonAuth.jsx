@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { useState } from 'react'
 const StyledButton = styled.button`
 	font-style: normal;
 	font-weight: 400;
@@ -27,6 +27,10 @@ const StyledButton = styled.button`
 	}
 `
 
-export const ButtonAuth = ({ text }) => {
-	return <StyledButton type='submit'>{text}</StyledButton>
+export const ButtonAuth = ({ text, style, onClick }) => {
+	return (
+		<StyledButton type='submit' style={style} onClick={onClick}>
+			{text}
+		</StyledButton>
+	)
 }
