@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 import { Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
-import { Header, Modal, Logout } from 'modules'
+import { Header, Modal, Logout, Navigation } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
@@ -34,6 +34,7 @@ export default function App() {
 			{isModalLogoutOpen &&
 				<Modal><Logout name='Bayraktar' /></Modal>}
 			<Header />
+			<Navigation></Navigation>
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
@@ -48,7 +49,7 @@ export default function App() {
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			{/* <Home /> */}
+			<Home />
 			{/* <Balance /> */}
 
 			<Outlet />
