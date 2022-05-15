@@ -4,6 +4,7 @@ import { vars } from 'stylesheet';
 
 const Loader = styled.div`
     position: fixed;
+    z-index: 1500;
     top: 50%;
     left: 50%;
 
