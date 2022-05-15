@@ -6,6 +6,7 @@ import { Fragment } from 'react'
 // import { Currency } from 'modules'
 // import { Header } from 'modules'
 // import { Logout } from 'modules'
+import { Navigation } from 'modules'
 
 export default function App() {
 	return (
@@ -22,6 +23,7 @@ export default function App() {
 					onCancel={() => console.log('Don"t logout')}
 					onLogout={() => console.log("Logout")} />
 			</Modal> */}
+			<Navigation></Navigation>
 		</Fragment>
 	)
 }
