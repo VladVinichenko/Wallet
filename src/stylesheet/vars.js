@@ -8,6 +8,8 @@ export const vars = {
 			currency: 'rgba(255, 255, 255, 0.2)',
 			cardGradient: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) -8.67%, rgba(255, 255, 255, 0) 116.22%)',
 			backdrop: 'rgba(0, 0, 0, 0.25)',
+			tableLine: '#DCDCDF',
+
 		},
 		font: {
 			primary: '#000000',
@@ -17,6 +19,7 @@ export const vars = {
 			fifth: '#FFFFFF',
 			positive: '#24CCA7',
 			negative: '#FF6596',
+			colorTitle: '#000000'
 		},
 		accent: {
 			primary: '#24CCA7',
@@ -49,6 +52,7 @@ export const vars = {
 		primary: '20px',
 		seconary: '30px',
 		third: '2px',
+		fourth: '10px',
 	},
 	border: {
 		firstLine: '1px solid #DCDCDF',

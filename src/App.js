@@ -6,18 +6,15 @@ import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-
+import { Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
-// import { Modal } from 'modules'
+import { Header, Modal, Logout } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
-// import { Header } from 'modules'
-// import { Logout } from 'modules'
-import { Navigation } from 'modules'
 import { Button } from 'modules'
 import { Currency } from 'modules'
-
+import { Balance } from 'modules'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;
@@ -30,56 +27,70 @@ import { Currency } from 'modules'
 // `
 
 export default function App() {
-	const isLoading = useSelector(selectorsGlobal.getIsLoading)
-
+	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
+	const isModalLogoutOpen = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	return (
 		<Fragment>
+			{isModalLogoutOpen &&
+				<Modal><Logout name='Bayraktar' /></Modal>}
+			<Header />
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
+			<NavLink to='/currency'>
+				<Button>Currency</Button>
+			</NavLink>
+			<NavLink to='/balance'>
+				<Button>Balance</Button>
+			</NavLink>
+
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			{/* <Header openModal={() => console.log('Open modal')} /> */}
-			{/* <Modal>
-				<Logout
-					name='Bayraktar'
-					onCancel={() => console.log('Don"t logout')}
-					onLogout={() => console.log("Logout")} />
-			</Modal> */}
-			<Navigation></Navigation>
+			{/* <Home /> */}
+			{/* <Balance /> */}
+
 			<Outlet />
 			<ToastContainer autoClose={2000} />
 			<Routes>
 				<Route
 					path='/'
 					element={
-						<NavLink to='/currency'>
-							<Button color={false}>Currency</Button>
-							<Outlet />
-						</NavLink>
+						<>
+							<Home /> <Outlet />
+						</>
 					}
-				>
-					<Route
-						path='currency'
-						element={
-							<>
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-							</>
-						}
-					/>
-					<Route
+				/>
+				<Route
+					path='/currency'
+					element={
+						<>
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Outlet />
+						</>
+					}
+				/>
+				<Route
+					path='/balance'
+					element={
+						<>
+							<Balance />
+							<Outlet />
+						</>
+					}
+				/>
+				{/* <Route
 						path='*'
 						element={
 							<main style={{ padding: '1rem', color: 'red' }}>
@@ -87,9 +98,9 @@ export default function App() {
 								<Outlet />
 							</main>
 						}
-					/>
-				</Route>
+					/> */}
+				{/* </Route> */}
 			</Routes>
-		</Fragment>
+		</Fragment >
 	)
 }

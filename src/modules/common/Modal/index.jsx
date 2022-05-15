@@ -7,7 +7,7 @@ import { vars } from 'stylesheet'
 const modalRoot = document.querySelector('#root-modal')
 
 export const Modal = ({ children }) => {
-	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [isModalOpen, setIsModalOpen] = useState(true)
 
 	const toggleModal = () => {
 		setIsModalOpen(!isModalOpen)
