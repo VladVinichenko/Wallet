@@ -5,7 +5,9 @@ export const vars = {
 			seconary: '#E7EAF2',
 			page: 'rgba(255, 255, 255, 0.4)',
 			card: '#4A56E2',
+			currency: 'rgba(255, 255, 255, 0.2)',
 			cardGradient: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) -8.67%, rgba(255, 255, 255, 0) 116.22%)',
+			backdrop: 'rgba(0, 0, 0, 0.25)',
 		},
 		font: {
 			primary: '#000000',
@@ -61,5 +63,9 @@ export const vars = {
 		tablet: '768px',
 		tabletUp: '1279px',
 		desktop: '1280px',
+		tabletUp: '1279px',
+		FHD: '1920px',
+		FHDUp: '1919px',
+		QHD: '2560px',
 	},
 }

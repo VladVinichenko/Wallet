@@ -1,17 +1,70 @@
 import { Fragment } from 'react'
-// import { ButtonAddTransactios } from 'modules'
-import { AddTransaction } from 'modules/components/addTransaction'
-import 'react-datetime/css/react-datetime.css'
+import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
+import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+import { selectorsGlobal } from 'store'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { ROUTES } from 'lib'
 
-// исправить импорт
+import { ButtonAddTransactios } from 'modules'
+import Modal from 'modules/components/Modal'
+// import { Logo } from 'modules'
+import { AddTransaction } from 'modules/components/addTransaction'
+// import 'react-datetime/css/react-datetime.css'
+
+import { Currency } from 'modules'
+
+const Button = styled.button`
+	background: black;
+	height: 50px;
+	width: 200px;
+	color: yellow;
+	margin-bottom: 5px;
+	&:hover {
+		background: grey;
+	}
+`
 
 export default function App() {
+	const isLoading = useSelector(selectorsGlobal.getIsLoading)
+
 	return (
 		<Fragment>
-			{
-				/* <ButtonAddTransactios /> */
+			<NavLink to='/'>
+				<Button>Home</Button>
+			</NavLink>
+
+			<Modal>
 				<AddTransaction />
-			}
+			</Modal>
+			<ButtonAddTransactios />
+			{/* <Currency /> */}
+			{/* <Logo /> */}
+			<Outlet />
+			<ToastContainer autoClose={2000} />
+			<Routes>
+				<Route
+					path='/'
+					element={
+						<NavLink to='/currency'>
+							<Button>Currency</Button>
+							<Outlet />
+						</NavLink>
+					}
+				>
+					<Route path='currency' element={<Currency />} />
+					<Route
+						path='*'
+						element={
+							<main style={{ padding: '1rem', color: 'red' }}>
+								<p>page not found</p>
+								<Outlet />
+							</main>
+						}
+					/>
+				</Route>
+			</Routes>
 		</Fragment>
 	)
 }
