@@ -8,29 +8,36 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 import { Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
-// import Modal from 'modules/components/Modal'
+// import { Modal } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
 
+import { Button } from 'modules'
 import { Currency } from 'modules'
-
-const Button = styled.button`
-	background: black;
-	height: 50px;
-	width: 200px;
-	color: yellow;
-	margin-bottom: 5px;
-	&:hover {
-		background: grey;
-	}
-`
+import { Balance } from 'modules'
+// const Button = styled.button`
+// 	background: black;
+// 	height: 50px;
+// 	width: 200px;
+// 	color: yellow;
+// 	margin-bottom: 5px;
+// 	&:hover {
+// 		background: grey;
+// 	}
+// `
 
 export default function App() {
-	const isLoading = useSelector(selectorsGlobal.getIsLoading)
+	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
 
 	return (
 		<Fragment>
+			<NavLink to='/'>
+				<Button>Home</Button>
+			</NavLink>
+			<NavLink to='/'>
+				<Button>Home</Button>
+			</NavLink>
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
@@ -40,6 +47,8 @@ export default function App() {
 			{/* <Currency /> */}
 			{/* <Logo /> */}
 			<Home />
+			{/* <Balance /> */}
+
 			<Outlet />
 			<ToastContainer autoClose={2000} />
 			<Routes>
@@ -47,12 +56,37 @@ export default function App() {
 					path='/'
 					element={
 						<NavLink to='/currency'>
-							<Button>Currency</Button>
+							<Button color={false}>Currency</Button>
 							<Outlet />
 						</NavLink>
 					}
 				>
-					<Route path='currency' element={<Currency />} />
+					<Route
+						path='currency'
+						element={
+							<>
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+							</>
+						}
+					/>
+					<Route
+						path='dashboard'
+						element={
+							<>
+								<Currency />
+							</>
+						}
+					/>
 					<Route
 						path='*'
 						element={
