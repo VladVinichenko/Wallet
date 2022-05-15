@@ -90,8 +90,8 @@ export const IconButton = styled.button`
 	}
 
 	svg {
-		width: 30px;
-		height: 30px;
+		width: 16px;
+		height: 16px;
 	}
 `
 

@@ -40,16 +40,16 @@ a {
 }
 
 button {
-  background: none;
-  border: none;
+  // background: none;
+  // border: none;
   outline: none;
   cursor: pointer;
 }
 
 input {
-  outline: none;
-  margin: 0;
-  border: 0;
+  // outline: none;
+  // margin: 0;
+  // border: 0;
   /* Chrome, Safari, Edge, Opera */
 
   &::-webkit-outer-spin-button,
