@@ -80,9 +80,6 @@ textarea {
   outline: none;
 }
 
-thead{
-  display: block;
-}
 `
 
 

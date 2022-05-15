@@ -50,6 +50,7 @@ export const vars = {
 		primary: '20px',
 		seconary: '30px',
 		third: '2px',
+		fourth: '10px',
 	},
 	border: {
 		firstLine: '1px solid #DCDCDF',

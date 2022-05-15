@@ -19,7 +19,7 @@ export const Home = () => {
 			<Dashboard>
 				<Media
 					queries={{
-						mobileScreen: '(max-width: 767px)',
+						mobileScreen: '(max-width: 768px)',
 						anotherScreen: '(min-width: 768px)',
 					}}
 				>

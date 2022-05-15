@@ -8,8 +8,12 @@ import { useSelector } from 'react-redux'
 import { selectorsFinance } from 'store'
 import { vars } from 'stylesheet'
 
-const {color, border, breakpoints } = vars
-const Component = styled.table``
+const { color, border, borderRadius, breakpoints } = vars
+const Component = styled.table`
+	thead {
+		display: block;
+	}
+`
 const Title = styled.caption`
 	position: absolute;
 	width: 1px;
@@ -25,7 +29,7 @@ const Title = styled.caption`
 const HederTable = styled.thead`
 	tr {
 		background-color: ${color.background.primary};
-		border-radius: 30px;
+		border-radius: ${borderRadius.seconary};
 	}
 `
 const BodyTable = styled.tbody`
@@ -38,7 +42,7 @@ const BodyTable = styled.tbody`
 			margin-top: 8px;
 		}
 	}
-	@media screen and (min-width:${breakpoints.tablet}) {
+	@media screen and (min-width: ${breakpoints.tablet}) {
 		width: 704px;
 		height: 285px;
 		overflow: auto;
@@ -46,7 +50,7 @@ const BodyTable = styled.tbody`
 			border-bottom: ${border.firstLine};
 		}
 	}
-	@media screen and (min-width:${breakpoints.desktop}) {
+	@media screen and (min-width: ${breakpoints.desktop}) {
 		width: 715px;
 	}
 `
@@ -54,10 +58,12 @@ const Row = styled.tr`
 	display: flex;
 	flex-direction: column;
 	background: ${color.background.primary};
-	background-color: transparent;
+	background-color: ${(prop) => {
+		prop.background
+	}};
 
-	@media screen and (max-width:${breakpoints.mobileUp}) {
-		border-radius: 10px;
+	@media screen and (max-width: ${breakpoints.mobileUp}) {
+		border-radius: ${borderRadius.fourth};
 		overflow: hidden;
 		td + td {
 			position: relative;
@@ -73,7 +79,7 @@ const Row = styled.tr`
 			}
 		}
 	}
-	@media screen and (min-width:${breakpoints.tablet}) {
+	@media screen and (min-width: ${breakpoints.tablet}) {
 		flex-direction: row;
 		justify-content: space-between;
 		padding: 16px 20px;
@@ -93,23 +99,20 @@ export const DashboardTable = ({ viewport }) => {
 		if (inView) console.log(111) //dispatch
 	}, [inView])
 
-	const BodyRowRender = useCallback(
-		() => {
-			return dataTable.map((data, idx) => (
-				<Row key={nanoid()}>
-					<ColumnBody
-						data={data}
-						tableColumns={tableColumns}
-						type={data.type}
-						viewport={viewport}
-						setInView={setInView}
-						isLast={dataTable.length === idx + 1}
-					/>
-				</Row>
-			))
-		},
-		[inView, viewport]
-	)
+	const BodyRowRender = useCallback(() => {
+		return dataTable.map((data, idx) => (
+			<Row key={nanoid()} background={viewport.anotherScreen ? 'transparent' : `${color.background.primary}`}>
+				<ColumnBody
+					data={data}
+					tableColumns={tableColumns}
+					type={data.type}
+					viewport={viewport}
+					setInView={setInView}
+					isLast={dataTable.length === idx + 1}
+				/>
+			</Row>
+		))
+	}, [inView, viewport])
 	return useMemo(() => {
 		return (
 			<Component>
@@ -118,7 +121,6 @@ export const DashboardTable = ({ viewport }) => {
 					<HederTable>
 						<Row>
 							{tableColumns.map((el) => (
-								
 								<Column key={nanoid()} width={el.style.width} justifyContent={el.style.justifyContent}>
 									{el.label}
 								</Column>
@@ -138,7 +140,7 @@ export const DashboardTable = ({ viewport }) => {
 				</BodyTable>
 			</Component>
 		)
-	}, [viewport,inView])
+	}, [viewport, inView])
 }
 
 Component.className = DashboardTable
