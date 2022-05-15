@@ -17,8 +17,9 @@ export const Fonts = createGlobalStyle`
 } */
 
 @font-face {
-  font-family: 'Poppins-Regular';
-  src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype'),
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/Poppins-Bold.ttf') format('truetype');
 }
 
 @font-face {
