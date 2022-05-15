@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
@@ -49,44 +49,11 @@ const StyledInput = styled(Field)`
 	padding-bottom: 12px;
 	padding-left: 54px;
 `
-
-export const FormRegistration = ({ toggleForm }) => {
-	const [name, setName] = useState('')
-	const [password, setPassword] = useState('')
-	const [passwordConfirm, setPasswordConfirm] = useState('')
-	const [email, setEmail] = useState('')
-	const [isOpenFormLogin, setIsOpenFormLogin] = useState(false)
-	const [isOpenFormRegister, setIsOpenFormRegister] = useState(false)
-
-	const [contact, setContact] = useState({
-		name: '',
-		email: '',
-		password: '',
-		passwordConfirm: '',
-	})
-
+const ValidationError = styled.div`
+	color: red;
+`
+export const FormRegistration = () => {
 	const dispatch = useDispatch()
-
-	const handleChange = ({ target: { name, value } }) => {
-		setContact((prev) => ({ ...prev, [name]: value }))
-	}
-
-	const onSubmit = (values) => {
-		// el.preventDefault()
-		dispatch(authOperations.register({ ...contact }))
-		console.log(contact)
-
-		reset()
-	}
-
-	const reset = () => {
-		setContact({
-			name: '',
-			email: '',
-			password: '',
-			passwordConfirm: '',
-		})
-	}
 
 	return (
 		<Formik
@@ -98,8 +65,15 @@ export const FormRegistration = ({ toggleForm }) => {
 			}}
 			validationSchema={Yup.object({
 				name: Yup.string().min(3, 'Must be 15 characters or less').required('Required'),
-				password: Yup.string().min(8, 'Must be 20 characters or less').required('Required'),
-				passwordConfirm: Yup.string().min(8, 'Must be 20 characters or less').required('Required'),
+				password: Yup.string()
+					.min(8, <ValidationError>'Must be 20 characters or less'</ValidationError>)
+					.required('Required'),
+				passwordConfirm: Yup.string()
+
+					.default('')
+					.oneOf([Yup.ref('password'), null], 'Passwords must match')
+					.required('Required'),
+
 				email: Yup.string().email('Invalid email address').required('Required'),
 			})}
 			onSubmit={(values, actions) => {
@@ -131,6 +105,7 @@ export const FormRegistration = ({ toggleForm }) => {
 					</StyleSvgIcon>
 
 					<StyledInput id='password' type='text' name='password' required placeholder='Password' />
+
 					<ErrorMessage name='password' />
 				</StyleIconInput>
 
