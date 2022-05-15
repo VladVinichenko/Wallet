@@ -28,54 +28,58 @@ const grey = {
 
 const StyledButton = styled('button')(
 	({ theme }) => `
-  font-family: IBM Plex Sans, sans-serif;
-  font-size: 0.875rem;
+  font-family: Circe, sans-serif;
+  font-size: 18px;
   box-sizing: border-box;
   min-height: calc(1.5em + 22px);
-  min-width: 320px;
+  width: 280px;
 //   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border-bottom: 2px solid ${theme.palette.mode === 'dark' ? '' : grey[100]};
+  border-bottom: 1px solid #E0E0E0;
 //   border-radius: 30px;
   margin: 0.5em;
   padding: 10px;
   text-align: left;
   line-height: 1.5;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  color: #E0E0E0;
 
 //   &:hover {
 //     background: inherit;
-//     border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+//     border-color: red;
 //   }
 
   &.${selectUnstyledClasses.focusVisible} {
-    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+    outline: 2px solid #E0E0E0;
   }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
       content: '▴';
+      color: #E0E0E0;
     }
   }
 
   &::after {
     content: '▾';
     float: right;
+    color: #E0E0E0;
+
   }
   `
 )
 
 const StyledListbox = styled('ul')(
 	({ theme }) => `
-  font-family: IBM Plex Sans, sans-serif;
-  font-size: 0.875rem;
+  font-family: Circe, sans-serif;
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 400;
   box-sizing: border-box;
-  padding: 5px;
+  padding: 20px 0;
   margin: 10px 0;
-  min-width: 320px;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
-  border-radius: 0.75em;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  width: 280px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #E0E0E0;
+  border-radius: 30px;
   overflow: auto;
   outline: 0px;
   `
@@ -85,35 +89,36 @@ const StyledOption = styled(OptionUnstyled)(
 	({ theme }) => `
   list-style: none;
   padding: 8px;
-  border-radius: 0.45em;
-  cursor: default;
+//   border-radius: 30px;
+  cursor: red;
+  
 
   &:last-of-type {
     border-bottom: none;
   }
 
-  &.${optionUnstyledClasses.selected} {
-    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
-  }
+//   &.${optionUnstyledClasses.selected} {
+//     background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+//     color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+//   }
 
-  &.${optionUnstyledClasses.highlighted} {
-    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  }
+//   &.${optionUnstyledClasses.highlighted} {
+//     background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+//     color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+//   }
 
-  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
-    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
-  }
+//   &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+//     background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+//     color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+//   }
 
-  &.${optionUnstyledClasses.disabled} {
-    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
-  }
+//   &.${optionUnstyledClasses.disabled} {
+//     color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+//   }
 
   &:hover:not(.${optionUnstyledClasses.disabled}) {
-    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+    background-color: #ffffff;
+    color: #FF6596;
   }
   `
 )
@@ -132,20 +137,20 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 
 	return <SelectUnstyled {...props} ref={ref} components={components} />
 })
-
-export const OpenMenu = ({ data, onClick, initValue }) => {
-	const [newValue, setValue] = React.useState()
-
-	const value = newValue || initValue
-
-	const handleChange = (event) => {
-		onClick(event.target.value)
-		setValue(event.target.value)
+function renderValue(option) {
+	if (option == null) {
+		return <span>Select category...</span>
 	}
+
+	return <span>{option.value}</span>
+}
+
+export const OpenMenu = ({ data, handleChange }) => {
+	const [value, setValue] = React.useState()
 
 	return (
 		<StyledEngineProvider injectFirst>
-			<CustomSelect value={value} onChange={handleChange}>
+			<CustomSelect renderValue={renderValue} value={value} onChange={handleChange}>
 				{/* {data.map((key) => (
 					<StyledOption value={key} key={key}>
 						{key}
@@ -158,3 +163,38 @@ export const OpenMenu = ({ data, onClick, initValue }) => {
 		</StyledEngineProvider>
 	)
 }
+
+const rangesExpense = [
+	{
+		value: 'Basic',
+		label: 'Basic',
+	},
+	{
+		value: 'Food',
+		label: 'Food',
+	},
+	{
+		value: 'Auto',
+		label: 'Auto',
+	},
+	{
+		value: 'Development',
+		label: 'Development',
+	},
+	{
+		value: 'Children',
+		label: 'Children',
+	},
+	{
+		value: 'House',
+		label: 'House',
+	},
+	{
+		value: 'Education',
+		label: 'Education',
+	},
+	{
+		value: 'The other',
+		label: 'The other',
+	},
+]
