@@ -1,60 +1,122 @@
 import { Fragment } from 'react'
 import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-
-import { ButtonAddTransactios } from 'modules'
-import Modal from 'modules/components/Modal'
+import { Home } from 'modules'
+// import { ButtonAddTransactios } from 'modules'
+import { Modal } from 'modules'
 // import { Logo } from 'modules'
-import { AddTransaction } from 'modules/components/addTransaction'
-// import 'react-datetime/css/react-datetime.css'
+// import { ButtonAddTransactios } from 'modules'
+// import { Currency } from 'modules'
+import { setIsModalLogoutOpen } from 'store'
+import { setIsModalAddTransactionOpen } from 'store'
+import { ButtonAddTransactios } from 'modules'
 
+import { Button } from 'modules'
 import { Currency } from 'modules'
-
-const Button = styled.button`
-	background: black;
-	height: 50px;
-	width: 200px;
-	color: yellow;
-	margin-bottom: 5px;
-	&:hover {
-		background: grey;
-	}
-`
+import { Balance } from 'modules'
+// const Button = styled.button`
+// 	background: black;
+// 	height: 50px;
+// 	width: 200px;
+// 	color: yellow;
+// 	margin-bottom: 5px;
+// 	&:hover {
+// 		background: grey;
+// 	}
+// `
 
 export default function App() {
-	const isLoading = useSelector(selectorsGlobal.getIsLoading)
-
+	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
+	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
+	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
+	const dispatch = useDispatch()
+	const meow1 = () => {
+		dispatch(setIsModalLogoutOpen(true))
+	}
+	const meow2 = () => {
+		dispatch(setIsModalAddTransactionOpen(true))
+	}
 	return (
 		<Fragment>
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
-
-			<Modal>
-				<AddTransaction />
-			</Modal>
-			<ButtonAddTransactios />
+			<NavLink to='/currency'>
+				<Button>Currency</Button>
+			</NavLink>
+			<NavLink to='/balance'>
+				<Button>Balance</Button>
+			</NavLink>
+			<Button onClickButton={meow1} color={false}>
+				Modal 1
+			</Button>
+			<Button onClickButton={meow2} color={false}>
+				Modal 1
+			</Button>
+			{/* <Modal></Modal> */}
+			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
+			{/* <Home /> */}
+			{/* <Balance /> */}
+
 			<Outlet />
+
+			{isModalLogOut && (
+				<Modal>
+					<Currency />
+				</Modal>
+			)}
+			{isModalAddTransaction && (
+				<Modal>
+					<Balance />
+				</Modal>
+			)}
+
 			<ToastContainer autoClose={2000} />
 			<Routes>
 				<Route
 					path='/'
 					element={
-						<NavLink to='/currency'>
-							<Button>Currency</Button>
-							<Outlet />
-						</NavLink>
+						<>
+							<Home /> <Outlet />
+						</>
 					}
-				>
-					<Route path='currency' element={<Currency />} />
-					<Route
+				/>
+				<Route
+					path='/currency'
+					element={
+						<>
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Outlet />
+						</>
+					}
+				/>
+				<Route
+					path='/balance'
+					element={
+						<>
+							<Balance />
+							<Outlet />
+						</>
+					}
+				/>
+				{/* <Route
 						path='*'
 						element={
 							<main style={{ padding: '1rem', color: 'red' }}>
@@ -62,8 +124,8 @@ export default function App() {
 								<Outlet />
 							</main>
 						}
-					/>
-				</Route>
+					/> */}
+				{/* </Route> */}
 			</Routes>
 		</Fragment>
 	)
