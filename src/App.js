@@ -6,11 +6,13 @@ import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-
+import { Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Modal } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
+// import { Currency } from 'modules'
+
 import { Button } from 'modules'
 import { Currency } from 'modules'
 import { Balance } from 'modules'
@@ -33,11 +35,19 @@ export default function App() {
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
+			<NavLink to='/currency'>
+				<Button>Currency</Button>
+			</NavLink>
+			<NavLink to='/balance'>
+				<Button>Balance</Button>
+			</NavLink>
+
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			<Balance />
+			{/* <Home /> */}
+			{/* <Balance /> */}
 
 			<Outlet />
 			<ToastContainer autoClose={2000} />
@@ -45,31 +55,40 @@ export default function App() {
 				<Route
 					path='/'
 					element={
-						<NavLink to='/currency'>
-							<Button color={false}>Currency</Button>
-							<Outlet />
-						</NavLink>
+						<>
+							<Home /> <Outlet />
+						</>
 					}
-				>
-					<Route
-						path='currency'
-						element={
-							<>
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-								<Currency />
-							</>
-						}
-					/>
-					<Route
+				/>
+				<Route
+					path='/currency'
+					element={
+						<>
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Currency />
+							<Outlet />
+						</>
+					}
+				/>
+				<Route
+					path='/balance'
+					element={
+						<>
+							<Balance />
+							<Outlet />
+						</>
+					}
+				/>
+				{/* <Route
 						path='*'
 						element={
 							<main style={{ padding: '1rem', color: 'red' }}>
@@ -77,8 +96,8 @@ export default function App() {
 								<Outlet />
 							</main>
 						}
-					/>
-				</Route>
+					/> */}
+				{/* </Route> */}
 			</Routes>
 		</Fragment>
 	)

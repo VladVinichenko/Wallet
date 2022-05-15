@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchFinance } from './finance-operation'
 import { toast } from 'react-toastify'
+
 const example = [
 	{
 		data: 1600547654,
@@ -83,11 +84,12 @@ const example = [
 		total: '14900.00',
 	},
 ]
+
 const initialState = {
 	isLoading: false,
 	error: null,
 	data: [...example],
-	totalBalance: '6900.00'
+	totalBalance: '6900.00',
 }
 
 const financeSlice = createSlice({
