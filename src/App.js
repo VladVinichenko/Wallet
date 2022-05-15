@@ -6,13 +6,13 @@ import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-
+import { Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import Modal from 'modules/components/Modal'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
-import { DashboardTable } from 'modules'
+
 import { Currency } from 'modules'
 
 const Button = styled.button`
@@ -39,7 +39,7 @@ export default function App() {
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			<DashboardTable />
+			<Home />
 			<Outlet />
 			<ToastContainer autoClose={2000} />
 			<Routes>

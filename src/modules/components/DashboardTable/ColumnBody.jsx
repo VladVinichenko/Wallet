@@ -2,7 +2,9 @@ import { useState, useEffect, useMemo } from 'react'
 import { nanoid } from 'nanoid'
 import styled from 'styled-components'
 import { InView } from 'react-intersection-observer'
+import { vars } from 'stylesheet'
 
+const { color, breakpoints } = vars
 const Component = styled.td`
 	position: relative;
 	display: flex;
@@ -15,7 +17,7 @@ const Component = styled.td`
 	font-size: 16px;
 	line-height: 1.5;
 
-	@media screen and (min-width: 760px) {
+	@media screen and (min-width: ${breakpoints.tablet}) {
 		justify-content: ${(prop) => prop.justifyContent};
 		border-left: none;
 		padding: 0;
@@ -31,7 +33,7 @@ const Title = styled.span`
 	font-weight: 700;
 	font-size: 18px;
 	line-height: 1.5;
-	color: #000000;
+	color: ${color.font.colorTitle};
 `
 
 export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLast }) => {
@@ -66,13 +68,19 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 						<>
 							<Component
 								key={nanoid()}
-								colorBorder={typeAction ? '#24CCA7' : '#FF6596'}
-								color={el.type === 'Summa' ? (typeAction ? '#24CCA7' : '#FF6596') : '#000000'}
-								width={viewport >= 760 ? el.style.width: undefined}
+								colorBorder={typeAction ? `${color.font.positive}` : `${color.font.negative}`}
+								color={
+									el.type === 'Summa'
+										? typeAction
+											? `${color.font.positive}`
+											: `${color.font.negative}`
+										: `${color.font.primary}`
+								}
+								width={viewport.anotherScreen ? el.style.width : undefined}
 								justifyContent={el.style.justifyContent}
 							>
 								{isLast && el.type === 'Summa' && <InView onChange={setInView} />}
-								{viewport <= 759 && <Title>{el.label}</Title>}
+								{viewport.mobileScreen && <Title>{el.label}</Title>}
 								{formateData(el)}
 							</Component>
 						</>
