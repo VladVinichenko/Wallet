@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { vars } from 'stylesheet'
 import { selectorsFinance } from 'store'
-const { color, breakpoints } = vars
+const { color,borderRadius, breakpoints } = vars
 const Component = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -12,8 +12,8 @@ const Component = styled.div`
 	height: 80px;
 	padding: 8px 0 12px 32px;
 
-	background: #ffffff;
-	border-radius: 30px;
+	background: ${color.background.primary};
+	border-radius:${borderRadius.seconary};
 
 	@media screen and (min-width: ${breakpoints.tablet}) {
 		width: 336px;
