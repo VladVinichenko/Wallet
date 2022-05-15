@@ -1,17 +1,19 @@
 import { Fragment } from 'react'
 import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 import { Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
-import { Header, Modal } from 'modules'
+import { Modal } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
+import { setIsModalLogoutOpen } from 'store'
+import { setIsModalAddTransactionOpen } from 'store'
 
 import { Button } from 'modules'
 import { Currency } from 'modules'
@@ -29,7 +31,15 @@ import { Balance } from 'modules'
 
 export default function App() {
 	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
-	const isModalLogoutOpen = useSelector(selectorsGlobal.getIsModalLogoutOpen)
+	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
+	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
+	const dispatch = useDispatch()
+	const meow1 = () => {
+		dispatch(setIsModalLogoutOpen(true))
+	}
+	const meow2 = () => {
+		dispatch(setIsModalAddTransactionOpen(true))
+	}
 	return (
 		<Fragment>
 			{isModalLogoutOpen &&
@@ -44,7 +54,12 @@ export default function App() {
 			<NavLink to='/balance'>
 				<Button>Balance</Button>
 			</NavLink>
-
+			<Button onClickButton={meow1} color={false}>
+				Modal 1
+			</Button>
+			<Button onClickButton={meow2} color={false}>
+				Modal 1
+			</Button>
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
@@ -53,6 +68,18 @@ export default function App() {
 			{/* <Balance /> */}
 
 			<Outlet />
+
+			{isModalLogOut && (
+				<Modal>
+					<Currency />
+				</Modal>
+			)}
+			{isModalAddTransaction && (
+				<Modal>
+					<Balance />
+				</Modal>
+			)}
+
 			<ToastContainer autoClose={2000} />
 			<Routes>
 				<Route
