@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalStyle, Fonts } from './stylesheet'
+import { store } from 'store'
 import './index.css'
 import './stylesheet/fonts.js'
 import './stylesheet/animation.js'
@@ -11,14 +12,17 @@ import './stylesheet/vars.js'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Background } from 'modules/components/background'
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<Fonts />
-			<GlobalStyle />
-			<Background />
-			<App />
+			<Provider store={store}>
+				<Fonts />
+				<GlobalStyle />
+				<Background />
+				<App />
+			</Provider>
 		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById('root')
