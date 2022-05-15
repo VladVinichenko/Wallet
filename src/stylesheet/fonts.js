@@ -12,6 +12,11 @@ export const Fonts = createGlobalStyle`
 }
 
 @font-face {
+  font-family: 'Poppins-Bold';
+  src: url('../assets/fonts/Poppins-Bold.ttf') format('ttf'),
+}
+
+@font-face {
   font-family: 'segoeui';
   src: url('../assets/fonts/segoeui.ttf') format('ttf'),
 }
