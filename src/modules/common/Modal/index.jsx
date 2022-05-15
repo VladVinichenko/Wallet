@@ -6,7 +6,7 @@ import { vars } from 'stylesheet'
 
 const modalRoot = document.querySelector('#root-modal')
 
-const Modal = ({ children }) => {
+export const Modal = ({ children }) => {
 	const [isModalOpen, setIsModalOpen] = useState(true)
 
 	const toggleModal = () => {
@@ -94,5 +94,3 @@ export const IconButton = styled.button`
 		height: 30px;
 	}
 `
-
-export default Modal
