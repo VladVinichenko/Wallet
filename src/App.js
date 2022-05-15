@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 // import { ButtonAddTransactios } from 'modules'
-// import Modal from 'modules/components/Modal'
+// import { Modal } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
