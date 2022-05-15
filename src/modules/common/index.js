@@ -1,4 +1,5 @@
 export * from './container'
+export * from './Balance'
 export * from './ButtonAddTransactions'
 export * from './Logo'
 export * from './Button'

@@ -13,7 +13,7 @@ import { ROUTES } from 'lib'
 // import { ButtonAddTransactios } from 'modules'
 import { Button } from 'modules'
 import { Currency } from 'modules'
-
+import { Balance } from 'modules'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;
@@ -26,7 +26,7 @@ import { Currency } from 'modules'
 // `
 
 export default function App() {
-	const isLoading = useSelector(selectorsGlobal.getIsLoading)
+	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
 
 	return (
 		<Fragment>
@@ -37,6 +37,8 @@ export default function App() {
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
+			<Balance />
+
 			<Outlet />
 			<ToastContainer autoClose={2000} />
 			<Routes>
