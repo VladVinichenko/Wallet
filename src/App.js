@@ -8,20 +8,22 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 
 // import { ButtonAddTransactios } from 'modules'
-// import Modal from 'modules/components/Modal'
+// import { Modal } from 'modules'
 // import { Logo } from 'modules'
+// import { ButtonAddTransactios } from 'modules'
+import { Button } from 'modules'
 import { Currency } from 'modules'
 
-const Button = styled.button`
-	background: black;
-	height: 50px;
-	width: 200px;
-	color: yellow;
-	margin-bottom: 5px;
-	&:hover {
-		background: grey;
-	}
-`
+// const Button = styled.button`
+// 	background: black;
+// 	height: 50px;
+// 	width: 200px;
+// 	color: yellow;
+// 	margin-bottom: 5px;
+// 	&:hover {
+// 		background: grey;
+// 	}
+// `
 
 export default function App() {
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
@@ -31,7 +33,6 @@ export default function App() {
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
-
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
@@ -43,12 +44,29 @@ export default function App() {
 					path='/'
 					element={
 						<NavLink to='/currency'>
-							<Button>Currency</Button>
+							<Button color={false}>Currency</Button>
 							<Outlet />
 						</NavLink>
 					}
 				>
-					<Route path='currency' element={<Currency />} />
+					<Route
+						path='currency'
+						element={
+							<>
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+								<Currency />
+							</>
+						}
+					/>
 					<Route
 						path='*'
 						element={
