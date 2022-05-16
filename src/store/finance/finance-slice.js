@@ -137,7 +137,7 @@ const financeSlice = createSlice({
 			state.isLoading = false;
 			state.statistics.incomeTotal = action.payload.data.data.incomeStatistics;
 			state.statistics.outlayTotal = action.payload.data.data.totalOutlayStatistics;	
-			state.statistics.statisticsByCategory = action.payload.data.data.allCategoriesStatistics;			
+			state.statistics.statisticsByCategory = action.payload.data.data.statisticsByCategory;			
 			toast.success('Ok')		
 		},
 		[getStatistics.rejected]: (state, action) => { 

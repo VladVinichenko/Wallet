@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
  import axios from 'axios'
 // axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'
-axios.defaults.baseURL = "http://localhost:3004/api/finance"
-import { getFinance, getTotal } from 'api'
+axios.defaults.baseURL = "http://localhost:3004/api"
+import { getFinance, getTotal , getStatisticsApi} from 'api'
 
 
 // axios.defaults.baseURL = 'http://localhost:3001/api/'
-axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/'
+/* axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/' */
 axios.defaults.headers.common[
 	'Authorization'
 ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE2NTc4NWQ3MDNhOWI4Yzc0MWQ5YiIsImlhdCI6MTY1MjY4NzY4NywiZXhwIjoxNjUyNjkxMjg3fQ.YGSfT75SmQ4iWngfK5_-I0vDySvfAGwGZIGvjek0h7s` // only test
@@ -40,7 +40,7 @@ export const getStatistics = createAsyncThunk(
 	const{ month, year } = credentials;
 	  
     try {
-      const responce = await axios.get(`/finance/statistics?year=${year}&month=${month}`);
+      const responce = await getStatisticsApi(month, year)
       return responce;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -49,59 +49,3 @@ export const getStatistics = createAsyncThunk(
 );
 
 
-// export const getContacts = createAsyncThunk('/contacts/get', async (_, thunkAPI) => {
-// 	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-// 	return await axios
-// 		.get('/contacts')
-// 		.then(function (response) {
-// 			if (response.status === 200) {
-// 				return thunkAPI.fulfillWithValue(response.data)
-// 			}
-// 			return thunkAPI.fulfillWithValue([])
-// 		})
-// 		.catch(function (error) {
-// 			return thunkAPI.rejectWithValue(error.response.statusText)
-// 		})
-// })
-
-// export const addContacts = createAsyncThunk('/contacts/add', async (payload, thunkAPI) => {
-// 	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-// 	return await axios
-// 		.post('/contacts', payload)
-// 		.then(function (response) {
-// 			if (response.status === 201) {
-// 				return thunkAPI.fulfillWithValue(response.data)
-// 			}
-// 		})
-// 		.catch(function (error) {
-// 			return thunkAPI.rejectWithValue(error.response.statusText)
-// 		})
-// })
-
-// export const deleteContacts = createAsyncThunk('/contacts/delete', async (payload, thunkAPI) => {
-// 	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-// 	return await axios
-// 		.delete(`/contacts/${payload}`)
-// 		.then(function (response) {
-// 			if (response.status === 200) {
-// 				return thunkAPI.fulfillWithValue(response.data)
-// 			}
-// 		})
-// 		.catch(function (error) {
-// 			return thunkAPI.rejectWithValue(error.response.statusText)
-// 		})
-// })
-
-// export const editContacts = createAsyncThunk('/contacts/edit', async (payload, thunkAPI) => {
-// 	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-// 	return await axios
-// 		.patch(`/contacts/${payload.id}`, payload.data)
-// 		.then(function (response) {
-// 			if (response.status === 200) {
-// 				return thunkAPI.fulfillWithValue(response.data)
-// 			}
-// 		})
-// 		.catch(function (error) {
-// 			return thunkAPI.rejectWithValue(error.response.statusText)
-// 		})
-// })

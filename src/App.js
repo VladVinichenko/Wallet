@@ -81,7 +81,7 @@ export default function App() {
 			{/* <Logo /> */}
 			{/* <Home />
 			<Balance /> */}
-
+			<ChartSection/>
 			<Outlet />
 
 			{isModalLogOut && (
@@ -117,7 +117,7 @@ export default function App() {
 					/> */}
 				{/* </Route> */}
 			</Routes>
-			<ChartSection/>
+			
 			{isLoading && <CustomLoader />}
 		</Fragment>
 	)
