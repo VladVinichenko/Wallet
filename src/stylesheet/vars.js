@@ -9,7 +9,6 @@ export const vars = {
 			cardGradient: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) -8.67%, rgba(255, 255, 255, 0) 116.22%)',
 			backdrop: 'rgba(0, 0, 0, 0.25)',
 			tableLine: '#DCDCDF',
-
 		},
 		font: {
 			primary: '#000000',
@@ -19,7 +18,7 @@ export const vars = {
 			fifth: '#FFFFFF',
 			positive: '#24CCA7',
 			negative: '#FF6596',
-			colorTitle: '#000000'
+			colorTitle: '#000000',
 		},
 		accent: {
 			primary: '#24CCA7',
@@ -43,18 +42,18 @@ export const vars = {
 	filter: {
 		pageBackgroundFilter: 'blur(50px)',
 		shadowButton: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
-		navigationFilter: 'drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));'
+		navigationFilter: 'drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));',
 	},
 	animation: {
 		duration: '250ms',
-		function: 'cubic-bezier(0.4, 0, 0.2, 1)'
+		function: 'cubic-bezier(0.4, 0, 0.2, 1)',
 	},
 	borderRadius: {
 		primary: '20px',
 		seconary: '30px',
 		third: '2px',
 		fourth: '10px',
-		fifth: '6px'
+		fifth: '6px',
 	},
 	border: {
 		firstLine: '1px solid #DCDCDF',
@@ -73,9 +72,9 @@ export const vars = {
 		tablet: '768px',
 		tabletUp: '1279px',
 		desktop: '1280px',
-		tabletUp: '1279px',
+		desktopUp: '1919px',
 		FHD: '1920px',
-		FHDUp: '1919px',
+		FHDUp: '2559px',
 		QHD: '2560px',
 	},
 }

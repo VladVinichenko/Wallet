@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+// import { OpenMenu } from 'modules'
 import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,19 +8,15 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 import { Header, Home, Logout } from 'modules'
-// import { ButtonAddTransactios } from 'modules'
-import { ChartSection} from './modules'
-// import Modal from 'modules/components/Modal'
 import { Modal } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
-// import { Currency } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
 import { setIsLoading } from 'store'
 
 import { Button } from 'modules'
-import { Currency } from 'modules'
+// import { Currency } from 'modules'
 import { Balance } from 'modules'
 import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
@@ -56,6 +53,8 @@ export default function App() {
 				</Modal>
 			)}
 			<Header />
+			{/* <OpenMenu /> */}
+
 			{/* <Navigation></Navigation>
 			<NavLink to='/'>
 				<Button>Home</Button>
