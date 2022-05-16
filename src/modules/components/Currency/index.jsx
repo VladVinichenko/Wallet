@@ -11,10 +11,10 @@ import currency_desk from 'assets/images/currency/currency_desk.svg'
 
 const Currenc = styled.div`
 	position: relative;
-	max-width: 280px;
+	width: 280px;
 	height: 174px;
-	margin: 0 auto;
-	margin-top: 30px;
+	/* margin: 0 auto; */
+	/* margin-top: 30px; */
 	border-radius: ${vars.borderRadius.seconary};
 	color: ${vars.color.background.primary};
 	background-color: ${vars.color.background.card};
@@ -78,7 +78,7 @@ const Currenc = styled.div`
 	}
 
 	@media (min-width: 768px) {
-		max-width: 336px;
+		width: 336px;
 		height: 182px;
 		background-image: url(${currency_tab});
 
@@ -88,7 +88,7 @@ const Currenc = styled.div`
 	}
 
 	@media (min-width: 1280px) {
-		max-width: 393px;
+		width: 393px;
 		height: 347px;
 		background-image: url(${currency_desk});
 		margin-top: 0;
