@@ -16,6 +16,7 @@ export const vars = {
 			seconary: '#A6A6A6',
 			third: '#BDBDBD',
 			fourth: '#4A56E2',
+			fifth: '#FFFFFF',
 			positive: '#24CCA7',
 			negative: '#FF6596',
 			colorTitle: '#000000'
@@ -42,15 +43,18 @@ export const vars = {
 	filter: {
 		pageBackgroundFilter: 'blur(50px)',
 		shadowButton: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
+		navigationFilter: 'drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));'
 	},
 	animation: {
 		duration: '250ms',
+		function: 'cubic-bezier(0.4, 0, 0.2, 1)'
 	},
 	borderRadius: {
 		primary: '20px',
 		seconary: '30px',
 		third: '2px',
 		fourth: '10px',
+		fifth: '6px'
 	},
 	border: {
 		firstLine: '1px solid #DCDCDF',
