@@ -3,15 +3,92 @@ import styled from 'styled-components'
 import Datetime from 'react-datetime'
 import { Formik, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import { useDispatch } from 'react-redux'
+import { setCloseModal } from 'store'
 
 import { vars } from 'stylesheet'
+import { Button } from 'modules'
 
 import 'react-datetime/css/react-datetime.css'
 import { sprite } from 'assets'
 
+const StyledInput = styled.input`
+	box-sizing: border-box;
+	margin-bottom: 40px;
+	width: 100%;
+
+	font-size: 18px;
+	line-height: 1.5;
+	border-bottom: 1px solid #e0e0e0;
+
+	&::placeholder {
+		color: ${vars.color.font.third};
+	}
+`
+
+const SummInput = styled(StyledInput)`
+	font-weight: 700;
+	text-align: center;
+
+	&::placeholder {
+		text-align: center;
+	}
+
+	&.error {
+		border-color: red;
+	}
+
+	@media screen and (min-width: 768px) {
+		margin-right: 30px;
+	}
+`
+
+const StyledGroup = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 40px;
+
+	span {
+		width: 100%;
+		position: relative;
+	}
+
+	svg {
+		position: absolute;
+		top: 2px;
+		right: 10px;
+	}
+
+	@media screen and (min-width: 768px) {
+		flex-wrap: nowrap;
+	}
+`
+
+const StyledTextarea = styled.textarea`
+	box-sizing: border-box;
+	margin-bottom: 40px;
+	padding-left: 20px;
+
+	width: 100%;
+	height: 86px;
+	font-size: 18px;
+	line-height: 1.5;
+	border-bottom: 1px solid #e0e0e0;
+	resize: none;
+
+	&::placeholder {
+		color: ${vars.color.font.third};
+	}
+
+	@media screen and (min-width: 768px) {
+		height: 32px;
+	}
+`
+
 const FormContainer = styled.div`
-	padding: 10px 20px;
+	padding: 20px 10px;
 	padding-bottom: 0;
+	width: 100vw;
 
 	font-size: 18px;
 	line-height: 1.5;
@@ -19,6 +96,7 @@ const FormContainer = styled.div`
 
 	@media screen and (min-width: 768px) {
 		padding: 40px 75px;
+		width: 540px;
 	}
 
 	h2 {
@@ -34,45 +112,46 @@ const FormContainer = styled.div`
 		}
 	}
 
-	.group {
-		// flex-grow: 2;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
+	.form-control {
+		padding-left: 20px;
 
-		@media screen and (min-width: 768px) {
-			justify-content: space-between;
-		}
+		width: 100%;
+		font-size: 18px;
+		line-height: 1.5;
+		border-bottom: 1px solid #e0e0e0;
 	}
 
-	.form-control,
-	.summInput {
-		@media screen and (min-width: 768px) {
-			max-width: 185px;
-		}
+	.button-item:not(:last-child) {
+		margin-bottom: 20px;
 	}
 
-	.summInput {
-		@media screen and (min-width: 768px) {
-			margin-right: 30px;
-		}
-	}
+	// .group {
+	// 	display: flex;
+	// 	flex-wrap: wrap;
+	// 	justify-content: center;
 
-	input.summInput::placeholder {
-		text-align: center;
-	}
+	// 	@media screen and (min-width: 768px) {
+	// 		justify-content: space-between;
+	// 	}
+	// }
 
-	form {
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-	}
+	// .form-control,
+	// .summInput {
+	// 	@media screen and (min-width: 768px) {
+	// 		max-width: 185px;
+	// 	}
+	// }
 
-	input,
+	// form {
+	// 	display: flex;
+	// 	align-items: center;
+	// 	flex-direction: column;
+	// }
+
 	select {
 		margin-bottom: 40px;
 		padding-left: 20px;
-		width: 280px;
+		width: 100%;
 
 		font-size: 18px;
 		line-height: 1.5;
@@ -82,40 +161,22 @@ const FormContainer = styled.div`
 		}
 	}
 
-	input::placeholder {
-		line-height: 27px;
-		color: ${vars.color.font.third};
-	}
-
-	.select-placeholder {
-		color: #bdbdbd;
-	}
-
-	input.error {
-		border-color: red;
-	}
-
-	.button-item:not(:last-child) {
-		margin-bottom: 20px;
-	}
+	// .select-placeholder {
+	// 	color: #bdbdbd;
+	// }
 
 	.error-message {
 		color: red;
 	}
-
-	.dateInputWrapper {
-		position: relative;
-	}
-
-	.calendarIcon {
-		position: absolute;
-		top: 4px;
-		right: 10px;
-	}
 `
 
-export const AddTransaction = (toggleModal) => {
+export const AddTransaction = () => {
 	const [date, setDate] = useState(Date.now()) //текущая дата
+	const dispatch = useDispatch()
+
+	const closeModal = () => {
+		dispatch(setCloseModal())
+	}
 
 	const getCategories = () => {
 		const result = [
@@ -130,7 +191,7 @@ export const AddTransaction = (toggleModal) => {
 
 	const categories = getCategories()
 
-	const handletDateChange = ({ _d: time }) => {
+	const handleDateChange = ({ _d: time }) => {
 		// setDate(time?.getTime())
 		setDate(time)
 		console.log(time)
@@ -142,6 +203,7 @@ export const AddTransaction = (toggleModal) => {
 		const type = values.isConsumption ? 'decrement' : 'increment'
 		values = { type, ...values, date }
 		delete values.isConsumption
+		closeModal()
 		/*
 					добавить в базу
 					добавить в стор
@@ -169,7 +231,7 @@ export const AddTransaction = (toggleModal) => {
 				onSubmit={addTransaction}
 				validationSchema={transactionSchena}
 			>
-				{({ values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleSubmit, handleReset }) => (
+				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
 						<Field type='checkbox' name='isConsumption' onChange={handleChange} />
 						{values.isConsumption && (
@@ -188,8 +250,8 @@ export const AddTransaction = (toggleModal) => {
 						)}
 						{/* {errors.category && touched.category && <div className='input-feedback'>{errors.category}</div>} */}
 						{errors.category && touched.category && errors.category}
-						<div className='group'>
-							<input
+						<StyledGroup className='group'>
+							<SummInput
 								type='number'
 								name='summ'
 								min='0'
@@ -208,16 +270,16 @@ export const AddTransaction = (toggleModal) => {
 									dateFormat='DD.MM.YYYY'
 									timeFormat={false}
 									initialValue={values.date}
-									onChange={handletDateChange}
+									onChange={handleDateChange}
 									className='groupItem'
 								/>
 								<svg className='calendarIcon' width='24' height='24'>
 									<use href={sprite + '#icon-calendar'}></use>
 								</svg>
 							</span>
-						</div>
+						</StyledGroup>
 						{errors.date && touched.date && errors.date}
-						<input
+						<StyledTextarea
 							type='text'
 							name='comment'
 							value={values.comment}
@@ -229,15 +291,14 @@ export const AddTransaction = (toggleModal) => {
 						{/* {errors.summ && touched.summ && <div className='error-message'>{errors.summ}</div>} */}
 						<ul className='button-list'>
 							<li className='button-item'>
-								<button type='submit' disabled={isSubmitting}>
+								<Button type='submit' disabled={isSubmitting}>
 									Add
-								</button>
+								</Button>
 							</li>
 							<li className='button-item'>
-								<button type='button' onClick={() => console.log('cancel')}>
-									{/* onClick={toggleModal}>  */}
+								<Button type='button' color={false} onClickButton={closeModal}>
 									Cancel
-								</button>
+								</Button>
 							</li>
 						</ul>
 					</form>

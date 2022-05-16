@@ -7,14 +7,13 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 import { Home } from 'modules'
-// import { ButtonAddTransactios } from 'modules'
 import { Modal } from 'modules'
 // import { Logo } from 'modules'
-// import { ButtonAddTransactios } from 'modules'
+import { ButtonAddTransaction } from 'modules'
 // import { Currency } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
-import { ButtonAddTransactios } from 'modules'
+import { AddTransaction } from 'modules'
 
 import { Button } from 'modules'
 import { Currency } from 'modules'
@@ -55,11 +54,8 @@ export default function App() {
 			<Button onClickButton={meow1} color={false}>
 				Modal 1
 			</Button>
-			<Button onClickButton={meow2} color={false}>
-				Modal 1
-			</Button>
 			{/* <Modal></Modal> */}
-			{/* <ButtonAddTransactios /> */}
+			<ButtonAddTransaction onClickButton={meow2} />
 			{/* <Currency /> */}
 			{/* <Logo /> */}
 			{/* <Home /> */}
@@ -74,7 +70,7 @@ export default function App() {
 			)}
 			{isModalAddTransaction && (
 				<Modal>
-					<Balance />
+					<AddTransaction />
 				</Modal>
 			)}
 
