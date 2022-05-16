@@ -67,7 +67,10 @@ export default function App() {
 					<Logout name='Bayraktar' />
 				</Modal>
 			)}
-			<Header />
+			{isLoggedIn && <Header />}
+
+			{!isLoggedIn && <Login />}
+
 			{/* <Navigation></Navigation>
 			<NavLink to='/'>
 				<Button>Home</Button>

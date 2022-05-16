@@ -25,15 +25,15 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 
 const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 	try {
-		const { data } = await axios.post('/auth/signin', credentials)
+		const { data } = await axios.post('auth/signin', credentials)
 		token.set(data.token)
 		return data
 	} catch (error) {}
 })
 
-const logOut = createAsyncThunk('auth/logout', async () => {
+const logOut = createAsyncThunk('auth/signout', async () => {
 	try {
-		await axios.post('/users/logout')
+		await axios.post('auth/signout')
 		token.unset()
 	} catch (error) {
 		// TODO: Добавить обработку ошибки error.message
