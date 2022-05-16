@@ -3,44 +3,8 @@ import { BsPlusLg } from 'react-icons/bs'
 import { FaMinus } from 'react-icons/fa'
 import { vars } from 'stylesheet'
 
-export const Checkbox = () => {
-	return (
-		<Container>
-			<ToggleContainer>
-				<FormForButton>
-					<Label>
-						<Input defaultChecked />
-						<LabelText>Доход</LabelText>
-					</Label>
-					<ToggleField />
-					<ToggleIcon className='toogle'>
-						<BsPlusLg />
-					</ToggleIcon>
-					<Label>
-						<Input className='expenses' />
-						<LabelText $mode='expenses'>Расход</LabelText>
-					</Label>
-
-					{/* <input id='income' name='satisfaction' type='radio' />
-					<input id='expenses' name='satisfaction' type='radio' />
-					<label for='income' class='rating-label rating-label-income'>
-						Доход
-					</label>
-					<div class='smile-rating-toggle'></div>
-
-					<div class='toggle-rating-pill'></div>
-					<label for='expenses' class='rating-label rating-label-fun'>
-						Расход
-					</label> */}
-				</FormForButton>
-			</ToggleContainer>
-		</Container>
-	)
-}
-
 const Container = styled.div`
 	position: relative;
-
 	max-width: 300px;
 	margin: 0 auto;
 	margin-top: 30px;
@@ -48,7 +12,7 @@ const Container = styled.div`
 
 const ToggleContainer = styled.div`
 	input {
-		/* display: none; */
+		display: none;
 	}
 `
 
@@ -59,10 +23,17 @@ const FormForButton = styled.form`
 `
 const Input = styled.input.attrs({ type: 'radio', name: 'lasc' })``
 
-const Label = styled.label``
+const Label = styled.label`
+	position: relative;
+	display: flex;
+	align-items: center;
+`
 
 const LabelText = styled.span`
-	color: #e0e0e0;
+	display: inline-flex;
+	color: ${vars.color.font.third};
+	padding: 0;
+
 	font-weight: 700;
 	font-size: 16px;
 	line-height: 1.5;
@@ -71,13 +42,13 @@ const LabelText = styled.span`
 			case 'expenses':
 				return css`
 					${Input}:checked + && {
-						color: #ff6596;
+						color: ${vars.color.font.negative};
 					}
 				`
 			default:
 				return css`
 					${Input}:checked + && {
-						color: #24cca7;
+						color: ${vars.color.font.positive};
 					}
 				`
 		}
@@ -90,22 +61,22 @@ const ToggleField = styled.div`
 	width: 80px;
 	margin-left: 20px;
 	margin-right: 20px;
-	border: 1px solid #e0e0e0;
+	border: 1px solid ${vars.color.font.third};
 	border-radius: 30px;
-	transition: all 500ms;
+	transition: all ${vars.animation.duration};
 `
 
 const ToggleIcon = styled.div`
+	position: absolute;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: absolute;
 	width: 44px;
 	height: 44px;
-	background-color: #24cca7;
-	left: 100px;
+	background-color: ${vars.color.font.positive};
+	left: 67px;
 	border-radius: 50%;
-	transition: all 500ms;
+	transition: all ${vars.animation.duration};
 	z-index: 4;
 	box-shadow: 0px 6px 15px rgba(36, 204, 167, 0.5);
 
@@ -115,3 +86,27 @@ const ToggleIcon = styled.div`
 		fill: ${vars.color.background.primary};
 	}
 `
+export const Checkbox = () => {
+	return (
+		<Container>
+			<ToggleContainer>
+				<FormForButton>
+					<Label>
+						<Input defaultChecked />
+						<LabelText>Доход</LabelText>
+
+						<ToggleIcon>
+							<BsPlusLg />
+						</ToggleIcon>
+					</Label>
+					<ToggleField />
+
+					<Label>
+						<Input name='expenses' />
+						<LabelText $mode='expenses'>Расход</LabelText>
+					</Label>
+				</FormForButton>
+			</ToggleContainer>
+		</Container>
+	)
+}
