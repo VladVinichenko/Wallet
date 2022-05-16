@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-// import axios from 'axios'
+ import axios from 'axios'
 // axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'
+axios.defaults.baseURL = "http://localhost:3004/api/finance"
 
 const tempData = [{ id: '314343', name: 'gruzin' }]
 
@@ -18,6 +19,22 @@ export const fetchFinance = createAsyncThunk('finance', async () => {
 	// throw new Error('error')
 	return res
 })
+
+
+export const getStatistics = createAsyncThunk(
+	'transactions/getStatistics',
+	async (credentials, { rejectWithValue }) => {
+	const{ month, year } = credentials;
+	  
+    try {
+      const responce = await axios.get(`/finance/statistics?year=${year}&month=${month}`);
+      return responce;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
 
 // export const getContacts = createAsyncThunk('/contacts/get', async (_, thunkAPI) => {
 // 	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`

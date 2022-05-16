@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { vars} from '../../../stylesheet'
 
@@ -45,13 +45,29 @@ margin-bottom: 20px;
 }
 
 `
-const monthOptions = ['January', 'February', 'March', 'April', 'May', 'June','July','August','September','October','November','December']
+const monthOptions = [
+    { number: 1, string: 'January' },
+    { number: 2, string: 'February' },
+{ number: 3, string: 'March' },
+{ number: 4, string: 'April' },
+{ number: 5, string: 'May' },
+{ number: 6, string: 'June' },
+{ number: 7, string: 'July' },
+{ number: 8, string: 'August' },
+{ number: 9, string: 'September' },
+{ number: 10, string: 'October' },
+{ number: 11, string: 'November' },
+  { number: 12, string: 'December' }]
+
 const yearOptions = [2020, 2021, 2022]
 
-const Selects = () => { 
-    const [month, setMonth] = useState('');
-    const [year, setYear] = useState('');
+const Selects = ({ setData }) => {
+  const [month, setMonth] = useState('');
+  const [year, setYear] = useState('');
 
+  useEffect(() => {
+    setData({month, year})
+   },[month, year])
     const handleChange = event => {
     const { name, value } = event.target;
     switch (name) {
@@ -64,7 +80,7 @@ const Selects = () => {
 
       default:
         break;
-    }
+      }
   };
 
     return <SelectsContainer>
@@ -75,7 +91,7 @@ const Selects = () => {
             defaultValue='Month'
        >           
             <option value="Month"  disabled hidden>Month</option>
-            {monthOptions.map(month => <option value={month} key={month}>{month}</option>) }
+            {monthOptions.map(month => <option value={month.number} key={month.string}>{month.string}</option>) }
         </Select>
         
         <Select name='year'

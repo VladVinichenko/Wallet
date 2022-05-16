@@ -9,12 +9,6 @@ import { ROUTES } from 'lib'
 
 // import { ButtonAddTransactios } from 'modules'
 import { ChartSection} from './modules'
-
-/* export default function App() {
-	return <Fragment>
-	<ChartSection/>
-	</Fragment> */
-	
 // import Modal from 'modules/components/Modal'
 // import { Logo } from 'modules'
 import { Currency } from 'modules'
@@ -43,6 +37,7 @@ export default function App() {
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
+			
 			<Outlet />
 			<ToastContainer autoClose={2000} />
 			<Routes>
@@ -67,6 +62,7 @@ export default function App() {
 					/>
 				</Route>
 			</Routes>
+			<ChartSection/>
 		</Fragment>
 	)
 }

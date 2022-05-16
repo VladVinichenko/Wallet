@@ -33,13 +33,19 @@ line-height: 27px;
  left:50%;
  transform: translate(-50%, -50%) ;
  `
-
-export const data = {
+const renderData = (list) => { 
+    if (list.length===0) {return }
+    const data = list.map(item => item.sum)
+    return data
+}
+ 
+const Chart = ({ categories, outlay }) => { 
+  const data = {
   /* labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'], */
   datasets: [
     {
       label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3, 4,5,7],
+       data: renderData(categories),
       backgroundColor: [
          vars.color.chart.basic,
          vars.color.chart.products,
@@ -69,9 +75,8 @@ export const data = {
     },
   ],
 };
-const Chart = () => { 
     return(<ChartWrap><Doughnut data={data} />
-        <TotalBalance>&#x24; {/* {balance} */}</TotalBalance>
+        <TotalBalance>&#x24; {outlay}</TotalBalance>
       </ChartWrap>)
     
 }

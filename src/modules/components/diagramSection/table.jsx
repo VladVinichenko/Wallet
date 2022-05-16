@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { vars} from '../../../stylesheet'
+import { vars } from '../../../stylesheet'
+
 const Table = styled.table`
 font-size: 16px;
 line-height: 24px;
 border-collapse: collapse; 
-background-color: pink;
 
 @media (max-width: ${vars.breakpoints.tabletUp}) {
     width: 340px;
@@ -121,7 +121,18 @@ height: 24px;
 border-radius: ${vars.borderRadius.third};
 margin-right: 16px;
 `
-const DiagramTable = () => { 
+
+const renderRows = (list) => { 
+    if (list.length===0) {return }
+    const rows = list.map(item => {return (<TRow key={item.category }>
+        <TBodyCategory><CategoryContents><ColorSquare />{item.category }</CategoryContents></TBodyCategory>
+        <TBodySum>{item.sum }</TBodySum>
+    </TRow>) })
+    return rows
+}
+
+
+const DiagramTable = ({outlay, income, categories }) => { 
     return <>
         <Table>
             <THead><tr>
@@ -129,51 +140,16 @@ const DiagramTable = () => {
                 <THeadSum>Sum</THeadSum>
             </tr></THead>
             <tbody>
-                <TRow>
-                    <TBodyCategory><CategoryContents><ColorSquare basic/>Basic outlay</CategoryContents></TBodyCategory>
-                    <TBodySum>300000.00</TBodySum>
-                </TRow>
-                 <TRow>
-                    <TBodyCategory><CategoryContents><ColorSquare foodstuff/>Foodstuff</CategoryContents></TBodyCategory>
-                    <TBodySum></TBodySum>
-                </TRow>
-                 <TRow>
-                    <TBodyCategory><CategoryContents><ColorSquare car/>Car</CategoryContents></TBodyCategory>
-                    <TBodySum></TBodySum>
-                </TRow>
-                 <TRow>
-                    <TBodyCategory><CategoryContents><ColorSquare careofyourself/>Care of yourself</CategoryContents></TBodyCategory>
-                    <TBodySum></TBodySum>
-                </TRow>
-                 <TRow>
-                    <TBodyCategory><CategoryContents><ColorSquare children/>Care of children</CategoryContents></TBodyCategory>
-                    <TBodySum></TBodySum>
-                </TRow>
-                 <TRow>
-                    <TBodyCategory><CategoryContents><ColorSquare household/>Household goods</CategoryContents></TBodyCategory>
-                    <TBodySum></TBodySum>
-                </TRow>
-                 <TRow>
-                    <TBodyCategory><CategoryContents><ColorSquare education/>Education</CategoryContents></TBodyCategory>
-                    <TBodySum></TBodySum>
-                </TRow>
-                 <TRow>
-                    <TBodyCategory><CategoryContents><ColorSquare leisure/>Leisure</CategoryContents></TBodyCategory>
-                    <TBodySum></TBodySum>
-                </TRow>
-                 <TRow>
-                    <TBodyCategory><CategoryContents><ColorSquare other/>Other outlay</CategoryContents></TBodyCategory>
-                    <TBodySum></TBodySum>
-                </TRow>
+                 { renderRows(categories)}
             </tbody>
             <tfoot>
                 <TFootRow>
                     <TFootCategory > Outlay</TFootCategory>
-                    <TFootSum Outlay>30000.00</TFootSum>
+                    <TFootSum Outlay>{ outlay}</TFootSum>
                 </TFootRow>
                 <TFootRow>
                     <TFootCategory >Income</TFootCategory>
-                    <TFootSum Income>230000.00</TFootSum>
+                    <TFootSum Income>{income }</TFootSum>
                 </TFootRow>
             </tfoot>
         </Table>
