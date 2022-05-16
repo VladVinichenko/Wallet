@@ -1,5 +1,6 @@
 import React from 'react'
 // import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import Media from 'react-media'
 // import { windowSize } from 'lib/hooks/windowSize'
 import styled from 'styled-components'

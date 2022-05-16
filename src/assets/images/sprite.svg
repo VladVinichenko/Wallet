@@ -1,3 +1,7 @@
+<symbol id="arrowDown"  width="20" height="11" viewBox="0 0 20 11">
+    <path fill="#E0E0E0" d="M1 1L10 10L19 1" stroke="black"/>
+</symbol>
+
 <svg aria-hidden="true" style="position:absolute;width:0;height:0" xmlns="http://www.w3.org/2000/svg" overflow="hidden">
   <defs>
 <symbol id="currency_mob" width="280" height="93" viewBox="0 0 280 93" fill="none">
