@@ -19,8 +19,13 @@ const globalSlice = createSlice({
 		setIsModalAddTransactionOpen: (state, action) => {
 			state.isModalAddTransactionOpen = action.payload
 		},
+		setCloseModal: (state) => {
+			state.isModalLogoutOpen = false
+			state.isModalAddTransactionOpen = false
+		},
 	},
 })
 
 export default globalSlice.reducer
-export const { setIsLoading, setIsModalLogoutOpen, setIsModalAddTransactionOpen, setError } = globalSlice.actions
+export const { setIsLoading, setIsModalLogoutOpen, setIsModalAddTransactionOpen, setError, setCloseModal } =
+	globalSlice.actions
