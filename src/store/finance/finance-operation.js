@@ -31,7 +31,6 @@ export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async
 })
 export const fetchCategories = createAsyncThunk('finance/categories', async () => {
 	const { data } = await getCategories()
-	const { categories } = data.categories
-	console.log(categories)
-	return categories
+	// console.log(data)
+	return data.data
 })
