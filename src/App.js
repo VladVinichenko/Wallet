@@ -54,7 +54,7 @@ export default function App() {
 				</Modal>
 			)}
 			<Header />
-			<Navigation></Navigation>
+			{/* <Navigation></Navigation>
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
@@ -72,13 +72,13 @@ export default function App() {
 			</Button>
 			<Button onClickButton={checkLoader} color={false}>
 				Check loader
-			</Button>
+			</Button> */}
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			<Home />
-			{/* <Balance /> */}
+			{/* <Home />
+			<Balance /> */}
 
 			<Outlet />
 
@@ -103,34 +103,7 @@ export default function App() {
 						</>
 					}
 				/>
-				<Route
-					path='/currency'
-					element={
-						<>
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Outlet />
-						</>
-					}
-				/>
-				<Route
-					path='/balance'
-					element={
-						<>
-							<Balance />
-							<Outlet />
-						</>
-					}
-				/>
+
 				{/* <Route
 						path='*'
 						element={
