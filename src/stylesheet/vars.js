@@ -45,6 +45,7 @@ export const vars = {
 	},
 	animation: {
 		duration: '250ms',
+		function: 'cubic-bezier(0.4, 0, 0.2, 1)'
 	},
 	borderRadius: {
 		primary: '20px',

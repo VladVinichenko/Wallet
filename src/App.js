@@ -6,7 +6,7 @@ import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Home } from 'modules'
+import { Header, Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 import { Modal } from 'modules'
 // import { Logo } from 'modules'
@@ -34,14 +34,15 @@ export default function App() {
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
 	const dispatch = useDispatch()
-	const meow1 = () => {
+	const showModalLogout = () => {
 		dispatch(setIsModalLogoutOpen(true))
 	}
-	const meow2 = () => {
+	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
 	}
 	return (
 		<Fragment>
+			<Header/>
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
@@ -51,10 +52,10 @@ export default function App() {
 			<NavLink to='/balance'>
 				<Button>Balance</Button>
 			</NavLink>
-			<Button onClickButton={meow1} color={false}>
+			<Button onClickButton={showModalLogout} color={false}>
 				Modal 1
 			</Button>
-			<Button onClickButton={meow2} color={false}>
+			<Button onClickButton={showModalAddTransaction} color={false}>
 				Modal 1
 			</Button>
 			{/* <Modal></Modal> */}
@@ -68,7 +69,7 @@ export default function App() {
 
 			{isModalLogOut && (
 				<Modal>
-					<Currency />
+					Logout
 				</Modal>
 			)}
 			{isModalAddTransaction && (
