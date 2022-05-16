@@ -1,49 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { VscClose } from 'react-icons/vsc'
 import { vars } from 'stylesheet'
+import { useDispatch } from 'react-redux'
+import { setCloseModal } from 'store'
 
 const modalRoot = document.querySelector('#root-modal')
-
-const Modal = ({ children }) => {
-	const [isModalOpen, setIsModalOpen] = useState(true)
-
-	const toggleModal = () => {
-		setIsModalOpen(!isModalOpen)
-	}
-
-	useEffect(() => {
-		function handleKeyDown(e) {
-			e.code === 'Escape' && toggleModal()
-		}
-		window.addEventListener('keydown', handleKeyDown)
-
-		return () => {
-			window.removeEventListener('keydown', handleKeyDown)
-		}
-	}, [children, toggleModal])
-
-	const handleBackdropClick = (e) => {
-		e.target === e.currentTarget && toggleModal()
-	}
-
-	return createPortal(
-		<>
-			{isModalOpen && (
-				<Backdrop onClick={handleBackdropClick}>
-					<ModalContent>
-						<IconButton type='button' onClick={toggleModal}>
-							<VscClose />
-						</IconButton>
-						{children}
-					</ModalContent>
-				</Backdrop>
-			)}
-		</>,
-		modalRoot
-	)
-}
 
 export const Backdrop = styled.div`
 	position: fixed;
@@ -64,7 +27,7 @@ export const ModalContent = styled.div`
 	min-height: 100px;
 	border-radius: ${vars.borderRadius.primary};
 	background-color: ${vars.color.background.primary};
-	overflow: auto;
+	overflow: hidden;
 
 	@media screen and (max-width: ${vars.breakpoints.mobileUp}) {
 		border-radius: 0;
@@ -94,5 +57,39 @@ export const IconButton = styled.button`
 		height: 30px;
 	}
 `
+export const Modal = ({ children }) => {
+	const dispatch = useDispatch()
 
-export default Modal
+	const closeModal = () => {
+		dispatch(setCloseModal())
+	}
+
+	useEffect(() => {
+		function handleKeyDown(e) {
+			e.code === 'Escape' && closeModal()
+		}
+		window.addEventListener('keydown', handleKeyDown)
+
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [children, closeModal])
+
+	const handleBackdropClick = (e) => {
+		e.target === e.currentTarget && closeModal()
+	}
+
+	return createPortal(
+		<>
+			<Backdrop onClick={handleBackdropClick}>
+				<ModalContent>
+					<IconButton type='button' onClick={closeModal}>
+						<VscClose />
+					</IconButton>
+					{children}
+				</ModalContent>
+			</Backdrop>
+		</>,
+		modalRoot
+	)
+}

@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
+
 body {
   font-size: 16px;
   line-height: 24px;
@@ -40,6 +41,7 @@ button {
   background: none;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 input {
@@ -77,4 +79,7 @@ ul, ol {
 textarea {
   outline: none;
 }
+
 `
+
+
