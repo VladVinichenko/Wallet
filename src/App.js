@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 // import { OpenMenu } from 'modules'
 import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
@@ -20,6 +20,8 @@ import { Button } from 'modules'
 import { Balance } from 'modules'
 import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
+import { fetchCategories } from 'store'
+import { selectorsFinance } from 'store'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;
@@ -30,11 +32,13 @@ import { Navigation } from 'modules/components/Navigation'
 // 		background: grey;
 // 	}
 // `
-
+// selectorsFinance
 export default function App() {
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
+	const categories = useSelector(selectorsFinance.getCategories)
+	console.log(categories)
 	const dispatch = useDispatch()
 	const showModalLogout = () => {
 		dispatch(setIsModalLogoutOpen(true))
@@ -45,6 +49,9 @@ export default function App() {
 	const checkLoader = () => {
 		dispatch(setIsLoading(!isLoading))
 	}
+
+	useEffect(() => dispatch(fetchCategories()), [])
+
 	return (
 		<Fragment>
 			{isModalLogOut && (
