@@ -80,7 +80,7 @@ const StyledListbox = styled('ul')(
   border: 1px solid #E0E0E0;
   border-radius: 20px;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
   overflow: auto;
   outline: 0px;
   `

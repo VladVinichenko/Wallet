@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-// import { OpenMenu } from 'modules'
+import { OpenMenu } from 'modules'
 import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -49,13 +49,14 @@ export default function App() {
 	}
 	return (
 		<Fragment>
-			{/* <OpenMenu /> */}
 			{isModalLogOut && (
 				<Modal>
 					<Logout name='Bayraktar' />
 				</Modal>
 			)}
 			<Header />
+			<OpenMenu />
+
 			{/* <Navigation></Navigation>
 			<NavLink to='/'>
 				<Button>Home</Button>
