@@ -19,7 +19,7 @@ import { Login } from 'modules/pages/login/login'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
 import { setIsLoading } from 'store'
-
+import { authSelectors } from './store/auth/auth-selectors'
 import { Button } from 'modules'
 import { Currency } from 'modules'
 import { Balance } from 'modules'
@@ -42,6 +42,7 @@ import { Navigation } from 'modules/components/Navigation'
 // }, [dispatch])
 
 export default function App() {
+	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
@@ -57,8 +58,10 @@ export default function App() {
 	}
 	return (
 		<Fragment>
-			<Registration />
-			<Login />
+			{/* <Registration /> */}
+
+			{/* <Login /> */}
+
 			{isModalLogOut && (
 				<Modal>
 					<Logout name='Bayraktar' />
