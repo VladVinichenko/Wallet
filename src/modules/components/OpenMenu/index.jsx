@@ -62,7 +62,6 @@ const StyledButton = styled('button')(
     content: '▾';
     float: right;
     color: #E0E0E0;
-
   }
   `
 )
@@ -79,7 +78,9 @@ const StyledListbox = styled('ul')(
   width: 280px;
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid #E0E0E0;
-  border-radius: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(50px);
   overflow: auto;
   outline: 0px;
   `
@@ -163,38 +164,3 @@ export const OpenMenu = ({ data, handleChange }) => {
 		</StyledEngineProvider>
 	)
 }
-
-const rangesExpense = [
-	{
-		value: 'Basic',
-		label: 'Basic',
-	},
-	{
-		value: 'Food',
-		label: 'Food',
-	},
-	{
-		value: 'Auto',
-		label: 'Auto',
-	},
-	{
-		value: 'Development',
-		label: 'Development',
-	},
-	{
-		value: 'Children',
-		label: 'Children',
-	},
-	{
-		value: 'House',
-		label: 'House',
-	},
-	{
-		value: 'Education',
-		label: 'Education',
-	},
-	{
-		value: 'The other',
-		label: 'The other',
-	},
-]
