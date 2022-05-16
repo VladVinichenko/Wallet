@@ -1,4 +1,5 @@
 import { Fragment, useEffect } from 'react'
+// import { OpenMenu } from 'modules'
 import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,22 +10,22 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 import { Header, Home, Logout } from 'modules'
-// import { ButtonAddTransactios } from 'modules'
 import { Modal } from 'modules'
 import { Registration } from 'modules/pages/registration/registration'
 import { Login } from 'modules/pages/login/login'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
-// import { Currency } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
 import { setIsLoading } from 'store'
 import { authSelectors } from './store/auth/auth-selectors'
 import { Button } from 'modules'
-import { Currency } from 'modules'
+// import { Currency } from 'modules'
 import { Balance } from 'modules'
 import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
+import { fetchCategories } from 'store'
+import { selectorsFinance } from 'store'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;
@@ -35,12 +36,14 @@ import { Navigation } from 'modules/components/Navigation'
 // 		background: grey;
 // 	}
 // `
-
+// selectorsFinance
 export default function App() {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
+	const categories = useSelector(selectorsFinance.getCategories)
+	console.log(categories)
 	const dispatch = useDispatch()
 	const showModalLogout = () => {
 		dispatch(setIsModalLogoutOpen(true))
@@ -54,6 +57,9 @@ export default function App() {
 	useEffect(() => {
 		dispatch(authOperations.fetchCurrentUser())
 	}, [dispatch])
+
+	useEffect(() => dispatch(fetchCategories()), [])
+
 	return (
 		<Fragment>
 			{/* <Registration /> */}
@@ -92,8 +98,8 @@ export default function App() {
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			{/* <Home />
-			<Balance /> */}
+			{/* <Home /> */}
+			{/* <Balance /> */}
 
 			<Outlet />
 
