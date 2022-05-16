@@ -88,7 +88,7 @@ const example = [
 const initialState = {
 	isLoading: false,
 	error: null,
-	data: [...example],
+	data: [],
 	totalBalance: '6900.00',
 }
 
@@ -102,17 +102,19 @@ const financeSlice = createSlice({
 		},
 		[fetchTotalFinance.pending]: (state) => {
 			state.isLoading = true
-			state.data = []
+			state.totalBalance = []
 		},
 
 		[fetchFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.data = action.payload
+			// console.log(action)
 			toast.success('Ok')
 		},
 		[fetchTotalFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.totalBalance = action.payload
+			// console.log(action)
 			toast.success('Ok')
 		},
 
