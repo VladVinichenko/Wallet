@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+// import { OpenMenu } from 'modules'
 import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,18 +7,19 @@ import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Home } from 'modules'
+import { Header, Home, Logout } from 'modules'
 import { Modal } from 'modules'
 // import { Logo } from 'modules'
 import { ButtonAddTransaction } from 'modules'
-// import { Currency } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
+import { setIsLoading } from 'store'
 import { AddTransaction } from 'modules'
-
 import { Button } from 'modules'
-import { Currency } from 'modules'
+// import { Currency } from 'modules'
 import { Balance } from 'modules'
+import { CustomLoader } from 'modules'
+import { Navigation } from 'modules/components/Navigation'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;
@@ -30,18 +32,30 @@ import { Balance } from 'modules'
 // `
 
 export default function App() {
-	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
+	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
 	const dispatch = useDispatch()
-	const meow1 = () => {
+	const showModalLogout = () => {
 		dispatch(setIsModalLogoutOpen(true))
 	}
-	const meow2 = () => {
+	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
+	}
+	const checkLoader = () => {
+		dispatch(setIsLoading(!isLoading))
 	}
 	return (
 		<Fragment>
+			{isModalLogOut && (
+				<Modal>
+					<Logout name='Bayraktar' />
+				</Modal>
+			)}
+			<Header />
+			{/* <OpenMenu /> */}
+
+			{/* <Navigation></Navigation>
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
@@ -51,11 +65,17 @@ export default function App() {
 			<NavLink to='/balance'>
 				<Button>Balance</Button>
 			</NavLink>
-			<Button onClickButton={meow1} color={false}>
+			<Button onClickButton={showModalLogout} color={false}>
 				Modal 1
 			</Button>
+			<Button onClickButton={showModalAddTransaction} color={false}>
+				Modal 1
+			</Button>
+			<Button onClickButton={checkLoader} color={false}>
+				Check loader
+			</Button> */}
 			{/* <Modal></Modal> */}
-			<ButtonAddTransaction onClickButton={meow2} />
+			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
 			{/* <Currency /> */}
 			{/* <Logo /> */}
 			{/* <Home /> */}
@@ -65,7 +85,7 @@ export default function App() {
 
 			{isModalLogOut && (
 				<Modal>
-					<Currency />
+					<Logout />
 				</Modal>
 			)}
 			{isModalAddTransaction && (
@@ -84,34 +104,7 @@ export default function App() {
 						</>
 					}
 				/>
-				<Route
-					path='/currency'
-					element={
-						<>
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Currency />
-							<Outlet />
-						</>
-					}
-				/>
-				<Route
-					path='/balance'
-					element={
-						<>
-							<Balance />
-							<Outlet />
-						</>
-					}
-				/>
+
 				{/* <Route
 						path='*'
 						element={
@@ -123,6 +116,7 @@ export default function App() {
 					/> */}
 				{/* </Route> */}
 			</Routes>
+			{isLoading && <CustomLoader />}
 		</Fragment>
 	)
 }

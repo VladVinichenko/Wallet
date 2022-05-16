@@ -57,9 +57,7 @@ const BodyTable = styled.tbody`
 const Row = styled.tr`
 	display: flex;
 	flex-direction: column;
-	background: ${(prop) => 
-		prop.background
-	};
+	background: ${(prop) => prop.background};
 
 	@media screen and (max-width: ${breakpoints.mobileUp}) {
 		border-radius: ${borderRadius.fourth};
@@ -93,13 +91,14 @@ const Column = styled.th`
 export const DashboardTable = ({ viewport }) => {
 	const [inView, setInView] = useState(false)
 	const dataTable = useSelector(selectorsFinance.getData)
+	// console.log(dataTable)
 
 	useEffect(() => {
 		if (inView) console.log(111) //dispatch
 	}, [inView])
 
 	const BodyRowRender = useCallback(() => {
-		console.log(viewport.anotherScreen);
+		console.log(viewport.anotherScreen)
 		return dataTable.map((data, idx) => (
 			<Row key={nanoid()} background={viewport.anotherScreen ? `transparent` : `${color.background.primary}`}>
 				<ColumnBody
@@ -112,7 +111,7 @@ export const DashboardTable = ({ viewport }) => {
 				/>
 			</Row>
 		))
-	}, [inView, viewport])
+	}, [inView, viewport, dataTable])
 	return useMemo(() => {
 		return (
 			<Component>
@@ -140,7 +139,7 @@ export const DashboardTable = ({ viewport }) => {
 				</BodyTable>
 			</Component>
 		)
-	}, [viewport, inView])
+	}, [viewport, inView, dataTable])
 }
 
 Component.className = DashboardTable

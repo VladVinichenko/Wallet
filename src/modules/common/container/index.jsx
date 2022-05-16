@@ -5,12 +5,12 @@ export const Container = styled.div`
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
-	overflow-x: hidden;
-	min-width: ${vars.breakpoints.mobile};
+	/* overflow-x: hidden; */
+	/* min-width: ${vars.breakpoints.mobile}; */
 	@media screen and (min-width: ${vars.breakpoints.mobile}) and (max-width: ${vars.breakpoints.mobileUp}) {
 		padding-left: 20px;
 		padding-right: 20px;
-		max-width: ${vars.breakpoints.mobileUp};
+		width: ${vars.breakpoints.mobile};
 	}
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		padding-left: 32px;
