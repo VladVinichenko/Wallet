@@ -16,7 +16,7 @@ import { setIsModalAddTransactionOpen } from 'store'
 import { setIsLoading } from 'store'
 
 import { Button } from 'modules'
-import { Currency } from 'modules'
+// import { Currency } from 'modules'
 import { Balance } from 'modules'
 import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
@@ -76,7 +76,7 @@ export default function App() {
 			</Button> */}
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
-			<Currency />
+			{/* <Currency /> */}
 			{/* <Logo /> */}
 			{/* <Home />
 			<Balance /> */}
