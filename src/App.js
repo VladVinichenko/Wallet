@@ -80,8 +80,8 @@ export default function App() {
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			{/* <Home />
-			<Balance /> */}
+			{/* <Home /> */}
+			{/* <Balance /> */}
 
 			<Outlet />
 
