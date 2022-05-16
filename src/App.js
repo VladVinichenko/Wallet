@@ -18,6 +18,7 @@ import { setIsModalAddTransactionOpen } from 'store'
 import { Button } from 'modules'
 import { Currency } from 'modules'
 import { Balance } from 'modules'
+import { Navigation } from 'modules/components/Navigation'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;
@@ -42,7 +43,13 @@ export default function App() {
 	}
 	return (
 		<Fragment>
-			<Header/>
+			{isModalLogOut && (
+				<Modal>
+					<Logout name='Bayraktar' />
+				</Modal>
+			)}
+			<Header />
+			<Navigation></Navigation>
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>
@@ -62,14 +69,14 @@ export default function App() {
 			{/* <ButtonAddTransactios /> */}
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			{/* <Home /> */}
+			<Home />
 			{/* <Balance /> */}
 
 			<Outlet />
 
 			{isModalLogOut && (
 				<Modal>
-					<Logout/>
+					<Logout />
 				</Modal>
 			)}
 			{isModalAddTransaction && (
@@ -127,6 +134,6 @@ export default function App() {
 					/> */}
 				{/* </Route> */}
 			</Routes>
-		</Fragment >
+		</Fragment>
 	)
 }
