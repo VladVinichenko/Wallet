@@ -16,6 +16,7 @@ export const vars = {
 			seconary: '#A6A6A6',
 			third: '#BDBDBD',
 			fourth: '#4A56E2',
+			fifth: '#FFFFFF',
 			positive: '#24CCA7',
 			negative: '#FF6596',
 			colorTitle: '#000000'

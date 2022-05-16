@@ -6,7 +6,7 @@ import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Header, Home } from 'modules'
+import { Header, Home, Logout } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 import { Modal } from 'modules'
 // import { Logo } from 'modules'
@@ -69,7 +69,7 @@ export default function App() {
 
 			{isModalLogOut && (
 				<Modal>
-					Logout
+					<Logout/>
 				</Modal>
 			)}
 			{isModalAddTransaction && (
@@ -127,6 +127,6 @@ export default function App() {
 					/> */}
 				{/* </Route> */}
 			</Routes>
-		</Fragment>
+		</Fragment >
 	)
 }
