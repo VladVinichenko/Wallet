@@ -6,10 +6,10 @@ export const vars = {
 			page: 'rgba(255, 255, 255, 0.4)',
 			card: '#4A56E2',
 			currency: 'rgba(255, 255, 255, 0.2)',
+			openMenu: 'rgba(255, 255, 255, 0.7)',
 			cardGradient: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) -8.67%, rgba(255, 255, 255, 0) 116.22%)',
 			backdrop: 'rgba(0, 0, 0, 0.25)',
 			tableLine: '#DCDCDF',
-
 		},
 		font: {
 			primary: '#000000',
@@ -19,7 +19,7 @@ export const vars = {
 			fifth: '#FFFFFF',
 			positive: '#24CCA7',
 			negative: '#FF6596',
-			colorTitle: '#000000'
+			colorTitle: '#000000',
 		},
 		accent: {
 			primary: '#24CCA7',
@@ -27,6 +27,8 @@ export const vars = {
 			fourth: '#6E78E8',
 			firstEllipse: '#FFD8D0',
 			secondEllipse: '#C5BAFF',
+			openMenu: '#FF6596',
+			buttonOpenMenu: '#E0E0E0',
 		},
 		chart: {
 			basic: '#FED057',
@@ -43,18 +45,18 @@ export const vars = {
 	filter: {
 		pageBackgroundFilter: 'blur(50px)',
 		shadowButton: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
-		navigationFilter: 'drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));'
+		navigationFilter: 'drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));',
 	},
 	animation: {
 		duration: '250ms',
-		function: 'cubic-bezier(0.4, 0, 0.2, 1)'
+		function: 'cubic-bezier(0.4, 0, 0.2, 1)',
 	},
 	borderRadius: {
 		primary: '20px',
 		seconary: '30px',
 		third: '2px',
 		fourth: '10px',
-		fifth: '6px'
+		fifth: '6px',
 	},
 	border: {
 		firstLine: '1px solid #DCDCDF',
@@ -65,6 +67,7 @@ export const vars = {
 	boxShadow: {
 		firstLine: `0px 1px 0px rgba(255, 255, 255, 0.6)`,
 		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px rgba(255, 255, 255, 0.6)`,
+		openMenu: '0px 6px 15px rgba(0, 0, 0, 0.1)',
 	},
 	breakpoints: {
 		mobile: '320px',

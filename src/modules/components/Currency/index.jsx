@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import fetchCourse from 'servises/fetchCourse'
 import { animation, vars } from 'stylesheet'
 
-// import { sprite } from 'assets'
 import currency_mob from 'assets/images/currency/currency_mob.svg'
 import currency_tab from 'assets/images/currency/currency_tab.svg'
 import currency_desk from 'assets/images/currency/currency_desk.svg'
@@ -72,12 +71,12 @@ const Currenc = styled.div`
 		justify-content: center;
 		transform: translate(-50%, -50%);
 
-		@media (min-width: 768px) {
+		@media (min-width: ${vars.breakpoints.tablet}) {
 			top: 50%;
 		}
 	}
 
-	@media (min-width: 768px) {
+	@media (min-width: ${vars.breakpoints.tablet}) {
 		max-width: 336px;
 		height: 182px;
 		background-image: url(${currency_tab});
@@ -87,7 +86,7 @@ const Currenc = styled.div`
 		}
 	}
 
-	@media (min-width: 1280px) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		max-width: 393px;
 		height: 347px;
 		background-image: url(${currency_desk});
