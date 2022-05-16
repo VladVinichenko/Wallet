@@ -45,6 +45,7 @@ const Name = styled.span`
     margin-left: 12px;
     max-width: calc(100vw - 200px);
     
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 
@@ -131,7 +132,7 @@ export const Header = () => {
         <Head>
             <Container>
                 <HeaderContainer>
-                    <Link to='/'>
+                    <Link to='/home'>
                         <Logo />
                     </Link>
                     <UserMenu>
