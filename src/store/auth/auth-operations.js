@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 
 axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
 
@@ -19,6 +20,9 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 		// token.set(data.token)
 		return data
 	} catch (error) {
+		if (error.response.status === 409) {
+			toast.error('Пользователь с таким именем уже существует')
+		}
 		// TODO: Добавить обработку ошибки error.message
 	}
 })
@@ -28,7 +32,13 @@ const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 		const { data } = await axios.post('auth/signin', credentials)
 		token.set(data.token)
 		return data
-	} catch (error) {}
+	} catch (error) {
+		if (error.response.status !== 401) {
+			toast.error('Сервіс тимчасово недоступний')
+		} else {
+			toast.error('Невірний логін або пароль')
+		}
+	}
 })
 
 const logOut = createAsyncThunk('auth/signout', async () => {
@@ -51,6 +61,7 @@ const fetchCurrentUser = createAsyncThunk('users/current', async (_, thunkAPI) =
 	token.set(persistedToken)
 	try {
 		const { data } = await axios.get('users/current')
+		console.log(data)
 		return data
 	} catch (error) {
 		// TODO: Добавить обработку ошибки error.message

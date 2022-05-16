@@ -35,11 +35,6 @@ import { Navigation } from 'modules/components/Navigation'
 // 		background: grey;
 // 	}
 // `
-// const dispatch = useDispatch()
-
-// useEffect(() => {
-// 	dispatch(authOperations.fetchCurrentUser())
-// }, [dispatch])
 
 export default function App() {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
@@ -56,6 +51,9 @@ export default function App() {
 	const checkLoader = () => {
 		dispatch(setIsLoading(!isLoading))
 	}
+	useEffect(() => {
+		dispatch(authOperations.fetchCurrentUser())
+	}, [dispatch])
 	return (
 		<Fragment>
 			{/* <Registration /> */}

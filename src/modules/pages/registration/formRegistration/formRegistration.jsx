@@ -4,7 +4,6 @@ import { validate } from 'indicative/validator'
 
 import styled from 'styled-components'
 import { LogoAuth } from '../../../components/logo'
-import { ButtonAuth } from '../../../components/buttonAuth'
 import { Button } from '../../../../modules/common/Button/index'
 import { sprite } from '../../../../assets/images/index.js'
 import { useDispatch } from 'react-redux'
@@ -156,11 +155,7 @@ export const FormRegistration = () => {
 
 					<ErrorMessage name='name' />
 				</StyleIconInput>
-				{/* <ButtonAuth
-					text='Регистрация'
-					style={{ background: '#24cca7', borderRadius: '20px', border: 'none', color: '#ffffff' }}
-				/>
-				<ButtonAuth text='Вход' /> */}
+
 				<Button type='button'>Registration</Button>
 				<Button color={false} type='button'>
 					Log In

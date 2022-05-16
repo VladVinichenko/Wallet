@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
+
 import styled from 'styled-components'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { sprite } from '../../../../assets/images/index.js'
 import { Button } from '../../../../modules/common/Button/index'
+import { ShowPasswordButton } from '../../../../modules/common/showPasswordButton/showPasswordButton'
 import { LogoAuth } from 'modules/components/logo/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from '../../../../store/auth/auth-operations'
@@ -70,54 +72,77 @@ const StyledInput = styled(Field)`
 	}
 `
 
-export const FormLogin = () => {
+export const FormLogin = ({ isShown }) => {
+	const [passwordShown, setPasswordShown] = useState(false)
+	console.log(isShown)
+
+	useEffect(() => {
+		console.log(passwordShown)
+	}, [passwordShown])
+
+	const togglePassword = () => {
+		setPasswordShown(!passwordShown)
+	}
+
 	const dispatch = useDispatch()
 
 	return (
-		<Formik
-			initialValues={{
-				email: '',
-				password: '',
-			}}
-			// validationSchema={Yup.object({
-			// 	password: Yup.string().min(8).required('Required'),
-			// 	email: Yup.string().email('Invalid email address').required('Required'),
-			// })}
-
-			onSubmit={(values, actions) => {
-				dispatch(authOperations.logIn(values))
-				console.log(values)
-				alert(JSON.stringify(values, null, 2))
-				actions.resetForm({
+		<>
+			<Formik
+				initialValues={{
 					email: '',
 					password: '',
-				})
-			}}
-		>
-			<StyledFormRegistration>
-				<LogoAuth />
+				}}
+				// validationSchema={Yup.object({
+				// 	password: Yup.string().min(8).required('Required'),
+				// 	email: Yup.string().email('Invalid email address').required('Required'),
+				// })}
 
-				<StyleIconInput>
-					<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
-						<use href={sprite + '#icon-e-mail'} />
-					</StyleSvgIcon>
-					<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
-					<ErrorMessage name='email' />
-				</StyleIconInput>
+				onSubmit={(values, actions) => {
+					dispatch(authOperations.logIn(values))
+					console.log(values)
+					alert(JSON.stringify(values, null, 2))
+					actions.resetForm({
+						email: '',
+						password: '',
+					})
+				}}
+			>
+				<StyledFormRegistration>
+					<LogoAuth />
 
-				<StyleIconInput>
-					<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
-						<use href={sprite + '#icon-password'} />
-					</StyleSvgIcon>
-					<StyledInput id='password' type='text' name='password' required placeholder='Password' />
-					<ErrorMessage name='password' />
-				</StyleIconInput>
+					<StyleIconInput>
+						<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
+							<use href={sprite + '#icon-e-mail'} />
+						</StyleSvgIcon>
+						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
+						<ErrorMessage name='email' />
+					</StyleIconInput>
 
-				<Button type='button'> Log In</Button>
-				<Button color={false} type='button'>
-					Registration
-				</Button>
-			</StyledFormRegistration>
-		</Formik>
+					<StyleIconInput>
+						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
+							<use href={sprite + '#icon-password'} />
+						</StyleSvgIcon>
+						<StyledInput
+							id='password'
+							type={passwordShown ? 'text' : 'password'}
+							name='password'
+							aria-label='Password'
+							required
+							placeholder='Password'
+							style={{ position: 'relative' }}
+						/>
+						<ShowPasswordButton />
+
+						<ErrorMessage name='password' />
+					</StyleIconInput>
+
+					<Button type='submit'> Log In</Button>
+					<Button color={false} type='button'>
+						Registration
+					</Button>
+				</StyledFormRegistration>
+			</Formik>
+		</>
 	)
 }
