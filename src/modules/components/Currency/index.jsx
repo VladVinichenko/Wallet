@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import Spinner from 'Spinner'
+import { RotatingLines } from 'react-loader-spinner'
 import styled from 'styled-components'
 import fetchCourse from 'servises/fetchCourse'
 import { animation, vars } from 'stylesheet'
 
-// import { sprite } from 'assets'
 import currency_mob from 'assets/images/currency/currency_mob.svg'
 import currency_tab from 'assets/images/currency/currency_tab.svg'
 import currency_desk from 'assets/images/currency/currency_desk.svg'
+
+const Loader = styled.div`
+	position: relative;
+	z-index: 1500;
+	display: flex;
+	justify-content: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`
+
+export const CurrencyLoader = () => {
+	return (
+		<Loader>
+			<RotatingLines width={50} />
+		</Loader>
+	)
+}
 
 const Currenc = styled.div`
 	position: relative;
@@ -62,19 +79,6 @@ const Currenc = styled.div`
 
 	td {
 		padding-top: 10px;
-	}
-
-	Spinner {
-		position: relative;
-		top: 50%;
-		left: 50%;
-		display: flex;
-		justify-content: center;
-		transform: translate(-50%, -50%);
-
-		@media (min-width: 768px) {
-			top: 50%;
-		}
 	}
 
 	@media (min-width: 768px) {
@@ -144,7 +148,7 @@ export const Currency = () => {
 	return (
 		<Currenc>
 			{currency.length === 0 ? (
-				<Spinner />
+				<CurrencyLoader />
 			) : (
 				<table>
 					<thead>
