@@ -8,11 +8,9 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 import { Header, Home, Logout } from 'modules'
-// import { ButtonAddTransactios } from 'modules'
 import { Modal } from 'modules'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
-// import { Currency } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
 import { setIsLoading } from 'store'
@@ -78,7 +76,7 @@ export default function App() {
 			</Button> */}
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
-			{/* <Currency /> */}
+			<Currency />
 			{/* <Logo /> */}
 			{/* <Home />
 			<Balance /> */}
