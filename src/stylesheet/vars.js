@@ -75,9 +75,9 @@ export const vars = {
 		tablet: '768px',
 		tabletUp: '1279px',
 		desktop: '1280px',
-		tabletUp: '1279px',
+		desktopUp: '1919px',
 		FHD: '1920px',
-		FHDUp: '1919px',
+		FHDUp: '2559px',
 		QHD: '2560px',
 	},
 }
