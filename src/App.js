@@ -14,10 +14,12 @@ import { Modal } from 'modules'
 // import { Currency } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
+import { setIsLoading } from 'store'
 
 import { Button } from 'modules'
 import { Currency } from 'modules'
 import { Balance } from 'modules'
+import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
 // const Button = styled.button`
 // 	background: black;
@@ -31,7 +33,7 @@ import { Navigation } from 'modules/components/Navigation'
 // `
 
 export default function App() {
-	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
+	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
 	const dispatch = useDispatch()
@@ -40,6 +42,9 @@ export default function App() {
 	}
 	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
+	}
+	const checkLoader = () => {
+		dispatch(setIsLoading(!isLoading))
 	}
 	return (
 		<Fragment>
@@ -64,6 +69,9 @@ export default function App() {
 			</Button>
 			<Button onClickButton={showModalAddTransaction} color={false}>
 				Modal 1
+			</Button>
+			<Button onClickButton={checkLoader} color={false}>
+				Check loader
 			</Button>
 			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
@@ -134,6 +142,7 @@ export default function App() {
 					/> */}
 				{/* </Route> */}
 			</Routes>
+			{isLoading && <CustomLoader />}
 		</Fragment>
 	)
 }
