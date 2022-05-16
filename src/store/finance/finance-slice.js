@@ -88,7 +88,7 @@ const example = [
 const initialState = {
 	isLoading: false,
 	error: null,
-	data: [],
+	data: [...example],
 	totalBalance: '6900.00',
 }
 
