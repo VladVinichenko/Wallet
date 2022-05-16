@@ -1,7 +1,9 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
+import authOperations from '../src/store/auth/auth-operations'
+
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -9,6 +11,8 @@ import { ROUTES } from 'lib'
 import { Home } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 import { Modal } from 'modules'
+import { Registration } from 'modules/pages/registration/registration'
+import { Login } from 'modules/pages/login/login'
 // import { Logo } from 'modules'
 // import { ButtonAddTransactios } from 'modules'
 // import { Currency } from 'modules'
@@ -28,6 +32,11 @@ import { Balance } from 'modules'
 // 		background: grey;
 // 	}
 // `
+// const dispatch = useDispatch()
+
+// useEffect(() => {
+// 	dispatch(authOperations.fetchCurrentUser())
+// }, [dispatch])
 
 export default function App() {
 	//const isLoading = useSelector(selectorsGlobal.getIsLoading)
@@ -42,6 +51,8 @@ export default function App() {
 	}
 	return (
 		<Fragment>
+			<Registration />
+			<Login />
 			<NavLink to='/'>
 				<Button>Home</Button>
 			</NavLink>

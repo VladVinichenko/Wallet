@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com'
+axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
 
 const token = {
 	set(token) {
@@ -12,19 +12,20 @@ const token = {
 	},
 }
 
-const register = createAsyncThunk('auth/register', async (credentials) => {
+const register = createAsyncThunk('auth/signup', async (credentials) => {
 	try {
-		const { data } = await axios.post('/users/signup', credentials)
-		token.set(data.token)
+		const { data } = await axios.post('auth/signup', credentials)
+
+		// token.set(data.token)
 		return data
 	} catch (error) {
 		// TODO: Добавить обработку ошибки error.message
 	}
 })
 
-const logIn = createAsyncThunk('auth/login', async (credentials) => {
+const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 	try {
-		const { data } = await axios.post('/users/login', credentials)
+		const { data } = await axios.post('/auth/signin', credentials)
 		token.set(data.token)
 		return data
 	} catch (error) {}
@@ -39,7 +40,7 @@ const logOut = createAsyncThunk('auth/logout', async () => {
 	}
 })
 
-const fetchCurrentUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+const fetchCurrentUser = createAsyncThunk('users/current', async (_, thunkAPI) => {
 	const state = thunkAPI.getState()
 	const persistedToken = state.auth.token
 
@@ -49,7 +50,7 @@ const fetchCurrentUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) =>
 
 	token.set(persistedToken)
 	try {
-		const { data } = await axios.get('/users/current')
+		const { data } = await axios.get('users/current')
 		return data
 	} catch (error) {
 		// TODO: Добавить обработку ошибки error.message
@@ -62,4 +63,5 @@ const operations = {
 	logIn,
 	fetchCurrentUser,
 }
+
 export default operations

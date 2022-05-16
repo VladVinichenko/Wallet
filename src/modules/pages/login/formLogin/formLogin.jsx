@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { nanoid } from 'nanoid'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 import { sprite } from '../../../../assets/images/index.js'
-import { ButtonAuth } from 'modules/components/buttonAuth/index.js'
+import { Button } from '../../../../modules/common/Button/index'
 import { LogoAuth } from 'modules/components/logo/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from '../../../../store/auth/auth-operations'
 
-const StyledFormRegistration = styled.form`
+const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -33,12 +34,20 @@ const StyledFormRegistration = styled.form`
 		margin-left: 0;
 		margin-right: 0;
 	}
+
+	button:not(:last-child) {
+		margin-bottom: 20px;
+	}
 `
 
 const StyleIconInput = styled.div`
+	position: relative;
 	width: 100%;
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
+	&:not(:last-child) {
+		margin-bottom: 40px;
+	}
 `
 
 const StyleSvgIcon = styled.svg`
@@ -46,76 +55,69 @@ const StyleSvgIcon = styled.svg`
 	margin-left: 12px;
 `
 
-const StyledInput = styled.input`
+const StyledInput = styled(Field)`
 	width: 100%;
 	border-bottom: 1px solid #e0e0e0;
-	margin-bottom: 40px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
 	padding-bottom: 12px;
+	padding-top: 12px;
 	padding-left: 54px;
+	outline: none;
+	&:-webkit-autofill {
+		transition: background-color 5000s ease-in-out 0s;
+	}
 `
 
 export const FormLogin = () => {
-	const [password, setPassword] = useState('')
-	const [email, setEmail] = useState('')
-	const [contact, setContact] = useState({
-		email: '',
-		password: '',
-	})
 	const dispatch = useDispatch()
 
-	const handleChange = ({ target: { name, value } }) => {
-		setContact((prev) => ({ ...prev, [name]: value }))
-	}
-	const handleSubmit = (el) => {
-		el.preventDefault()
-		dispatch(authOperations.register({ ...contact }))
-		reset()
-	}
-
-	const reset = () => {
-		setContact({
-			email: '',
-			password: '',
-		})
-	}
-
 	return (
-		<StyledFormRegistration onSubmit={handleSubmit}>
-			<LogoAuth />
-			<StyleIconInput>
-				<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
-					<use href={sprite + '#icon-e-mail'} />
-				</StyleSvgIcon>
-				<StyledInput
-					id={nanoid()}
-					type='text'
-					name='email'
-					value={contact.email}
-					required
-					onChange={handleChange}
-					placeholder='E-mail'
-				/>
-			</StyleIconInput>
-			<StyleIconInput>
-				<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
-					<use href={sprite + '#icon-password'} />
-				</StyleSvgIcon>
+		<Formik
+			initialValues={{
+				email: '',
+				password: '',
+			}}
+			// validationSchema={Yup.object({
+			// 	password: Yup.string().min(8).required('Required'),
+			// 	email: Yup.string().email('Invalid email address').required('Required'),
+			// })}
 
-				<StyledInput
-					id={nanoid()}
-					type='text'
-					name='password'
-					value={contact.password}
-					required
-					onChange={handleChange}
-					placeholder='Password'
-				/>
-			</StyleIconInput>
-			<ButtonAuth
-				text='Вход'
-				style={{ background: '#24cca7', borderRadius: '20px', border: 'none', color: '#ffffff' }}
-			/>
-			<ButtonAuth text='Регистрация' />
-		</StyledFormRegistration>
+			onSubmit={(values, actions) => {
+				dispatch(authOperations.logIn(values))
+				console.log(values)
+				alert(JSON.stringify(values, null, 2))
+				actions.resetForm({
+					email: '',
+					password: '',
+				})
+			}}
+		>
+			<StyledFormRegistration>
+				<LogoAuth />
+
+				<StyleIconInput>
+					<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
+						<use href={sprite + '#icon-e-mail'} />
+					</StyleSvgIcon>
+					<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
+					<ErrorMessage name='email' />
+				</StyleIconInput>
+
+				<StyleIconInput>
+					<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
+						<use href={sprite + '#icon-password'} />
+					</StyleSvgIcon>
+					<StyledInput id='password' type='text' name='password' required placeholder='Password' />
+					<ErrorMessage name='password' />
+				</StyleIconInput>
+
+				<Button type='button'> Log In</Button>
+				<Button color={false} type='button'>
+					Registration
+				</Button>
+			</StyledFormRegistration>
+		</Formik>
 	)
 }

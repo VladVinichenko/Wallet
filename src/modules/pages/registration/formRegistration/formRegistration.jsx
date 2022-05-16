@@ -1,10 +1,11 @@
-import { useState } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import { validate } from 'indicative/validator'
 
 import styled from 'styled-components'
 import { LogoAuth } from '../../../components/logo'
 import { ButtonAuth } from '../../../components/buttonAuth'
+import { Button } from '../../../../modules/common/Button/index'
 import { sprite } from '../../../../assets/images/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from '../../../../store/auth/auth-operations'
@@ -29,12 +30,20 @@ const StyledFormRegistration = styled(Form)`
 	@media screen and (min-width: 1280px) {
 		margin: 0;
 	}
+
+	button:not(:last-child) {
+		margin-bottom: 20px;
+	}
 `
 
 const StyleIconInput = styled.div`
+	position: relative;
 	width: 100%;
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
+	&:not(:last-child) {
+		margin-bottom: 40px;
+	}
 `
 
 const StyleSvgIcon = styled.svg`
@@ -45,12 +54,22 @@ const StyleSvgIcon = styled.svg`
 const StyledInput = styled(Field)`
 	width: 100%;
 	border-bottom: 1px solid #e0e0e0;
-	margin-bottom: 40px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
 	padding-bottom: 12px;
+	padding-top: 12px;
 	padding-left: 54px;
+	outline: none;
+	&:-webkit-autofill {
+		transition: background-color 5000s ease-in-out 0s;
+	}
 `
 const ValidationError = styled.div`
+	position: absolute;
 	color: red;
+	top: -15px;
+	right: 50px;
 `
 export const FormRegistration = () => {
 	const dispatch = useDispatch()
@@ -66,20 +85,23 @@ export const FormRegistration = () => {
 			validationSchema={Yup.object({
 				name: Yup.string().min(3, 'Must be 15 characters or less').required('Required'),
 				password: Yup.string()
-					.min(8, <ValidationError>'Must be 20 characters or less'</ValidationError>)
+					.min(8, <ValidationError>Пароль больше 8 символов</ValidationError>)
 					.required('Required'),
 				passwordConfirm: Yup.string()
 
 					.default('')
-					.oneOf([Yup.ref('password'), null], 'Passwords must match')
+					.oneOf([Yup.ref('password'), null], <ValidationError>Пароль не соответствует</ValidationError>)
 					.required('Required'),
 
 				email: Yup.string().email('Invalid email address').required('Required'),
 			})}
 			onSubmit={(values, actions) => {
-				dispatch(authOperations.register({ ...values }))
-				console.log(values)
+				console.log(values.name)
+				const test = { name: values.name, email: values.email, password: values.password }
+				dispatch(authOperations.register(test))
+				console.log(test)
 				alert(JSON.stringify(values, null, 2))
+
 				actions.resetForm({
 					name: '',
 					email: '',
@@ -121,6 +143,7 @@ export const FormRegistration = () => {
 						required
 						placeholder='Подтвердите пароль'
 					/>
+
 					<ErrorMessage name='passwordConfirm' />
 				</StyleIconInput>
 
@@ -133,11 +156,15 @@ export const FormRegistration = () => {
 
 					<ErrorMessage name='name' />
 				</StyleIconInput>
-				<ButtonAuth
+				{/* <ButtonAuth
 					text='Регистрация'
 					style={{ background: '#24cca7', borderRadius: '20px', border: 'none', color: '#ffffff' }}
 				/>
-				<ButtonAuth text='Вход' />
+				<ButtonAuth text='Вход' /> */}
+				<Button type='button'>Registration</Button>
+				<Button color={false} type='button'>
+					Log In
+				</Button>
 			</StyledFormRegistration>
 		</Formik>
 	)

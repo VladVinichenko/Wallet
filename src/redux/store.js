@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
 // import { createLogger } from 'react-loader-spinner'
-// import contactsReducer from '../redux/telbook/reducer'
 import storage from 'redux-persist/lib/storage'
 import authReducer from '../store/auth/auth-slice'
 
