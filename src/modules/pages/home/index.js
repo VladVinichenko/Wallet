@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-// import { useNavigate, useLocation } from 'react-router-dom'
+import React from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Media from 'react-media'
 // import { windowSize } from 'lib/hooks/windowSize'
@@ -73,11 +73,9 @@ const BalanceWrapper = styled.div`
 	}
 `
 export const Home = ({ page = ROUTES.HOME }) => {
-	// const [page, setPage] = useState(page)
-	// const home = true
-	// const checkWindowSize = windowSize()
-	// const location = useLocation()
-	// const navigate = useNavigate()
+	const location = useLocation()
+	const navigate = useNavigate()
+
 	return (
 		<>
 			<Background />
@@ -90,6 +88,9 @@ export const Home = ({ page = ROUTES.HOME }) => {
 						}}
 					>
 						{(matches) => {
+							if (matches.anotherScreen === true && location.pathname === `/${ROUTES.CURRENCY}`) {
+								navigate(`/${ROUTES.HOME}`)
+							}
 							return (
 								<>
 									{matches.mobileScreen && (
