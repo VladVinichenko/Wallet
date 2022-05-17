@@ -130,7 +130,6 @@ export const FormLogin = ({ isShown }) => {
 							aria-label='Password'
 							required
 							placeholder='Password'
-							style={{ position: 'relative' }}
 						/>
 						<ShowPasswordButton />
 

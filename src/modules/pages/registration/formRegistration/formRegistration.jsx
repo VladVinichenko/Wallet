@@ -1,5 +1,4 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 import { validate } from 'indicative/validator'
 
 import styled from 'styled-components'
@@ -8,7 +7,7 @@ import { Button } from '../../../../modules/common/Button/index'
 import { sprite } from '../../../../assets/images/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from '../../../../store/auth/auth-operations'
-
+import { ValidationSchema } from '../../../../modules/common/validationSchema'
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -64,12 +63,7 @@ const StyledInput = styled(Field)`
 		transition: background-color 5000s ease-in-out 0s;
 	}
 `
-const ValidationError = styled.div`
-	position: absolute;
-	color: red;
-	top: -15px;
-	right: 50px;
-`
+
 export const FormRegistration = () => {
 	const dispatch = useDispatch()
 
@@ -81,19 +75,7 @@ export const FormRegistration = () => {
 				password: '',
 				passwordConfirm: '',
 			}}
-			validationSchema={Yup.object({
-				name: Yup.string().min(3, 'Must be 15 characters or less').required('Required'),
-				password: Yup.string()
-					.min(8, <ValidationError>Пароль больше 8 символов</ValidationError>)
-					.required('Required'),
-				passwordConfirm: Yup.string()
-
-					.default('')
-					.oneOf([Yup.ref('password'), null], <ValidationError>Пароль не соответствует</ValidationError>)
-					.required('Required'),
-
-				email: Yup.string().email('Invalid email address').required('Required'),
-			})}
+			validationSchema={ValidationSchema}
 			onSubmit={(values, actions) => {
 				console.log(values.name)
 				const test = { name: values.name, email: values.email, password: values.password }
