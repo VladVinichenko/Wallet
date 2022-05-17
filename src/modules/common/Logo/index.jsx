@@ -22,7 +22,7 @@ const LogoName = styled.span`
 	display: flex;
 	align-items: center;
 
-	font-family: 'Poppins-Bold', sans-serif;
+	font-family: 'Poppins', sans-serif;
 	font-style: normal;
 	font-weight: 700;
 	font-size: 18px;

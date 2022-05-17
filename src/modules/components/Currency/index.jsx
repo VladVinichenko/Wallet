@@ -1,20 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import Spinner from 'Spinner'
+import { RotatingLines } from 'react-loader-spinner'
 import styled from 'styled-components'
 import fetchCourse from 'servises/fetchCourse'
 import { animation, vars } from 'stylesheet'
 
-// import { sprite } from 'assets'
 import currency_mob from 'assets/images/currency/currency_mob.svg'
 import currency_tab from 'assets/images/currency/currency_tab.svg'
 import currency_desk from 'assets/images/currency/currency_desk.svg'
 
+const Loader = styled.div`
+	position: relative;
+	z-index: 1500;
+	display: flex;
+	justify-content: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`
+
+export const CurrencyLoader = () => {
+	return (
+		<Loader>
+			<RotatingLines width={50} />
+		</Loader>
+	)
+}
+
 const Currenc = styled.div`
 	position: relative;
-	max-width: 280px;
+	width: 280px;
 	height: 174px;
-	margin: 0 auto;
-	margin-top: 30px;
+	/* margin: 0 auto; */
+	/* margin-top: 30px; */
 	border-radius: ${vars.borderRadius.seconary};
 	color: ${vars.color.background.primary};
 	background-color: ${vars.color.background.card};
@@ -26,7 +43,6 @@ const Currenc = styled.div`
 		width: 100%;
 		text-align: center;
 		border-collapse: collapse;
-		font-family: Circe, sans-serif;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 16px;
@@ -64,21 +80,8 @@ const Currenc = styled.div`
 		padding-top: 10px;
 	}
 
-	Spinner {
-		position: relative;
-		top: 50%;
-		left: 50%;
-		display: flex;
-		justify-content: center;
-		transform: translate(-50%, -50%);
-
-		@media (min-width: 768px) {
-			top: 50%;
-		}
-	}
-
-	@media (min-width: 768px) {
-		max-width: 336px;
+	@media (min-width: ${vars.breakpoints.tablet}) {
+		width: 336px;
 		height: 182px;
 		background-image: url(${currency_tab});
 
@@ -87,8 +90,8 @@ const Currenc = styled.div`
 		}
 	}
 
-	@media (min-width: 1280px) {
-		max-width: 393px;
+	@media (min-width: ${vars.breakpoints.desktop}) {
+		width: 393px;
 		height: 347px;
 		background-image: url(${currency_desk});
 		margin-top: 0;
@@ -144,7 +147,7 @@ export const Currency = () => {
 	return (
 		<Currenc>
 			{currency.length === 0 ? (
-				<Spinner />
+				<CurrencyLoader />
 			) : (
 				<table>
 					<thead>

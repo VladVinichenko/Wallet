@@ -1,77 +1,54 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-// import axios from 'axios'
-// axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'
+ import axios from 'axios'
+import { getFinance, getTotal , getStatisticsApi, getCategories} from 'api'
 
-const tempData = [{ id: '314343', name: 'gruzin' }]
+ /* axios.defaults.baseURL = 'http://localhost:3004/api/' */
+axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
+axios.defaults.headers.common[
+	'Authorization'
+] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1Mjc5MDM2NSwiZXhwIjoxNjUyNzkzOTY1fQ.gBNtLpcfPl8e3ZFVBXvW2C4P3T_7BtVyyT7rA-tp9A8` // only test
 
-export const getFinance = async () => {
-	const result = new Promise(function (resolve, reject) {
-		setTimeout(() => {
-			resolve(tempData)
-		}, 1500)
-	})
-	return result
-}
+// const token = {
+// 	set(token) {
+// 		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+// 	},
+// 	unset() {
+// 		axios.defaults.headers.common['Authorization'] = ``
+// 	},
+// }
 
 export const fetchFinance = createAsyncThunk('finance', async () => {
-	const res = await getFinance()
-	// throw new Error('error')
-	return res
+	const { data } = await getFinance()
+	const { transition } = data.data
+	// console.log(transition)
+	return transition
+})
+export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async () => {
+	const { data } = await getTotal()
+	console.log('fetchTotalFinance', data)
+	const { balance } = data.totalFinance
+	// console.log(total)
+	return balance
 })
 
-// export const getContacts = createAsyncThunk('/contacts/get', async (_, thunkAPI) => {
-// 	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-// 	return await axios
-// 		.get('/contacts')
-// 		.then(function (response) {
-// 			if (response.status === 200) {
-// 				return thunkAPI.fulfillWithValue(response.data)
-// 			}
-// 			return thunkAPI.fulfillWithValue([])
-// 		})
-// 		.catch(function (error) {
-// 			return thunkAPI.rejectWithValue(error.response.statusText)
-// 		})
-// })
 
-// export const addContacts = createAsyncThunk('/contacts/add', async (payload, thunkAPI) => {
-// 	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-// 	return await axios
-// 		.post('/contacts', payload)
-// 		.then(function (response) {
-// 			if (response.status === 201) {
-// 				return thunkAPI.fulfillWithValue(response.data)
-// 			}
-// 		})
-// 		.catch(function (error) {
-// 			return thunkAPI.rejectWithValue(error.response.statusText)
-// 		})
-// })
+export const getStatistics = createAsyncThunk(
+	'transactions/getStatistics',
+	async (credentials, { rejectWithValue }) => {
+	const{ month, year } = credentials;
+	  
+    try {
+		const { data} = await getStatisticsApi(month, year)
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
-// export const deleteContacts = createAsyncThunk('/contacts/delete', async (payload, thunkAPI) => {
-// 	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-// 	return await axios
-// 		.delete(`/contacts/${payload}`)
-// 		.then(function (response) {
-// 			if (response.status === 200) {
-// 				return thunkAPI.fulfillWithValue(response.data)
-// 			}
-// 		})
-// 		.catch(function (error) {
-// 			return thunkAPI.rejectWithValue(error.response.statusText)
-// 		})
-// })
 
-// export const editContacts = createAsyncThunk('/contacts/edit', async (payload, thunkAPI) => {
-// 	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-// 	return await axios
-// 		.patch(`/contacts/${payload.id}`, payload.data)
-// 		.then(function (response) {
-// 			if (response.status === 200) {
-// 				return thunkAPI.fulfillWithValue(response.data)
-// 			}
-// 		})
-// 		.catch(function (error) {
-// 			return thunkAPI.rejectWithValue(error.response.statusText)
-// 		})
-// })
+export const fetchCategories = createAsyncThunk('finance/categories', async () => {
+	const { data } = await getCategories()
+	// console.log(data)
+	return data.data
+})
