@@ -3,14 +3,17 @@ import styled from 'styled-components'
 import Datetime from 'react-datetime'
 import { Formik, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+
 import { useDispatch } from 'react-redux'
 import { setCloseModal } from 'store'
+import { addTransaction as zuzuzu } from 'store'
 
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
+// import { OpenMenu } from '..'
 
-import 'react-datetime/css/react-datetime.css'
 import { sprite } from 'assets'
+import 'react-datetime/css/react-datetime.css'
 
 const StyledInput = styled.input`
 	box-sizing: border-box;
@@ -84,6 +87,18 @@ const StyledTextarea = styled.textarea`
 		height: 32px;
 	}
 `
+const Title = styled.h2`
+	font-family: 'Poppins';
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 1.5;
+	text-align: center;
+	margin-bottom: 40px;
+
+	@media screen and (min-width: 768px) {
+		font-size: 30px;
+	}
+`
 
 const FormContainer = styled.div`
 	padding: 20px 10px;
@@ -99,19 +114,6 @@ const FormContainer = styled.div`
 		width: 540px;
 	}
 
-	h2 {
-		font-family: 'Poppins';
-		font-weight: 400;
-		font-size: 24px;
-		line-height: 1.5;
-		text-align: center;
-		margin-bottom: 40px;
-
-		@media screen and (min-width: 768px) {
-			font-size: 30px;
-		}
-	}
-
 	.form-control {
 		padding-left: 20px;
 
@@ -124,29 +126,6 @@ const FormContainer = styled.div`
 	.button-item:not(:last-child) {
 		margin-bottom: 20px;
 	}
-
-	// .group {
-	// 	display: flex;
-	// 	flex-wrap: wrap;
-	// 	justify-content: center;
-
-	// 	@media screen and (min-width: 768px) {
-	// 		justify-content: space-between;
-	// 	}
-	// }
-
-	// .form-control,
-	// .summInput {
-	// 	@media screen and (min-width: 768px) {
-	// 		max-width: 185px;
-	// 	}
-	// }
-
-	// form {
-	// 	display: flex;
-	// 	align-items: center;
-	// 	flex-direction: column;
-	// }
 
 	select {
 		margin-bottom: 40px;
@@ -161,10 +140,6 @@ const FormContainer = styled.div`
 		}
 	}
 
-	// .select-placeholder {
-	// 	color: #bdbdbd;
-	// }
-
 	.error-message {
 		color: red;
 	}
@@ -176,6 +151,9 @@ export const AddTransaction = () => {
 
 	const closeModal = () => {
 		dispatch(setCloseModal())
+	}
+	const postTransaction = () => {
+		dispatch(zuzuzu())
 	}
 
 	const getCategories = () => {
@@ -192,8 +170,8 @@ export const AddTransaction = () => {
 	const categories = getCategories()
 
 	const handleDateChange = ({ _d: time }) => {
-		// setDate(time?.getTime())
-		setDate(time)
+		setDate(time?.getTime())
+		// setDate(time)
 		console.log(time)
 	}
 
@@ -203,13 +181,9 @@ export const AddTransaction = () => {
 		const type = values.isConsumption ? 'decrement' : 'increment'
 		values = { type, ...values, date }
 		delete values.isConsumption
+
+		postTransaction()
 		closeModal()
-		/*
-					добавить в базу
-					добавить в стор
-					очистить поля
-					закрыть модалку
-					*/
 
 		await new Promise((resolve) => setTimeout(resolve, 500))
 		alert(JSON.stringify(values, null, 2))
@@ -225,7 +199,7 @@ export const AddTransaction = () => {
 
 	return (
 		<FormContainer className='addTransaction'>
-			<h2>Add transaction</h2>
+			<Title>Add transaction</Title>
 			<Formik
 				initialValues={{ isConsumption: true, category: '', summ: '', date, comment: '' }}
 				onSubmit={addTransaction}
@@ -234,6 +208,7 @@ export const AddTransaction = () => {
 				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
 						<Field type='checkbox' name='isConsumption' onChange={handleChange} />
+						{/* <OpenMenu /> */}
 						{values.isConsumption && (
 							<select name='category' onChange={handleChange}>
 								<option value='' className='select-placeholder' disabled selected hidden>
@@ -241,7 +216,7 @@ export const AddTransaction = () => {
 								</option>
 								{categories.map((category, index) => {
 									return (
-										<option value={category._id} key={index}>
+										<option value={category} key={index}>
 											{category.name}
 										</option>
 									)
