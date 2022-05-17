@@ -1,5 +1,6 @@
 const getData = (state) => state.finance.data
 const getTotal = (state) => state.finance.totalBalance
+const getCategories = (state) => state.finance.categories
 
 const totalOutlaySlct = state => state.finance.statistics.outlayTotal;
 const totalIncomeSlct = state => state.finance.statistics.incomeTotal;
@@ -10,5 +11,6 @@ export const selectorsFinance = {
 	totalOutlaySlct,
 	totalIncomeSlct,
 	categoriesStatisticsSlct,
-	getTotal
+	getTotal,
+	getCategories,
 }

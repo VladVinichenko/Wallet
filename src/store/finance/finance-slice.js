@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchFinance , getStatistics, fetchTotalFinance} from './finance-operation'
+import { fetchFinance , getStatistics, fetchTotalFinance, fetchCategories} from './finance-operation'
 
 import { toast } from 'react-toastify'
 
@@ -97,39 +97,29 @@ const initialState = {
 	
 	data: [...example],
 	totalBalance: '6900.00',
+	categories: [],
 }
 
 const financeSlice = createSlice({
 	name: 'finance',
 	initialState,
 	extraReducers: {
+		//================AllFinance
 		[fetchFinance.pending]: (state) => {
 			state.isLoading = true
 			state.data = []
 		},
-		[fetchTotalFinance.pending]: (state) => {
-			state.isLoading = true
-			state.totalBalance = []
-		},
-
 		[fetchFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.data = action.payload
-			// console.log(action)
 			toast.success('Ok')
 		},
-		[fetchTotalFinance.fulfilled]: (state, action) => {
-			state.isLoading = false
-			state.totalBalance = action.payload
-			// console.log(action)
-			toast.success('Ok')
-		},
-
 		[fetchFinance.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error')
 		},
+		//=========Statistics
 		[getStatistics.pending]: (state) => {
 			state.isLoading = true
 		},
@@ -140,18 +130,42 @@ const financeSlice = createSlice({
 			state.statistics.statisticsByCategory = action.payload.data.data.statisticsByCategory;			
 			toast.success('Ok')		
 		},
-		[getStatistics.rejected]: (state, action) => { 
+		[getStatistics.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error')
+		},
+		//=================Balance
+		[fetchTotalFinance.pending]: (state) => {
+			state.isLoading = true
+			state.totalBalance = []
+		},
+		[fetchTotalFinance.fulfilled]: (state, action) => {
+			state.isLoading = false
+			state.totalBalance = action.payload
+			toast.success('Ok')
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error')
 		},
-		
-		
+		//====================Categories
+		[fetchCategories.pending]: (state) => {
+			state.isLoading = true
+			state.categories = []
+		},
+		[fetchCategories.fulfilled]: (state, action) => {
+			state.isLoading = false
+			state.categories = action.payload
+			console.log(action.payload)
+			toast.success('Ok')
+		},
+		[fetchCategories.rejected]: (state, action) => {
+			state.isLoading = false
+			state.error = action.payload
+			toast.error('Error')
+		},
 	},
 })
 

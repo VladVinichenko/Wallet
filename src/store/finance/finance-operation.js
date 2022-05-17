@@ -2,14 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
  import axios from 'axios'
 // axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'
 axios.defaults.baseURL = "http://localhost:3004/api"
-import { getFinance, getTotal , getStatisticsApi} from 'api'
+import { getFinance, getTotal , getStatisticsApi, getCategories} from 'api'
 
 
 // axios.defaults.baseURL = 'http://localhost:3001/api/'
 /* axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/' */
 axios.defaults.headers.common[
 	'Authorization'
-] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE2NTc4NWQ3MDNhOWI4Yzc0MWQ5YiIsImlhdCI6MTY1MjY4NzY4NywiZXhwIjoxNjUyNjkxMjg3fQ.YGSfT75SmQ4iWngfK5_-I0vDySvfAGwGZIGvjek0h7s` // only test
+] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1MjczNTczNiwiZXhwIjoxNjUyNzM5MzM2fQ.9JseHCQWQ3MfVHKQ4g5VStAgSTlzx5EBQTz88D8ZY5I` // only test
 
 // const token = {
 // 	set(token) {
@@ -49,3 +49,8 @@ export const getStatistics = createAsyncThunk(
 );
 
 
+export const fetchCategories = createAsyncThunk('finance/categories', async () => {
+	const { data } = await getCategories()
+	// console.log(data)
+	return data.data
+})

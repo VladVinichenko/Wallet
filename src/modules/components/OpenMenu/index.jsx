@@ -4,6 +4,9 @@ import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
 import { StyledEngineProvider } from '@mui/material/styles'
+import { vars } from 'stylesheet'
+
+import rowDown from 'assets/images/openMenu/row-down.svg'
 
 const blue = {
 	100: '#DAECFF',
@@ -34,13 +37,13 @@ const StyledButton = styled('button')(
   min-height: calc(1.5em + 22px);
   width: 280px;
 //   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 //   border-radius: 30px;
   margin: 0.5em;
   padding: 10px;
   text-align: left;
   line-height: 1.5;
-  color: #E0E0E0;
+  color: ${vars.color.accent.buttonOpenMenu};
 
 //   &:hover {
 //     background: inherit;
@@ -48,20 +51,27 @@ const StyledButton = styled('button')(
 //   }
 
   &.${selectUnstyledClasses.focusVisible} {
-    outline: 2px solid #E0E0E0;
+    outline: 2px solid ${vars.color.accent.buttonOpenMenu};
   }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
-      content: '▴';
-      color: #E0E0E0;
+      content: '';
+      color: ${vars.color.accent.buttonOpenMenu};
     }
   }
 
   &::after {
-    content: '▾';
+    content: url(${rowDown});
     float: right;
-    color: #E0E0E0;
+  }
+
+  @media (min-width: ${vars.breakpoints.tablet}) {
+    width: 402px;
+  }
+
+  @media (min-width: ${vars.breakpoints.desktop}) {
+    width: 540px;
   }
   `
 )
@@ -76,13 +86,28 @@ const StyledListbox = styled('ul')(
   padding: 20px 0;
   margin: 10px 0;
   width: 280px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid #E0E0E0;
-  border-radius: 20px;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  height: 352px;
+  background: ${vars.color.background.openMenu};
+  border: 1px solid inherit;
+  border-radius: ${vars.borderRadius.primary};
+  box-shadow: ${vars.boxShadow.openMenu};
   backdrop-filter: blur(50px);
   overflow: auto;
   outline: 0px;
+
+  @media (min-width: ${vars.breakpoints.tablet}) {
+    width: 402px;
+    height: 352px;
+
+  }
+
+  @media (min-width: ${vars.breakpoints.desktop}) {
+    width: 540px;
+    height: 603px;
+
+  }
+
+
   `
 )
 
@@ -91,7 +116,7 @@ const StyledOption = styled(OptionUnstyled)(
   list-style: none;
   padding: 8px;
 //   border-radius: 30px;
-  cursor: red;
+  // cursor: red;
   
 
   &:last-of-type {
@@ -118,8 +143,8 @@ const StyledOption = styled(OptionUnstyled)(
 //   }
 
   &:hover:not(.${optionUnstyledClasses.disabled}) {
-    background-color: #ffffff;
-    color: #FF6596;
+    background-color: ${vars.color.background.primary};
+    color: ${vars.color.accent.openMenu};
   }
   `
 )

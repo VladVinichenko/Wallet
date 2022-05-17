@@ -6,6 +6,7 @@ export const vars = {
 			page: 'rgba(255, 255, 255, 0.4)',
 			card: '#4A56E2',
 			currency: 'rgba(255, 255, 255, 0.2)',
+			openMenu: 'rgba(255, 255, 255, 0.7)',
 			cardGradient: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) -8.67%, rgba(255, 255, 255, 0) 116.22%)',
 			backdrop: 'rgba(0, 0, 0, 0.25)',
 			tableLine: '#DCDCDF',
@@ -26,6 +27,8 @@ export const vars = {
 			fourth: '#6E78E8',
 			firstEllipse: '#FFD8D0',
 			secondEllipse: '#C5BAFF',
+			openMenu: '#FF6596',
+			buttonOpenMenu: '#E0E0E0',
 		},
 		chart: {
 			basic: '#FED057',
@@ -65,6 +68,7 @@ export const vars = {
 	boxShadow: {
 		firstLine: `0px 1px 0px rgba(255, 255, 255, 0.6)`,
 		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px rgba(255, 255, 255, 0.6)`,
+		openMenu: '0px 6px 15px rgba(0, 0, 0, 0.1)',
 	},
 	breakpoints: {
 		mobile: '320px',
