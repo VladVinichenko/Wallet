@@ -82,7 +82,7 @@ const Currenc = styled.div`
 	}
 
 	@media (min-width: ${vars.breakpoints.tablet}) {
-		max-width: 336px;
+		width: 336px;
 		height: 182px;
 		background-image: url(${currency_tab});
 
