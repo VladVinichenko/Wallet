@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid'
 import styled from 'styled-components'
 import { InView } from 'react-intersection-observer'
 import { vars } from 'stylesheet'
+import EllipsisText from 'react-ellipsis-text'
 
 const { color, breakpoints } = vars
 const Component = styled.td`
@@ -35,25 +36,26 @@ const Title = styled.span`
 `
 
 export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLast }) => {
-	const [typeAction, setTypeAction] = useState(false)
-
-	useEffect(() => {
-		type === 'decrement' ? setTypeAction(false) : setTypeAction(true)
-	}, [type])
+	// const [typeAction, setTypeAction] = useState(false)
+	// useEffect(() => {
+	// 	type === 'outlay' ? setTypeAction(false) : setTypeAction(true)
+	// }, [type])
 
 	const formateData = (elem) => {
 		switch (elem.type) {
 			case 'UnixTime':
-				const currentData = new Date(data[elem.value] * 1000)
+				const currentData = new Date(data[elem.value])
 				return `${currentData.toLocaleDateString()}`
 			case 'Action':
-				if (data[elem.value] === 'decrement') {
+				if (data[elem.value] === 'outlay') {
 					return '-'
 				} else {
 					return '+'
 				}
 			case 'Category':
 				return data[elem.value].name
+			case 'Comment':
+				return <EllipsisText text={`${data[elem.value]}`} length={'30'} />
 			default:
 				return data[elem.value]
 		}
@@ -66,10 +68,10 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 						<>
 							<Component
 								key={nanoid()}
-								colorBorder={typeAction ? `${color.font.positive}` : `${color.font.negative}`}
+								colorBorder={type === 'outlay' ? `${color.font.positive}` : `${color.font.negative}`}
 								color={
 									el.type === 'Summa'
-										? typeAction
+										? type === 'outlay'
 											? `${color.font.positive}`
 											: `${color.font.negative}`
 										: `${color.font.primary}`
@@ -86,6 +88,6 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 				})}
 			</>
 		)
-	}, [typeAction])
+	}, [data])
 }
 ColumnBody.className = Component

@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
- import axios from 'axios'
-import { getFinance, getTotal , getStatisticsApi, getCategories} from 'api'
+import axios from 'axios'
+import { getFinance, getTotal, getStatisticsApi, getCategories } from 'api'
 
- /* axios.defaults.baseURL = 'http://localhost:3004/api/' */
-axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
+axios.defaults.baseURL = 'http://localhost:3001/api/'
+//axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
 axios.defaults.headers.common[
 	'Authorization'
-] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1Mjc5MDM2NSwiZXhwIjoxNjUyNzkzOTY1fQ.gBNtLpcfPl8e3ZFVBXvW2C4P3T_7BtVyyT7rA-tp9A8` // only test
+] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1MjgzMTMzMywiZXhwIjoxNjUyODM0OTMzfQ.5ZjTUjmOWRm1nL0eQ_957cPq5U1ZOfmEVj7yPs9maBY` // only test
 
 // const token = {
 // 	set(token) {
@@ -17,11 +17,18 @@ axios.defaults.headers.common[
 // 	},
 // }
 
-export const fetchFinance = createAsyncThunk('finance', async () => {
-	const { data } = await getFinance()
+export const fetchFinance = createAsyncThunk('finance', async (page = 1) => {
+	const { data } = await getFinance(page)
+	const categoryArr = await getCategories()
 	const { transition } = data.data
-	// console.log(transition)
-	return transition
+	return [...transition].map((elem) => {
+		const category = categoryArr.data.data.filter((el) => {
+			if (el._id === elem.category) {
+				return el
+			}
+		})
+		return { ...elem, category: category[0] }
+	})
 })
 export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async () => {
 	const { data } = await getTotal()
@@ -31,21 +38,19 @@ export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async
 	return balance
 })
 
-
 export const getStatistics = createAsyncThunk(
 	'transactions/getStatistics',
 	async (credentials, { rejectWithValue }) => {
-	const{ month, year } = credentials;
-	  
-    try {
-		const { data} = await getStatisticsApi(month, year)
-      return data.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  },
-);
+		const { month, year } = credentials
 
+		try {
+			const { data } = await getStatisticsApi(month, year)
+			return data.data
+		} catch (error) {
+			return rejectWithValue(error.message)
+		}
+	}
+)
 
 export const fetchCategories = createAsyncThunk('finance/categories', async () => {
 	const { data } = await getCategories()
