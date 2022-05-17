@@ -43,7 +43,6 @@ const Currenc = styled.div`
 		width: 100%;
 		text-align: center;
 		border-collapse: collapse;
-		font-family: Circe, sans-serif;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 16px;
