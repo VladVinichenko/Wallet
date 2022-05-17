@@ -44,10 +44,11 @@ button {
   cursor: pointer;
 }
 
-input {
-  outline: none;
-  margin: 0;
-  border: 0;
+input,
+textarea {
+    outline: none;
+    margin: 0;
+    border: 0;
   /* Chrome, Safari, Edge, Opera */
 
   &::-webkit-outer-spin-button,
@@ -81,5 +82,3 @@ textarea {
 }
 
 `
-
-

@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
- import axios from 'axios'
-import { getFinance, getTotal , getStatisticsApi, getCategories} from 'api'
+import axios from 'axios'
+import { getFinance, getTotal, getStatisticsApi, getCategories } from 'api'
 
-/*  axios.defaults.baseURL = 'http://localhost:3004/api/' */
-/* axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/' */
+axios.defaults.baseURL = 'http://localhost:3001/api/'
+// axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
 axios.defaults.headers.common[
 	'Authorization'
 ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1MjgxNjk2NiwiZXhwIjoxNjUyODIwNTY2fQ.KdJmIQp4T3BdVMLmy8WC4op2H3ja3n1oeZJafmO24y8` // only test
@@ -31,22 +31,34 @@ export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async
 	return balance
 })
 
-
 export const getStatistics = createAsyncThunk(
 	'transactions/getStatistics',
 	async (credentials, { rejectWithValue }) => {
-		const { month, year } = credentials;
-		const { number } = month;
-	  
-    try {
-		const { data} = await getStatisticsApi(number, year)
-      return data.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  },
-);
+		const { month, year } = credentials
 
+		try {
+			const { data } = await getStatisticsApi(month, year)
+			return data.data
+		} catch (error) {
+			return rejectWithValue(error.message)
+		}
+	}
+)
+
+export const addTransaction = createAsyncThunk('finance/add', async (transaction, { getState, rejectWithValue }) => {
+	const state = getState()
+	const allTransactions = state.data
+
+	try {
+		const { data } = await axios.post('finance', transaction)
+		const newData = [...allTransactions, data]
+
+		return newData
+	} catch (error) {
+		console.dir(error)
+		return rejectWithValue(error.message)
+	}
+})
 
 export const fetchCategories = createAsyncThunk('finance/categories', async () => {
 	const { data } = await getCategories()

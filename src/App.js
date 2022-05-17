@@ -10,11 +10,11 @@ import { ROUTES } from 'lib'
 import { Header, Home, Logout } from 'modules'
 import { Modal } from 'modules'
 // import { Logo } from 'modules'
-// import { ButtonAddTransactios } from 'modules'
+import { ButtonAddTransaction } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
 import { setIsLoading } from 'store'
-
+import { AddTransaction } from 'modules'
 import { Button } from 'modules'
 // import { Currency } from 'modules'
 import { Balance } from 'modules'
@@ -61,6 +61,7 @@ export default function App() {
 				</Modal>
 			)}
 			<Header />
+			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
 			{/* <OpenMenu /> */}
 			{/* <ButtonAddTransactios /> */}
 			<Outlet />
@@ -72,7 +73,7 @@ export default function App() {
 			)}
 			{isModalAddTransaction && (
 				<Modal>
-					<Balance />
+					<AddTransaction />
 				</Modal>
 			)}
 

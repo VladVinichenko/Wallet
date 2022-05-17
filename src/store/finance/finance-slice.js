@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchFinance , getStatistics, fetchTotalFinance, fetchCategories} from './finance-operation'
+import { fetchFinance, getStatistics, fetchTotalFinance, fetchCategories, addTransaction } from './finance-operation'
 
 import { toast } from 'react-toastify'
 
@@ -91,11 +91,11 @@ const initialState = {
 	error: null,
 	statistics: {
 		statisticsByCategory: [],
-            incomeTotal: 0,
-            outlayTotal: 0 
+		incomeTotal: 0,
+		outlayTotal: 0,
 	},
-	
-	data: [...example ],
+
+	data: [...example],
 	totalBalance: '6900.00',
 	categories: [],
 }
@@ -124,11 +124,11 @@ const financeSlice = createSlice({
 			state.isLoading = true
 		},
 		[getStatistics.fulfilled]: (state, action) => {
-			state.isLoading = false;
-			state.statistics.incomeTotal = action.payload.incomeStatistics;
-			state.statistics.outlayTotal = action.payload.totalOutlayStatistics;	
-			state.statistics.statisticsByCategory = action.payload.statisticsByCategory;			
-			toast.success('Ok')		
+			state.isLoading = false
+			state.statistics.incomeTotal = action.payload.incomeStatistics
+			state.statistics.outlayTotal = action.payload.totalOutlayStatistics
+			state.statistics.statisticsByCategory = action.payload.statisticsByCategory
+			toast.success('Ok')
 		},
 		[getStatistics.rejected]: (state, action) => {
 			state.isLoading = false
@@ -162,6 +162,20 @@ const financeSlice = createSlice({
 			toast.success('Ok')
 		},
 		[fetchCategories.rejected]: (state, action) => {
+			state.isLoading = false
+			state.error = action.payload
+			toast.error('Error')
+		},
+		//=======================Add_transaction
+		[addTransaction.pending]: (state) => {
+			state.isLoading = true
+		},
+		[addTransaction.fulfilled]: (state, action) => {
+			state.isLoading = false
+			state.data = action.payload
+			toast.success('Transaction added')
+		},
+		[addTransaction.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error')

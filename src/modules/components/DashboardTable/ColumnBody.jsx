@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, Fragment } from 'react'
 import { nanoid } from 'nanoid'
 import styled from 'styled-components'
 import { InView } from 'react-intersection-observer'
@@ -63,9 +63,8 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 			<>
 				{tableColumns.map((el, idx) => {
 					return (
-						<>
+						<Fragment key={idx}>
 							<Component
-								key={nanoid()}
 								colorBorder={typeAction ? `${color.font.positive}` : `${color.font.negative}`}
 								color={
 									el.type === 'Summa'
@@ -81,7 +80,7 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 								{viewport.mobileScreen && <Title>{el.label}</Title>}
 								{formateData(el)}
 							</Component>
-						</>
+						</Fragment>
 					)
 				})}
 			</>

@@ -53,8 +53,8 @@ export const IconButton = styled.button`
 	}
 
 	svg {
-		width: 30px;
-		height: 30px;
+		width: 25px;
+		height: 25px;
 	}
 `
 export const Modal = ({ children }) => {
