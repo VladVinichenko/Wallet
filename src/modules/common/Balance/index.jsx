@@ -24,18 +24,18 @@ const Component = styled.div`
 	}
 `
 const Title = styled.h2`
-	font-family: 'Circe';
 	font-size: 12px;
 	line-height: 1.5;
 	text-transform: uppercase;
 	color: ${color.font.seconary};
 `
 const Currency = styled.span`
+	font-family: 'Poppins',sans-serif;
 	font-weight: 400;
 `
 
 const Counter = styled.p`
-	font-family: 'Poppins';
+	font-family: 'Poppins', sans-serif;
 	font-weight: 700;
 	font-size: 30px;
 	line-height: 1.5;
