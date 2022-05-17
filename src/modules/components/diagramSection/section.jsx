@@ -41,11 +41,16 @@ const SectionContent = styled.div`
 
 
 const ChartSection = () => {
+  
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
-  const totalOutlay = useSelector(selectorsFinance.totalOutlaySlct)
-  const totalIncome = useSelector(selectorsFinance.totalIncomeSlct)
-  const categoriesStatistics = useSelector(selectorsFinance.categoriesStatisticsSlct)
+
+  const { totalOutlaySlct, totalIncomeSlct, categoriesStatisticsSlct, getCategories } = selectorsFinance;
+  const allCategories = useSelector(getCategories);
+  const totalOutlay = useSelector(totalOutlaySlct);
+  const totalIncome = useSelector(totalIncomeSlct);
+  const categoriesStatistics = useSelector(categoriesStatisticsSlct);
+
   const dispatch = useDispatch()
   useEffect(() => {
     if (month !== '' && year !== '') {
@@ -62,10 +67,10 @@ const ChartSection = () => {
     <section>
       <SectionTitle>Statistics</SectionTitle>     
       <SectionContent> 
-        <Chart categories={categoriesStatistics } outlay={totalOutlay }/>
+        <Chart statistics={categoriesStatistics} outlay={totalOutlay} categories={ allCategories}/>
         <div>
           <Selects setData={ setDate}/>
-            <DiagramTable outlay={totalOutlay } income={totalIncome } categories={categoriesStatistics }/> 
+          <DiagramTable outlay={totalOutlay} income={totalIncome} statistics={categoriesStatistics} categories={allCategories }/> 
       </div>  
       </SectionContent>  
     </section>

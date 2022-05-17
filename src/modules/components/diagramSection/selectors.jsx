@@ -59,7 +59,7 @@ const monthOptions = [
 { number: 11, string: 'November' },
   { number: 12, string: 'December' }]
 
-const yearOptions = [2020, 2021, 2022]
+const yearOptions = [1970, 2020, 2021, 2022]
 
 const Selects = ({ setData }) => {
   const [month, setMonth] = useState('');

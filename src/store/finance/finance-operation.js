@@ -9,7 +9,7 @@ import { getFinance, getTotal , getStatisticsApi, getCategories} from 'api'
 /* axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/' */
 axios.defaults.headers.common[
 	'Authorization'
-] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1MjczNTczNiwiZXhwIjoxNjUyNzM5MzM2fQ.9JseHCQWQ3MfVHKQ4g5VStAgSTlzx5EBQTz88D8ZY5I` // only test
+] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1Mjc5MDM2NSwiZXhwIjoxNjUyNzkzOTY1fQ.gBNtLpcfPl8e3ZFVBXvW2C4P3T_7BtVyyT7rA-tp9A8` // only test
 
 // const token = {
 // 	set(token) {
@@ -40,8 +40,8 @@ export const getStatistics = createAsyncThunk(
 	const{ month, year } = credentials;
 	  
     try {
-      const responce = await getStatisticsApi(month, year)
-      return responce;
+		const { data} = await getStatisticsApi(month, year)
+      return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

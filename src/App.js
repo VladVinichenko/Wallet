@@ -22,6 +22,7 @@ import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
 import { fetchCategories } from 'store'
 import { selectorsFinance } from 'store'
+import {ChartSection } from './modules'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;

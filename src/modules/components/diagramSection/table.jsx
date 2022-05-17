@@ -105,34 +105,34 @@ padding-right: 30px;
 }
 `
 const ColorSquare = styled.span`
-background-color: ${props => { 
-    if (props.basic) { return vars.color.chart.basic};
-    if (props.foodstuff) { return vars.color.chart.products };
-    if (props.car) { return vars.color.chart.car};
-    if (props.careofyourself) { return vars.color.chart.careAbout };
-    if (props.children) { return vars.color.chart.careChild };
-    if (props.household) { return vars.color.chart.forHome };
-    if (props.education) { return vars.color.chart.education };
-    if (props.leisure) { return vars.color.chart.leisure};
-    if (props.other) {return vars.color.chart.other }
-}};
+
 width: 24px;
 height: 24px;
 border-radius: ${vars.borderRadius.third};
 margin-right: 16px;
 `
 
-const renderRows = (list) => { 
-    if (list.length===0) {return }
-    const rows = list.map(item => {return (<TRow key={item.category }>
+const renderRows = (listStatistics, listCategories) => { 
+    if (listStatistics.length===0) {return }
+    const rows = listStatistics.map(item => listCategories.map(cat => { 
+        if (item.category === cat._id) {
+            return (<TRow key={cat._id }>
+                <TBodyCategory><CategoryContents><ColorSquare style={{backgroundColor: cat.color}}/>{cat.name }</CategoryContents></TBodyCategory>
+        <TBodySum>{item.sum }</TBodySum>
+    </TRow>)
+         }
+    } ))/* .map(cat => {return (<TRow key={cat._id }>
+        <TBodyCategory><CategoryContents><ColorSquare />{cat.name }</CategoryContents></TBodyCategory>
+        <TBodySum>{item.sum }</TBodySum>
+    </TRow>) }) *//* {return (<TRow key={item.category }>
         <TBodyCategory><CategoryContents><ColorSquare />{item.category }</CategoryContents></TBodyCategory>
         <TBodySum>{item.sum }</TBodySum>
-    </TRow>) })
+    </TRow>) }) */
     return rows
 }
 
 
-const DiagramTable = ({outlay, income, categories }) => { 
+const DiagramTable = ({outlay, income,statistics, categories }) => { 
     return <>
         <Table>
             <THead><tr>
@@ -140,7 +140,7 @@ const DiagramTable = ({outlay, income, categories }) => {
                 <THeadSum>Sum</THeadSum>
             </tr></THead>
             <tbody>
-                 { renderRows(categories)}
+                 { renderRows(statistics,categories)}
             </tbody>
             <tfoot>
                 <TFootRow>

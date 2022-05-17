@@ -33,42 +33,28 @@ line-height: 27px;
  left:50%;
  transform: translate(-50%, -50%) ;
  `
-const renderData = (list) => { 
-    if (list.length===0) {return }
-    const data = list.map(item => item.sum)
+const renderData = (listStatistics) => { 
+
+    if (listStatistics.length===0) {return }
+    const data = listStatistics.map(item => item.sum)
     return data
 }
- 
-const Chart = ({ categories, outlay }) => { 
+function renderColors(listStatistics, listCategories) { 
+  
+  if (listStatistics.length === 0) { return }
+  const colors = listStatistics.map(item => listCategories.find(cat => item.category === cat._id)).map(item=> item.color)
+  console.log('colors',colors)
+  return colors
+}
+const Chart = ({ categories, outlay, statistics }) => { 
   const data = {
   /* labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'], */
   datasets: [
     {
       label: '# of Votes',
-       data: renderData(categories),
-      backgroundColor: [
-         vars.color.chart.basic,
-         vars.color.chart.products,
-         vars.color.chart.car,
-          vars.color.chart.careAbout,
-         vars.color.chart.careChild,
-          vars.color.chart.forHome,
-          vars.color.chart.education,
-          vars.color.chart.leisure,
-         vars.color.chart.other,
-        
-      ],
-      borderColor: [
-        vars.color.chart.basic,
-         vars.color.chart.products,
-         vars.color.chart.car,
-          vars.color.chart.careAbout,
-         vars.color.chart.careChild,
-          vars.color.chart.forHome,
-          vars.color.chart.education,
-          vars.color.chart.leisure,
-         vars.color.chart.other,
-      ],
+       data: renderData(statistics),
+      backgroundColor: renderColors(statistics, categories),
+      borderColor: renderColors(statistics, categories),
           borderWidth: 1,
           cutout: '70%',
      
@@ -81,4 +67,8 @@ const Chart = ({ categories, outlay }) => {
     
 }
 
-export { Chart}
+export { Chart }
+
+/*_id: '628356e997d487932b45633e',
+        name: 'Care about',
+        color: '#C5BAFF'*/

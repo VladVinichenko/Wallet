@@ -95,7 +95,7 @@ const initialState = {
             outlayTotal: 0 
 	},
 	
-	data: [...example],
+	data: [...example ],
 	totalBalance: '6900.00',
 	categories: [],
 }
@@ -125,9 +125,9 @@ const financeSlice = createSlice({
 		},
 		[getStatistics.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.statistics.incomeTotal = action.payload.data.data.incomeStatistics;
-			state.statistics.outlayTotal = action.payload.data.data.totalOutlayStatistics;	
-			state.statistics.statisticsByCategory = action.payload.data.data.statisticsByCategory;			
+			state.statistics.incomeTotal = action.payload.incomeStatistics;
+			state.statistics.outlayTotal = action.payload.totalOutlayStatistics;	
+			state.statistics.statisticsByCategory = action.payload.statisticsByCategory;			
 			toast.success('Ok')		
 		},
 		[getStatistics.rejected]: (state, action) => {
