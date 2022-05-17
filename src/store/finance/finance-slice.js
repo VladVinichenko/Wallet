@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchFinance, fetchTotalFinance, fetchCategories } from './finance-operation'
+import { fetchFinance , getStatistics, fetchTotalFinance, fetchCategories} from './finance-operation'
+
 import { toast } from 'react-toastify'
 
 const example = [
@@ -88,7 +89,13 @@ const example = [
 const initialState = {
 	isLoading: false,
 	error: null,
-	data: [...example],
+	statistics: {
+		statisticsByCategory: [],
+            incomeTotal: 0,
+            outlayTotal: 0 
+	},
+	
+	data: [...example ],
 	totalBalance: '6900.00',
 	categories: [],
 }
@@ -108,6 +115,22 @@ const financeSlice = createSlice({
 			toast.success('Ok')
 		},
 		[fetchFinance.rejected]: (state, action) => {
+			state.isLoading = false
+			state.error = action.payload
+			toast.error('Error')
+		},
+		//=========Statistics
+		[getStatistics.pending]: (state) => {
+			state.isLoading = true
+		},
+		[getStatistics.fulfilled]: (state, action) => {
+			state.isLoading = false;
+			state.statistics.incomeTotal = action.payload.incomeStatistics;
+			state.statistics.outlayTotal = action.payload.totalOutlayStatistics;	
+			state.statistics.statisticsByCategory = action.payload.statisticsByCategory;			
+			toast.success('Ok')		
+		},
+		[getStatistics.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error')

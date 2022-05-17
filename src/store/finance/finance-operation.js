@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getFinance, getTotal, getCategories } from 'api'
-import axios from 'axios'
+ import axios from 'axios'
+import { getFinance, getTotal , getStatisticsApi, getCategories} from 'api'
 
-// axios.defaults.baseURL = 'http://localhost:3001/api/'
+ /* axios.defaults.baseURL = 'http://localhost:3004/api/' */
 axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
 axios.defaults.headers.common[
 	'Authorization'
-] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1Mjc4NTMyOCwiZXhwIjoxNjUyNzg4OTI4fQ.Jpl4fGurRpFnaupBohcu4oDs6aBpBkxwjHOGoUjD2aM` // only test
+] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1Mjc5MDM2NSwiZXhwIjoxNjUyNzkzOTY1fQ.gBNtLpcfPl8e3ZFVBXvW2C4P3T_7BtVyyT7rA-tp9A8` // only test
 
 // const token = {
 // 	set(token) {
@@ -30,6 +30,23 @@ export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async
 	// console.log(total)
 	return balance
 })
+
+
+export const getStatistics = createAsyncThunk(
+	'transactions/getStatistics',
+	async (credentials, { rejectWithValue }) => {
+	const{ month, year } = credentials;
+	  
+    try {
+		const { data} = await getStatisticsApi(month, year)
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+
 export const fetchCategories = createAsyncThunk('finance/categories', async () => {
 	const { data } = await getCategories()
 	// console.log(data)
