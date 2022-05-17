@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getFinance, getTotal, getCategories } from 'api'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:3001/api/'
-// axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/'
+// axios.defaults.baseURL = 'http://localhost:3001/api/'
+axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
 axios.defaults.headers.common[
 	'Authorization'
-] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1MjczNTczNiwiZXhwIjoxNjUyNzM5MzM2fQ.9JseHCQWQ3MfVHKQ4g5VStAgSTlzx5EBQTz88D8ZY5I` // only test
+] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1Mjc4NTMyOCwiZXhwIjoxNjUyNzg4OTI4fQ.Jpl4fGurRpFnaupBohcu4oDs6aBpBkxwjHOGoUjD2aM` // only test
 
 // const token = {
 // 	set(token) {
@@ -25,9 +25,10 @@ export const fetchFinance = createAsyncThunk('finance', async () => {
 })
 export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async () => {
 	const { data } = await getTotal()
-	const { total } = data.totalFinance
+	console.log('fetchTotalFinance', data)
+	const { balance } = data.totalFinance
 	// console.log(total)
-	return total
+	return balance
 })
 export const fetchCategories = createAsyncThunk('finance/categories', async () => {
 	const { data } = await getCategories()
