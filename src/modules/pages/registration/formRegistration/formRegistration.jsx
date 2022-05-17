@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { validate } from 'indicative/validator'
 
@@ -8,6 +9,7 @@ import { sprite } from '../../../../assets/images/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from '../../../../store/auth/auth-operations'
 import { ValidationSchema } from '../../../../modules/common/validationSchema'
+import { ValidationPassIndicator } from '../../../../modules/components/validationPassword/validationIndicator'
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -65,8 +67,13 @@ const StyledInput = styled(Field)`
 `
 
 export const FormRegistration = () => {
-	const dispatch = useDispatch()
+	const [password, setPassword] = useState([])
+	const [confirmPassword, setConfirmPassword] = useState([])
 
+	const dispatch = useDispatch()
+	const test = () => {
+		console.log(password)
+	}
 	return (
 		<Formik
 			initialValues={{
@@ -78,10 +85,9 @@ export const FormRegistration = () => {
 			validationSchema={ValidationSchema}
 			onSubmit={(values, actions) => {
 				console.log(values.name)
-				const test = { name: values.name, email: values.email, password: values.password }
-				dispatch(authOperations.register(test))
-				console.log(test)
-				alert(JSON.stringify(values, null, 2))
+
+				const data = { name: values.name, email: values.email, password: values.password }
+				dispatch(authOperations.register(data))
 
 				actions.resetForm({
 					name: '',
@@ -91,58 +97,74 @@ export const FormRegistration = () => {
 				})
 			}}
 		>
-			<StyledFormRegistration>
-				<LogoAuth />
-				<StyleIconInput>
-					<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
-						<use href={sprite + '#icon-e-mail'} />
-					</StyleSvgIcon>
+			{({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, isValid, dirty }) => (
+				<StyledFormRegistration>
+					<LogoAuth />
+					<StyleIconInput>
+						<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
+							<use href={sprite + '#icon-e-mail'} />
+						</StyleSvgIcon>
 
-					<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
-					<ErrorMessage name='email' />
-				</StyleIconInput>
+						<StyledInput id='email' type='text' name='email' placeholder='E-mail' />
+						<ErrorMessage name='email' />
+					</StyleIconInput>
 
-				<StyleIconInput>
-					<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
-						<use href={sprite + '#icon-password'} />
-					</StyleSvgIcon>
+					<StyleIconInput>
+						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
+							<use href={sprite + '#icon-password'} />
+						</StyleSvgIcon>
 
-					<StyledInput id='password' type='text' name='password' required placeholder='Password' />
+						<StyledInput
+							id='password'
+							type='text'
+							name='password'
+							required
+							placeholder='Password'
+							value={values.password}
+							onChange={handleChange('password')}
+						/>
 
-					<ErrorMessage name='password' />
-				</StyleIconInput>
+						<ValidationPassIndicator passValue={values.password} />
 
-				<StyleIconInput>
-					<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
-						<use href={sprite + '#icon-password'} />
-					</StyleSvgIcon>
+						<ErrorMessage name='password' />
+					</StyleIconInput>
 
-					<StyledInput
-						id='passwordConfirm'
-						type='text'
-						name='passwordConfirm'
-						required
-						placeholder='Подтвердите пароль'
-					/>
+					<StyleIconInput>
+						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
+							<use href={sprite + '#icon-password'} />
+						</StyleSvgIcon>
 
-					<ErrorMessage name='passwordConfirm' />
-				</StyleIconInput>
+						<StyledInput
+							id='passwordConfirm'
+							type='text'
+							name='passwordConfirm'
+							required
+							value={values.passwordConfirm}
+							onChange={handleChange}
+							placeholder='Подтвердите пароль'
+						/>
+						<ErrorMessage name='passwordConfirm' />
+					</StyleIconInput>
 
-				<StyleIconInput>
-					<StyleSvgIcon style={{ width: '18px', height: '18px' }}>
-						<use href={sprite + '#icon-user'} />
-					</StyleSvgIcon>
+					<StyleIconInput>
+						<StyleSvgIcon style={{ width: '18px', height: '18px' }}>
+							<use href={sprite + '#icon-user'} />
+						</StyleSvgIcon>
 
-					<StyledInput id='name' type='text' name='name' required placeholder='Ваше имя' />
+						<StyledInput id='name' type='text' name='name' required placeholder='Ваше имя' />
 
-					<ErrorMessage name='name' />
-				</StyleIconInput>
+						<ErrorMessage name='name' />
+					</StyleIconInput>
 
-				<Button type='button'>Registration</Button>
-				<Button color={false} type='button'>
-					Log In
-				</Button>
-			</StyledFormRegistration>
+					<Button type='submit' disabled={isSubmitting}>
+						Registration
+					</Button>
+
+					<Button color={false} type={'button'}>
+						Log In
+					</Button>
+				</StyledFormRegistration>
+			)}
 		</Formik>
 	)
 }

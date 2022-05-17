@@ -24,16 +24,16 @@ const ButtonAccent = styled(ButtonPrimary)`
 	background-color: ${vars.color.background.primary};
 `
 
-export const Button = ({ color = true, children, ariaLabel, onClickButton }) => {
+export const Button = ({ color = true, children, ariaLabel, onClickButton, type }) => {
 	return (
 		<>
 			{color && (
-				<ButtonPrimary aria-label={ariaLabel} onClick={onClickButton}>
+				<ButtonPrimary type={type} aria-label={ariaLabel} onClick={onClickButton}>
 					{children}
 				</ButtonPrimary>
 			)}
 			{!color && (
-				<ButtonAccent aria-label={ariaLabel} onClick={onClickButton}>
+				<ButtonAccent type={type} aria-label={ariaLabel} onClick={onClickButton}>
 					{children}
 				</ButtonAccent>
 			)}

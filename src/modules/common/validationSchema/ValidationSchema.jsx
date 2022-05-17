@@ -42,7 +42,9 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Не більше 16 символів</ValidationErrorText>
 				</ValidationError>
 			)
+
 			.required('Required'),
+
 		passwordConfirm: Yup.string()
 
 			.default('')
