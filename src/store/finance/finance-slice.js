@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchFinance, fetchTotalFinance, addTransaction } from './finance-operation'
+import { fetchFinance, fetchTotalFinance, fetchCategories, addTransaction } from './finance-operation'
 import { toast } from 'react-toastify'
 
 const example = [
@@ -90,51 +90,67 @@ const initialState = {
 	error: null,
 	data: [...example],
 	totalBalance: '6900.00',
+	categories: [],
 }
 
 const financeSlice = createSlice({
 	name: 'finance',
 	initialState,
 	extraReducers: {
+		//================AllFinance
 		[fetchFinance.pending]: (state) => {
 			state.isLoading = true
 			state.data = []
 		},
-		[fetchTotalFinance.pending]: (state) => {
-			state.isLoading = true
-			state.totalBalance = []
-		},
-		[addTransaction.pending]: (state) => {
-			state.isLoading = true
-		},
-
 		[fetchFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.data = action.payload
-			// console.log(action)
 			toast.success('Ok')
 		},
-		[fetchTotalFinance.fulfilled]: (state, action) => {
-			state.isLoading = false
-			state.totalBalance = action.payload
-			// console.log(action)
-			toast.success('Ok')
-		},
-		[addTransaction.fulfilled]: (state, action) => {
-			state.isLoading = false
-			state.data = action.payload
-			toast.success('Transaction added')
-		},
-
 		[fetchFinance.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error')
 		},
+		//=================Balance
+		[fetchTotalFinance.pending]: (state) => {
+			state.isLoading = true
+			state.totalBalance = []
+		},
+		[fetchTotalFinance.fulfilled]: (state, action) => {
+			state.isLoading = false
+			state.totalBalance = action.payload
+			toast.success('Ok')
+		},
 		[fetchTotalFinance.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error')
+		},
+		//====================Categories
+		[fetchCategories.pending]: (state) => {
+			state.isLoading = true
+			state.categories = []
+		},
+		[fetchCategories.fulfilled]: (state, action) => {
+			state.isLoading = false
+			state.categories = action.payload
+			console.log(action.payload)
+			toast.success('Ok')
+		},
+		[fetchCategories.rejected]: (state, action) => {
+			state.isLoading = false
+			state.error = action.payload
+			toast.error('Error')
+		},
+		//=======================Add_transaction
+		[addTransaction.pending]: (state) => {
+			state.isLoading = true
+		},
+		[addTransaction.fulfilled]: (state, action) => {
+			state.isLoading = false
+			state.data = action.payload
+			toast.success('Transaction added')
 		},
 		[addTransaction.rejected]: (state, action) => {
 			state.isLoading = false

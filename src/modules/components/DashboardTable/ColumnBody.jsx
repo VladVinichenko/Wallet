@@ -13,7 +13,6 @@ const Component = styled.td`
 	color: ${(prop) => prop.color};
 	border-left: 5px solid ${(prop) => prop.colorBorder};
 
-	font-family: 'Circe';
 	font-size: 16px;
 	line-height: 1.5;
 
@@ -29,7 +28,6 @@ const Component = styled.td`
 	}
 `
 const Title = styled.span`
-	font-family: 'Circe';
 	font-weight: 700;
 	font-size: 18px;
 	line-height: 1.5;
