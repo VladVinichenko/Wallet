@@ -54,7 +54,7 @@ const ChartSection = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     if (month !== '' && year !== '') {
-      dispatch(getStatistics({month,year}));
+      dispatch(getStatistics({month , year}));
      }
      
   }, [month, year])
