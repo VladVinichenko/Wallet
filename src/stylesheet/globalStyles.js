@@ -11,7 +11,7 @@ body {
 
 * {
   box-sizing: border-box;
-  font-family: 'Circe-Regular', sans-serif;
+  font-family: 'Circe', sans-serif;
   
   &::before, &::after {
     box-sizing: border-box;
