@@ -22,7 +22,8 @@ import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
 import { fetchCategories } from 'store'
 import { selectorsFinance } from 'store'
-import {ChartSection } from './modules'
+import { ChartSection } from './modules'
+import { Checkbox } from 'modules'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;
@@ -61,6 +62,7 @@ export default function App() {
 				</Modal>
 			)}
 			<Header />
+			<Checkbox />
 			{/* <OpenMenu /> */}
 
 			{/* <Navigation></Navigation>
@@ -88,7 +90,7 @@ export default function App() {
 			{/* <Logo /> */}
 			{/* <Home />
 			<Balance /> */}
-			<ChartSection/>
+			<ChartSection />
 			<Outlet />
 
 			{isModalLogOut && (
@@ -124,7 +126,7 @@ export default function App() {
 					/> */}
 				{/* </Route> */}
 			</Routes>
-			
+
 			{isLoading && <CustomLoader />}
 		</Fragment>
 	)
