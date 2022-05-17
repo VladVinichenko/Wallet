@@ -62,6 +62,7 @@ export const vars = {
 		firstLine: '1px solid #DCDCDF',
 		secondLine: '1px solid #E7E5F2',
 		thirdLine: '1px solid #BDBDBD',
+		forthLine: '1px solid #000000',
 		button: '1px solid #4A56E2',
 	},
 	boxShadow: {

@@ -22,6 +22,7 @@ import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
 import { fetchCategories } from 'store'
 import { selectorsFinance } from 'store'
+import {ChartSection } from './modules'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;
@@ -85,9 +86,9 @@ export default function App() {
 			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
 			{/* <Currency /> */}
 			{/* <Logo /> */}
-			{/* <Home /> */}
-			{/* <Balance /> */}
-
+			{/* <Home />
+			<Balance /> */}
+			<ChartSection/>
 			<Outlet />
 
 			{isModalLogOut && (
@@ -123,6 +124,7 @@ export default function App() {
 					/> */}
 				{/* </Route> */}
 			</Routes>
+			
 			{isLoading && <CustomLoader />}
 		</Fragment>
 	)
