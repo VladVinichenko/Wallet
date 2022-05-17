@@ -4,9 +4,8 @@ import Datetime from 'react-datetime'
 import { Formik, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
-import { useDispatch } from 'react-redux'
-import { setCloseModal } from 'store'
-import { addTransaction as zuzuzu } from 'store'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCloseModal, selectorsFinance, addTransaction as zuzuzu } from 'store'
 
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
@@ -22,7 +21,7 @@ const StyledInput = styled.input`
 
 	font-size: 18px;
 	line-height: 1.5;
-	border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 
 	&::placeholder {
 		color: ${vars.color.font.third};
@@ -38,7 +37,7 @@ const SummInput = styled(StyledInput)`
 	}
 
 	&.error {
-		border-color: red;
+		border-color: ${vars.color.font.negative};
 	}
 
 	@media screen and (min-width: 768px) {
@@ -76,7 +75,7 @@ const StyledTextarea = styled.textarea`
 	height: 86px;
 	font-size: 18px;
 	line-height: 1.5;
-	border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 	resize: none;
 
 	&::placeholder {
@@ -120,7 +119,7 @@ const FormContainer = styled.div`
 		width: 100%;
 		font-size: 18px;
 		line-height: 1.5;
-		border-bottom: 1px solid #e0e0e0;
+		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 	}
 
 	.button-item:not(:last-child) {
@@ -141,7 +140,7 @@ const FormContainer = styled.div`
 	}
 
 	.error-message {
-		color: red;
+		color: ${vars.color.font.negative};
 	}
 `
 
@@ -156,18 +155,7 @@ export const AddTransaction = () => {
 		dispatch(zuzuzu())
 	}
 
-	const getCategories = () => {
-		const result = [
-			{ _id: 111, name: 'main' },
-			{ _id: 222, name: 'food' },
-			{ _id: 333, name: 'auto' },
-			{ _id: 444, name: 'development' },
-			{ _id: 555, name: 'kids' },
-		] // await fetch getCategories
-		return [...result]
-	}
-
-	const categories = getCategories()
+	const categories = useSelector(selectorsFinance.getCategories)
 
 	const handleDateChange = ({ _d: time }) => {
 		setDate(time?.getTime())
@@ -176,9 +164,9 @@ export const AddTransaction = () => {
 	}
 
 	const addTransaction = async (values) => {
-		if (!values.isConsumption) values.category = 'regular income'
+		if (!values.isConsumption) values.category = 'Regular income'
 
-		const type = values.isConsumption ? 'decrement' : 'increment'
+		const type = values.isConsumption ? 'outlay' : 'income'
 		values = { type, ...values, date }
 		delete values.isConsumption
 
@@ -192,7 +180,7 @@ export const AddTransaction = () => {
 	const transactionSchena = Yup.object().shape({
 		isConsumption: Yup.boolean().required('Required'),
 		category: Yup.string(),
-		summ: Yup.number().required('Summ is Required'),
+		sum: Yup.number().required('Sum is Required'),
 		// date: Yup.date().required('Required').default(date),
 		comment: Yup.string(),
 	})
@@ -201,7 +189,7 @@ export const AddTransaction = () => {
 		<FormContainer className='addTransaction'>
 			<Title>Add transaction</Title>
 			<Formik
-				initialValues={{ isConsumption: true, category: '', summ: '', date, comment: '' }}
+				initialValues={{ isConsumption: true, category: '', sum: '', date, comment: '' }}
 				onSubmit={addTransaction}
 				validationSchema={transactionSchena}
 			>
@@ -216,7 +204,7 @@ export const AddTransaction = () => {
 								</option>
 								{categories.map((category, index) => {
 									return (
-										<option value={category} key={index}>
+										<option value={category._id} key={index}>
 											{category.name}
 										</option>
 									)
@@ -228,17 +216,17 @@ export const AddTransaction = () => {
 						<StyledGroup className='group'>
 							<SummInput
 								type='number'
-								name='summ'
+								name='sum'
 								min='0'
 								step='0,01'
 								placeholder='0.00'
-								value={values.summ}
+								value={values.sum}
 								onChange={handleChange}
 								onBlur={handleBlur}
-								className={['summInput', errors.summ && touched.summ ? 'error' : null].join(' ')}
+								className={['summInput', errors.sum && touched.sum ? 'error' : null].join(' ')}
 							/>
-							{/* {errors.summ && touched.summ && errors.summ} */}
-							{/* <ErrorMessage name='summ' component='div' /> */}
+							{/* {errors.sum && touched.sum && errors.sum} */}
+							{/* <ErrorMessage name='sum' component='div' /> */}
 							<span className='dateInputWrapper'>
 								<Datetime
 									name='date'
@@ -262,8 +250,8 @@ export const AddTransaction = () => {
 							autoComplete='off'
 							onChange={handleChange}
 						/>
-						<ErrorMessage name='summ' className='error-message' component='div' />
-						{/* {errors.summ && touched.summ && <div className='error-message'>{errors.summ}</div>} */}
+						<ErrorMessage name='sum' className='error-message' component='div' />
+						{/* {errors.sum && touched.sum && <div className='error-message'>{errors.sum}</div>} */}
 						<ul className='button-list'>
 							<li className='button-item'>
 								<Button type='submit' disabled={isSubmitting}>

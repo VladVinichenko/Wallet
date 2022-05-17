@@ -38,8 +38,8 @@ a {
 }
 
 button {
-  // background: none;
-  // border: none;
+  background: none;
+  border: none;
   outline: none;
   cursor: pointer;
 }
