@@ -158,9 +158,10 @@ export const AddTransaction = () => {
 	const categories = useSelector(selectorsFinance.getCategories)
 
 	const handleDateChange = ({ _d: time }) => {
-		setDate(time?.getTime())
-		// setDate(time)
-		console.log(time)
+		const unixTime = time.getTime()
+		// setDate(time?.getTime())
+		setDate(unixTime)
+		console.log(unixTime)
 	}
 
 	const addTransaction = async (values) => {
@@ -172,6 +173,8 @@ export const AddTransaction = () => {
 
 		postTransaction()
 		closeModal()
+
+		console.log(values)
 
 		await new Promise((resolve) => setTimeout(resolve, 500))
 		alert(JSON.stringify(values, null, 2))

@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { getFinance, getTotal, getStatisticsApi, getCategories } from 'api'
 
-/* axios.defaults.baseURL = 'http://localhost:3004/api/' */
-axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
+axios.defaults.baseURL = 'http://localhost:3001/api/'
+// axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
 axios.defaults.headers.common[
 	'Authorization'
 ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1Mjc5MDM2NSwiZXhwIjoxNjUyNzkzOTY1fQ.gBNtLpcfPl8e3ZFVBXvW2C4P3T_7BtVyyT7rA-tp9A8` // only test
@@ -50,7 +50,7 @@ export const addTransaction = createAsyncThunk('finance/add', async (transaction
 	const allTransactions = state.data
 
 	try {
-		const { data } = await axios.post('finance/add', transaction)
+		const { data } = await axios.post('finance', transaction)
 		const newData = [...allTransactions, data]
 
 		return newData
