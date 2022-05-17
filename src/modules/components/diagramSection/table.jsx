@@ -121,13 +121,7 @@ const renderRows = (listStatistics, listCategories) => {
         <TBodySum>{item.sum }</TBodySum>
     </TRow>)
          }
-    } ))/* .map(cat => {return (<TRow key={cat._id }>
-        <TBodyCategory><CategoryContents><ColorSquare />{cat.name }</CategoryContents></TBodyCategory>
-        <TBodySum>{item.sum }</TBodySum>
-    </TRow>) }) *//* {return (<TRow key={item.category }>
-        <TBodyCategory><CategoryContents><ColorSquare />{item.category }</CategoryContents></TBodyCategory>
-        <TBodySum>{item.sum }</TBodySum>
-    </TRow>) }) */
+    } ))
     return rows
 }
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { vars} from '../../../stylesheet'
+import { Select } from './select';
 
 
 const SelectsContainer = styled.div`
@@ -21,31 +22,7 @@ width: 395px;
 }
 `
 
-const Select = styled.select`
-font-size: 16px;
-line-height: 24px;
-height:50px;
-border: ${vars.border.forthLine}; 
-border-radius: ${vars.borderRadius.seconary};
-appearance: none;
-
-@media (max-width: ${vars.breakpoints.mobileUp}) {
-width: 100%;
-}
-@media (min-width: ${vars.breakpoints.tablet}) {
-width: 160px;
-}
-@media(min-width: ${vars.breakpoints.desktop}){
-width:180px;
-}
-&:not(:last-child){
-  @media (max-width: ${vars.breakpoints.mobileUp}) {
-margin-bottom: 20px;
-}
-}
-
-`
-const monthOptions = [
+const monthOptions = [ /* 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 */
     { number: 1, string: 'January' },
     { number: 2, string: 'February' },
 { number: 3, string: 'March' },
@@ -59,48 +36,23 @@ const monthOptions = [
 { number: 11, string: 'November' },
   { number: 12, string: 'December' }]
 
-const yearOptions = [1970, 2020, 2021, 2022]
+const yearOptions = [1970, 2020, 2021, 2022] 
+
+
+
 
 const Selects = ({ setData }) => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
   useEffect(() => {
-    setData({month, year})
+     setData({month, year})
    },[month, year])
-    const handleChange = event => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'month':
-        setMonth(value);
-        break;
-      case 'year':
-        setYear(value);
-        break;
-
-      default:
-        break;
-      }
-  };
-
-    return <SelectsContainer>
-        
-            <Select name='month'
-            placeholder='Month'
-            onChange={handleChange}
-            defaultValue='Month'
-       >           
-            <option value="Month"  disabled hidden>Month</option>
-            {monthOptions.map(month => <option value={month.number} key={month.string}>{month.string}</option>) }
-        </Select>
-        
-        <Select name='year'
-            placeholder='Year'
-            onChange={handleChange}
-        defaultValue='Year'>
-            <option value="Year"  disabled hidden>Year</option>
-            {yearOptions.map(year => <option value={year} key={year}>{year}</option>) }
-        </Select>
+   
+  
+  return <SelectsContainer>
+    <Select name={'month'} data={monthOptions} setValues={setMonth}></Select>
+    <Select name={'year'} data={yearOptions} setValues={setYear}></Select>
     </SelectsContainer>
 }
 
