@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchFinance, getStatistics, fetchTotalFinance, fetchCategories } from './finance-operation'
+import { fetchFinance, getStatistics, fetchTotalFinance, fetchCategories, addTransaction } from './finance-operation'
 
 import { toast } from 'react-toastify'
 
@@ -78,6 +78,20 @@ const financeSlice = createSlice({
 			toast.success('Ok')
 		},
 		[fetchCategories.rejected]: (state, action) => {
+			state.isLoading = false
+			state.error = action.payload
+			toast.error('Error')
+		},
+		//=======================Add_transaction
+		[addTransaction.pending]: (state) => {
+			state.isLoading = true
+		},
+		[addTransaction.fulfilled]: (state, action) => {
+			state.isLoading = false
+			state.data = action.payload
+			toast.success('Transaction added')
+		},
+		[addTransaction.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error')

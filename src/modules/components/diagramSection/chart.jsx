@@ -69,6 +69,3 @@ const Chart = ({ categories, outlay, statistics }) => {
 
 export { Chart }
 
-/*_id: '628356e997d487932b45633e',
-        name: 'Care about',
-        color: '#C5BAFF'*/

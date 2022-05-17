@@ -1,5 +1,5 @@
 import React from 'react'
-// import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Media from 'react-media'
@@ -10,9 +10,10 @@ import { DashboardTable } from 'modules'
 import { Currency, Navigation } from 'modules/components'
 // import { Modal } from 'modules/components'
 import { Balance, Container } from 'modules/common'
-// import { ROUTES } from 'lib'
+import { ROUTES } from 'lib'
 // import { ButtonAddTransactios } from 'modules/common'
 import { fetchFinance } from 'store'
+import { ChartSection } from '../../components/diagramSection'
 
 const Background = styled.div`
 	position: fixed;
@@ -93,15 +94,18 @@ export const Home = () => {
 						}}
 					>
 						{(matches) => {
+							if (matches.anotherScreen === true && location.pathname === `/${ROUTES.CURRENCY}`) {
+								navigate(`/${ROUTES.HOME}`)
+							}
 							return (
 								<>
 									{matches.mobileScreen && (
 										<>
 											<Navigation />
-											<BalanceWrapper>
-												<Balance />
-											</BalanceWrapper>
-											<DashboardTable viewport={matches} />
+											<BalanceWrapper>{page === ROUTES.HOME && <Balance />}</BalanceWrapper>
+											{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+											{page === ROUTES.DIAGRAM && <ChartSection />}
+											{page === ROUTES.CURRENCY && <Currency />}
 										</>
 									)}
 									{matches.anotherScreen && (
@@ -114,7 +118,8 @@ export const Home = () => {
 												<Currency />
 											</LeftBlock>
 											<DashBoardWrapper>
-												<DashboardTable viewport={matches} />
+												{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+												{page === ROUTES.DIAGRAM && <ChartSection />}
 											</DashBoardWrapper>
 											{/* <ButtonAddTransactios viewport={matches} /> */}
 										</>

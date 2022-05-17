@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from 'react'
 // import { OpenMenu } from 'modules'
-import { Routes, Route, Link, NavLink, Outlet } from 'react-router-dom'
+import { Routes, Route, Link, NavLink, Outlet, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectorsGlobal } from 'store'
@@ -10,11 +10,11 @@ import { ROUTES } from 'lib'
 import { Header, Home, Logout } from 'modules'
 import { Modal } from 'modules'
 // import { Logo } from 'modules'
-// import { ButtonAddTransactios } from 'modules'
+import { ButtonAddTransaction } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
 import { setIsLoading } from 'store'
-
+import { AddTransaction } from 'modules'
 import { Button } from 'modules'
 // import { Currency } from 'modules'
 import { Balance } from 'modules'
@@ -22,7 +22,7 @@ import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
 import { fetchCategories } from 'store'
 import { selectorsFinance } from 'store'
-import {ChartSection } from './modules'
+// import {ChartSection } from './modules'
 // const Button = styled.button`
 // 	background: black;
 // 	height: 50px;
@@ -61,34 +61,9 @@ export default function App() {
 				</Modal>
 			)}
 			<Header />
+			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
 			{/* <OpenMenu /> */}
-
-			{/* <Navigation></Navigation>
-			<NavLink to='/'>
-				<Button>Home</Button>
-			</NavLink>
-			<NavLink to='/currency'>
-				<Button>Currency</Button>
-			</NavLink>
-			<NavLink to='/balance'>
-				<Button>Balance</Button>
-			</NavLink>
-			<Button onClickButton={showModalLogout} color={false}>
-				Modal 1
-			</Button>
-			<Button onClickButton={showModalAddTransaction} color={false}>
-				Modal 1
-			</Button>
-			<Button onClickButton={checkLoader} color={false}>
-				Check loader
-			</Button> */}
-			{/* <Modal></Modal> */}
 			{/* <ButtonAddTransactios /> */}
-			{/* <Currency /> */}
-			{/* <Logo /> */}
-			{/* <Home />
-			<Balance /> */}
-			<ChartSection/>
 			<Outlet />
 
 			{isModalLogOut && (
@@ -98,22 +73,39 @@ export default function App() {
 			)}
 			{isModalAddTransaction && (
 				<Modal>
-					<Balance />
+					<AddTransaction />
 				</Modal>
 			)}
 
 			<ToastContainer autoClose={2000} />
 			<Routes>
-				<Route
-					path='/'
-					element={
-						<>
-							<Home /> <Outlet />
-						</>
-					}
-				/>
-
-				{/* <Route
+				<Route>
+					<Route path='/' element={<Navigate to={ROUTES.HOME} />} />
+					<Route
+						path={ROUTES.HOME}
+						element={
+							<>
+								<Home page={ROUTES.HOME} /> <Outlet />
+							</>
+						}
+					/>
+					<Route
+						path={ROUTES.DIAGRAM}
+						element={
+							<>
+								<Home page={ROUTES.DIAGRAM} /> <Outlet />
+							</>
+						}
+					/>
+					<Route
+						path={ROUTES.CURRENCY}
+						element={
+							<>
+								<Home page={ROUTES.CURRENCY} /> <Outlet />
+							</>
+						}
+					/>
+					<Route
 						path='*'
 						element={
 							<main style={{ padding: '1rem', color: 'red' }}>
@@ -121,10 +113,10 @@ export default function App() {
 								<Outlet />
 							</main>
 						}
-					/> */}
-				{/* </Route> */}
+					/>
+				</Route>
 			</Routes>
-			
+
 			{isLoading && <CustomLoader />}
 		</Fragment>
 	)

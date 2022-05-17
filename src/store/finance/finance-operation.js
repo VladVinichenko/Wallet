@@ -52,6 +52,21 @@ export const getStatistics = createAsyncThunk(
 	}
 )
 
+export const addTransaction = createAsyncThunk('finance/add', async (transaction, { getState, rejectWithValue }) => {
+	const state = getState()
+	const allTransactions = state.data
+
+	try {
+		const { data } = await axios.post('finance', transaction)
+		const newData = [...allTransactions, data]
+
+		return newData
+	} catch (error) {
+		console.dir(error)
+		return rejectWithValue(error.message)
+	}
+})
+
 export const fetchCategories = createAsyncThunk('finance/categories', async () => {
 	const { data } = await getCategories()
 	// console.log(data)
