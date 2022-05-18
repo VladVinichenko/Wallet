@@ -1,7 +1,8 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { setIsModalLogoutOpen } from 'store'
 import { vars } from 'stylesheet'
+import { authSelectors } from 'store/auth/auth-selectors'
 import { Button } from 'modules'
 import authOperations from '../../../store/auth/auth-operations'
 
@@ -101,7 +102,7 @@ export const Logout = () => {
 		dispatch(setIsModalLogoutOpen())
 	}
 
-	const name = 'Bayraktar'
+	const name = useSelector(authSelectors.getUsername)
 
 	return (
 		<>
