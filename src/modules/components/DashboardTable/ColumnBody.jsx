@@ -68,10 +68,10 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 						<Fragment key={idx}>
 							<Component
 								key={nanoid()}
-								colorBorder={type === 'outlay' ? `${color.font.positive}` : `${color.font.negative}`}
+								colorBorder={type === 'income' ? `${color.font.positive}` : `${color.font.negative}`}
 								color={
 									el.type === 'Summa'
-										? type === 'outlay'
+										? type === 'income'
 											? `${color.font.positive}`
 											: `${color.font.negative}`
 										: `${color.font.primary}`

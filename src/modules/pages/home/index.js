@@ -74,7 +74,7 @@ const BalanceWrapper = styled.div`
 		margin-bottom: 32px;
 	}
 `
-export const Home = () => {
+export const Home = ({ page = ROUTES.HOME }) => {
 	const dispatch = useDispatch()
 	// const checkWindowSize = windowSize()
 	// const location = useLocation()

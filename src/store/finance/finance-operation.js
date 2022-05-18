@@ -6,7 +6,7 @@ axios.defaults.baseURL = 'http://localhost:3001/api/'
 //axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
 axios.defaults.headers.common[
 	'Authorization'
-] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1MjgzMTMzMywiZXhwIjoxNjUyODM0OTMzfQ.5ZjTUjmOWRm1nL0eQ_957cPq5U1ZOfmEVj7yPs9maBY` // only test
+] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODEzMzJkZmQyNmQ0MWMwOTA3NTRjZSIsImlhdCI6MTY1Mjg1NTkwMCwiZXhwIjoxNjUyODU5NTAwfQ.h6W5NkUKNsi9RAKOLNhfJOcM07ja6X4r1ku9lGvZg8M` // only test
 
 // const token = {
 // 	set(token) {

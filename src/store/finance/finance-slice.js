@@ -28,7 +28,7 @@ const financeSlice = createSlice({
 		[fetchFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.data = [...state.data, ...action.payload]
-			toast.success('Ok')
+			// toast.success('Ok')
 		},
 		[fetchFinance.rejected]: (state, action) => {
 			state.isLoading = false
@@ -44,7 +44,7 @@ const financeSlice = createSlice({
 			state.statistics.incomeTotal = action.payload.incomeStatistics
 			state.statistics.outlayTotal = action.payload.totalOutlayStatistics
 			state.statistics.statisticsByCategory = action.payload.statisticsByCategory
-			toast.success('Ok')
+			// toast.success('Ok')
 		},
 		[getStatistics.rejected]: (state, action) => {
 			state.isLoading = false
@@ -59,7 +59,8 @@ const financeSlice = createSlice({
 		[fetchTotalFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.totalBalance = action.payload
-			toast.success('Ok')
+			console.log(action.payload)
+			// toast.success('Ok')
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
 			state.isLoading = false
@@ -74,8 +75,7 @@ const financeSlice = createSlice({
 		[fetchCategories.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.categories = action.payload
-			console.log(action.payload)
-			toast.success('Ok')
+			// toast.success('Ok')
 		},
 		[fetchCategories.rejected]: (state, action) => {
 			state.isLoading = false
