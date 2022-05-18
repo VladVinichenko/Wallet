@@ -3,6 +3,7 @@ import { BsPlusLg } from 'react-icons/bs'
 import { FaMinus } from 'react-icons/fa'
 import { vars } from 'stylesheet'
 import { type } from '@testing-library/user-event/dist/type'
+import { useState } from 'react'
 
 const Container = styled.div`
 	position: relative;
@@ -102,22 +103,21 @@ const ToggleIcon = styled.div`
 `
 
 export const Checkbox = () => {
+	const [plus, setPlus] = useState(true)
+
 	const check = (e) => {
-		document.querySelector('')
-		console.log(Label)
+		const block = document.querySelector('#checkbox')
+		setPlus(block.checked)
 	}
 
 	return (
 		<Container>
 			<ToggleContainer>
 				<FormForButton>
-					<Label onClick={check}>
-						<Input id='checkbox' value='income' data='check' />
+					<Label>
+						<Input id='checkbox' value='income' data='check' onClick={check} defaultChecked aria-label='transaction' />
 						<LabelText>Доход</LabelText>
-						<ToggleIcon>
-							<BsPlusLg />
-							<FaMinus />
-						</ToggleIcon>
+						<ToggleIcon>{plus ? <BsPlusLg /> : <FaMinus />}</ToggleIcon>
 						<ToggleField />
 						<LabelText $mode='expenses'>Расход</LabelText>
 					</Label>
