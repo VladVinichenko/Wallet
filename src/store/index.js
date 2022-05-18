@@ -31,7 +31,7 @@ const authPersistConfig = {
 	whitelist: ['token'],
 }
 
-const logger = CustomLoader()
+const logger = null
 
 const middleware = {
 	serializableCheck: {
