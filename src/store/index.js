@@ -31,13 +31,10 @@ const authPersistConfig = {
 	whitelist: ['token'],
 }
 
-const logger = CustomLoader()
-
 const middleware = {
 	serializableCheck: {
 		ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 	},
-	logger,
 }
 
 const rootReducer = combineReducers({
