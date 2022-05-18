@@ -5,13 +5,13 @@ const BlockCheck = styled.div`
 	position: absolute;
 	bottom: -20px;
 	height: 0;
-	border: 4px solid #24cca7;
-	border-radius: 20px;
+	height: 5px;
+	margin-top: 5px;
 	transition: 1s;
 `
 
 // box-shadow: 0px 1px 8px rgba(36, 204, 167, 0.5);
-
+// box-shadow: 0px 1px 8px rgb(196 37 37 / 0.5);
 export const ValidationPassIndicator = ({ passValue }) => {
 	const [isUpperCase, setIsUpperCase] = useState(false)
 	const [isLowerCase, setIsLowerCase] = useState(false)
@@ -24,7 +24,7 @@ export const ValidationPassIndicator = ({ passValue }) => {
 	const specials = '!@#$%^&*()_-+=|/.,:;[]{}' // Спецсимволы
 
 	let rating = 0
-
+	console.log(rating)
 	useEffect(() => {
 		const passValueArr = [...passValue]
 
@@ -58,10 +58,47 @@ export const ValidationPassIndicator = ({ passValue }) => {
 	console.log(isUpperCase, isLowerCase, isNumber, isSpecial)
 
 	return (
+		// <>
+		// 	{passValue.length < 6 && rating < 3 && (
+		// 		<BlockCheck
+		// 			style={{
+		// 				width: '10%',
+		// 				boxShadow: 'box-shadow: 0px 1px 8px rgb(196 37 37 / 0.5)',
+		// 				border: '2px solid rgb(201 33 27)',
+		// 			}}
+		// 		/>
+		// 	)}
+		// 	{passValue.length >= 8 && rating < 3 && (
+		// 		<BlockCheck
+		// 			style={{
+		// 				width: '50%',
+		// 				boxShadow: 'box-shadow: 0px 1px 8px rgb(255 199 39 / 0.5)',
+		// 				border: '2px solid rgb(255 199 39)',
+		// 			}}
+		// 		/>
+		// 	)}
+
+		// 	{passValue.length >= 8 && rating >= 3 && <BlockCheck style={{ width: '100%', border: '4px solid #24CCA7' }} />}
+		// 	{passValue.length <= 16 && rating >= 3 && <BlockCheck style={{ width: '100%', border: '4px solid #24CCA7' }} />}
+
+		// 	{passValue.length >= 6 && rating === 1 && <BlockCheck style={{ width: '10%' }} />}
+
+		// 	{passValue.length >= 6 && rating > 1 && rating < 4 && (
+		// 		<BlockCheck style={{ width: '50%', backgroundColor: '#ffdb00' }} />
+		// 	)}
+
+		// 	{passValue.length >= 6 && rating === 4 && <BlockCheck style={{ width: '100%', backgroundColor: '#61ac27' }} />}
+		// </>
+
 		<>
-			{passValue.length <= 7 && rating < 3 && <BlockCheck style={{ width: '10%', backgroundColor: '#e7140d' }} />}
+			{passValue.length < 6 && rating < 3 && <BlockCheck style={{ width: '10%', backgroundColor: '#e7140d' }} />}
+
+			{passValue.length < 6 && rating >= 3 && <BlockCheck style={{ width: '50%', backgroundColor: '#ffdb00' }} />}
+
 			{passValue.length >= 8 && rating < 3 && <BlockCheck style={{ width: '50%', backgroundColor: '#ffdb00' }} />}
+
 			{passValue.length >= 8 && rating >= 3 && <BlockCheck style={{ width: '100%', backgroundColor: '#61ac27' }} />}
+
 			{passValue.length >= 6 && rating == 1 && <BlockCheck style={{ width: '10%', backgroundColor: '#e7140d' }} />}
 
 			{passValue.length >= 6 && rating > 1 && rating < 4 && (

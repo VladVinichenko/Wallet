@@ -18,32 +18,32 @@ export const ValidationSchema = () => {
 				1,
 
 				<ValidationError>
-					<ValidationErrorText>Не меньше 1 символи</ValidationErrorText>
+					<ValidationErrorText>At least 1 character</ValidationErrorText>
 				</ValidationError>
 			)
 			.max(
 				12,
 				<ValidationError>
-					<ValidationErrorText>Не більше 12 символів</ValidationErrorText>
+					<ValidationErrorText>No more than 12 characters</ValidationErrorText>
 				</ValidationError>
 			)
-			.required('Обовязкове поле'),
+			.required('Required field'),
 
 		password: Yup.string()
 			.min(
 				6,
 				<ValidationError>
-					<ValidationErrorText>Пароль больше 6 символов</ValidationErrorText>
+					<ValidationErrorText>At least 1 character</ValidationErrorText>
 				</ValidationError>
 			)
 			.max(
 				16,
 				<ValidationError>
-					<ValidationErrorText>Не більше 16 символів</ValidationErrorText>
+					<ValidationErrorText>No more than 16 characters</ValidationErrorText>
 				</ValidationError>
 			)
 
-			.required('Обовязкове поле'),
+			.required('Required field'),
 
 		passwordConfirm: Yup.string()
 
@@ -51,10 +51,10 @@ export const ValidationSchema = () => {
 			.oneOf(
 				[Yup.ref('password'), null],
 				<ValidationError>
-					<ValidationErrorText>Пароль не соответствует</ValidationErrorText>
+					<ValidationErrorText>Passwords do not match</ValidationErrorText>
 				</ValidationError>
 			)
-			.required('Обовязкове поле'),
+			.required('Required field'),
 
 		email: Yup.string()
 			.email(
@@ -62,6 +62,6 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Invalid email address</ValidationErrorText>
 				</ValidationError>
 			)
-			.required('Обовязкове поле'),
+			.required('Required field'),
 	})
 }

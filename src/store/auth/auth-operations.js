@@ -21,7 +21,7 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 		return data
 	} catch (error) {
 		if (error.response.status === 409) {
-			toast.error('Пользователь с таким именем уже существует')
+			toast.error('A user with this name already exists')
 		}
 		// TODO: Добавить обработку ошибки error.message
 	}
@@ -34,9 +34,9 @@ const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 		return data
 	} catch (error) {
 		if (error.response.status !== 401) {
-			toast.error('Сервіс тимчасово недоступний')
+			toast.error('The service is temporarily unavailable')
 		} else {
-			toast.error('Невірний логін або пароль')
+			toast.error('Invalid login or password')
 		}
 	}
 })
