@@ -3,89 +3,6 @@ import { fetchFinance, getStatistics, fetchTotalFinance, fetchCategories, addTra
 
 import { toast } from 'react-toastify'
 
-const example = [
-	{
-		data: 1600547654,
-		type: 'decrement',
-		category: { id: 888, name: 'Other' },
-		comment: 'Gift for wife',
-		summa: '300.00',
-		total: '6900.00',
-	},
-	{
-		data: 1652547654,
-		type: 'increment',
-		category: { id: 444, name: 'Regular' },
-		comment: 'January Bonus',
-		summa: '8000.00',
-		total: '14900.00',
-	},
-	{
-		data: 1652547654,
-		type: 'increment',
-		category: { id: 444, name: 'Regular' },
-		comment: 'January Bonus',
-		summa: '8000.00',
-		total: '14900.00',
-	},
-	{
-		data: 1652547654,
-		type: 'increment',
-		category: { id: 444, name: 'Regular' },
-		comment: 'January Bonus',
-		summa: '8000.00',
-		total: '14900.00',
-	},
-	{
-		data: 1652547654,
-		type: 'increment',
-		category: { id: 444, name: 'Regular' },
-		comment: 'January Bonus',
-		summa: '8000.00',
-		total: '14900.00',
-	},
-	{
-		data: 1652547654,
-		type: 'increment',
-		category: { id: 444, name: 'Regular' },
-		comment: 'January Bonus',
-		summa: '8000.00',
-		total: '14900.00',
-	},
-	{
-		data: 1652547654,
-		type: 'increment',
-		category: { id: 444, name: 'Regular' },
-		comment: 'January Bonus',
-		summa: '8000.00',
-		total: '14900.00',
-	},
-	{
-		data: 1652547654,
-		type: 'increment',
-		category: { id: 444, name: 'Regular' },
-		comment: 'January Bonus',
-		summa: '8000.00',
-		total: '14900.00',
-	},
-	{
-		data: 1652547654,
-		type: 'increment',
-		category: { id: 444, name: 'Regular' },
-		comment: 'January Bonus',
-		summa: '8000.00',
-		total: '14900.00',
-	},
-	{
-		data: 1652547654,
-		type: 'increment',
-		category: { id: 444, name: 'Regular' },
-		comment: 'January Bonus',
-		summa: '8000.00',
-		total: '14900.00',
-	},
-]
-
 const initialState = {
 	isLoading: false,
 	error: null,
@@ -95,8 +12,8 @@ const initialState = {
 		outlayTotal: 0,
 	},
 
-	data: [...example],
-	totalBalance: '6900.00',
+	data: [],
+	totalBalance: '',
 	categories: [],
 }
 
@@ -107,12 +24,11 @@ const financeSlice = createSlice({
 		//================AllFinance
 		[fetchFinance.pending]: (state) => {
 			state.isLoading = true
-			state.data = []
 		},
 		[fetchFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
-			state.data = action.payload
-			toast.success('Ok')
+			state.data = [...state.data, ...action.payload]
+			// toast.success('Ok')
 		},
 		[fetchFinance.rejected]: (state, action) => {
 			state.isLoading = false
@@ -128,7 +44,7 @@ const financeSlice = createSlice({
 			state.statistics.incomeTotal = action.payload.incomeStatistics
 			state.statistics.outlayTotal = action.payload.totalOutlayStatistics
 			state.statistics.statisticsByCategory = action.payload.statisticsByCategory
-			toast.success('Ok')
+			// toast.success('Ok')
 		},
 		[getStatistics.rejected]: (state, action) => {
 			state.isLoading = false
@@ -143,7 +59,8 @@ const financeSlice = createSlice({
 		[fetchTotalFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.totalBalance = action.payload
-			toast.success('Ok')
+			console.log(action.payload)
+			// toast.success('Ok')
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
 			state.isLoading = false
@@ -158,8 +75,7 @@ const financeSlice = createSlice({
 		[fetchCategories.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.categories = action.payload
-			console.log(action.payload)
-			toast.success('Ok')
+			// toast.success('Ok')
 		},
 		[fetchCategories.rejected]: (state, action) => {
 			state.isLoading = false

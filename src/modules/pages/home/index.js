@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Media from 'react-media'
 // import { windowSize } from 'lib/hooks/windowSize'
 import styled from 'styled-components'
@@ -11,6 +12,7 @@ import { Currency, Navigation } from 'modules/components'
 import { Balance, Container } from 'modules/common'
 import { ROUTES } from 'lib'
 // import { ButtonAddTransactios } from 'modules/common'
+import { fetchFinance } from 'store'
 import { ChartSection } from '../../components/diagramSection'
 
 const Background = styled.div`
@@ -73,9 +75,13 @@ const BalanceWrapper = styled.div`
 	}
 `
 export const Home = ({ page = ROUTES.HOME }) => {
-	const location = useLocation()
-	const navigate = useNavigate()
-
+	const dispatch = useDispatch()
+	// const checkWindowSize = windowSize()
+	// const location = useLocation()
+	// const navigate = useNavigate()
+	useEffect(() => {
+		dispatch(fetchFinance())
+	}, [])
 	return (
 		<>
 			<Background />
