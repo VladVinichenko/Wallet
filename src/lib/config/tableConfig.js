@@ -1,11 +1,11 @@
 export const tableColumns = [
 	{
-		label: 'Data',
-		value: 'data',
+		label: 'Date',
+		value: 'date',
 		type: 'UnixTime',
 		style: {
 			width: 80,
-			justifyContent: 'flex-start'
+			justifyContent: 'flex-start',
 		},
 	},
 	{
@@ -14,7 +14,7 @@ export const tableColumns = [
 		type: 'Action',
 		style: {
 			width: 40,
-			justifyContent: 'center'
+			justifyContent: 'center',
 		},
 	},
 	{
@@ -23,34 +23,34 @@ export const tableColumns = [
 		type: 'Category',
 		style: {
 			width: 110,
-			justifyContent: 'flex-start'
+			justifyContent: 'flex-start',
 		},
 	},
 	{
 		label: 'Comment',
 		value: 'comment',
-		type: 'text',
+		type: 'Comment',
 		style: {
 			width: 110,
-			justifyContent: 'flex-start'
+			justifyContent: 'flex-start',
 		},
 	},
 	{
 		label: 'Summa',
-		value: 'summa',
+		value: 'sum',
 		type: 'Summa',
 		style: {
 			width: 110,
-			justifyContent: 'flex-end'
+			justifyContent: 'flex-end',
 		},
 	},
 	{
-		label: 'Total',
-		value: 'total',
-		type: 'text',
+		label: 'Balance',
+		value: 'balance',
+		type: 'Balance',
 		style: {
 			width: 110,
-			justifyContent: 'flex-end'
+			justifyContent: 'flex-end',
 		},
 	},
 ]

@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { ColumnBody } from './ColumnBody'
 import { tableColumns } from 'lib/config'
 import { Scrollbars } from 'react-custom-scrollbars-2'
-import { useSelector } from 'react-redux'
-import { selectorsFinance } from 'store'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectorsFinance, fetchFinance } from 'store'
 import { vars } from 'stylesheet'
 
 const { color, border, borderRadius, breakpoints } = vars
@@ -52,6 +52,7 @@ const BodyTable = styled.tbody`
 	}
 	@media screen and (min-width: ${breakpoints.desktop}) {
 		width: 715px;
+		height: 60vh;
 	}
 `
 const Row = styled.tr`
@@ -90,15 +91,19 @@ const Column = styled.th`
 
 export const DashboardTable = ({ viewport }) => {
 	const [inView, setInView] = useState(false)
+	const [page, setPage] = useState(1)
 	const dataTable = useSelector(selectorsFinance.getData)
-	// console.log(dataTable)
+
+	const dispatch = useDispatch()
 
 	useEffect(() => {
-		if (inView) console.log(111) //dispatch
-	}, [inView])
+		if (inView) {
+			dispatch(fetchFinance(page + 1))
+			setPage(page + 1)
+		}
+	}, [viewport, inView])
 
-	const BodyRowRender = useCallback(() => {
-		console.log(viewport.anotherScreen)
+	const BodyRowRender = () => {
 		return dataTable.map((data, idx) => (
 			<Row key={nanoid()} background={viewport.anotherScreen ? `transparent` : `${color.background.primary}`}>
 				<ColumnBody
@@ -111,7 +116,8 @@ export const DashboardTable = ({ viewport }) => {
 				/>
 			</Row>
 		))
-	}, [inView, viewport, dataTable])
+	}
+
 	return useMemo(() => {
 		return (
 			<Component>
@@ -139,7 +145,7 @@ export const DashboardTable = ({ viewport }) => {
 				</BodyTable>
 			</Component>
 		)
-	}, [viewport, inView, dataTable])
+	}, [viewport, dataTable])
 }
 
 Component.className = DashboardTable

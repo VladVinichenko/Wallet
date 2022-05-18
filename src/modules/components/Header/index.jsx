@@ -1,7 +1,8 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { vars } from 'stylesheet'
+import { authSelectors } from 'store/auth/auth-selectors'
 import { setIsModalLogoutOpen } from 'store'
 import { Container } from 'modules/common'
 import { Logo } from 'modules/common'
@@ -127,7 +128,7 @@ const ButtonLabel = styled.span`
 export const Header = () => {
     const dispatch = useDispatch();
 
-    const name = 'Bayraktar Javelin'
+    const name = useSelector(authSelectors.getUsername)
     return (
         <Head>
             <Container>
@@ -144,7 +145,7 @@ export const Header = () => {
                             <ButtonSvg width="18" height="18">
                                 <use href={`${sprite}#icon-exit`} ></use>
                             </ButtonSvg>
-                            <ButtonLabel>Log out</ButtonLabel>
+                            <ButtonLabel>Logout</ButtonLabel>
                         </ExitButton>
                     </UserMenu>
                 </HeaderContainer>
