@@ -24,7 +24,7 @@ const ButtonAccent = styled(ButtonPrimary)`
 	background-color: ${vars.color.background.primary};
 `
 
-export const Button = ({ color = true, children, ariaLabel, onClickButton, type }) => {
+export const Button = ({ color = true, children, type = 'button', ariaLabel, onClickButton }) => {
 	return (
 		<>
 			{color && (

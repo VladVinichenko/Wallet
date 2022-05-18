@@ -29,7 +29,7 @@ const Button = styled.button`
 	}
 `
 
-export const ButtonAddTransactios = ({ onClickButton }) => {
+export const ButtonAddTransaction = ({ onClickButton }) => {
 	return (
 		<Button type='button' onClick={onClickButton}>
 			<BsPlusLg />

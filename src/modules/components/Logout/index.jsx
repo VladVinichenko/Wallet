@@ -29,7 +29,7 @@ const Form = styled.div`
 const Title = styled.h2`
 	margin-bottom: 40px;
 
-	font-family: 'Poppins-Regular', sans-serif;
+	font-family: 'Poppins', sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	font-size: 30px;
