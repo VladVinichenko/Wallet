@@ -29,6 +29,8 @@ import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
 import { fetchCategories } from 'store'
 import { selectorsFinance } from 'store'
+import { ChartSection } from './modules'
+import { Checkbox } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
 
@@ -171,6 +173,7 @@ export default function App() {
 					/>
 				</Route>
 			</Routes>
+
 			{isLoading && <CustomLoader />}
 		</Fragment>
 	)
