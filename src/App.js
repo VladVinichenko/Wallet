@@ -53,7 +53,7 @@ export default function App() {
 	useEffect(() => {
 		isLoggedIn && dispatch(fetchCategories())
 		isLoggedIn && dispatch(authOperations.fetchCurrentUser())
-	}, [dispatch])
+	}, [isLoggedIn])
 
 	// useEffect(() => {
 	// !isLoggedIn && navigate(`/${ROUTES.LOGIN}`)
