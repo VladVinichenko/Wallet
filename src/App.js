@@ -75,7 +75,6 @@ export default function App() {
 
 			{!isLoggedIn && <Login />}
 
-			<Header />
 			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
 			{/* <OpenMenu /> */}
 			{/* <ButtonAddTransactios /> */}

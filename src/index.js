@@ -19,6 +19,9 @@ ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
+				<Background />
+				<GlobalStyle />
+				<Fonts />
 				<BrowserRouter>
 					<App />
 				</BrowserRouter>

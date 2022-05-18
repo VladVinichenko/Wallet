@@ -54,12 +54,14 @@ const Wrapper = styled.div`
 		display: flex;
 		justify-content: space-between;
 		position: relative;
+		height: calc(100vh - 80px);
 		&&::before {
 			position: absolute;
 			content: '';
 			border-right: ${vars.border.secondLine};
 			width: 0px;
-			height: calc(100vh - 80px);
+			/* height: calc(100vh - 80px); */
+			height: 100%;
 			left: 480px;
 			box-shadow: ${vars.boxShadow.secondLine};
 		}
@@ -77,8 +79,8 @@ const BalanceWrapper = styled.div`
 export const Home = ({ page = ROUTES.HOME }) => {
 	const dispatch = useDispatch()
 	// const checkWindowSize = windowSize()
-	// const location = useLocation()
-	// const navigate = useNavigate()
+	const location = useLocation()
+	const navigate = useNavigate()
 	useEffect(() => {
 		dispatch(fetchFinance())
 	}, [])

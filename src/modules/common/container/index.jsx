@@ -9,9 +9,10 @@ export const Container = styled.div`
 	min-width: 320px;
 
 	@media screen and (min-width: 320px) and (max-width: 767px) {
-	min-width: ${vars.breakpoints.mobile};
-	/* overflow-x: hidden; */
-	/* min-width: ${vars.breakpoints.mobile}; */
+		min-width: ${vars.breakpoints.mobile};
+		/* overflow-x: hidden; */
+		/* min-width: ${vars.breakpoints.mobile}; */
+	}
 	@media screen and (min-width: ${vars.breakpoints.mobile}) and (max-width: ${vars.breakpoints.mobileUp}) {
 		padding-left: 20px;
 		padding-right: 20px;
