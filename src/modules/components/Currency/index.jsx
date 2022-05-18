@@ -106,7 +106,7 @@ const Currenc = styled.div`
 			padding-top: 23px;
 		}
 	}
-	@keyframes ${animation.keyframes.currencyShow};
+	/* @keyframes ${animation.keyframes.currencyShow}; */
 `
 
 export const Currency = () => {
