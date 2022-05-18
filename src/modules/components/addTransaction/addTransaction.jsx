@@ -156,6 +156,7 @@ export const AddTransaction = () => {
 	}
 
 	const categories = useSelector(selectorsFinance.getCategories)
+	console.log('categories', categories)
 
 	const handleDateChange = ({ _d: time }) => {
 		const unixTime = time.getTime()
