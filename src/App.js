@@ -28,6 +28,8 @@ import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
 import { fetchCategories } from 'store'
 import { selectorsFinance } from 'store'
+import { PrivateRoute } from 'lib'
+import { PublicRoute } from 'lib'
 
 export default function App() {
 	const location = useLocation()
@@ -37,8 +39,6 @@ export default function App() {
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
-	const categories = useSelector(selectorsFinance.getCategories)
-	// console.log(categories)
 	console.log(isLoggedIn)
 	const dispatch = useDispatch()
 	const showModalLogout = () => {
@@ -55,9 +55,9 @@ export default function App() {
 		dispatch(authOperations.fetchCurrentUser())
 	}, [dispatch])
 
-	useEffect(() => {
-		isLoggedIn ? navigate(`/${ROUTES.HOME}`) : navigate(`/${ROUTES.LOGIN}`)
-	}, [isLoggedIn])
+	// useEffect(() => {
+	// !isLoggedIn && navigate(`/${ROUTES.LOGIN}`)
+	// }, [isLoggedIn])
 
 	return (
 		<Fragment>
@@ -72,7 +72,7 @@ export default function App() {
 			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
 			{/* <OpenMenu /> */}
 			{/* <ButtonAddTransactios /> */}
-			<Outlet />
+			{/* <Outlet /> */}
 			{isModalLogOut && (
 				<Modal>
 					<Logout />
@@ -85,47 +85,75 @@ export default function App() {
 			)}
 
 			<ToastContainer autoClose={2000} />
+
 			<Routes>
 				<Route>
-					<Route path='/' />
-					<Route
-						path={ROUTES.REGISTER}
-						element={
-							<>
-								<Registration /> <Outlet />
-							</>
-						}
-					/>
+					<Route path='/' element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
 					<Route
 						path={ROUTES.LOGIN}
 						element={
-							<>
-								<Login /> <Outlet />
-							</>
+							<PublicRoute
+								element={
+									<>
+										<Login /> <Outlet />
+									</>
+								}
+								redirectTo={`/${ROUTES.HOME}`}
+								restricted
+							/>
+						}
+					/>
+					<Route
+						path={ROUTES.REGISTER}
+						element={
+							<PublicRoute
+								element={
+									<>
+										<Registration /> <Outlet />
+									</>
+								}
+								redirectTo={`/${ROUTES.HOME}`}
+								restricted
+							/>
 						}
 					/>
 					<Route
 						path={ROUTES.HOME}
 						element={
-							<>
-								<Home page={ROUTES.HOME} /> <Outlet />
-							</>
+							<PrivateRoute
+								redirectTo={`/${ROUTES.LOGIN}`}
+								element={
+									<>
+										<Home page={ROUTES.HOME} /> <Outlet />
+									</>
+								}
+							/>
 						}
 					/>
 					<Route
 						path={ROUTES.DIAGRAM}
 						element={
-							<>
-								<Home page={ROUTES.DIAGRAM} /> <Outlet />
-							</>
+							<PrivateRoute
+								redirectTo={`/${ROUTES.LOGIN}`}
+								element={
+									<>
+										<Home page={ROUTES.DIAGRAM} /> <Outlet />
+									</>
+								}
+							/>
 						}
 					/>
 					<Route
 						path={ROUTES.CURRENCY}
 						element={
-							<>
-								<Home page={ROUTES.CURRENCY} /> <Outlet />
-							</>
+							<PrivateRoute
+								redirectTo={`/${ROUTES.LOGIN}`}
+								element={
+									<>
+										<Home page={ROUTES.CURRENCY} /> <Outlet />
+									</>
+								}
+							/>
 						}
 					/>
 					<Route
@@ -139,7 +167,6 @@ export default function App() {
 					/>
 				</Route>
 			</Routes>
-
 			{isLoading && <CustomLoader />}
 		</Fragment>
 	)

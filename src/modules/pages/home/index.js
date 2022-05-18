@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Media from 'react-media'
@@ -85,7 +85,7 @@ export const Home = ({ page = ROUTES.HOME }) => {
 	const navigate = useNavigate()
 	useEffect(() => {
 		dispatch(fetchFinance())
-	}, [])
+	}, [dispatch])
 	return (
 		<>
 			{isLoggedIn && (
@@ -138,6 +138,10 @@ export const Home = ({ page = ROUTES.HOME }) => {
 					</Container>
 				</>
 			)}
+
+			{/* {(
+				<Navigate to={`/${ROUTES.LOGIN}`} />
+			)} */}
 		</>
 	)
 }

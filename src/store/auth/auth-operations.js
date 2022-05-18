@@ -1,17 +1,7 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
-
-axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
-
-const token = {
-	set(token) {
-		axios.defaults.headers.common.Authorization = `Bearer ${token}`
-	},
-	unset() {
-		axios.defaults.headers.common.Authorization = ''
-	},
-}
+import { token } from 'store'
 
 const register = createAsyncThunk('auth/signup', async (credentials) => {
 	try {

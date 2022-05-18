@@ -4,9 +4,16 @@ import { StyledLoginPage } from '../../components/formPage/formPage'
 import { StyledBlockSvg, StyledPageSvg } from '../../components/svgFormPage/svgFormPage'
 import { useSelector } from 'react-redux'
 import { authSelectors } from 'store/auth/auth-selectors'
+import { useEffect } from 'react'
+import { useNavigate, Navigate } from 'react-router-dom'
+import { ROUTES } from 'lib'
 
 export const Login = () => {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
+	const navigate = useNavigate()
+	// useEffect(() => {
+	// 	isLoggedIn && navigate(`/${ROUTES.HOME}`)
+	// }, [isLoggedIn])
 
 	return (
 		<>
@@ -21,6 +28,7 @@ export const Login = () => {
 					<FormLogin />
 				</StyledLoginPage>
 			)}
+			{/* {isLoggedIn && <Navigate to={`/${ROUTES.HOME}`} />} */}
 		</>
 	)
 }

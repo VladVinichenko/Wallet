@@ -7,7 +7,8 @@ import { ShowPasswordButton } from '../../../../modules/common/showPasswordButto
 import { LogoAuth } from 'modules/components/logo/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from '../../../../store/auth/auth-operations'
-
+import { Link } from 'react-router-dom'
+import { ROUTES } from 'lib'
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -121,9 +122,11 @@ export const FormLogin = () => {
 					</StyleIconInput>
 
 					<Button type='submit'> Log In</Button>
-					<Button color={false} type='button'>
-						Registration
-					</Button>
+					<Link to={`/${ROUTES.REGISTER}`}>
+						<Button color={false} type={'button'}>
+							Registration
+						</Button>
+					</Link>
 				</StyledFormRegistration>
 			</Formik>
 		</>
