@@ -64,7 +64,7 @@ export default function App() {
 
 	return (
 		<Fragment>
-			<Registration />
+			{/* <Registration /> */}
 
 			{isModalLogOut && (
 				<Modal>
