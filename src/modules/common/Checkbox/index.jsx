@@ -1,15 +1,14 @@
 import styled, { css } from 'styled-components'
 import { BsPlusLg } from 'react-icons/bs'
 import { FaMinus } from 'react-icons/fa'
+
 import { vars } from 'stylesheet'
-import { type } from '@testing-library/user-event/dist/type'
 import { useState } from 'react'
 
 const Container = styled.div`
 	position: relative;
-	max-width: 300px;
+	max-width: 220px;
 	margin: 0 auto;
-	margin-top: 30px;
 `
 
 const ToggleContainer = styled.div`
@@ -22,11 +21,6 @@ const FormForButton = styled.form`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
-	/* .input:checked ~ .icon {
-		left: 120px;
-		background: red;
-	} */
 `
 
 const Input = styled.input.attrs({ type: 'checkbox', name: 'lasc' })``
@@ -84,16 +78,16 @@ const ToggleIcon = styled.div`
 	height: 44px;
 	background-color: ${vars.color.font.positive};
 	background: ${vars.color.font.negative};
-	left: 107px;
+	left: 104px;
 	border-radius: 50%;
 	transition: all ${vars.animation.duration};
 	z-index: 4;
-	box-shadow: 0px 6px 15px rgba(255, 101, 150, 0.5);
+	box-shadow: ${vars.boxShadow.secondCheckbox};
 
 	${Input}:checked ~ & {
-		left: 67px;
+		left: 64px;
 		background: ${vars.color.font.positive};
-		box-shadow: 0px 6px 15px rgba(36, 204, 167, 0.5);
+		box-shadow: ${vars.boxShadow.firstCheckbox};
 	}
 
 	svg {
@@ -104,9 +98,9 @@ const ToggleIcon = styled.div`
 `
 
 export const Checkbox = () => {
-	const [plus, setPlus] = useState(true)
+	const [icon, setIcon] = useState(true)
 
-	const check = (e) => {
+	const onCheck = (e) => {
 		const block = document.querySelector('#checkbox')
 		setPlus(block.checked)
 	}
@@ -116,9 +110,9 @@ export const Checkbox = () => {
 			<ToggleContainer>
 				<FormForButton>
 					<Label>
-						<Input id='checkbox' value='income' data='check' onClick={check} defaultChecked aria-label='transaction' />
+						<Input id='checkbox' onClick={onCheck} defaultChecked aria-label='transaction' />
 						<LabelText>Доход</LabelText>
-						<ToggleIcon>{plus ? <BsPlusLg /> : <FaMinus />}</ToggleIcon>
+						<ToggleIcon>{icon ? <BsPlusLg /> : <FaMinus />}</ToggleIcon>
 						<ToggleField />
 						<LabelText $mode='expenses'>Расход</LabelText>
 					</Label>

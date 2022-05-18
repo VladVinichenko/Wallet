@@ -62,7 +62,7 @@ export default function App() {
 				</Modal>
 			)}
 			<Header />
-			<Checkbox />
+
 			{/* <OpenMenu /> */}
 
 			{/* <Navigation></Navigation>
