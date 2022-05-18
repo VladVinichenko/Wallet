@@ -7,16 +7,18 @@ import { ShowPasswordButton } from '../../../../modules/common/showPasswordButto
 import { LogoAuth } from 'modules/components/logo/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from '../../../../store/auth/auth-operations'
-
+import { Link } from 'react-router-dom'
+import { ROUTES } from 'lib'
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 38px 20px 36px 20px;
+	padding: 107px 20px 107px 20px;
 	margin-left: auto;
 	margin-right: auto;
 	color: #e0e0e0;
+	background-color: #ffffff;
 
 	@media screen and (max-width: 767px) {
 		max-width: 320px;
@@ -121,9 +123,11 @@ export const FormLogin = () => {
 					</StyleIconInput>
 
 					<Button type='submit'> Log In</Button>
-					<Button color={false} type='button'>
-						Registration
-					</Button>
+					<Link to={`/${ROUTES.REGISTER}`}>
+						<Button color={false} type={'button'}>
+							Registration
+						</Button>
+					</Link>
 				</StyledFormRegistration>
 			</Formik>
 		</>

@@ -5,7 +5,7 @@ export const StyledPageSvg = styled.svg`
 	height: 250px;
 	margin-right: 40px;
 	@media screen and (min-width: 1280px) {
-		margin-right: 0;
+		margin-right: 145px;
 		width: 435px;
 		height: 419px;
 	}

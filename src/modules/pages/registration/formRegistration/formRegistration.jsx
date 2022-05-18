@@ -10,6 +10,8 @@ import { ShowPasswordButton } from '../../../../modules/common/showPasswordButto
 import authOperations from '../../../../store/auth/auth-operations'
 import { ValidationSchema } from '../../../../modules/common/validationSchema'
 import { ValidationPassIndicator } from '../../../../modules/components/validationPassword/validationIndicator'
+import { Link } from 'react-router-dom'
+import { ROUTES } from 'lib'
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -20,6 +22,7 @@ const StyledFormRegistration = styled(Form)`
 	margin-right: auto;
 	width: 320px;
 	color: #e0e0e0;
+	background-color: #ffffff;
 
 	@media screen and (min-width: 768px) {
 		width: 530px;
@@ -171,10 +174,11 @@ export const FormRegistration = () => {
 					<Button type='submit' disabled={isSubmitting}>
 						Registration
 					</Button>
-
-					<Button color={false} type={'button'}>
-						Log In
-					</Button>
+					<Link to={`/${ROUTES.LOGIN}`}>
+						<Button color={false} type={'button'}>
+							Log In
+						</Button>
+					</Link>
 				</StyledFormRegistration>
 			)}
 		</Formik>

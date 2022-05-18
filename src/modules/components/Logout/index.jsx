@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { setIsModalLogoutOpen } from 'store'
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
+import authOperations from '../../../store/auth/auth-operations'
 
 const Form = styled.div`
 	max-width: 100vh;
@@ -56,9 +57,9 @@ const Buttons = styled.div`
 	width: 100%;
 	align-items: center;
 
-    button:first-child {
-        margin-bottom: 20px;vvvvvvv
-    }
+	button:first-child {
+		margin-bottom: 20px;
+	}
 `
 
 // const Button = styled.button`
@@ -93,8 +94,12 @@ const Buttons = styled.div`
 //     }
 // `
 
-export const Logout = ({ onLogout }) => {
+export const Logout = () => {
 	const dispatch = useDispatch()
+	const logout = () => {
+		dispatch(authOperations.logOut())
+		dispatch(setIsModalLogoutOpen())
+	}
 
 	const name = 'Bayraktar'
 
@@ -112,7 +117,7 @@ export const Logout = ({ onLogout }) => {
 					>
 						No, thanks
 					</Button>
-					<Button onClickButton={onLogout} type='button' title={'Logout'} label={'Logout'} color={false}>
+					<Button onClickButton={logout} type='button' title={'Logout'} label={'Logout'} color={false}>
 						Yes, I want to logout
 					</Button>
 				</Buttons>
