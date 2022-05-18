@@ -5,6 +5,7 @@ import { Routes, Route, Link, NavLink, Outlet, Navigate } from 'react-router-dom
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import authOperations from '../src/store/auth/auth-operations'
+import { fetchTotalFinance } from 'store'
 
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
@@ -53,6 +54,7 @@ export default function App() {
 	useEffect(() => {
 		isLoggedIn && dispatch(fetchCategories())
 		isLoggedIn && dispatch(authOperations.fetchCurrentUser())
+		isLoggedIn && dispatch(fetchTotalFinance())
 	}, [isLoggedIn])
 
 	// useEffect(() => {
