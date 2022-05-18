@@ -10,7 +10,7 @@ import currency_desk from 'assets/images/currency/currency_desk.svg'
 
 const Loader = styled.div`
 	position: relative;
-	z-index: 1500;
+	z-index: 1;
 	display: flex;
 	justify-content: center;
 	top: 50%;
@@ -30,8 +30,6 @@ const Currenc = styled.div`
 	position: relative;
 	width: 280px;
 	height: 174px;
-	/* margin: 0 auto; */
-	/* margin-top: 30px; */
 	border-radius: ${vars.borderRadius.seconary};
 	color: ${vars.color.background.primary};
 	background-color: ${vars.color.background.card};
