@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Media from 'react-media'
 // import { windowSize } from 'lib/hooks/windowSize'
 import styled from 'styled-components'
@@ -14,6 +14,7 @@ import { ROUTES } from 'lib'
 // import { ButtonAddTransactios } from 'modules/common'
 import { fetchFinance } from 'store'
 import { ChartSection } from '../../components/diagramSection'
+import { authSelectors } from '../../../store/auth/auth-selectors'
 
 const Background = styled.div`
 	position: fixed;
@@ -77,6 +78,7 @@ const BalanceWrapper = styled.div`
 	}
 `
 export const Home = ({ page = ROUTES.HOME }) => {
+	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const dispatch = useDispatch()
 	// const checkWindowSize = windowSize()
 	const location = useLocation()
@@ -86,52 +88,56 @@ export const Home = ({ page = ROUTES.HOME }) => {
 	}, [])
 	return (
 		<>
-			<Background />
-			<Container>
-				<Wrapper>
-					<Media
-						queries={{
-							mobileScreen: '(max-width: 767px)',
-							anotherScreen: '(min-width: 768px)',
-						}}
-					>
-						{(matches) => {
-							if (matches.anotherScreen === true && location.pathname === `/${ROUTES.CURRENCY}`) {
-								navigate(`/${ROUTES.HOME}`)
-							}
-							return (
-								<>
-									{matches.mobileScreen && (
+			{isLoggedIn && (
+				<>
+					<Background />
+					<Container>
+						<Wrapper>
+							<Media
+								queries={{
+									mobileScreen: '(max-width: 767px)',
+									anotherScreen: '(min-width: 768px)',
+								}}
+							>
+								{(matches) => {
+									if (matches.anotherScreen === true && location.pathname === `/${ROUTES.CURRENCY}`) {
+										navigate(`/${ROUTES.HOME}`)
+									}
+									return (
 										<>
-											<Navigation />
-											<BalanceWrapper>{page === ROUTES.HOME && <Balance />}</BalanceWrapper>
-											{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
-											{page === ROUTES.DIAGRAM && <ChartSection />}
-											{page === ROUTES.CURRENCY && <Currency />}
-										</>
-									)}
-									{matches.anotherScreen && (
-										<>
-											<LeftBlock>
-												<BalanceWrapper>
+											{matches.mobileScreen && (
+												<>
 													<Navigation />
-													<Balance />
-												</BalanceWrapper>
-												<Currency />
-											</LeftBlock>
-											<DashBoardWrapper>
-												{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
-												{page === ROUTES.DIAGRAM && <ChartSection />}
-											</DashBoardWrapper>
-											{/* <ButtonAddTransactios viewport={matches} /> */}
+													<BalanceWrapper>{page === ROUTES.HOME && <Balance />}</BalanceWrapper>
+													{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+													{page === ROUTES.DIAGRAM && <ChartSection />}
+													{page === ROUTES.CURRENCY && <Currency />}
+												</>
+											)}
+											{matches.anotherScreen && (
+												<>
+													<LeftBlock>
+														<BalanceWrapper>
+															<Navigation />
+															<Balance />
+														</BalanceWrapper>
+														<Currency />
+													</LeftBlock>
+													<DashBoardWrapper>
+														{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+														{page === ROUTES.DIAGRAM && <ChartSection />}
+													</DashBoardWrapper>
+													{/* <ButtonAddTransactios viewport={matches} /> */}
+												</>
+											)}
 										</>
-									)}
-								</>
-							)
-						}}
-					</Media>
-				</Wrapper>
-			</Container>
+									)
+								}}
+							</Media>
+						</Wrapper>
+					</Container>
+				</>
+			)}
 		</>
 	)
 }

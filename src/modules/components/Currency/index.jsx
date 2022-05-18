@@ -130,7 +130,7 @@ export const Currency = () => {
 			})
 			setCurrency(filteredCurrencies)
 			localStorage.setItem('currency', JSON.stringify(filteredCurrencies))
-			localStorage.setItem('currencyTime', Date.now())
+			Storage.setItem('currencyTime', Date.now())
 		}
 		let currencyLS = JSON.parse(localStorage.getItem('currency'))
 		let currencyTime = JSON.parse(localStorage.getItem('currencyTime'))

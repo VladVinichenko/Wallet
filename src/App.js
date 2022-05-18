@@ -1,4 +1,5 @@
 import { Fragment, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 // import { OpenMenu } from 'modules'
 import { Routes, Route, Link, NavLink, Outlet, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -27,25 +28,18 @@ import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
 import { fetchCategories } from 'store'
 import { selectorsFinance } from 'store'
-// import {ChartSection } from './modules'
-// const Button = styled.button`
-// 	background: black;
-// 	height: 50px;
-// 	width: 200px;
-// 	color: yellow;
-// 	margin-bottom: 5px;
-// 	&:hover {
-// 		background: grey;
-// 	}
-// `
-// selectorsFinance
+
 export default function App() {
+	const location = useLocation()
+	const navigate = useNavigate()
+
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
 	const categories = useSelector(selectorsFinance.getCategories)
-	console.log(categories)
+	// console.log(categories)
+	console.log(isLoggedIn)
 	const dispatch = useDispatch()
 	const showModalLogout = () => {
 		dispatch(setIsModalLogoutOpen(true))
@@ -57,29 +51,28 @@ export default function App() {
 		dispatch(setIsLoading(!isLoading))
 	}
 	useEffect(() => {
+		isLoggedIn && dispatch(fetchCategories())
 		dispatch(authOperations.fetchCurrentUser())
 	}, [dispatch])
 
-	useEffect(() => dispatch(fetchCategories()), [])
+	useEffect(() => {
+		isLoggedIn ? navigate(`/${ROUTES.HOME}`) : navigate(`/${ROUTES.LOGIN}`)
+	}, [isLoggedIn])
 
 	return (
 		<Fragment>
 			{/* <Registration /> */}
-
 			{isModalLogOut && (
 				<Modal>
 					<Logout name='Bayraktar' />
 				</Modal>
 			)}
 			{isLoggedIn && <Header />}
-
-			{!isLoggedIn && <Login />}
-
+			{/* {!isLoggedIn && <Login />} */}
 			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
 			{/* <OpenMenu /> */}
 			{/* <ButtonAddTransactios /> */}
 			<Outlet />
-
 			{isModalLogOut && (
 				<Modal>
 					<Logout />
@@ -94,7 +87,23 @@ export default function App() {
 			<ToastContainer autoClose={2000} />
 			<Routes>
 				<Route>
-					<Route path='/' element={<Navigate to={ROUTES.HOME} />} />
+					<Route path='/' />
+					<Route
+						path={ROUTES.REGISTER}
+						element={
+							<>
+								<Registration /> <Outlet />
+							</>
+						}
+					/>
+					<Route
+						path={ROUTES.LOGIN}
+						element={
+							<>
+								<Login /> <Outlet />
+							</>
+						}
+					/>
 					<Route
 						path={ROUTES.HOME}
 						element={
