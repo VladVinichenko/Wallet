@@ -52,7 +52,7 @@ export default function App() {
 	}
 	useEffect(() => {
 		isLoggedIn && dispatch(fetchCategories())
-		dispatch(authOperations.fetchCurrentUser())
+		isLoggedIn && dispatch(authOperations.fetchCurrentUser())
 	}, [dispatch])
 
 	// useEffect(() => {

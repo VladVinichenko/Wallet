@@ -6,7 +6,7 @@ import { token } from 'store'
 const register = createAsyncThunk('auth/signup', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signup', credentials)
-
+		console.log(data)
 		// token.set(data.token)
 		return data
 	} catch (error) {
