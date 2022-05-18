@@ -27,7 +27,7 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Не більше 12 символів</ValidationErrorText>
 				</ValidationError>
 			)
-			.required('Required'),
+			.required('Обовязкове поле'),
 
 		password: Yup.string()
 			.min(
@@ -43,7 +43,7 @@ export const ValidationSchema = () => {
 				</ValidationError>
 			)
 
-			.required('Required'),
+			.required('Обовязкове поле'),
 
 		passwordConfirm: Yup.string()
 
@@ -54,7 +54,7 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Пароль не соответствует</ValidationErrorText>
 				</ValidationError>
 			)
-			.required('Required'),
+			.required('Обовязкове поле'),
 
 		email: Yup.string()
 			.email(
@@ -62,6 +62,6 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Invalid email address</ValidationErrorText>
 				</ValidationError>
 			)
-			.required('Required'),
+			.required('Обовязкове поле'),
 	})
 }

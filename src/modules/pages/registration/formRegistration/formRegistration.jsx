@@ -7,6 +7,7 @@ import { LogoAuth } from '../../../components/logo'
 import { Button } from '../../../../modules/common/Button/index'
 import { sprite } from '../../../../assets/images/index.js'
 import { useDispatch } from 'react-redux'
+import { ShowPasswordButton } from '../../../../modules/common/showPasswordButton/showPasswordButton'
 import authOperations from '../../../../store/auth/auth-operations'
 import { ValidationSchema } from '../../../../modules/common/validationSchema'
 import { ValidationPassIndicator } from '../../../../modules/components/validationPassword/validationIndicator'
@@ -67,13 +68,19 @@ const StyledInput = styled(Field)`
 `
 
 export const FormRegistration = () => {
-	const [password, setPassword] = useState([])
-	const [confirmPassword, setConfirmPassword] = useState([])
+	const [passwordShown, setPasswordShown] = useState(false)
+	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
+
+	const handleChowPassword = (ev) => {
+		setPasswordShown(!passwordShown)
+	}
+
+	const handleConfirmPasswordShown = () => {
+		setConfirmPasswordShown(!confirmPasswordShown)
+	}
 
 	const dispatch = useDispatch()
-	const test = () => {
-		console.log(password)
-	}
+
 	return (
 		<Formik
 			initialValues={{
@@ -97,7 +104,7 @@ export const FormRegistration = () => {
 				})
 			}}
 		>
-			{({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, isValid, dirty }) => (
+			{({ values, handleChange, isSubmitting }) => (
 				<StyledFormRegistration>
 					<LogoAuth />
 					<StyleIconInput>
@@ -105,7 +112,7 @@ export const FormRegistration = () => {
 							<use href={sprite + '#icon-e-mail'} />
 						</StyleSvgIcon>
 
-						<StyledInput id='email' type='text' name='email' placeholder='E-mail' />
+						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
 						<ErrorMessage name='email' />
 					</StyleIconInput>
 
@@ -116,14 +123,14 @@ export const FormRegistration = () => {
 
 						<StyledInput
 							id='password'
-							type='text'
+							type={passwordShown ? 'text' : 'password'}
 							name='password'
 							required
 							placeholder='Password'
 							value={values.password}
 							onChange={handleChange('password')}
 						/>
-
+						<ShowPasswordButton type={'button'} onClickButton={handleChowPassword} passwordShown={passwordShown} />
 						<ValidationPassIndicator passValue={values.password} />
 
 						<ErrorMessage name='password' />
@@ -136,13 +143,19 @@ export const FormRegistration = () => {
 
 						<StyledInput
 							id='passwordConfirm'
-							type='text'
+							type={confirmPasswordShown ? 'text' : 'password'}
 							name='passwordConfirm'
 							required
 							value={values.passwordConfirm}
 							onChange={handleChange}
 							placeholder='Подтвердите пароль'
 						/>
+						<ShowPasswordButton
+							type={'button'}
+							onClickButton={handleConfirmPasswordShown}
+							confirmPasswordShown={confirmPasswordShown}
+						/>
+
 						<ErrorMessage name='passwordConfirm' />
 					</StyleIconInput>
 

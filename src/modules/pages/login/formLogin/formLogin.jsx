@@ -76,14 +76,6 @@ export const FormLogin = ({ isShown }) => {
 	const [passwordShown, setPasswordShown] = useState(false)
 	console.log(isShown)
 
-	useEffect(() => {
-		console.log(passwordShown)
-	}, [passwordShown])
-
-	const togglePassword = () => {
-		setPasswordShown(!passwordShown)
-	}
-
 	const dispatch = useDispatch()
 
 	return (

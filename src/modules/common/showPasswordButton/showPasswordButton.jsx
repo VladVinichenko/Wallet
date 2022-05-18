@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md'
 
-const ShowPassword = styled.div`
+const ShowPassword = styled.button`
 	position: absolute;
 	top: 50%;
 	right: 10px;
@@ -46,23 +46,22 @@ const ShowSvg = styled(MdOutlineVisibility, MdOutlineVisibilityOff)`
 	transform: translate(-50%, -50%);
 `
 
-export const ShowPasswordButton = ({ passwordShown }) => {
+export const ShowPasswordButton = ({ type, onClickButton, passwordShown, confirmPasswordShown }) => {
 	const [isShown, setIsShown] = useState(false)
 
-	const handleClick = () => {
-		setIsShown(!isShown)
-		console.log(isShown)
-	}
+	console.log(passwordShown)
+	console.log(confirmPasswordShown)
 
 	return (
 		<ShowPassword
-			type='button'
-			onClick={handleClick}
-			isShown={isShown}
+			type={type}
+			onClick={onClickButton}
+			passwordShown={passwordShown}
+			confirmPasswordShown={confirmPasswordShown}
 			title={isShown ? 'Hide password' : 'Show password'}
 			arial-label={isShown ? 'Hide password' : 'Show password'}
 		>
-			{isShown ? <MdOutlineVisibility /> : <MdOutlineVisibilityOff />}
+			{confirmPasswordShown || passwordShown ? <MdOutlineVisibility /> : <MdOutlineVisibilityOff />}
 		</ShowPassword>
 	)
 }
