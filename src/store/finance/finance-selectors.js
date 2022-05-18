@@ -1,9 +1,11 @@
+import { formatNumber } from "lib";
+
 const getData = (state) => state.finance.data
-const getTotal = (state) => state.finance.totalBalance
+const getTotal = (state) => formatNumber(state.finance.totalBalance)
 const getCategories = (state) => state.finance.categories
 
-const totalOutlaySlct = state => state.finance.statistics.outlayTotal;
-const totalIncomeSlct = state => state.finance.statistics.incomeTotal;
+const totalOutlaySlct = state => formatNumber(state.finance.statistics.outlayTotal);
+const totalIncomeSlct = state => formatNumber(state.finance.statistics.incomeTotal);
 const categoriesStatisticsSlct = state => state.finance.statistics.statisticsByCategory;
 
 export const selectorsFinance = {

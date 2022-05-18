@@ -5,6 +5,7 @@ import { Routes, Route, Link, NavLink, Outlet, Navigate } from 'react-router-dom
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import authOperations from '../src/store/auth/auth-operations'
+import { fetchTotalFinance } from 'store'
 
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
@@ -28,6 +29,8 @@ import { CustomLoader } from 'modules'
 import { Navigation } from 'modules/components/Navigation'
 import { fetchCategories } from 'store'
 import { selectorsFinance } from 'store'
+import { ChartSection } from './modules'
+import { Checkbox } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
 
@@ -51,9 +54,12 @@ export default function App() {
 		dispatch(setIsLoading(!isLoading))
 	}
 	useEffect(() => {
-		isLoggedIn && dispatch(fetchCategories())
-		isLoggedIn && dispatch(authOperations.fetchCurrentUser())
-	}, [dispatch])
+		if (isLoggedIn) {
+			isLoggedIn && dispatch(fetchCategories())
+			isLoggedIn && dispatch(authOperations.fetchCurrentUser())
+			isLoggedIn && dispatch(fetchTotalFinance())
+		}
+	}, [isLoggedIn])
 
 	// useEffect(() => {
 	// !isLoggedIn && navigate(`/${ROUTES.LOGIN}`)
@@ -69,7 +75,7 @@ export default function App() {
 			)}
 			{isLoggedIn && <Header />}
 			{/* {!isLoggedIn && <Login />} */}
-			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
+			{isLoggedIn && <ButtonAddTransaction onClickButton={showModalAddTransaction} />}
 			{/* <OpenMenu /> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Outlet /> */}
@@ -167,6 +173,7 @@ export default function App() {
 					/>
 				</Route>
 			</Routes>
+
 			{isLoading && <CustomLoader />}
 		</Fragment>
 	)

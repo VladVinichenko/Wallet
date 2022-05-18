@@ -69,6 +69,8 @@ export const vars = {
 		firstLine: `0px 1px 0px rgba(255, 255, 255, 0.6)`,
 		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px rgba(255, 255, 255, 0.6)`,
 		openMenu: '0px 6px 15px rgba(0, 0, 0, 0.1)',
+		firstCheckbox: '0px 6px 15px rgba(36, 204, 167, 0.5)',
+		secondCheckbox: '0px 6px 15px rgba(255, 101, 150, 0.5);',
 	},
 	breakpoints: {
 		mobile: '320px',
