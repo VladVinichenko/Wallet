@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
-import { validate } from 'indicative/validator'
 
 import styled from 'styled-components'
 import { LogoAuth } from '../../../components/logo'
@@ -71,7 +70,7 @@ export const FormRegistration = () => {
 	const [passwordShown, setPasswordShown] = useState(false)
 	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
 
-	const handleChowPassword = (ev) => {
+	const handleChowPassword = () => {
 		setPasswordShown(!passwordShown)
 	}
 

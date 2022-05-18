@@ -8,9 +8,7 @@ const ShowPassword = styled.button`
 	position: absolute;
 	top: 50%;
 	right: 10px;
-
 	width: 36px;
-
 	color: gray;
 	background-color: transparent;
 
@@ -39,27 +37,20 @@ const ShowSvg = styled(MdOutlineVisibility, MdOutlineVisibilityOff)`
 	position: absolute;
 	top: 50%;
 	left: 50%;
-
 	width: 24px;
 	height: 24px;
-
 	transform: translate(-50%, -50%);
 `
 
 export const ShowPasswordButton = ({ type, onClickButton, passwordShown, confirmPasswordShown }) => {
-	const [isShown, setIsShown] = useState(false)
-
-	console.log(passwordShown)
-	console.log(confirmPasswordShown)
-
 	return (
 		<ShowPassword
 			type={type}
 			onClick={onClickButton}
 			passwordShown={passwordShown}
 			confirmPasswordShown={confirmPasswordShown}
-			title={isShown ? 'Hide password' : 'Show password'}
-			arial-label={isShown ? 'Hide password' : 'Show password'}
+			title={confirmPasswordShown || passwordShown ? 'Hide password' : 'Show password'}
+			arial-label={confirmPasswordShown || passwordShown ? 'Hide password' : 'Show password'}
 		>
 			{confirmPasswordShown || passwordShown ? <MdOutlineVisibility /> : <MdOutlineVisibilityOff />}
 		</ShowPassword>

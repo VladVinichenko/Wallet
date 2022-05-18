@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react'
-
+import { useState } from 'react'
 import styled from 'styled-components'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 import { sprite } from '../../../../assets/images/index.js'
 import { Button } from '../../../../modules/common/Button/index'
 import { ShowPasswordButton } from '../../../../modules/common/showPasswordButton/showPasswordButton'
@@ -18,7 +16,6 @@ const StyledFormRegistration = styled(Form)`
 	padding: 38px 20px 36px 20px;
 	margin-left: auto;
 	margin-right: auto;
-
 	color: #e0e0e0;
 
 	@media screen and (max-width: 767px) {
@@ -72,12 +69,13 @@ const StyledInput = styled(Field)`
 	}
 `
 
-export const FormLogin = ({ isShown }) => {
+export const FormLogin = () => {
 	const [passwordShown, setPasswordShown] = useState(false)
-	console.log(isShown)
 
 	const dispatch = useDispatch()
-
+	const handleChowPassword = () => {
+		setPasswordShown(!passwordShown)
+	}
 	return (
 		<>
 			<Formik
@@ -85,14 +83,8 @@ export const FormLogin = ({ isShown }) => {
 					email: '',
 					password: '',
 				}}
-				// validationSchema={Yup.object({
-				// 	password: Yup.string().min(8).required('Required'),
-				// 	email: Yup.string().email('Invalid email address').required('Required'),
-				// })}
-
 				onSubmit={(values, actions) => {
 					dispatch(authOperations.logIn(values))
-					console.log(values)
 					alert(JSON.stringify(values, null, 2))
 					actions.resetForm({
 						email: '',
@@ -123,7 +115,7 @@ export const FormLogin = ({ isShown }) => {
 							required
 							placeholder='Password'
 						/>
-						<ShowPasswordButton />
+						<ShowPasswordButton type={'button'} onClickButton={handleChowPassword} passwordShown={passwordShown} />
 
 						<ErrorMessage name='password' />
 					</StyleIconInput>
