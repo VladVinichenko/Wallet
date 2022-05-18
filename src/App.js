@@ -3,17 +3,22 @@ import { Fragment, useEffect } from 'react'
 import { Routes, Route, Link, NavLink, Outlet, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
+import authOperations from '../src/store/auth/auth-operations'
+
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
 import { Header, Home, Logout } from 'modules'
 import { Modal } from 'modules'
+import { Registration } from 'modules/pages/registration/registration'
+import { Login } from 'modules/pages/login/login'
 // import { Logo } from 'modules'
 import { ButtonAddTransaction } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
 import { setIsLoading } from 'store'
+import { authSelectors } from './store/auth/auth-selectors'
 import { AddTransaction } from 'modules'
 import { Button } from 'modules'
 // import { Currency } from 'modules'
@@ -35,6 +40,7 @@ import { selectorsFinance } from 'store'
 // `
 // selectorsFinance
 export default function App() {
+	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
@@ -50,16 +56,25 @@ export default function App() {
 	const checkLoader = () => {
 		dispatch(setIsLoading(!isLoading))
 	}
+	useEffect(() => {
+		dispatch(authOperations.fetchCurrentUser())
+	}, [dispatch])
 
 	useEffect(() => dispatch(fetchCategories()), [])
 
 	return (
 		<Fragment>
+			{/* <Registration /> */}
+
 			{isModalLogOut && (
 				<Modal>
 					<Logout name='Bayraktar' />
 				</Modal>
 			)}
+			{isLoggedIn && <Header />}
+
+			{!isLoggedIn && <Login />}
+
 			<Header />
 			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
 			{/* <OpenMenu /> */}

@@ -5,6 +5,11 @@ export const Container = styled.div`
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
+	overflow-x: hidden;
+	min-width: 320px;
+
+	@media screen and (min-width: 320px) and (max-width: 767px) {
+	min-width: ${vars.breakpoints.mobile};
 	/* overflow-x: hidden; */
 	/* min-width: ${vars.breakpoints.mobile}; */
 	@media screen and (min-width: ${vars.breakpoints.mobile}) and (max-width: ${vars.breakpoints.mobileUp}) {
