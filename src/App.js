@@ -69,7 +69,7 @@ export default function App() {
 			)}
 			{isLoggedIn && <Header />}
 			{/* {!isLoggedIn && <Login />} */}
-			<ButtonAddTransaction onClickButton={showModalAddTransaction} />
+			{isLoggedIn && <ButtonAddTransaction onClickButton={showModalAddTransaction} />}
 			{/* <OpenMenu /> */}
 			{/* <ButtonAddTransactios /> */}
 			{/* <Outlet /> */}
