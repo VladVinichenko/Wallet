@@ -53,9 +53,10 @@ export default function App() {
 	}
 	useEffect(() => {
 		if (isLoggedIn) {
-		isLoggedIn && dispatch(fetchCategories())
-		isLoggedIn && dispatch(authOperations.fetchCurrentUser())
-		isLoggedIn && dispatch(fetchTotalFinance())
+			isLoggedIn && dispatch(fetchCategories())
+			isLoggedIn && dispatch(authOperations.fetchCurrentUser())
+			isLoggedIn && dispatch(fetchTotalFinance())
+		}
 	}, [isLoggedIn])
 
 	// useEffect(() => {
