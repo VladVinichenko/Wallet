@@ -52,6 +52,7 @@ export default function App() {
 		dispatch(setIsLoading(!isLoading))
 	}
 	useEffect(() => {
+		if (isLoggedIn) {
 		isLoggedIn && dispatch(fetchCategories())
 		isLoggedIn && dispatch(authOperations.fetchCurrentUser())
 		isLoggedIn && dispatch(fetchTotalFinance())
