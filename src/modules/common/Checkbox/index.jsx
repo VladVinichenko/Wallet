@@ -3,7 +3,6 @@ import { BsPlusLg } from 'react-icons/bs'
 import { FaMinus } from 'react-icons/fa'
 import { vars } from 'stylesheet'
 import { type } from '@testing-library/user-event/dist/type'
-import s from './checkbox.module.css'
 
 const Container = styled.div`
 	position: relative;
@@ -29,7 +28,7 @@ const FormForButton = styled.form`
 	} */
 `
 
-const Input = styled.input.attrs({ type: 'radio', name: 'lasc' })``
+const Input = styled.input.attrs({ type: 'checkbox', name: 'lasc' })``
 
 const Label = styled.label`
 	position: relative;
@@ -45,17 +44,18 @@ const LabelText = styled.span`
 	font-weight: 700;
 	font-size: 16px;
 	line-height: 1.5;
+
 	${(props) => {
 		switch (props.$mode) {
 			case 'expenses':
 				return css`
-					${Input}:checked + && {
+					${Input}:not(:checked) ~ && {
 						color: ${vars.color.font.negative};
 					}
 				`
 			default:
 				return css`
-					${Input}:checked + && {
+					${Input}:checked ~ && {
 						color: ${vars.color.font.positive};
 					}
 				`
@@ -102,31 +102,23 @@ const ToggleIcon = styled.div`
 `
 
 export const Checkbox = () => {
-	const check = () => {
-		console.log('click')
-		const checked = document.querySelectorAll('[data]')
-		checked.forEach((e) => {
-			e.checked ? (e.checked = false) : (e.checked = true)
-			// !e.checked
-
-			console.log(e)
-		})
+	const check = (e) => {
+		document.querySelector('')
+		console.log(Label)
 	}
 
 	return (
 		<Container>
 			<ToggleContainer>
 				<FormForButton>
-					<Label>
-						<Input id='true' value='income' data='check' />
+					<Label onClick={check}>
+						<Input id='checkbox' value='income' data='check' />
 						<LabelText>Доход</LabelText>
-						<ToggleIcon onClick={check}>
+						<ToggleIcon>
 							<BsPlusLg />
+							<FaMinus />
 						</ToggleIcon>
-					</Label>
-					<ToggleField />
-					<Label>
-						<Input name='expenses' id='false' value='outlay' data='check' />
+						<ToggleField />
 						<LabelText $mode='expenses'>Расход</LabelText>
 					</Label>
 				</FormForButton>
