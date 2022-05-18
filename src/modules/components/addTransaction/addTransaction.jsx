@@ -5,7 +5,8 @@ import { Formik, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setCloseModal, selectorsFinance, addTransaction as zuzuzu } from 'store'
+import { setCloseModal, selectorsFinance, fetchTotalFinance, addTransaction as zuzuzu } from 'store'
+import authOperations from '../../../../src/store/auth/auth-operations'
 
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
@@ -145,24 +146,20 @@ const FormContainer = styled.div`
 `
 
 export const AddTransaction = () => {
-	const [date, setDate] = useState(Date.now()) //текущая дата
+	const [date, setDate] = useState(new Date()) //текущая дата
 	const dispatch = useDispatch()
 
 	const closeModal = () => {
 		dispatch(setCloseModal())
 	}
-	const postTransaction = () => {
-		dispatch(zuzuzu())
+	const postTransaction = (body) => {
+		dispatch(zuzuzu(body))
 	}
 
 	const categories = useSelector(selectorsFinance.getCategories)
-	console.log('categories', categories)
 
 	const handleDateChange = ({ _d: time }) => {
-		const unixTime = time.getTime()
-		// setDate(time?.getTime())
-		setDate(unixTime)
-		console.log(unixTime)
+		setDate(time)
 	}
 
 	const addTransaction = async (values) => {
@@ -172,10 +169,14 @@ export const AddTransaction = () => {
 		values = { type, ...values, date }
 		delete values.isConsumption
 
-		postTransaction()
+		try {
+			postTransaction(values)
+			dispatch(authOperations.fetchCurrentUser())
+			dispatch(fetchTotalFinance())
+		} catch (error) {
+			console.log(error.message)
+		}
 		closeModal()
-
-		console.log(values)
 
 		await new Promise((resolve) => setTimeout(resolve, 500))
 		alert(JSON.stringify(values, null, 2))
@@ -208,7 +209,7 @@ export const AddTransaction = () => {
 								</option>
 								{categories.map((category, index) => {
 									return (
-										<option value={category._id} key={index}>
+										<option value={category.name} key={index}>
 											{category.name}
 										</option>
 									)
