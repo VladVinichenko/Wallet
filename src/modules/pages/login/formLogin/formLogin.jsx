@@ -14,10 +14,11 @@ const StyledFormRegistration = styled(Form)`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 38px 20px 36px 20px;
+	padding: 107px 20px 107px 20px;
 	margin-left: auto;
 	margin-right: auto;
 	color: #e0e0e0;
+	background-color: #ffffff;
 
 	@media screen and (max-width: 767px) {
 		max-width: 320px;

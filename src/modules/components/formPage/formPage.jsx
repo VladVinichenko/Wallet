@@ -3,18 +3,25 @@ import { sprite } from '../../../assets/images/index'
 import { SvgFormPage } from '../svgFormPage/svgFormPage'
 
 export const StyledLoginPage = styled.div`
-	background: rgba(255, 255, 255, 0.4);
+	/* background: rgba(255, 255, 255, 0.4); */
+	background-color: #ffffff;
 	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	@media screen and (min-width: 768px) {
+		display: block;
+		background-color: transparent;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		overflow-y: scroll;
 	}
 
 	@media screen and (min-width: 1280px) {
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-evenly;
+		justify-content: center;
 	}
 `
 

@@ -22,6 +22,7 @@ const StyledFormRegistration = styled(Form)`
 	margin-right: auto;
 	width: 320px;
 	color: #e0e0e0;
+	background-color: #ffffff;
 
 	@media screen and (min-width: 768px) {
 		width: 530px;
