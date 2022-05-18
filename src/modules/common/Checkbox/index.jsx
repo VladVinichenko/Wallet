@@ -88,11 +88,12 @@ const ToggleIcon = styled.div`
 	border-radius: 50%;
 	transition: all ${vars.animation.duration};
 	z-index: 4;
-	box-shadow: 0px 6px 15px rgba(36, 204, 167, 0.5);
+	box-shadow: 0px 6px 15px rgba(255, 101, 150, 0.5);
 
 	${Input}:checked ~ & {
 		left: 67px;
 		background: ${vars.color.font.positive};
+		box-shadow: 0px 6px 15px rgba(36, 204, 167, 0.5);
 	}
 
 	svg {
