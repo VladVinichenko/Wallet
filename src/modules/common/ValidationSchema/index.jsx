@@ -7,8 +7,17 @@ const ValidationError = styled.div`
 	right: 30%;
 	text-align: right;
 `
+
 const ValidationErrorText = styled.p`
 	color: ${vars.color.font.negative};
+`
+
+const Required = styled.span`
+	position: absolute;
+	left: -3%;
+	top: 35%;
+	color: ${vars.color.font.negative};
+	font-weight: bold;
 `
 
 export const ValidationSchema = () => {
@@ -27,7 +36,7 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>No more than 12 characters</ValidationErrorText>
 				</ValidationError>
 			)
-			.required('Required field'),
+			.required(<Required>!</Required>),
 
 		password: Yup.string()
 			.min(
@@ -43,7 +52,7 @@ export const ValidationSchema = () => {
 				</ValidationError>
 			)
 
-			.required('Required field'),
+			.required(<Required>!</Required>),
 
 		passwordConfirm: Yup.string()
 
@@ -54,7 +63,7 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Passwords do not match</ValidationErrorText>
 				</ValidationError>
 			)
-			.required('Required field'),
+			.required(<Required>!</Required>),
 
 		email: Yup.string()
 			.email(
@@ -62,6 +71,6 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Invalid email address</ValidationErrorText>
 				</ValidationError>
 			)
-			.required('Required field'),
+			.required(<Required>!</Required>),
 	})
 }

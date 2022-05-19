@@ -32,19 +32,26 @@ export const ValidationPassIndicator = ({ passValue }) => {
 			/* Проверяем каждый символ пароля на принадлежность к тому или иному типу */
 			if (!isUpperCase && upperCase.indexOf(passValue[i]) != -1) {
 				setIsUpperCase(true)
-				setRatingUpperCase(1) // Если в пароле есть символы в верхнем регистре, то увеличиваем рейтинг сложности
-			} else if (!isLowerCase && loverCase.indexOf(passValue[i]) != -1) {
-				setIsLowerCase(true)
-				setRatingLowerCase(1) // Если в пароле есть символы в нижнем регистре, то увеличиваем рейтинг сложности
-				setRating(ratingLowerCase + ratingUpperCase + ratingNumber + ratingSpecial) // Суммируем рейтинги всех типов пароля
-			} else if (!isNumber && digits.indexOf(passValue[i]) != -1) {
-				setIsNumber(true)
-				setRatingNumber(1) // Если в пароле есть цифры, то увеличиваем рейтинг сложности
-				setRating(ratingLowerCase + ratingUpperCase + ratingNumber + ratingSpecial) // Суммируем рейтинги всех типов пароля
-			} else if (!isSpecial && specials.indexOf(passValue[i]) != -1) {
-				setIsSpecial(true)
-				setRatingSpecial(1) // Если в пароле есть спецсимволы, то увеличиваем рейтинг сложности
-			}
+				setRatingUpperCase(1)
+				return
+			} else {
+				console.log('first')
+				setIsUpperCase(false)
+				setRatingUpperCase(0)
+			} // Если в пароле есть символы в верхнем регистре, то увеличиваем рейтинг сложности
+
+			// else if (!isLowerCase && loverCase.indexOf(passValue[i]) != -1) {
+			// 	setIsLowerCase(true)
+			// 	setRatingLowerCase(1) // Если в пароле есть символы в нижнем регистре, то увеличиваем рейтинг сложности
+			// 	setRating(ratingLowerCase + ratingUpperCase + ratingNumber + ratingSpecial) // Суммируем рейтинги всех типов пароля
+			// } else if (!isNumber && digits.indexOf(passValue[i]) != -1) {
+			// 	setIsNumber(true)
+			// 	setRatingNumber(1) // Если в пароле есть цифры, то увеличиваем рейтинг сложности
+			// 	setRating(ratingLowerCase + ratingUpperCase + ratingNumber + ratingSpecial) // Суммируем рейтинги всех типов пароля
+			// } else if (!isSpecial && specials.indexOf(passValue[i]) != -1) {
+			// 	setIsSpecial(true)
+			// 	setRatingSpecial(1) // Если в пароле есть спецсимволы, то увеличиваем рейтинг сложности
+			// }
 		}
 		setRating(ratingLowerCase + ratingUpperCase + ratingNumber + ratingSpecial) // Суммируем рейтинги всех типов пароля
 	}, [passValue])
@@ -67,7 +74,7 @@ export const ValidationPassIndicator = ({ passValue }) => {
 
 			{passValue.length >= 8 && rating < 3 && <BlockCheck style={{ width: '50%', border: '2px solid #ffc727' }} />}
 
-			{passValue.length >= 8 && rating >= 3 && (
+			{passValue.length >= 16 && rating >= 3 && (
 				<BlockCheck
 					style={{ width: '100%', border: '2px solid #24CCA7', boxShadow: '0px 1px 8px rgba(36, 204, 167, 0.5' }}
 				/>

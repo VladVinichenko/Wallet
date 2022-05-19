@@ -2,14 +2,15 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { sprite } from '../../../../assets/images/index.js'
-import { Button } from '../../../../modules/common/Button/index'
-import { ShowPasswordButton } from '../../../../modules/common/showPasswordButton/showPasswordButton'
+import { Button } from '../../../common/Button/index'
+import { ShowPasswordButton } from 'modules/common/index.js'
 import { LogoAuth } from 'modules/components/logo/index.js'
 import { useDispatch } from 'react-redux'
-import authOperations from '../../../../store/auth/auth-operations'
+import authOperations from 'store/auth/auth-operations'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
 import { vars } from 'stylesheet/vars.js'
+
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -75,6 +76,7 @@ const StyledInput = styled(Field)`
 		font-weight: 400;
 		font-size: 18px;
 		line-height: 1.5;
+		margin: 0;
 		color: ${vars.color.font.third}#bdbdbd;
 	}
 `

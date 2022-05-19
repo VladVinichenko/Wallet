@@ -1,3 +1,3 @@
 export * from './home'
-export * from './login'
-export * from './registration'
+export * from '../components/Login'
+export * from '../components/Registration'

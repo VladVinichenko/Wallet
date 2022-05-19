@@ -1,10 +1,10 @@
-import { FormRegistration } from './formRegistration/formRegistration'
-import { sprite } from '../../../assets/images/index.js'
-import { StyledLoginPage } from '../../components/formPage/formPage'
-import { StyledBlockSvg, StyledPageSvg } from '../../components/svgFormPage/svgFormPage'
+import { FormRegistration } from './formRegistration'
+import { sprite } from '../../../../assets/images/index.js'
+import { StyledLoginPage } from '../../formPage/formPage'
+import { StyledBlockSvg, StyledPageSvg } from '../../svgFormPage/svgFormPage'
 import { useSelector } from 'react-redux'
 import { authSelectors } from 'store/auth/auth-selectors'
-
+import { StyledTitle } from '../../../components/svgFormPage/svgFormPage'
 export const Registration = () => {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	return (
@@ -15,7 +15,7 @@ export const Registration = () => {
 						<StyledPageSvg>
 							<use href={sprite + '#icon-register-img'} />
 						</StyledPageSvg>
-						<h1>Finance App</h1>
+						<StyledTitle>Finance App</StyledTitle>
 					</StyledBlockSvg>
 					<FormRegistration />
 				</StyledLoginPage>

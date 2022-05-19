@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { SvgFormPage } from '../svgFormPage/svgFormPage'
 import { vars } from '../../../stylesheet/vars'
+import { StyledTitle } from '../../components/svgFormPage/svgFormPage'
 
 export const StyledLoginPage = styled.section`
 	background-color: ${vars.color.background.primary};
@@ -43,12 +43,12 @@ const StyledBlockSvg = styled.div`
 		margin-right: 140px;
 	}
 `
+
 export const FormPage = ({ props }) => {
 	return (
 		<StyledLoginPage>
 			<StyledBlockSvg>
-				<SvgFormPage props={props} />
-				<h1>Finance App</h1>
+				<StyledTitle>Finance App</StyledTitle>
 			</StyledBlockSvg>
 		</StyledLoginPage>
 	)
