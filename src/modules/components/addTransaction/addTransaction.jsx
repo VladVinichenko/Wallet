@@ -163,7 +163,7 @@ export const AddTransaction = () => {
 	}
 
 	const addTransaction = async (values) => {
-		if (!values.isConsumption) values.category = 'Regular income'
+		if (!values.isConsumption) values.category = '628587f997d487932b456397'
 
 		const type = values.isConsumption ? 'outlay' : 'income'
 		values = { type, ...values, date }
@@ -177,6 +177,7 @@ export const AddTransaction = () => {
 			console.log(error.message)
 		}
 		closeModal()
+		console.log(values)
 
 		await new Promise((resolve) => setTimeout(resolve, 500))
 		alert(JSON.stringify(values, null, 2))
@@ -194,7 +195,7 @@ export const AddTransaction = () => {
 		<FormContainer className='addTransaction'>
 			<Title>Add transaction</Title>
 			<Formik
-				initialValues={{ isConsumption: true, category: '', sum: '', date, comment: '' }}
+				initialValues={{ isConsumption: true, category: '628356e997d487932b456343', sum: '', date, comment: '' }}
 				onSubmit={addTransaction}
 				validationSchema={transactionSchena}
 			>
@@ -209,7 +210,7 @@ export const AddTransaction = () => {
 								</option>
 								{categories.map((category, index) => {
 									return (
-										<option value={category.name} key={index}>
+										<option value={category._id} key={index}>
 											{category.name}
 										</option>
 									)
