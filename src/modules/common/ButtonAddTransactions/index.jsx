@@ -27,6 +27,11 @@ const Button = styled.button`
 		width: 20px;
 		height: 20px;
 		fill: ${vars.color.background.primary};
+		transition: transform 0.8s ease-in-out;
+		&:hover,
+		&:focus {
+			transform: rotate(180deg);
+		}
 	}
 `
 
