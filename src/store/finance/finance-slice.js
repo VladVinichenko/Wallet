@@ -86,9 +86,8 @@ const financeSlice = createSlice({
 		[addTransaction.pending]: (state) => {
 			state.isLoading = true
 		},
-		[addTransaction.fulfilled]: (state, action) => {
+		[addTransaction.fulfilled]: (state) => {
 			state.isLoading = false
-			state.data = action.payload
 			toast.success('Transaction added')
 		},
 		[addTransaction.rejected]: (state, action) => {
