@@ -1,6 +1,22 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
+html {
+  overflow: overlay;
+  scrollbar-width: thin;
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
 
 body {
   font-size: 16px;
