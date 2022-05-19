@@ -92,7 +92,7 @@ const Column = styled.th`
 export const DashboardTable = ({ viewport }) => {
 	const [inView, setInView] = useState(false)
 	const [page, setPage] = useState(1)
-	const dataTable = useSelector(selectorsFinance.getData)
+	const dataTable = useSelector(selectorsFinance.getFormatData)
 
 	const dispatch = useDispatch()
 

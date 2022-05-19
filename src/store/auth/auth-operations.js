@@ -6,7 +6,6 @@ import { token } from 'store'
 const register = createAsyncThunk('auth/signup', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signup', credentials)
-		console.log(data)
 		// token.set(data.token)
 		return data
 	} catch (error) {
@@ -51,7 +50,6 @@ const fetchCurrentUser = createAsyncThunk('users/current', async (_, thunkAPI) =
 	token.set(persistedToken)
 	try {
 		const { data } = await axios.get('users/current')
-		console.log(data)
 		return data
 	} catch (error) {
 		// TODO: Добавить обработку ошибки error.message
