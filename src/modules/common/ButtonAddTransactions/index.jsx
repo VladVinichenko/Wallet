@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { vars } from 'stylesheet'
 
 const Button = styled.button`
-	position: absolute;
+	position: fixed;
 	right: 20px;
 	bottom: 20px;
 	width: 44px;
@@ -16,6 +16,7 @@ const Button = styled.button`
 	background-color: ${vars.color.accent.primary};
 	border-radius: 50%;
 	filter: ${vars.filter.shadowButton};
+	z-index: 1;
 
 	@media screen and (min-width: 768px) {
 		right: 40px;
