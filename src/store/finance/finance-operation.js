@@ -18,8 +18,8 @@ export const fetchFinance = createAsyncThunk('finance', async (page = 1) => {
 export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async () => {
 	const { data } = await getTotal()
 	console.log('fetchTotalFinance', data)
-	const { balance } = data.totalFinance
-	console.log(total)
+	const { balance } = data.totalFinance[0]
+	// console.log(total)
 	return balance
 })
 
