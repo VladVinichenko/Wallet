@@ -1,6 +1,6 @@
 import { FormRegistration } from './formRegistration'
 import { sprite } from '../../../../assets/images/index.js'
-import { StyledLoginPage } from '../../formPage/formPage'
+import { StyledLoginPage } from '../../FormPage/formPage'
 import { StyledBlockSvg, StyledPageSvg } from '../../svgFormPage/svgFormPage'
 import { useSelector } from 'react-redux'
 import { authSelectors } from 'store/auth/auth-selectors'

@@ -22,16 +22,16 @@ const StyledFormRegistration = styled(Form)`
 	color: ${vars.color.accent.buttonOpenMenu};
 	background-color: ${vars.color.font.fifth};
 
-	@media screen and (max-width: 767px) {
+	@media screen and (max-width: ${vars.breakpoints.tablet}) {
 		max-width: 320px;
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		width: 533px;
 		padding: 40px 58px 66px 65px;
 		border-radius: 20px;
 	}
-	@media screen and (min-width: 1280px) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		margin-top: 136px;
 		margin-bottom: 116px;
 		margin-left: 0;
@@ -77,7 +77,7 @@ const StyledInput = styled(Field)`
 		font-size: 18px;
 		line-height: 1.5;
 		margin: 0;
-		color: ${vars.color.font.third}#bdbdbd;
+		color: ${vars.color.font.third};
 	}
 `
 

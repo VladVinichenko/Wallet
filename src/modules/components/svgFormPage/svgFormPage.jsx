@@ -4,7 +4,7 @@ export const StyledPageSvg = styled.svg`
 	width: 260px;
 	height: 250px;
 	margin-right: 40px;
-	@media screen and (min-width: 1280px) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		width: 435px;
 		height: 419px;
 		margin-right: 0;
@@ -12,7 +12,7 @@ export const StyledPageSvg = styled.svg`
 `
 export const StyledBlockSvg = styled.div`
 	display: none;
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -20,7 +20,7 @@ export const StyledBlockSvg = styled.div`
 		margin-bottom: 50px;
 	}
 
-	@media screen and (min-width: 1280px) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		flex-direction: column;
 		margin-bottom: 0;
 		margin-right: 145px;

@@ -13,6 +13,7 @@ import { ValidationPassIndicator } from '../../validationPassword/validationIndi
 
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
+
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -26,13 +27,13 @@ const StyledFormRegistration = styled(Form)`
 	color: ${vars.color.accent.buttonOpenMenu};
 	background-color: ${vars.color.background.primary};
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		width: 530px;
 		padding: 40px 58px 66px 65px;
 		border-radius: 20px;
 	}
 
-	@media screen and (min-width: 1280px) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		margin: 0;
 	}
 
@@ -146,7 +147,6 @@ export const FormRegistration = () => {
 							placeholder='Password'
 							value={values.password}
 							onChange={handleChange('password')}
-							handleBlur={handleBlur('password')}
 						/>
 						<ShowPasswordButton type={'button'} onClickButton={handleChowPassword} passwordShown={passwordShown} />
 
@@ -165,7 +165,7 @@ export const FormRegistration = () => {
 							required
 							value={values.passwordConfirm}
 							onChange={handleChange}
-							placeholder='Подтвердите пароль'
+							placeholder='Confirm password'
 						/>
 						<ShowPasswordButton
 							type={'button'}
@@ -182,7 +182,7 @@ export const FormRegistration = () => {
 							<use href={sprite + '#icon-user'} />
 						</StyleSvgIcon>
 
-						<StyledInput id='name' type='text' name='name' required placeholder='Ваше имя' />
+						<StyledInput id='name' type='text' name='name' required placeholder='Name' />
 
 						<ErrorMessage name='name' />
 					</StyleIconInput>

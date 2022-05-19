@@ -42,13 +42,13 @@ const logOut = createAsyncThunk('auth/signout', async () => {
 
 const fetchCurrentUser = createAsyncThunk('users/current', async (_, thunkAPI) => {
 	const state = thunkAPI.getState()
-	const persistedToken = state.auth.token
+	const persistedtoken = state.auth.token
 
-	if (persistedToken === null) {
+	if (persistedtoken === null) {
 		return thunkAPI.rejectWithValue()
 	}
+	token.set(persistedAssesToken)
 
-	token.set(persistedToken)
 	try {
 		const { data } = await axios.get('users/current')
 		console.log(data)
