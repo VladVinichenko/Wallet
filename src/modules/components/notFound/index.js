@@ -22,15 +22,21 @@ const StyledLink = styled(Link)`
 	}
 `
 const ImageWrapper = styled.div`
+	background-image: url(${notFoundImage});
 	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: rgba(255, 255, 255, 0.4);
+	backdrop-filter: blur(50px);
 `
 
 export const NotFound = () => {
 	return (
 		<>
-			<ImageWrapper>
-				<img src={notFoundImage} alt='page not found' width='100%' />
-			</ImageWrapper>
+			<ImageWrapper>{/* <img src={notFoundImage} alt='page not found' width='100%' /> */}</ImageWrapper>
 			<StyledLink to='/'>back home</StyledLink>
 		</>
 	)
