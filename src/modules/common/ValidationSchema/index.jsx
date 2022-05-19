@@ -4,8 +4,11 @@ import { vars } from 'stylesheet'
 const ValidationError = styled.div`
 	position: absolute;
 	bottom: -35px;
-	right: 30%;
+	right: 15%;
 	text-align: right;
+	@media (min-width: ${vars.breakpoints.tablet}) {
+		right: 30%;
+	}
 `
 
 const ValidationErrorText = styled.p`

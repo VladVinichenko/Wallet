@@ -121,7 +121,7 @@ export const ValidationPassIndicator = ({ passValue }) => {
 
 	return (
 		<>
-			{passValue.length < 6 && rating < 3 && (
+			{passValue.length < 6 && rating < 3 ? (
 				<BlockCheck
 					style={{
 						width: '10%',
@@ -129,13 +129,11 @@ export const ValidationPassIndicator = ({ passValue }) => {
 						boxShadow: 'box-shadow: 0px 1px 8px rgba(36, 204, 167, 0.5)',
 					}}
 				/>
-			)}
-
-			{passValue.length < 6 && rating >= 3 && <BlockCheck style={{ width: '50%', border: '2px solid #ffc727' }} />}
-
-			{passValue.length >= 8 && rating < 3 && <BlockCheck style={{ width: '50%', border: '2px solid #ffc727' }} />}
-
-			{passValue.length >= 8 && rating >= 3 && (
+			) : passValue.length < 6 && rating >= 3 ? (
+				<BlockCheck style={{ width: '50%', border: '2px solid #ffc727' }} />
+			) : passValue.length >= 8 && rating < 3 ? (
+				<BlockCheck style={{ width: '50%', border: '2px solid #ffc727' }} />
+			) : passValue.length >= 8 && rating > 3 ? (
 				<BlockCheck
 					style={{
 						width: '100%',
@@ -143,21 +141,17 @@ export const ValidationPassIndicator = ({ passValue }) => {
 						boxShadow: '0px 1px 8px rgba(36, 204, 167, 0.5)',
 					}}
 				/>
-			)}
-
-			{passValue.length >= 6 && rating === 1 && <BlockCheck style={{ width: '10%', border: '2px solid #FF6596' }} />}
-
-			{passValue.length >= 6 && rating > 1 && rating < 4 && (
+			) : passValue.length >= 6 && rating === 1 ? (
+				<BlockCheck style={{ width: '10%', border: '2px solid #FF6596' }} />
+			) : passValue.length >= 6 && rating > 1 && rating < 4 ? (
 				<BlockCheck
 					style={{ width: '50%', border: '2px solid #ffc727', boxShadow: '0px 1px 8px rgba(36, 204, 167, 0.5)' }}
 				/>
-			)}
-
-			{passValue.length >= 6 && rating === 4 && (
+			) : passValue.length >= 6 && rating === 4 ? (
 				<BlockCheck
 					style={{ width: '100%', border: '2px solid #24CCA7', boxShadow: '0px 1px 8px rgba(36, 204, 167, 0.5)' }}
 				/>
-			)}
+			) : null}
 		</>
 	)
 }
