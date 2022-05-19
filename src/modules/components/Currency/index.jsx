@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { RotatingLines } from 'react-loader-spinner'
+import { CustomLoader } from 'modules'
 import styled from 'styled-components'
 import fetchCourse from 'servises/fetchCourse'
 import { animation, vars } from 'stylesheet'
@@ -7,24 +7,6 @@ import { animation, vars } from 'stylesheet'
 import currency_mob from 'assets/images/currency/currency_mob.svg'
 import currency_tab from 'assets/images/currency/currency_tab.svg'
 import currency_desk from 'assets/images/currency/currency_desk.svg'
-
-const Loader = styled.div`
-	position: relative;
-	z-index: 1;
-	display: flex;
-	justify-content: center;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`
-
-export const CurrencyLoader = () => {
-	return (
-		<Loader>
-			<RotatingLines width={50} />
-		</Loader>
-	)
-}
 
 const Currenc = styled.div`
 	position: relative;
@@ -145,7 +127,7 @@ export const Currency = () => {
 	return (
 		<Currenc>
 			{currency.length === 0 ? (
-				<CurrencyLoader />
+				<CustomLoader inBlock={'absolute'} size='50' />
 			) : (
 				<table>
 					<thead>
