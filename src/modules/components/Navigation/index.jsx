@@ -32,7 +32,6 @@ const StyledLink = styled(NavLink)`
 	align-items: center;
 	box-sizing: border-box;
 
-	font-family: 'Poppins', sans-serif;
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 1.5;
