@@ -6,13 +6,11 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import authOperations from '../src/store/auth/auth-operations'
 import { fetchTotalFinance } from 'store'
-
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Header, Home, Logout } from 'modules'
-import { NotFoundPage } from 'modules'
+import { Header, Home, Logout, NotFound } from 'modules'
 import { Modal } from 'modules'
 import { Registration } from 'modules/pages/registration/registration'
 import { Login } from 'modules/pages/login/login'
@@ -167,7 +165,7 @@ export default function App() {
 						path='*'
 						element={
 							<>
-								<NotFoundPage /> <Outlet />
+								<NotFound /> <Outlet />
 							</>
 						}
 					/>
