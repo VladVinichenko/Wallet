@@ -70,6 +70,7 @@ const StyledListbox = styled('ul')(
   box-sizing: border-box;
   padding: 20px 0;
   margin: 10px 0;
+  height: 250px;
   background: ${vars.color.background.openMenu};
   border: 1px solid inherit;
   border-radius: ${vars.borderRadius.primary};
