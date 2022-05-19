@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import { sprite } from '../../../assets/images/index'
 import { SvgFormPage } from '../svgFormPage/svgFormPage'
+import { vars } from '../../../stylesheet/vars'
 
-export const StyledLoginPage = styled.div`
-	/* background: rgba(255, 255, 255, 0.4); */
-	background-color: #ffffff;
+export const StyledLoginPage = styled.section`
+	background-color: ${vars.color.background.primary};
 	height: 100vh;
 	display: flex;
 	align-items: center;
@@ -16,6 +15,8 @@ export const StyledLoginPage = styled.div`
 		flex-direction: column;
 		align-items: center;
 		overflow-y: scroll;
+		padding-top: 20px;
+		padding-bottom: 20px;
 	}
 
 	@media screen and (min-width: 1280px) {

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
-
 import styled from 'styled-components'
 import { LogoAuth } from '../../../components/logo'
 import { Button } from '../../../../modules/common/Button/index'
 import { sprite } from '../../../../assets/images/index.js'
+import { vars } from 'stylesheet'
 import { useDispatch } from 'react-redux'
 import { ShowPasswordButton } from '../../../../modules/common/showPasswordButton/showPasswordButton'
 import authOperations from '../../../../store/auth/auth-operations'
@@ -20,9 +20,10 @@ const StyledFormRegistration = styled(Form)`
 	padding: 38px 20px 36px 20px;
 	margin-left: auto;
 	margin-right: auto;
+
 	width: 320px;
-	color: #e0e0e0;
-	background-color: #ffffff;
+	color: ${vars.color.accent.buttonOpenMenu};
+	background-color: ${vars.color.background.primary};
 
 	@media screen and (min-width: 768px) {
 		width: 530px;
@@ -56,16 +57,29 @@ const StyleSvgIcon = styled.svg`
 
 const StyledInput = styled(Field)`
 	width: 100%;
-	border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 	border-top: none;
 	border-left: none;
 	border-right: none;
 	padding-bottom: 12px;
 	padding-top: 12px;
 	padding-left: 54px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 1.5;
+
 	outline: none;
 	&:-webkit-autofill {
 		transition: background-color 5000s ease-in-out 0s;
+	}
+
+	::placeholder {
+		font-style: normal;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 1.5;
+		color: ${vars.color.font.third};
 	}
 `
 
@@ -106,7 +120,7 @@ export const FormRegistration = () => {
 				})
 			}}
 		>
-			{({ values, handleChange, isSubmitting }) => (
+			{({ values, handleChange, isSubmitting, handleBlur }) => (
 				<StyledFormRegistration>
 					<LogoAuth />
 					<StyleIconInput>
@@ -131,9 +145,9 @@ export const FormRegistration = () => {
 							placeholder='Password'
 							value={values.password}
 							onChange={handleChange('password')}
+							handleBlur={handleBlur('password')}
 						/>
 						<ShowPasswordButton type={'button'} onClickButton={handleChowPassword} passwordShown={passwordShown} />
-						<ValidationPassIndicator passValue={values.password} />
 
 						<ErrorMessage name='password' />
 					</StyleIconInput>
@@ -157,6 +171,7 @@ export const FormRegistration = () => {
 							onClickButton={handleConfirmPasswordShown}
 							confirmPasswordShown={confirmPasswordShown}
 						/>
+						<ValidationPassIndicator passValue={values.password} />
 
 						<ErrorMessage name='passwordConfirm' />
 					</StyleIconInput>

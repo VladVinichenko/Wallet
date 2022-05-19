@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import authOperations from '../../../../store/auth/auth-operations'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
+import { vars } from 'stylesheet/vars.js'
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -17,8 +18,8 @@ const StyledFormRegistration = styled(Form)`
 	padding: 107px 20px 107px 20px;
 	margin-left: auto;
 	margin-right: auto;
-	color: #e0e0e0;
-	background-color: #ffffff;
+	color: ${vars.color.accent.buttonOpenMenu};
+	background-color: ${vars.color.font.fifth};
 
 	@media screen and (max-width: 767px) {
 		max-width: 320px;
@@ -58,7 +59,7 @@ const StyleSvgIcon = styled.svg`
 
 const StyledInput = styled(Field)`
 	width: 100%;
-	border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 	border-top: none;
 	border-left: none;
 	border-right: none;
@@ -68,6 +69,13 @@ const StyledInput = styled(Field)`
 	outline: none;
 	&:-webkit-autofill {
 		transition: background-color 5000s ease-in-out 0s;
+	}
+	::placeholder {
+		font-style: normal;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 1.5;
+		color: ${vars.color.font.third}#bdbdbd;
 	}
 `
 

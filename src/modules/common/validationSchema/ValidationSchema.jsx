@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 import styled from 'styled-components'
-
+import { vars } from 'stylesheet'
 const ValidationError = styled.div`
 	position: absolute;
 	bottom: -35px;
@@ -8,7 +8,7 @@ const ValidationError = styled.div`
 	text-align: right;
 `
 const ValidationErrorText = styled.p`
-	color: red;
+	color: ${vars.color.font.negative};
 `
 
 export const ValidationSchema = () => {
