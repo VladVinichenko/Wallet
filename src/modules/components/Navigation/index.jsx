@@ -115,11 +115,12 @@ const Label = styled.p`
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: contents;
+
+		font-family: 'Poppins', sans-serif;
 	}
 `
 
 export const Navigation = () => {
-	const name = 'Bayraktar Javelin'
 	return (
 		<Nav>
 			<Item>
