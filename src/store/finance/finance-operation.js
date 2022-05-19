@@ -38,8 +38,8 @@ export const getStatistics = createAsyncThunk(
 )
 
 export const addTransaction = createAsyncThunk('finance/add', async (transaction, { getState, rejectWithValue }) => {
-	const state = getState()
-	const allTransactions = state.finance.data
+	// const state = getState()
+	// const allTransactions = state.finance.data
 	try {
 		const { data } = await axios.post('finance', transaction)
 		return data
