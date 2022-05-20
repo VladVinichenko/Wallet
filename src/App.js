@@ -53,6 +53,11 @@ export default function App() {
 	const checkLoader = () => {
 		dispatch(setIsLoading(!isLoading))
 	}
+
+	useEffect(() => {
+		!isLoggedIn && dispatch(authOperations.fetchCurrentUser())
+	}, [])
+
 	useEffect(() => {
 		if (isLoggedIn) {
 			isLoggedIn && dispatch(fetchCategories())
@@ -61,13 +66,8 @@ export default function App() {
 		}
 	}, [isLoggedIn])
 
-	// useEffect(() => {
-	// !isLoggedIn && navigate(`/${ROUTES.LOGIN}`)
-	// }, [isLoggedIn])
-
 	return (
 		<Fragment>
-			{/* <Registration /> */}
 			{isModalLogOut && (
 				<Modal>
 					<Logout name='Bayraktar' />
