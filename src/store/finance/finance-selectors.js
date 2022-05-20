@@ -1,21 +1,20 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { formatNumber } from "lib";
+import { createSelector } from '@reduxjs/toolkit'
+import { formatNumber } from 'lib'
 
 const getData = (state) => state.finance.data
 const getTotal = (state) => formatNumber(state.finance.totalBalance)
 const getCategories = (state) => state.finance.categories
 
-const totalOutlaySlct = state => formatNumber(state.finance.statistics.outlayTotal);
-const totalIncomeSlct = state => formatNumber(state.finance.statistics.incomeTotal);
-const categoriesStatisticsSlct = state => state.finance.statistics.statisticsByCategory;
+const totalOutlaySlct = (state) => formatNumber(state.finance.statistics.outlayTotal)
+const totalIncomeSlct = (state) => formatNumber(state.finance.statistics.incomeTotal)
+const categoriesStatisticsSlct = (state) => state.finance.statistics.statisticsByCategory
+const getPageCount = (state) => state.finance.page
 
-const getFormatData = createSelector (
-	[getData],
-	(data)=>{ return data.map(transaction=>{
-			return {...transaction, sum: formatNumber(transaction.sum), balance: formatNumber(transaction.balance)}
-		})
-	}
-)
+const getFormatData = createSelector([getData], (data) => {
+	return data.map((transaction) => {
+		return { ...transaction, sum: formatNumber(transaction.sum), balance: formatNumber(transaction.balance) }
+	})
+})
 
 export const selectorsFinance = {
 	getData,
@@ -24,5 +23,6 @@ export const selectorsFinance = {
 	categoriesStatisticsSlct,
 	getTotal,
 	getCategories,
-	getFormatData
+	getPageCount,
+	getFormatData,
 }
