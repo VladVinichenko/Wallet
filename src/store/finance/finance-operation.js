@@ -26,7 +26,6 @@ export const getStatistics = createAsyncThunk(
 	'transactions/getStatistics',
 	async (credentials, { rejectWithValue }) => {
 		const { month, year } = credentials
-
 		try {
 			const { data } = await getStatisticsApi(month, year)
 			return data.data
