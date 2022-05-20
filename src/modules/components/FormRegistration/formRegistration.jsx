@@ -8,7 +8,7 @@ import { vars } from 'stylesheet'
 import { useDispatch } from 'react-redux'
 import { ShowPasswordButton } from '../../common/ShowPasswordButton'
 import authOperations from 'store/auth/auth-operations'
-import { ValidationSchema } from '../../common/ValidationSchema'
+import { ValidationSchema, RequiredValid } from '../../common/ValidationSchema'
 import { ValidationPassIndicator } from '../../common/validationPassword/validationIndicator'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
@@ -91,6 +91,12 @@ const Required = styled.div`
 export const FormRegistration = () => {
 	const [passwordShown, setPasswordShown] = useState(false)
 	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
+	const [valuePassword, setValuePassword] = useState([])
+	console.log(valuePassword)
+
+	const fontDots = () => {
+		return !passwordShown > 0 ? { fontFamily: 'sans-serif' } : null
+	}
 
 	const handleChowPassword = () => {
 		setPasswordShown(!passwordShown)
@@ -139,6 +145,7 @@ export const FormRegistration = () => {
 						</StyleSvgIcon>
 
 						<StyledInput
+							style={fontDots()}
 							id='password'
 							type={passwordShown ? 'text' : 'password'}
 							name='password'
@@ -166,6 +173,7 @@ export const FormRegistration = () => {
 						</StyleSvgIcon>
 
 						<StyledInput
+							style={fontDots()}
 							id='passwordConfirm'
 							type={confirmPasswordShown ? 'text' : 'password'}
 							name='passwordConfirm'
@@ -183,7 +191,7 @@ export const FormRegistration = () => {
 							onClickBtn={handleConfirmPasswordShown}
 							confirmPasswordShown={confirmPasswordShown}
 						/>
-						<ValidationPassIndicator passValue={values.password} />
+						<ValidationPassIndicator passValue={values.password} onChange={setValuePassword(values.password)} />
 						<ErrorMessage name='passwordConfirm' />
 					</StyleIconInput>
 
