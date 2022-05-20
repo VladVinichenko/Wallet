@@ -12,7 +12,7 @@ const ValidationErrorText = styled.p`
 `
 
 const RequiredValid = styled.div`
-	display: ${(props) => (props.required ? 'block' : 'none')};
+	opacity: ${(props) => (props.required ? 1 : 0)};
 	left: 35%;
 	top: -15%;
 	color: ${vars.color.font.negative};
@@ -118,7 +118,7 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Invalid email address</ValidationErrorText>
 				</ValidationError>
 			)
-			.required(<RequiredValid display={false}>Required</RequiredValid>),
+			.required(<RequiredValid opacity={false}>Required</RequiredValid>),
 
 		// <div
 		// 	style={{

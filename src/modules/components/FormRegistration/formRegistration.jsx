@@ -12,7 +12,7 @@ import { ValidationSchema } from '../../common/ValidationSchema'
 import { ValidationPassIndicator } from '../../common/validationPassword/validationIndicator'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
-
+console.log(ErrorMessage)
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
