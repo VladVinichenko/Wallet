@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { resetFinance } from 'store'
 import { toast } from 'react-toastify'
-import { token } from 'store'
+import { store, token } from 'store'
+
 
 const register = createAsyncThunk('auth/signup', async (credentials) => {
 	try {
@@ -32,10 +34,11 @@ const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 
 const logOut = createAsyncThunk('auth/signout', async () => {
 	try {
-		await axios.post('auth/signout')
+		await axios.get('auth/signout')
+		store.dispatch(resetFinance())
 		token.unset()
 	} catch (error) {
-		// TODO: Добавить обработку ошибки error.message
+		toast.error('Sorry, you can not log out')
 	}
 })
 

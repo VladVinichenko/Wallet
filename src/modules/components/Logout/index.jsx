@@ -66,8 +66,8 @@ const Buttons = styled.div`
 export const Logout = () => {
 	const dispatch = useDispatch()
 	const logout = () => {
+		dispatch(setIsModalLogoutOpen(false))
 		dispatch(authOperations.logOut())
-		dispatch(setIsModalLogoutOpen())
 	}
 
 	const name = useSelector(authSelectors.getUsername)
