@@ -51,11 +51,11 @@ const ChartSection = () => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
-  const { totalOutlaySlct, totalIncomeSlct, categoriesStatisticsSlct, getCategories } = selectorsFinance;
+  const { totalOutlaySlct, totalIncomeSlct, getCategories, getFormatcategoriesStatistics } = selectorsFinance;
   const allCategories = useSelector(getCategories);
   const totalOutlay = useSelector(totalOutlaySlct);
   const totalIncome = useSelector(totalIncomeSlct);
-  const categoriesStatistics = useSelector(categoriesStatisticsSlct);
+  const categoriesStatistics = useSelector(getFormatcategoriesStatistics);
 
   const dispatch = useDispatch()
   useEffect(() => {

@@ -17,6 +17,15 @@ const getFormatData = createSelector (
 	}
 )
 
+const getFormatcategoriesStatistics = createSelector (
+	[categoriesStatisticsSlct],
+	(data)=>{
+		return data.map(transaction=>{
+			return {...transaction, sum: formatNumber(transaction.sum)}
+		})
+	}
+)
+
 export const selectorsFinance = {
 	getData,
 	totalOutlaySlct,
@@ -24,5 +33,6 @@ export const selectorsFinance = {
 	categoriesStatisticsSlct,
 	getTotal,
 	getCategories,
-	getFormatData
+	getFormatData,
+	getFormatcategoriesStatistics
 }
