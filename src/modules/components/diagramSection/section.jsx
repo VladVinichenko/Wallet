@@ -10,9 +10,14 @@ import {selectorsFinance } from '../../../store/finance/finance-selectors'
 import Media from 'react-media';
 
 const StatisticsSection = styled.section`
-@media (min-width: ${vars.breakpoints.tablet})and(max-width:${vars.breakpoints.tabletUp}) {
-   position: relative;
 
+@media (min-width:${vars.breakpoints.tablet}) and (max-width:${vars.breakpoints.tabletUp}) {
+  /*  position: relative; */
+padding-bottom: 35px;
+}
+padding-bottom: 50px;
+@media (min-width: ${vars.breakpoints.tablet}) {
+  padding-top: 45px;
 }
 `
 const SectionTitle = styled.h2`
@@ -21,22 +26,23 @@ font-weight: 400;
 font-size: 30px;
 line-height: 45px;
 margin-bottom: 20px;
-@media (max-width: ${vars.breakpoints.mobileUp}) {
-  margin-bottom: 5px;
-} 
-@media (min-width: ${vars.breakpoints.tablet})and(max-width:${vars.breakpoints.tabletUp}) {
+
+/* @media (min-width:${vars.breakpoints.tablet})and (max-width:${vars.breakpoints.tabletUp}) {
    position: absolute;
    top: 0;
    left: 0;
-   transform: translateY(-50%);
-
-}
+} */
+@media (max-width: ${vars.breakpoints.mobileUp}) {
+  margin-bottom: 5px;
+} 
 `
+
 const SectionContent = styled.div`
  
 @media (min-width: ${vars.breakpoints.tablet}) {
    display: flex;
 }
+
 `
 
 
@@ -60,20 +66,24 @@ const ChartSection = () => {
   }, [month, year])
 
   const setDate = data => { 
-    setMonth(data.month);
+    setMonth(data.month.number);
     setYear(data.year)
   }
   return (
-    <section>
+    <StatisticsSection>
       <SectionTitle>Statistics</SectionTitle>     
       <SectionContent> 
-        <Chart statistics={categoriesStatistics} outlay={totalOutlay} categories={ allCategories}/>
+        {totalOutlay !== '0.00'  &&<Chart statistics={categoriesStatistics} outlay={totalOutlay} categories={ allCategories}/> }
+        
         <div>
-          <Selects setData={ setDate}/>
-          <DiagramTable outlay={totalOutlay} income={totalIncome} statistics={categoriesStatistics} categories={allCategories }/> 
+          <Selects setData={setDate} />
+          {(totalIncome!=='0.00'||totalOutlay!=='0.00')?  
+            (<DiagramTable outlay={totalOutlay} income={totalIncome} statistics={categoriesStatistics} categories={allCategories} />)
+          :(<p>Nothing was founded. Please select month and year.</p>)}  
+          
       </div>  
       </SectionContent>  
-    </section>
+    </StatisticsSection>
   );
 };
 
