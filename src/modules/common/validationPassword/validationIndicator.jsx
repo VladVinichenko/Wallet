@@ -2,15 +2,12 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 const BlockCheck = styled.div`
-	display: block;
 	position: absolute;
 	bottom: -8px;
 	border-radius: 10px;
 	transition: 1s linear;
 `
 
-// box-shadow: 0px 1px 8px rgba(36, 204, 167, 0.5);
-// box-shadow: 0px 1px 8px rgb(196 37 37 / 0.5);
 export const ValidationPassIndicator = ({ passValue }) => {
 	const [rating, setRating] = useState(0)
 
@@ -121,18 +118,22 @@ export const ValidationPassIndicator = ({ passValue }) => {
 
 	return (
 		<>
-			{passValue.length < 6 && rating < 3 ? (
+			{passValue.length > 0 && rating < 3 ? (
 				<BlockCheck
 					style={{
 						width: '10%',
 						border: '2px solid #e7140d',
-						boxShadow: 'box-shadow: 0px 1px 8px rgba(36, 204, 167, 0.5)',
+						boxShadow: '0px 1px 8px rgba(208, 49, 44, 0.5)',
 					}}
 				/>
 			) : passValue.length < 6 && rating >= 3 ? (
-				<BlockCheck style={{ width: '50%', border: '2px solid #ffc727' }} />
+				<BlockCheck
+					style={{ width: '50%', border: '2px solid #ffc727', boxShadow: '0px 1px 8px rgba(255, 202, 51, 0.5)' }}
+				/>
 			) : passValue.length >= 8 && rating < 3 ? (
-				<BlockCheck style={{ width: '50%', border: '2px solid #ffc727' }} />
+				<BlockCheck
+					style={{ width: '50%', border: '2px solid #ffc727', boxShadow: '0px 1px 8px rgba(255, 202, 51, 0.5)' }}
+				/>
 			) : passValue.length >= 8 && rating > 3 ? (
 				<BlockCheck
 					style={{
@@ -142,10 +143,12 @@ export const ValidationPassIndicator = ({ passValue }) => {
 					}}
 				/>
 			) : passValue.length >= 6 && rating === 1 ? (
-				<BlockCheck style={{ width: '10%', border: '2px solid #FF6596' }} />
+				<BlockCheck
+					style={{ width: '10%', border: '2px solid #FF6596', boxShadow: '0px 1px 8px rgba(208, 49, 44, 0.5)' }}
+				/>
 			) : passValue.length >= 6 && rating > 1 && rating < 4 ? (
 				<BlockCheck
-					style={{ width: '50%', border: '2px solid #ffc727', boxShadow: '0px 1px 8px rgba(36, 204, 167, 0.5)' }}
+					style={{ width: '50%', border: '2px solid #ffc727', boxShadow: '0px 1px 8px rgba(255, 202, 51, 0.5)' }}
 				/>
 			) : passValue.length >= 6 && rating === 4 ? (
 				<BlockCheck

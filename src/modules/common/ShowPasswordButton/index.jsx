@@ -13,6 +13,7 @@ const ShowPassword = styled.button`
 	width: 36px;
 	height: 36px;
 	color: gray;
+	margin-bottom: 0;
 
 	background-color: transparent;
 
@@ -53,11 +54,11 @@ const VisibilityOff = styled(MdOutlineVisibilityOff)`
 	transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 `
 
-export const ShowPasswordButton = ({ type, onClickButton, passwordShown, confirmPasswordShown }) => {
+export const ShowPasswordButton = ({ type, onClickBtn, passwordShown, confirmPasswordShown }) => {
 	return (
 		<ShowPassword
 			type={type}
-			onClick={onClickButton}
+			onClick={onClickBtn}
 			passwordShown={passwordShown}
 			confirmPasswordShown={confirmPasswordShown}
 			title={confirmPasswordShown || passwordShown ? 'Hide password' : 'Show password'}

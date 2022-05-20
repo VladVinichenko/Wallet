@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
-import { sprite } from '../../../../assets/images/index.js'
-import { Button } from '../../../common/Button/index'
-import { ShowPasswordButton } from 'modules/common/index.js'
+import { sprite } from '../../../assets/images/index.js'
+import { Button } from '../../common/Button/index'
+import { ShowPasswordButton } from 'modules/common'
 import { LogoAuth } from 'modules/components/logo/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from 'store/auth/auth-operations'
@@ -36,10 +36,6 @@ const StyledFormRegistration = styled(Form)`
 		margin-bottom: 116px;
 		margin-left: 0;
 		margin-right: 0;
-	}
-
-	button:not(:last-child) {
-		margin-bottom: 20px;
 	}
 `
 
@@ -85,61 +81,67 @@ export const FormLogin = () => {
 	const [passwordShown, setPasswordShown] = useState(false)
 
 	const dispatch = useDispatch()
+
 	const handleChowPassword = () => {
 		setPasswordShown(!passwordShown)
 	}
 	return (
-		<>
-			<Formik
-				initialValues={{
+		<Formik
+			initialValues={{
+				email: '',
+				password: '',
+			}}
+			onSubmit={(values, actions) => {
+				dispatch(authOperations.logIn(values))
+				actions.resetForm({
 					email: '',
 					password: '',
-				}}
-				onSubmit={(values, actions) => {
-					dispatch(authOperations.logIn(values))
-					alert(JSON.stringify(values, null, 2))
-					actions.resetForm({
-						email: '',
-						password: '',
-					})
-				}}
-			>
-				<StyledFormRegistration>
-					<LogoAuth />
+				})
+			}}
+		>
+			<StyledFormRegistration>
+				<LogoAuth />
 
-					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
-							<use href={sprite + '#icon-e-mail'} />
-						</StyleSvgIcon>
-						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
-						<ErrorMessage name='email' />
-					</StyleIconInput>
+				<StyleIconInput>
+					<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
+						<use href={sprite + '#icon-e-mail'} />
+					</StyleSvgIcon>
+					<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
+					<ErrorMessage name='email' />
+				</StyleIconInput>
 
-					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
-							<use href={sprite + '#icon-password'} />
-						</StyleSvgIcon>
-						<StyledInput
-							id='password'
-							type={passwordShown ? 'text' : 'password'}
-							name='password'
-							aria-label='Password'
-							required
-							placeholder='Password'
-						/>
-						<ShowPasswordButton type={'button'} onClickButton={handleChowPassword} passwordShown={passwordShown} />
+				<StyleIconInput>
+					<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
+						<use href={sprite + '#icon-password'} />
+					</StyleSvgIcon>
 
-						<ErrorMessage name='password' />
-					</StyleIconInput>
+					<StyledInput
+						id='password'
+						type={passwordShown ? 'text' : 'password'}
+						name='password'
+						aria-label='Password'
+						required
+						placeholder='Password'
+					/>
+					<ShowPasswordButton
+						onClick={(el) => {
+							el.preventDefault()
+						}}
+						type={'button'}
+						onClickButton={handleChowPassword}
+						passwordShown={passwordShown}
+					/>
 
-					<Button type='submit'> Log In</Button>
-					<Link to={`/${ROUTES.REGISTER}`}>
-						<Button color={false} type={'button'}>
-							Registration
-						</Button>
-					</Link>
-				</StyledFormRegistration>
-			</Formik>
-		</>
+					<ErrorMessage name='password' />
+				</StyleIconInput>
+
+				<Button type='submit'> Log In</Button>
+				<Link to={`/${ROUTES.REGISTER}`}>
+					<Button color={false} type={'button'}>
+						Registration
+					</Button>
+				</Link>
+			</StyledFormRegistration>
+		</Formik>
 	)
 }

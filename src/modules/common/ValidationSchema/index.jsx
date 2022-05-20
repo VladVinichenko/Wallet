@@ -4,23 +4,25 @@ import { vars } from 'stylesheet'
 const ValidationError = styled.div`
 	position: absolute;
 	bottom: -35px;
-	right: 15%;
+	right: 30%;
 	text-align: right;
-	@media (min-width: ${vars.breakpoints.tablet}) {
-		right: 30%;
-	}
 `
-
 const ValidationErrorText = styled.p`
 	color: ${vars.color.font.negative};
 `
 
-const Required = styled.span`
-	position: absolute;
-	left: -3%;
-	top: 35%;
+const RequiredValid = styled.div`
+	display: ${(props) => (props.required ? 'block' : 'none')};
+	left: 35%;
+	top: -15%;
 	color: ${vars.color.font.negative};
 	font-weight: bold;
+	transition: 1s linear;
+
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+		left: 73%;
+		top: 27%;
+	}
 `
 
 export const ValidationSchema = () => {
@@ -39,7 +41,21 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>No more than 12 characters</ValidationErrorText>
 				</ValidationError>
 			)
-			.required(<Required>!</Required>),
+			.required(
+				<div
+					style={{
+						position: 'absolute',
+						left: ' 35%',
+						top: '-15%',
+						color: vars.color.font.negative,
+						fontWeight: 'bold',
+						transition: '1s linear',
+						media: '(max-width: 200px) { color: green }',
+					}}
+				>
+					Required
+				</div>
+			),
 
 		password: Yup.string()
 			.min(
@@ -55,7 +71,21 @@ export const ValidationSchema = () => {
 				</ValidationError>
 			)
 
-			.required(<Required>!</Required>),
+			.required(
+				<div
+					style={{
+						position: 'absolute',
+						left: ' 35%',
+						top: '-15%',
+						color: vars.color.font.negative,
+						fontWeight: 'bold',
+						transition: '1s linear',
+						media: '(max-width: 200px) { color: green }',
+					}}
+				>
+					Required
+				</div>
+			),
 
 		passwordConfirm: Yup.string()
 
@@ -66,7 +96,21 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Passwords do not match</ValidationErrorText>
 				</ValidationError>
 			)
-			.required(<Required>!</Required>),
+			.required(
+				<div
+					style={{
+						position: 'absolute',
+						left: ' 35%',
+						top: '-15%',
+						color: vars.color.font.negative,
+						fontWeight: 'bold',
+						transition: '1s linear',
+						media: '(max-width: 200px) { color: green }',
+					}}
+				>
+					Required
+				</div>
+			),
 
 		email: Yup.string()
 			.email(
@@ -74,6 +118,20 @@ export const ValidationSchema = () => {
 					<ValidationErrorText>Invalid email address</ValidationErrorText>
 				</ValidationError>
 			)
-			.required(<Required>!</Required>),
+			.required(<RequiredValid display={false}>Required</RequiredValid>),
+
+		// <div
+		// 	style={{
+		// 		position: 'absolute',
+		// 		left: ' 35%',
+		// 		top: '-15%',
+		// 		color: vars.color.font.negative,
+		// 		fontWeight: 'bold',
+		// 		transition: '1s linear',
+		// 		media: '(max-width: 200px) { color: green }',
+		// 	}}
+		// >
+		// 	Required
+		// </div>
 	})
 }
