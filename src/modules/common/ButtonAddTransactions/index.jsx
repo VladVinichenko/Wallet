@@ -18,6 +18,13 @@ const Button = styled.button`
 	filter: ${vars.filter.shadowButton};
 	z-index: 1;
 
+	&:hover,
+	&:focus {
+		svg {
+			transform: rotate(180deg);
+		}
+	}
+
 	@media screen and (min-width: 768px) {
 		right: 40px;
 		bottom: 40px;
@@ -28,10 +35,6 @@ const Button = styled.button`
 		height: 20px;
 		fill: ${vars.color.background.primary};
 		transition: transform 0.8s ease-in-out;
-		&:hover,
-		&:focus {
-			transform: rotate(180deg);
-		}
 	}
 `
 
