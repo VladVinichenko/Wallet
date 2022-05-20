@@ -12,7 +12,6 @@ import { ValidationSchema, RequiredValid } from '../../common/ValidationSchema'
 import { ValidationPassIndicator } from '../../common/validationPassword/validationIndicator'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
-console.log(ErrorMessage)
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -35,6 +34,10 @@ const StyledFormRegistration = styled(Form)`
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		margin: 0;
 	}
+
+	button:not(:last-child) {
+		margin-bottom: 20px;
+	}
 `
 
 const StyleIconInput = styled.div`
@@ -44,6 +47,10 @@ const StyleIconInput = styled.div`
 	align-items: center;
 	&:not(:last-child) {
 		margin-bottom: 40px;
+	}
+
+	button {
+		margin-bottom: 0;
 	}
 `
 
@@ -80,22 +87,20 @@ const StyledInput = styled(Field)`
 	}
 `
 
-const Required = styled.div`
-	font-family: 'Circe';
-	font-style: normal;
-	font-weight: 400;
-	font-size: 18px;
-	line-height: 27px;
-`
-
 export const FormRegistration = () => {
 	const [passwordShown, setPasswordShown] = useState(false)
 	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
-	const [valuePassword, setValuePassword] = useState([])
-	console.log(valuePassword)
+	const [valueConfirmPassword, setValueConfirmPassword] = useState('')
+	const [valuePassword, setValuePassword] = useState('')
 
-	const fontDots = () => {
-		return !passwordShown > 0 ? { fontFamily: 'sans-serif' } : null
+	console.log(valuePassword.length)
+
+	const fontDotsPass = () => {
+		return !passwordShown && valuePassword.length > 0 ? { fontFamily: 'sans-serif' } : null
+	}
+
+	const fontDotsConfPass = () => {
+		return !passwordShown && valueConfirmPassword.length > 0 ? { fontFamily: 'sans-serif' } : null
 	}
 
 	const handleChowPassword = () => {
@@ -143,17 +148,16 @@ export const FormRegistration = () => {
 						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
 							<use href={sprite + '#icon-password'} />
 						</StyleSvgIcon>
-
 						<StyledInput
-							style={fontDots()}
+							style={fontDotsPass()}
 							id='password'
 							type={passwordShown ? 'text' : 'password'}
 							name='password'
 							required
 							placeholder='Password'
 							value={values.password}
-							onChange={handleChange('password')}
 							onBlur={handleBlur('password')}
+							onChange={handleChange('password')}
 						/>
 						<ShowPasswordButton
 							onClick={(el) => {
@@ -173,15 +177,14 @@ export const FormRegistration = () => {
 						</StyleSvgIcon>
 
 						<StyledInput
-							style={fontDots()}
+							style={fontDotsConfPass()}
 							id='passwordConfirm'
 							type={confirmPasswordShown ? 'text' : 'password'}
 							name='passwordConfirm'
 							required
 							value={values.passwordConfirm}
-							onChange={handleChange}
+							onChange={handleChange('passwordConfirm')}
 							placeholder='Confirm password'
-							onBlur={handleBlur('passwordConfirm')}
 						/>
 						<ShowPasswordButton
 							onClick={(el) => {
@@ -191,7 +194,8 @@ export const FormRegistration = () => {
 							onClickBtn={handleConfirmPasswordShown}
 							confirmPasswordShown={confirmPasswordShown}
 						/>
-						<ValidationPassIndicator passValue={values.password} onChange={setValuePassword(values.password)} />
+
+						<ValidationPassIndicator passValue={values.password} onChange={setValueConfirmPassword(values.password)} />
 						<ErrorMessage name='passwordConfirm' />
 					</StyleIconInput>
 
@@ -205,7 +209,7 @@ export const FormRegistration = () => {
 						<ErrorMessage name='name' />
 					</StyleIconInput>
 
-					<Button type='submit' disabled={isSubmitting}>
+					<Button type='submit' disabled={isSubmitting} style={{ marginButton: '20px' }}>
 						Registration
 					</Button>
 					<Link to={`/${ROUTES.LOGIN}`}>

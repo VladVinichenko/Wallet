@@ -16,7 +16,6 @@ const ShowPassword = styled.button`
 	margin-bottom: 0;
 
 	background-color: transparent;
-
 	border: 0;
 	border-radius: 50%;
 	cursor: pointer;
