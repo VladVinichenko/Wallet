@@ -62,7 +62,7 @@ const Chart = ({ categories, outlay, statistics }) => {
   ],
 };
     return(<ChartWrap><Doughnut data={data} />
-        <TotalBalance>&#x24; {outlay}</TotalBalance>
+        <TotalBalance>&#x20b4; {outlay}</TotalBalance>
       </ChartWrap>)
     
 }
