@@ -59,7 +59,6 @@ const financeSlice = createSlice({
 		[fetchTotalFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.totalBalance = action.payload
-			console.log(action.payload)
 			// toast.success('Ok')
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {

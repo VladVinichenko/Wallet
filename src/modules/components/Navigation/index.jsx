@@ -32,7 +32,6 @@ const StyledLink = styled(NavLink)`
 	align-items: center;
 	box-sizing: border-box;
 
-	font-family: 'Poppins', sans-serif;
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 1.5;
@@ -115,11 +114,12 @@ const Label = styled.p`
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: contents;
+
+		font-family: 'Poppins', sans-serif;
 	}
 `
 
 export const Navigation = () => {
-	const name = 'Bayraktar Javelin'
 	return (
 		<Nav>
 			<Item>
