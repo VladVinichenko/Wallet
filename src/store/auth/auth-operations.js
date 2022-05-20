@@ -16,14 +16,20 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 	}
 })
 
+// accessToken
+// refreshToken
+
 const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signin', credentials)
-		token.set(data.token)
+		console.log(data)
+		token.set(data.accessToken)
 		return data
 	} catch (error) {
-		if (error.response.status !== 401) {
-			toast.error('The service is temporarily unavailable')
+		if (error.response.status === 401) {
+			const state = thunkAPI.getState()
+			const refreshToken = state.auth.refreshToken
+			refreshToken && toast.error('The service is temporarily unavailable')
 		} else {
 			toast.error('Invalid login or password')
 		}
@@ -41,12 +47,12 @@ const logOut = createAsyncThunk('auth/signout', async () => {
 
 const fetchCurrentUser = createAsyncThunk('users/current', async (_, thunkAPI) => {
 	const state = thunkAPI.getState()
-	const persistedToken = state.auth.token
-	const refreshToken = state.auth.accessToken
-	if (persistedToken === null) {
+	const accessToken = state.auth.accessToken
+	// const refreshToken = state.auth.accessToken
+	if (accessToken === null) {
 		return thunkAPI.rejectWithValue()
 	}
-	token.set(persistedToken)
+	token.set(accessToken)
 
 	try {
 		const { data } = await axios.get('users/current')

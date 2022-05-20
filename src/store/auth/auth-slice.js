@@ -3,7 +3,9 @@ import authOperation from './auth-operations'
 
 const initialState = {
 	user: { email: null, name: null },
-	token: null,
+	// token: null,
+	accessToken: null,
+	refreshToken: null,
 	isLoggedIn: false,
 }
 
@@ -13,17 +15,20 @@ const authSlice = createSlice({
 	extraReducers: {
 		[authOperation.register.fulfilled](state, action) {
 			state.user = action.payload.user
-			state.token = action.payload.token
+			state.accessToken = action.payload.accessToken
+			state.refreshToken = action.payload.refreshToken
 			state.isLoggedIn = false
 		},
 		[authOperation.logIn.fulfilled](state, action) {
 			state.user = action.payload.data.user
-			state.token = action.payload.data.token
+			state.accessToken = action.payload.data.accessToken
+			state.refreshToken = action.payload.data.refreshToken
 			state.isLoggedIn = true
 		},
 		[authOperation.logOut.fulfilled](state, action) {
 			state.user = { name: null, email: null }
-			state.token = null
+			state.accessToken = null
+			state.refreshToken = null
 			state.isLoggedIn = false
 		},
 		[authOperation.fetchCurrentUser.fulfilled](state, action) {
