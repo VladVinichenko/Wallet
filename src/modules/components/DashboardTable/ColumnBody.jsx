@@ -36,11 +36,6 @@ const Title = styled.span`
 `
 
 export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLast }) => {
-	// const [typeAction, setTypeAction] = useState(false)
-	// useEffect(() => {
-	// 	type === 'outlay' ? setTypeAction(false) : setTypeAction(true)
-	// }, [type])
-
 	const formateData = (elem) => {
 		switch (elem.type) {
 			case 'UnixTime':
@@ -55,7 +50,7 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 			case 'Category':
 				return data[elem.value].name
 			case 'Comment':
-				return <EllipsisText text={`${data[elem.value]}`} length={'30'} />
+				return <EllipsisText text={`${data[elem.value]}`} length={'10'} />
 			default:
 				return data[elem.value]
 		}

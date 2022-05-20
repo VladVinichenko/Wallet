@@ -11,7 +11,7 @@ const initialState = {
 		incomeTotal: 0,
 		outlayTotal: 0,
 	},
-
+	page: 0,
 	data: [],
 	totalBalance: '',
 	categories: [],
@@ -28,6 +28,7 @@ const financeSlice = createSlice({
 		[fetchFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.data = [...state.data, ...action.payload]
+			state.page = state.page + 1
 			// toast.success('Ok')
 		},
 		[fetchFinance.rejected]: (state, action) => {
