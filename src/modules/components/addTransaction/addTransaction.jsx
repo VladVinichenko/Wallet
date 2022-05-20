@@ -10,8 +10,7 @@ import authOperations from '../../../../src/store/auth/auth-operations'
 
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
-// import { OpenMenu } from '..'
-
+import { OpenMenu } from '..'
 import { sprite } from 'assets'
 import 'react-datetime/css/react-datetime.css'
 
@@ -127,6 +126,11 @@ const FormContainer = styled.div`
 		margin-bottom: 20px;
 	}
 
+	.MuiSelectUnstyled-root {
+		margin-bottom: 40px;
+		width: 100%;
+	}
+
 	select {
 		margin-bottom: 40px;
 		padding-left: 20px;
@@ -202,8 +206,8 @@ export const AddTransaction = () => {
 				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
 						<Field type='checkbox' name='isConsumption' onChange={handleChange} />
-						{/* <OpenMenu /> */}
-						{values.isConsumption && (
+						<OpenMenu data={categories} />
+						{/* {values.isConsumption && (
 							<select name='category' onChange={handleChange}>
 								<option value='' className='select-placeholder' disabled selected hidden>
 									choose category
@@ -216,7 +220,7 @@ export const AddTransaction = () => {
 									)
 								})}
 							</select>
-						)}
+						)} */}
 						{/* {errors.category && touched.category && <div className='input-feedback'>{errors.category}</div>} */}
 						{errors.category && touched.category && errors.category}
 						<StyledGroup className='group'>

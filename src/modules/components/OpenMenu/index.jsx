@@ -75,8 +75,8 @@ const StyledListbox = styled('ul')(
   box-sizing: border-box;
   padding: 20px 0;
   margin: 10px 0;
-  width: 280px;
-  height: 352px;
+  width: 95vw;
+  // height: 352px;
   background: ${vars.color.background.openMenu};
   border: 1px solid inherit;
   border-radius: ${vars.borderRadius.primary};
@@ -88,7 +88,7 @@ const StyledListbox = styled('ul')(
 
   @media (min-width: ${vars.breakpoints.tablet}) {
     width: 394px;
-    height: 352px;
+    // height: 352px;
   }
   `
 )
