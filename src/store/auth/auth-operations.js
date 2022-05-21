@@ -8,13 +8,7 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 	console.log('registerCredentials:', credentials)
 	try {
 		const { data } = await axios.post('auth/signup', credentials)
-<<<<<<< Updated upstream
-		// token.set(data.token)
-		console.log('registerData:', data)
-		return data.data
-=======
 		return data.data && data.data
->>>>>>> Stashed changes
 	} catch (error) {
 		if (error.response.status === 409) {
 			toast.error('A user with this name already exists')
