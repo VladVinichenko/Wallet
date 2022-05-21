@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useMatch } from 'react-router-dom'
 // import { OpenMenu } from 'modules'
 import { Routes, Route, Link, NavLink, Outlet, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -35,18 +35,35 @@ import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
 
 export default function App() {
+	const dispatch = useDispatch()
 	const location = useLocation()
 
-	console.log(location.pathname)
+	const match = useMatch('/verify/:item')
+
+	let start = false
+	// start &&
+	if (match) {
+		dispatch(authOperations.fetchVerify(match.params.item))
+		start = true
+	}
+
+	// match && sendVerifyToken()
+	// console.log(location)
 
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
-	const dispatch = useDispatch()
+
 	const showModalLogout = () => {
 		dispatch(setIsModalLogoutOpen(true))
 	}
+
+	// const sendVerifyToken = () => {
+	// 	dispatch(authOperations.fetchVerify(match.params.item))
+	// 	return
+	// }
+
 	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
 	}
@@ -59,8 +76,9 @@ export default function App() {
 	}, [isLoggedIn])
 
 	// useEffect(() => {
-	// 	dispatch(authOperations.fetchRefreshToken())
-	// 	// dispatch(authOperations.fetchCurrentUser())
+	// 	function useMatch<ParamKey extends string = string>(
+	// 		pattern: PathPattern | string
+	// 	): PathMatch<ParamKey> | null;
 	// }, [])
 
 	// useEffect(() => {
@@ -98,20 +116,7 @@ export default function App() {
 			<Routes>
 				<Route>
 					<Route path='/' element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
-					<Route
-						path='verify'
-						element={
-							<PublicRoute
-								element={
-									<>
-										<Login /> <Outlet />
-									</>
-								}
-								redirectTo={`/${ROUTES.HOME}`}
-								restricted
-							/>
-						}
-					/>
+					{/* <Route path='verify/' element={<>{sendVerifyToken()}</>} /> */}
 					<Route
 						path={ROUTES.LOGIN}
 						element={

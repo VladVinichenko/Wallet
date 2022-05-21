@@ -65,12 +65,25 @@ const fetchCurrentUser = createAsyncThunk('users/current', async () => {
 		// TODO: Добавить обработку ошибки error.message
 	}
 })
+
+const fetchVerify = createAsyncThunk('auth/verify', async (verifyToken) => {
+	console.log('verifyToken:', verifyToken)
+	try {
+		const { data } = await axios.get(`auth/verify/${verifyToken}`)
+		console.log(data)
+		// return data
+	} catch (error) {
+		// TODO: Добавить обработку ошибки error.message
+	}
+})
+
 const operations = {
 	register,
 	logOut,
 	logIn,
 	fetchCurrentUser,
 	fetchRefreshToken,
+	fetchVerify,
 }
 
 export default operations
