@@ -32,9 +32,7 @@ const StyledLink = styled(NavLink)`
 	align-items: center;
 	box-sizing: border-box;
 
-	font-size: 18px;
-	font-weight: 400;
-	line-height: 1.5;
+	text-shadow: none;
 
 	cursor: pointer;
 
@@ -51,10 +49,7 @@ const StyledLink = styled(NavLink)`
 	}
 
 	&.${(props) => props.activeClassName} {
-		font-style: normal;
-		font-weight: 700;
-		font-size: 18px;
-		line-height: 1.5;
+		text-shadow: 1.5px 0 0 currentColor;
 	}
 `
 
@@ -116,6 +111,9 @@ const Label = styled.p`
 		display: contents;
 
 		font-family: 'Poppins', sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 1.5;
 	}
 `
 
