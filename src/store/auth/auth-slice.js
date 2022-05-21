@@ -18,6 +18,7 @@ const authSlice = createSlice({
 		},
 		[authOperation.fetchRefreshToken.fulfilled](state, action) {
 			state.user = action.payload.data.accessToken
+			state.user = action.payload.data.refreshToken
 			state.isLoggedIn = true
 		},
 		[authOperation.fetchRefreshToken.rejected](state, action) {
@@ -26,7 +27,6 @@ const authSlice = createSlice({
 			state.isLoggedIn = false
 		},
 		[authOperation.register.fulfilled](state, action) {
-			console.log(action.payload)
 			state.user = action.payload.user
 			state.accessToken = action.payload.accessToken
 			state.refreshToken = action.payload.refreshToken
