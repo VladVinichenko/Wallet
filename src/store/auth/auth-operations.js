@@ -22,14 +22,12 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signin', credentials)
-		console.log(data)
-		token.set(data.accessToken)
+		// console.log(data.data.accessToken)
+		token.set(data.data.accessToken)
 		return data
 	} catch (error) {
-		if (error.response.status === 401) {
-			const state = thunkAPI.getState()
-			const refreshToken = state.auth.refreshToken
-			refreshToken && toast.error('The service is temporarily unavailable')
+		if (error.response.status !== 401) {
+			toast.error('The service is temporarily unavailable')
 		} else {
 			toast.error('Invalid login or password')
 		}
@@ -38,22 +36,28 @@ const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 
 const logOut = createAsyncThunk('auth/signout', async () => {
 	try {
-		await axios.post('auth/signout')
+		await axios.get('auth/signout')
 		token.unset()
 	} catch (error) {
 		// TODO: Добавить обработку ошибки error.message
 	}
 })
 
-const fetchCurrentUser = createAsyncThunk('users/current', async (_, thunkAPI) => {
+const fetchRefreshToken = createAsyncThunk('auth/refresh-tokens', async (_, thunkAPI) => {
 	const state = thunkAPI.getState()
-	const accessToken = state.auth.accessToken
-	// const refreshToken = state.auth.accessToken
-	if (accessToken === null) {
-		return thunkAPI.rejectWithValue()
+	const refreshToken = state.auth.refreshToken
+	!refreshToken && thunkAPI.rejectWithValue() //logout
+	try {
+		const { data } = await axios.post('auth/refresh-tokens', { refreshToken })
+		token.set(data.data.accessToken)
+		return data
+	} catch (error) {
+		console.log('NO-REFRESH')
+		// TODO: Добавить обработку ошибки error.message
 	}
-	token.set(accessToken)
+})
 
+const fetchCurrentUser = createAsyncThunk('users/current', async () => {
 	try {
 		const { data } = await axios.get('users/current')
 		return data
@@ -61,12 +65,12 @@ const fetchCurrentUser = createAsyncThunk('users/current', async (_, thunkAPI) =
 		// TODO: Добавить обработку ошибки error.message
 	}
 })
-
 const operations = {
 	register,
 	logOut,
 	logIn,
 	fetchCurrentUser,
+	fetchRefreshToken,
 }
 
 export default operations

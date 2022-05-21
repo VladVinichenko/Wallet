@@ -93,7 +93,7 @@ export const FormRegistration = () => {
 	const [valueConfirmPassword, setValueConfirmPassword] = useState('')
 	const [valuePassword, setValuePassword] = useState('')
 
-	console.log(valuePassword.length)
+	// console.log(valuePassword.length)
 
 	const fontDotsPass = () => {
 		return !passwordShown && valuePassword.length > 0 ? { fontFamily: 'sans-serif' } : null

@@ -36,13 +36,13 @@ import { PublicRoute } from 'lib'
 
 export default function App() {
 	const location = useLocation()
-	const navigate = useNavigate()
+
+	console.log(location.pathname)
 
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
-	console.log(isLoggedIn)
 	const dispatch = useDispatch()
 	const showModalLogout = () => {
 		dispatch(setIsModalLogoutOpen(true))
@@ -55,16 +55,19 @@ export default function App() {
 	}
 
 	useEffect(() => {
-		!isLoggedIn && dispatch(authOperations.fetchCurrentUser())
-	}, [])
-
-	useEffect(() => {
-		if (isLoggedIn) {
-			isLoggedIn && dispatch(fetchCategories())
-			isLoggedIn && dispatch(authOperations.fetchCurrentUser())
-			isLoggedIn && dispatch(fetchTotalFinance())
-		}
+		!isLoggedIn && dispatch(authOperations.fetchRefreshToken())
 	}, [isLoggedIn])
+
+	// useEffect(() => {
+	// 	dispatch(authOperations.fetchRefreshToken())
+	// 	// dispatch(authOperations.fetchCurrentUser())
+	// }, [])
+
+	// useEffect(() => {
+	// 	isLoggedIn && dispatch(fetchCategories())
+	// 	isLoggedIn && dispatch(authOperations.fetchCurrentUser())
+	// 	isLoggedIn && dispatch(fetchTotalFinance())
+	// }, [isLoggedIn])
 
 	return (
 		<Fragment>
@@ -95,6 +98,20 @@ export default function App() {
 			<Routes>
 				<Route>
 					<Route path='/' element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
+					<Route
+						path='verify'
+						element={
+							<PublicRoute
+								element={
+									<>
+										<Login /> <Outlet />
+									</>
+								}
+								redirectTo={`/${ROUTES.HOME}`}
+								restricted
+							/>
+						}
+					/>
 					<Route
 						path={ROUTES.LOGIN}
 						element={

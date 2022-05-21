@@ -18,6 +18,7 @@ axios.defaults.baseURL = 'http://localhost:3005/api/'
 
 export const token = {
 	set(token) {
+		// console.log('token:', token)
 		axios.defaults.headers.common.Authorization = `Bearer ${token}`
 	},
 	unset() {
@@ -28,7 +29,7 @@ export const token = {
 const authPersistConfig = {
 	key: 'auth',
 	storage,
-	whitelist: ['token'],
+	whitelist: ['accessToken', 'refreshToken'],
 }
 
 const logger = null
