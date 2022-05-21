@@ -59,7 +59,7 @@ const financeSlice = createSlice({
 		//=================Balance
 		[fetchTotalFinance.pending]: (state) => {
 			state.isLoading = true
-			state.totalBalance = []
+			state.totalBalance = ''
 		},
 		[fetchTotalFinance.fulfilled]: (state, action) => {
 			console.log('fulfilled', action.payload)

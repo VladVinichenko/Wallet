@@ -175,8 +175,8 @@ export const AddTransaction = () => {
 
 		try {
 			await postTransaction(values)
-			await dispatch(authOperations.fetchCurrentUser())
 			await dispatch(resetFinance())
+			await dispatch(authOperations.fetchCurrentUser())
 
 			await dispatch(fetchFinance())
 			await dispatch(fetchTotalFinance())
