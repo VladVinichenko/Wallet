@@ -1,24 +1,25 @@
 import styled from 'styled-components'
-import { sprite } from '../../../assets/images/index'
-import { SvgFormPage } from '../svgFormPage/svgFormPage'
+import { vars } from '../../../stylesheet/vars'
+import { StyledTitle } from '../svgFormPage/svgFormPage'
 
-export const StyledLoginPage = styled.div`
-	/* background: rgba(255, 255, 255, 0.4); */
-	background-color: #ffffff;
+export const StyledLoginPage = styled.section`
+	background-color: ${vars.color.background.primary};
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: block;
 		background-color: transparent;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		overflow-y: scroll;
+		padding-top: 20px;
+		padding-bottom: 20px;
 	}
 
-	@media screen and (min-width: 1280px) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
@@ -27,7 +28,7 @@ export const StyledLoginPage = styled.div`
 
 const StyledBlockSvg = styled.div`
 	display: none;
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -35,19 +36,19 @@ const StyledBlockSvg = styled.div`
 		margin-bottom: 50px;
 	}
 
-	@media screen and (min-width: 1280px) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		flex-direction: column;
 		margin-bottom: 0;
 		margin-top: 40px;
 		margin-right: 140px;
 	}
 `
+
 export const FormPage = ({ props }) => {
 	return (
 		<StyledLoginPage>
 			<StyledBlockSvg>
-				<SvgFormPage props={props} />
-				<h1>Finance App</h1>
+				<StyledTitle>Finance App</StyledTitle>
 			</StyledBlockSvg>
 		</StyledLoginPage>
 	)

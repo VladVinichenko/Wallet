@@ -3,11 +3,10 @@ import styled from 'styled-components'
 import Datetime from 'react-datetime'
 import { Formik, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { setCloseModal, selectorsFinance, fetchTotalFinance, addTransaction as zuzuzu } from 'store'
 import authOperations from '../../../../src/store/auth/auth-operations'
-
+import { authSelectors } from 'store/auth'
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
 // import { OpenMenu } from '..'
@@ -163,6 +162,7 @@ export const AddTransaction = () => {
 	}
 
 	const addTransaction = async (values) => {
+		const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 		if (!values.isConsumption) values.category = '628587f997d487932b456397'
 
 		const type = values.isConsumption ? 'outlay' : 'income'
@@ -177,7 +177,7 @@ export const AddTransaction = () => {
 			console.log(error.message)
 		}
 		closeModal()
-		console.log(values)
+		// console.log(values)
 
 		await new Promise((resolve) => setTimeout(resolve, 500))
 		alert(JSON.stringify(values, null, 2))
