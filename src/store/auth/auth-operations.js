@@ -8,7 +8,7 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signup', credentials)
 		// token.set(data.token)
-		return data
+		return data.data
 	} catch (error) {
 		if (error.response.status === 409) {
 			toast.error('A user with this name already exists')
@@ -23,7 +23,6 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signin', credentials)
-		// console.log(data.data.accessToken)
 		token.set(data.data.accessToken)
 		return data
 	} catch (error) {
@@ -54,7 +53,7 @@ const fetchRefreshToken = createAsyncThunk('auth/refresh-tokens', async (_, thun
 		token.set(data.data.accessToken)
 		return data
 	} catch (error) {
-		console.log('NO-REFRESH')
+		console.error('NO-REFRESH')
 		// TODO: Добавить обработку ошибки error.message
 	}
 })
@@ -72,7 +71,7 @@ const fetchVerify = createAsyncThunk('auth/verify', async (verifyToken) => {
 	console.log('verifyToken:', verifyToken)
 	try {
 		const { data } = await axios.get(`auth/verify/${verifyToken}`)
-		console.log(data)
+		// console.log(data)
 		// return data
 	} catch (error) {
 		// TODO: Добавить обработку ошибки error.message
