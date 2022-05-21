@@ -66,7 +66,8 @@ export default function App() {
 			<Routes>
 				<Route>
 					<Route path='/' element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
-					<Route path={ROUTES.VERIFY} element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
+					<Route path={`${ROUTES.VERIFY}`} element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
+					<Route path={`${ROUTES.VERIFY}/:token`} element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
 					<Route
 						path={ROUTES.LOGIN}
 						element={
