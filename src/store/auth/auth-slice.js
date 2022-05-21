@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import authOperation from './auth-operations'
+import { toast } from 'react-toastify'
 
 const initialState = {
 	user: { email: null, name: null },
-	// token: null,
 	accessToken: null,
 	refreshToken: null,
 	isLoggedIn: false,
@@ -15,11 +15,9 @@ const authSlice = createSlice({
 	extraReducers: {
 		[authOperation.fetchRefreshToken.pending](state) {
 			state.isLoggedIn = false
-			// console.log('fetchRefreshToken: pending')
 		},
 		[authOperation.fetchRefreshToken.fulfilled](state, action) {
 			state.user = action.payload.data.accessToken
-			// console.log('fetchRefreshToken: fulfilled')
 			state.isLoggedIn = true
 		},
 		[authOperation.fetchRefreshToken.rejected](state, action) {
@@ -28,21 +26,20 @@ const authSlice = createSlice({
 			state.isLoggedIn = false
 		},
 		[authOperation.register.fulfilled](state, action) {
+			console.log(action.payload)
 			state.user = action.payload.user
 			state.accessToken = action.payload.accessToken
 			state.refreshToken = action.payload.refreshToken
 			state.isLoggedIn = false
+			toast.success(`Check your email for verify: ${action.payload.user.email}`)
 		},
 		[authOperation.logIn.pending](state) {
 			state.isLoggedIn = false
-			// console.log('logIn: pending')
 		},
 		[authOperation.logIn.fulfilled](state, action) {
 			state.user = action.payload.data.user
 			state.accessToken = action.payload.data.accessToken
 			state.refreshToken = action.payload.data.refreshToken
-			state.isLoggedIn = true
-			// console.log('logIn: fulfilled')
 		},
 		[authOperation.logOut.fulfilled](state, action) {
 			state.user = { name: null, email: null }
@@ -52,6 +49,9 @@ const authSlice = createSlice({
 		},
 		[authOperation.fetchCurrentUser.fulfilled](state, action) {
 			state.user = action.payload.data.user
+		},
+		[authOperation.fetchVerify.fulfilled](state, action) {
+			toast.success(`Your email has vefiried`)
 		},
 	},
 })

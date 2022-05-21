@@ -36,19 +36,11 @@ import { PublicRoute } from 'lib'
 
 export default function App() {
 	const dispatch = useDispatch()
-	const location = useLocation()
 
 	const match = useMatch('/verify/:item')
-
-	let start = false
-	// start &&
 	if (match) {
 		dispatch(authOperations.fetchVerify(match.params.item))
-		start = true
 	}
-
-	// match && sendVerifyToken()
-	// console.log(location)
 
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
@@ -67,25 +59,12 @@ export default function App() {
 	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
 	}
-	const checkLoader = () => {
-		dispatch(setIsLoading(!isLoading))
-	}
 
 	useEffect(() => {
 		!isLoggedIn && dispatch(authOperations.fetchRefreshToken())
 	}, [isLoggedIn])
 
-	// useEffect(() => {
-	// 	function useMatch<ParamKey extends string = string>(
-	// 		pattern: PathPattern | string
-	// 	): PathMatch<ParamKey> | null;
-	// }, [])
-
-	// useEffect(() => {
-	// 	isLoggedIn && dispatch(fetchCategories())
-	// 	isLoggedIn && dispatch(authOperations.fetchCurrentUser())
-	// 	isLoggedIn && dispatch(fetchTotalFinance())
-	// }, [isLoggedIn])
+	// useEffect(() => {}, [location])
 
 	return (
 		<Fragment>
@@ -95,11 +74,7 @@ export default function App() {
 				</Modal>
 			)}
 			{isLoggedIn && <Header />}
-			{/* {!isLoggedIn && <Login />} */}
 			{isLoggedIn && <ButtonAddTransaction onClickButton={showModalAddTransaction} />}
-			{/* <OpenMenu /> */}
-			{/* <ButtonAddTransactios /> */}
-			{/* <Outlet /> */}
 			{isModalLogOut && (
 				<Modal>
 					<Logout />
