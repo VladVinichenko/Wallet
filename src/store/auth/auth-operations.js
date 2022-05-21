@@ -8,6 +8,7 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signup', credentials)
 		// token.set(data.token)
+		console.log('registerData:', data)
 		return data.data
 	} catch (error) {
 		if (error.response.status === 409) {
