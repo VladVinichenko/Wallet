@@ -184,3 +184,19 @@ import { StyledEngineProvider } from '@mui/material/styles'
 // 		</>
 // 	)
 // }
+// 	return (
+// 		<>
+// 			<StyledEngineProvider injectFirst>
+// 				<CustomSelect renderValue={renderValue} value={value} onChange={setValue}>
+// 					{data.map((category) => {
+// 						return (
+// 							<StyledOption value={category.name} key={category._id}>
+// 								{category.name}
+// 							</StyledOption>
+// 						)
+// 					})}
+// 				</CustomSelect>
+// 			</StyledEngineProvider>
+// 		</>
+// 	)
+// }

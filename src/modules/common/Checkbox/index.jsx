@@ -23,12 +23,13 @@ const FormForButton = styled.form`
 	justify-content: center;
 `
 
-const Input = styled.input.attrs({ type: 'checkbox', name: 'lasc' })``
+const Input = styled.input.attrs({ type: 'checkbox', name: 'isIncome' })``
 
 const Label = styled.label`
 	position: relative;
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 `
 
 const LabelText = styled.span`
@@ -97,22 +98,22 @@ const ToggleIcon = styled.div`
 	}
 `
 
-export const Checkbox = () => {
+export const Checkbox = ({ isChecked, func }) => {
 	const [icon, setIcon] = useState(true)
 
 	const onCheck = (e) => {
 		const block = document.querySelector('#checkbox')
-		setPlus(block.checked)
+		// setPlus(block.checked)
 	}
 
 	return (
-		<Container>
+		<Container className='switchContainer'>
 			<ToggleContainer>
 				<FormForButton>
 					<Label>
-						<Input id='checkbox' onClick={onCheck} defaultChecked aria-label='transaction' />
+						<Input onClick={onCheck} onChange={func} aria-label='transaction' />
 						<LabelText>Доход</LabelText>
-						<ToggleIcon>{icon ? <BsPlusLg /> : <FaMinus />}</ToggleIcon>
+						<ToggleIcon>{isChecked ? <BsPlusLg /> : <FaMinus />}</ToggleIcon>
 						<ToggleField />
 						<LabelText $mode='expenses'>Расход</LabelText>
 					</Label>
