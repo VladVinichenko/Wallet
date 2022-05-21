@@ -12,7 +12,7 @@ const Head = styled.header`
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 1100;
+    z-index: 1600;
     max-height: 60px;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -145,7 +145,7 @@ export const Header = () => {
                             <ButtonSvg width="18" height="18">
                                 <use href={`${sprite}#icon-exit`} ></use>
                             </ButtonSvg>
-                            <ButtonLabel>Logout</ButtonLabel>
+                            <ButtonLabel>Log out</ButtonLabel>
                         </ExitButton>
                     </UserMenu>
                 </HeaderContainer>

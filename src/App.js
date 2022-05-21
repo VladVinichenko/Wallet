@@ -1,84 +1,55 @@
 import { Fragment, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-// import { OpenMenu } from 'modules'
-import { Routes, Route, Link, NavLink, Outlet, Navigate } from 'react-router-dom'
-import styled from 'styled-components'
+import { useNavigate, useMatch } from 'react-router-dom'
+import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import authOperations from '../src/store/auth/auth-operations'
-import { fetchTotalFinance } from 'store'
-
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Header, Home, Logout } from 'modules'
+import { Header, Home, Logout, NotFoundPage } from 'modules'
 import { Modal } from 'modules'
-import { Registration } from 'modules/pages/registration/registration'
-import { Login } from 'modules/pages/login/login'
-// import { Logo } from 'modules'
+import { Registration } from 'modules'
+import { Login } from 'modules'
 import { ButtonAddTransaction } from 'modules'
-import { setIsModalLogoutOpen } from 'store'
 import { setIsModalAddTransactionOpen } from 'store'
-import { setIsLoading } from 'store'
 import { authSelectors } from './store/auth/auth-selectors'
 import { AddTransaction } from 'modules'
-import { Button } from 'modules'
-// import { Currency } from 'modules'
-import { Balance } from 'modules'
 import { CustomLoader } from 'modules'
-import { Navigation } from 'modules/components/Navigation'
-import { fetchCategories } from 'store'
-import { selectorsFinance } from 'store'
-import { ChartSection } from './modules'
-import { Checkbox } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
 
 export default function App() {
-	const location = useLocation()
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
+	const match = useMatch('/verify/:item')
+	if (match) {
+		dispatch(authOperations.fetchVerify(match.params.item))
+		navigate(`/`)
+	}
 
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
-	console.log(isLoggedIn)
-	const dispatch = useDispatch()
-	const showModalLogout = () => {
-		dispatch(setIsModalLogoutOpen(true))
-	}
+
 	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
 	}
-	const checkLoader = () => {
-		dispatch(setIsLoading(!isLoading))
-	}
-	useEffect(() => {
-		if (isLoggedIn) {
-			isLoggedIn && dispatch(fetchCategories())
-			isLoggedIn && dispatch(authOperations.fetchCurrentUser())
-			isLoggedIn && dispatch(fetchTotalFinance())
-		}
-	}, [isLoggedIn])
 
-	// useEffect(() => {
-	// !isLoggedIn && navigate(`/${ROUTES.LOGIN}`)
-	// }, [isLoggedIn])
+	useEffect(() => {
+		!isLoggedIn && dispatch(authOperations.fetchRefreshToken())
+	}, [isLoggedIn])
 
 	return (
 		<Fragment>
-			{/* <Registration /> */}
 			{isModalLogOut && (
 				<Modal>
 					<Logout name='Bayraktar' />
 				</Modal>
 			)}
 			{isLoggedIn && <Header />}
-			{/* {!isLoggedIn && <Login />} */}
 			{isLoggedIn && <ButtonAddTransaction onClickButton={showModalAddTransaction} />}
-			{/* <OpenMenu /> */}
-			{/* <ButtonAddTransactios /> */}
-			{/* <Outlet /> */}
 			{isModalLogOut && (
 				<Modal>
 					<Logout />
@@ -165,10 +136,9 @@ export default function App() {
 					<Route
 						path='*'
 						element={
-							<main style={{ padding: '1rem', color: 'red' }}>
-								<p>page not found</p>
-								<Outlet />
-							</main>
+							<>
+								<NotFoundPage /> <Outlet />
+							</>
 						}
 					/>
 				</Route>

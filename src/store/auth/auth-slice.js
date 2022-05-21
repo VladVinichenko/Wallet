@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import authOperation from './auth-operations'
+import { toast } from 'react-toastify'
 
 const initialState = {
 	user: { email: null, name: null },
-	token: null,
+	accessToken: null,
+	refreshToken: null,
 	isLoggedIn: false,
 }
 
@@ -11,24 +13,47 @@ const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	extraReducers: {
+		[authOperation.fetchRefreshToken.pending](state) {
+			state.isLoggedIn = false
+		},
+		[authOperation.fetchRefreshToken.fulfilled](state, action) {
+			state.user = action.payload.data.accessToken
+			state.isLoggedIn = true
+		},
+		[authOperation.fetchRefreshToken.rejected](state, action) {
+			state.accessToken = null
+			state.refreshToken = null
+			state.isLoggedIn = false
+		},
 		[authOperation.register.fulfilled](state, action) {
+			console.log(action.payload)
 			state.user = action.payload.user
-			state.token = action.payload.token
+			state.accessToken = action.payload.accessToken
+			state.refreshToken = action.payload.refreshToken
+			state.isLoggedIn = false
+			toast.success(`Check your email for verify: ${action.payload.user.email}`)
+		},
+		[authOperation.logIn.pending](state) {
 			state.isLoggedIn = false
 		},
 		[authOperation.logIn.fulfilled](state, action) {
 			state.user = action.payload.data.user
-			state.token = action.payload.data.token
+			state.accessToken = action.payload.data.accessToken
+			state.refreshToken = action.payload.data.refreshToken
 			state.isLoggedIn = true
+			toast.success(`Welome!`)
 		},
 		[authOperation.logOut.fulfilled](state, action) {
 			state.user = { name: null, email: null }
-			state.token = null
+			state.accessToken = null
+			state.refreshToken = null
 			state.isLoggedIn = false
 		},
 		[authOperation.fetchCurrentUser.fulfilled](state, action) {
-			state.user = action.payload
-			state.isLoggedIn = true
+			state.user = action.payload.data.user
+		},
+		[authOperation.fetchVerify.fulfilled](state, action) {
+			toast.success(`Your email has vefiried`)
 		},
 	},
 })

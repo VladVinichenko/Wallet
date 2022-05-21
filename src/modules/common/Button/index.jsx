@@ -9,6 +9,7 @@ const ButtonPrimary = styled.button`
 	height: 50px;
 	align-content: center;
 	text-transform: uppercase;
+
 	color: ${vars.color.background.primary};
 	size: 18px;
 	font-weight: 400;
@@ -24,16 +25,16 @@ const ButtonAccent = styled(ButtonPrimary)`
 	background-color: ${vars.color.background.primary};
 `
 
-export const Button = ({ color = true, children, type = 'button', ariaLabel, onClickButton }) => {
+export const Button = ({ color = true, children, type = 'button', ariaLabel, onClickButton, style }) => {
 	return (
 		<>
 			{color && (
-				<ButtonPrimary type={type} aria-label={ariaLabel} onClick={onClickButton}>
+				<ButtonPrimary type={type} aria-label={ariaLabel} onClick={onClickButton} style={style}>
 					{children}
 				</ButtonPrimary>
 			)}
 			{!color && (
-				<ButtonAccent type={type} aria-label={ariaLabel} onClick={onClickButton}>
+				<ButtonAccent type={type} aria-label={ariaLabel} onClick={onClickButton} style={style}>
 					{children}
 				</ButtonAccent>
 			)}

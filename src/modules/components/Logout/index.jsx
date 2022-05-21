@@ -63,43 +63,11 @@ const Buttons = styled.div`
 	}
 `
 
-// const Button = styled.button`
-//     width: 280px;
-//     height: 50px;
-//     padding: 13px;
-
-//     font-size: 18px;
-//     text-transform: uppercase;
-
-//     color: ${vars.color.font.fourth};
-//     background-color: ${vars.color.background.primary};
-
-//     border: 1px solid ${vars.color.accent.seconary};
-//     border-radius: ${vars.borderRadius.primary};
-
-//     transition: all ${vars.animation.duration} ${vars.animation.function};
-
-//     &:not(:last-child) {
-//         margin-bottom: 20px;
-//     }
-
-//     &:hover,
-//     &:focus {
-//         color: ${vars.color.font.fifth};
-//         background-color: ${vars.color.accent.primary};
-//         border: 1px solid ${vars.color.accent.primary};
-//     }
-
-//     @media screen and (min-width: ${vars.breakpoints.tablet}) {
-//         width: 300px;
-//     }
-// `
-
 export const Logout = () => {
 	const dispatch = useDispatch()
 	const logout = () => {
+		dispatch(setIsModalLogoutOpen(false))
 		dispatch(authOperations.logOut())
-		dispatch(setIsModalLogoutOpen())
 	}
 
 	const name = useSelector(authSelectors.getUsername)
@@ -108,18 +76,24 @@ export const Logout = () => {
 		<>
 			<Form>
 				<Title>Logout</Title>
-				<Message>{<Name>{name}</Name>} are you sure you want to logout?</Message>
+				<Message>{<Name>{name}</Name>} are you sure you want to log out?</Message>
 				<Buttons>
+				<Button 
+						onClickButton={logout} 
+						type='button' 
+						title={'Logout'} 
+						label={'Logout'} 
+					>
+						Log out
+					</Button>
 					<Button
 						onClickButton={() => dispatch(setIsModalLogoutOpen())}
 						type='button'
 						title={'Do not logout'}
 						label={'Do not logout'}
+						color = {false}
 					>
-						No, thanks
-					</Button>
-					<Button onClickButton={logout} type='button' title={'Logout'} label={'Logout'} color={false}>
-						Yes, I want to logout
+						Cancel
 					</Button>
 				</Buttons>
 			</Form>

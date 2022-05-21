@@ -15,19 +15,16 @@ export const fetchFinance = createAsyncThunk('finance', async (page = 1) => {
 		return { ...elem, category: category[0] }
 	})
 })
+
 export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async () => {
 	const { data } = await getTotal()
-	console.log('fetchTotalFinance', data)
-	const { balance } = data.totalFinance[0]
-	// console.log(total)
-	return balance
+	return data.data
 })
 
 export const getStatistics = createAsyncThunk(
 	'transactions/getStatistics',
 	async (credentials, { rejectWithValue }) => {
 		const { month, year } = credentials
-
 		try {
 			const { data } = await getStatisticsApi(month, year)
 			return data.data

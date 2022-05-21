@@ -1,9 +1,8 @@
 import { nanoid } from 'nanoid'
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import styled from 'styled-components'
 import { ColumnBody } from './ColumnBody'
 import { tableColumns } from 'lib/config'
-import { Scrollbars } from 'react-custom-scrollbars-2'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectorsFinance, fetchFinance } from 'store'
 import { vars } from 'stylesheet'
@@ -45,7 +44,20 @@ const BodyTable = styled.tbody`
 	@media screen and (min-width: ${breakpoints.tablet}) {
 		width: 704px;
 		height: 285px;
-		overflow: auto;
+		overflow: overlay;
+		scrollbar-width: thin;
+		::-webkit-scrollbar {
+			width: 5px;
+		}
+		::-webkit-scrollbar-thumb {
+			background: gray;
+			border-radius: 10px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
 		tr {
 			border-bottom: ${border.firstLine};
 		}
@@ -91,32 +103,15 @@ const Column = styled.th`
 
 export const DashboardTable = ({ viewport }) => {
 	const [inView, setInView] = useState(false)
-	const [page, setPage] = useState(1)
-	const dataTable = useSelector(selectorsFinance.getData)
-
+	const dataTable = useSelector(selectorsFinance.getFormatData)
+	const page = useSelector(selectorsFinance.getPageCount)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		if (inView) {
 			dispatch(fetchFinance(page + 1))
-			setPage(page + 1)
 		}
 	}, [viewport, inView])
-
-	const BodyRowRender = () => {
-		return dataTable.map((data, idx) => (
-			<Row key={nanoid()} background={viewport.anotherScreen ? `transparent` : `${color.background.primary}`}>
-				<ColumnBody
-					data={data}
-					tableColumns={tableColumns}
-					type={data.type}
-					viewport={viewport}
-					setInView={setInView}
-					isLast={dataTable.length === idx + 1}
-				/>
-			</Row>
-		))
-	}
 
 	return useMemo(() => {
 		return (
@@ -135,13 +130,18 @@ export const DashboardTable = ({ viewport }) => {
 				)}
 
 				<BodyTable inView={inView}>
-					{viewport.anotherScreen ? (
-						<Scrollbars autoHide autoHideTimeout={1500} autoHideDuration={200}>
-							{BodyRowRender()}
-						</Scrollbars>
-					) : (
-						BodyRowRender()
-					)}
+					{dataTable.map((data, idx) => (
+						<Row key={nanoid()} background={viewport.anotherScreen ? `transparent` : `${color.background.primary}`}>
+							<ColumnBody
+								data={data}
+								tableColumns={tableColumns}
+								type={data.type}
+								viewport={viewport}
+								setInView={setInView}
+								isLast={dataTable.length === idx + 1}
+							/>
+						</Row>
+					))}
 				</BodyTable>
 			</Component>
 		)
