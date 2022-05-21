@@ -37,6 +37,10 @@ const StyledFormRegistration = styled(Form)`
 		margin-left: 0;
 		margin-right: 0;
 	}
+
+	button:not(:last-child) {
+		margin-bottom: 20px;
+	}
 `
 
 const StyleIconInput = styled.div`

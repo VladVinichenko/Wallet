@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { store, token } from 'store'
 
 const register = createAsyncThunk('auth/signup', async (credentials) => {
+	console.log(credentials)
 	try {
 		const { data } = await axios.post('auth/signup', credentials)
 		// token.set(data.token)
