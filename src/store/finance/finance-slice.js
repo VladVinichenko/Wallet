@@ -20,6 +20,12 @@ const initialState = {
 const financeSlice = createSlice({
 	name: 'finance',
 	initialState,
+	reducers: {
+        resetFinance: (state, action) => {
+            console.log('!!!!!!')
+            Object.assign(state, initialState)
+        },
+    },
 	extraReducers: {
 		//================AllFinance
 		[fetchFinance.pending]: (state) => {
@@ -99,3 +105,5 @@ const financeSlice = createSlice({
 })
 
 export default financeSlice.reducer
+export const {resetFinance}=financeSlice.actions
+

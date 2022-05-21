@@ -22,6 +22,7 @@ padding-bottom: 50px;
 `
 const SectionTitle = styled.h2`
 text-align: left;
+font-family: 'Poppins',sans-serif;;
 font-weight: 400;
 font-size: 30px;
 line-height: 45px;
@@ -51,11 +52,12 @@ const ChartSection = () => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
-  const { totalOutlaySlct, totalIncomeSlct, categoriesStatisticsSlct, getCategories } = selectorsFinance;
+  const { totalOutlaySlct, totalIncomeSlct, categoriesStatisticsSlct, getCategories, getFormatcategoriesStatistics } = selectorsFinance;
   const allCategories = useSelector(getCategories);
   const totalOutlay = useSelector(totalOutlaySlct);
   const totalIncome = useSelector(totalIncomeSlct);
   const categoriesStatistics = useSelector(categoriesStatisticsSlct);
+  const formatCategoriesStatistics = useSelector(getFormatcategoriesStatistics)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -78,7 +80,7 @@ const ChartSection = () => {
         <div>
           <Selects setData={setDate} />
           {(totalIncome!=='0.00'||totalOutlay!=='0.00')?  
-            (<DiagramTable outlay={totalOutlay} income={totalIncome} statistics={categoriesStatistics} categories={allCategories} />)
+            (<DiagramTable outlay={totalOutlay} income={totalIncome} statistics={formatCategoriesStatistics} categories={allCategories} />)
           :(<p>Nothing was founded. Please select month and year.</p>)}  
           
       </div>  
