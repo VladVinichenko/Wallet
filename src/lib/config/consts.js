@@ -5,4 +5,5 @@ export const ROUTES = {
 	DIAGRAM: 'diagram',
 	CURRENCY: 'currency',
 	ERROR_404: 'error404',
+	VERIFY: 'verify',
 }
