@@ -11,7 +11,7 @@ const initialState = {
 		incomeTotal: 0,
 		outlayTotal: 0,
 	},
-
+	page: 0,
 	data: [],
 	totalBalance: '',
 	categories: [],
@@ -20,6 +20,12 @@ const initialState = {
 const financeSlice = createSlice({
 	name: 'finance',
 	initialState,
+	reducers: {
+        resetFinance: (state, action) => {
+            console.log('!!!!!!')
+            Object.assign(state, initialState)
+        },
+    },
 	extraReducers: {
 		//================AllFinance
 		[fetchFinance.pending]: (state) => {
@@ -28,6 +34,7 @@ const financeSlice = createSlice({
 		[fetchFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.data = [...state.data, ...action.payload]
+			state.page = state.page + 1
 			// toast.success('Ok')
 		},
 		[fetchFinance.rejected]: (state, action) => {
@@ -59,7 +66,6 @@ const financeSlice = createSlice({
 		[fetchTotalFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.totalBalance = action.payload
-			console.log(action.payload)
 			// toast.success('Ok')
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
@@ -99,3 +105,5 @@ const financeSlice = createSlice({
 })
 
 export default financeSlice.reducer
+export const {resetFinance}=financeSlice.actions
+

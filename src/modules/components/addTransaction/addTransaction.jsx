@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import Datetime from 'react-datetime'
 import { Formik, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { setCloseModal, selectorsFinance, fetchTotalFinance, addTransaction as zuzuzu } from 'store'
 import authOperations from '../../../../src/store/auth/auth-operations'
@@ -183,7 +182,7 @@ export const AddTransaction = () => {
 			console.log(error.message)
 		}
 		closeModal()
-		console.log(values)
+		// console.log(values)
 
 		// await new Promise((resolve) => setTimeout(resolve, 500))
 		// alert(JSON.stringify(values, null, 2))

@@ -46,7 +46,9 @@ const Selects = ({ setData }) => {
   const [year, setYear] = useState('');
 
   useEffect(() => {
-     setData({month, year})
+    if (month !== '' && year !== '') { 
+      setData({month, year})
+    }
    },[month, year])
    
   

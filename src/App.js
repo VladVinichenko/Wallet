@@ -1,20 +1,20 @@
 import { Fragment, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useMatch } from 'react-router-dom'
 // import { OpenMenu } from 'modules'
 import { Routes, Route, Link, NavLink, Outlet, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import authOperations from '../src/store/auth/auth-operations'
 import { fetchTotalFinance } from 'store'
-
 import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Header, Home, Logout } from 'modules'
+import { Header, Home, Logout, NotFoundPage } from 'modules'
 import { Modal } from 'modules'
-import { Registration } from 'modules/pages/registration/registration'
-import { Login } from 'modules/pages/login/login'
+import { Registration } from 'modules'
+
+import { Login } from 'modules'
 // import { Logo } from 'modules'
 import { ButtonAddTransaction } from 'modules'
 import { setIsModalLogoutOpen } from 'store'
@@ -35,39 +35,60 @@ import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
 
 export default function App() {
+	const dispatch = useDispatch()
 	const location = useLocation()
-	const navigate = useNavigate()
+
+	const match = useMatch('/verify/:item')
+
+	let start = false
+	// start &&
+	if (match) {
+		dispatch(authOperations.fetchVerify(match.params.item))
+		start = true
+	}
+
+	// match && sendVerifyToken()
+	// console.log(location)
 
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
-	console.log(isLoggedIn)
-	const dispatch = useDispatch()
+
 	const showModalLogout = () => {
 		dispatch(setIsModalLogoutOpen(true))
 	}
+
+	// const sendVerifyToken = () => {
+	// 	dispatch(authOperations.fetchVerify(match.params.item))
+	// 	return
+	// }
+
 	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
 	}
 	const checkLoader = () => {
 		dispatch(setIsLoading(!isLoading))
 	}
+
 	useEffect(() => {
-		if (isLoggedIn) {
-			isLoggedIn && dispatch(fetchCategories())
-			isLoggedIn && dispatch(authOperations.fetchCurrentUser())
-			isLoggedIn && dispatch(fetchTotalFinance())
-		}
+		!isLoggedIn && dispatch(authOperations.fetchRefreshToken())
 	}, [isLoggedIn])
 
 	// useEffect(() => {
-	// !isLoggedIn && navigate(`/${ROUTES.LOGIN}`)
+	// 	function useMatch<ParamKey extends string = string>(
+	// 		pattern: PathPattern | string
+	// 	): PathMatch<ParamKey> | null;
+	// }, [])
+
+	// useEffect(() => {
+	// 	isLoggedIn && dispatch(fetchCategories())
+	// 	isLoggedIn && dispatch(authOperations.fetchCurrentUser())
+	// 	isLoggedIn && dispatch(fetchTotalFinance())
 	// }, [isLoggedIn])
 
 	return (
 		<Fragment>
-			{/* <Registration /> */}
 			{isModalLogOut && (
 				<Modal>
 					<Logout name='Bayraktar' />
@@ -95,6 +116,7 @@ export default function App() {
 			<Routes>
 				<Route>
 					<Route path='/' element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
+					{/* <Route path='verify/' element={<>{sendVerifyToken()}</>} /> */}
 					<Route
 						path={ROUTES.LOGIN}
 						element={
@@ -165,10 +187,9 @@ export default function App() {
 					<Route
 						path='*'
 						element={
-							<main style={{ padding: '1rem', color: 'red' }}>
-								<p>page not found</p>
-								<Outlet />
-							</main>
+							<>
+								<NotFoundPage /> <Outlet />
+							</>
 						}
 					/>
 				</Route>

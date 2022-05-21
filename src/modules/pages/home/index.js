@@ -1,9 +1,7 @@
-import React from 'react'
-import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Media from 'react-media'
-// import { windowSize } from 'lib/hooks/windowSize'
 import styled from 'styled-components'
 import { vars } from 'stylesheet'
 import { DashboardTable } from 'modules'
@@ -15,6 +13,9 @@ import { ROUTES } from 'lib'
 import { fetchFinance } from 'store'
 import { ChartSection } from '../../components/diagramSection'
 import { authSelectors } from '../../../store/auth/auth-selectors'
+import authOperations from '../../../store/auth/auth-operations'
+import { fetchTotalFinance } from 'store'
+import { fetchCategories } from 'store'
 
 const Background = styled.div`
 	position: fixed;
@@ -84,8 +85,11 @@ export const Home = ({ page = ROUTES.HOME }) => {
 	const location = useLocation()
 	const navigate = useNavigate()
 	useEffect(() => {
-		dispatch(fetchFinance())
-	}, [dispatch])
+		isLoggedIn && dispatch(fetchCategories())
+		isLoggedIn && dispatch(authOperations.fetchCurrentUser())
+		isLoggedIn && dispatch(fetchTotalFinance())
+		isLoggedIn && dispatch(fetchFinance())
+	}, [isLoggedIn, dispatch])
 	return (
 		<>
 			{isLoggedIn && (
