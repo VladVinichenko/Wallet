@@ -27,7 +27,7 @@ const Background = styled.div`
 `
 const DashBoardWrapper = styled.div`
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
-		padding-top: 46px;
+		padding-top: 40px;
 	}
 `
 const LeftBlock = styled.div`
@@ -74,6 +74,14 @@ const BalanceWrapper = styled.div`
 		padding-top: 12px;
 		margin-bottom: 32px;
 	}
+
+	@media screen and (min-width: ${vars.breakpoints.tablet})  and (max-width:${vars.breakpoints.tabletUp}) {
+		display: flex;
+    	flex-direction: column;
+    	justify-content: space-around;
+
+	}
+
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		margin-bottom: 32px;
 	}
@@ -112,7 +120,7 @@ export const Home = ({ page = ROUTES.HOME }) => {
 											{matches.mobileScreen && (
 												<>
 													<Navigation />
-													<BalanceWrapper>{page === ROUTES.HOME && <Balance />}</BalanceWrapper>
+													<BalanceWrapper visible>{page === ROUTES.HOME && <Balance />}</BalanceWrapper>
 													{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
 													{page === ROUTES.DIAGRAM && <ChartSection />}
 													{page === ROUTES.CURRENCY && <Currency />}

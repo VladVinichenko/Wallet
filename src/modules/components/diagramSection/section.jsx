@@ -16,17 +16,25 @@ const StatisticsSection = styled.section`
 padding-bottom: 35px;
 }
 padding-bottom: 50px;
+
 @media (min-width: ${vars.breakpoints.tablet}) {
-  padding-top: 45px;
+  /* padding-top: 45px; */
+  width: 704px;
+}
+
+@media (min-width: ${vars.breakpoints.desktop}) {
+  /* padding-top: 45px; */
+  width: 715px;
 }
 `
 const SectionTitle = styled.h2`
 text-align: left;
-font-family: 'Poppins',sans-serif;;
+font-family: 'Poppins',sans-serif;
 font-weight: 400;
 font-size: 30px;
 line-height: 45px;
 margin-bottom: 20px;
+
 
 /* @media (min-width:${vars.breakpoints.tablet})and (max-width:${vars.breakpoints.tabletUp}) {
    position: absolute;
@@ -42,8 +50,24 @@ const SectionContent = styled.div`
  
 @media (min-width: ${vars.breakpoints.tablet}) {
    display: flex;
-}
+   justify-content: space-between;
 
+   & div:only-child {
+     margin-left: auto;
+   }
+}
+`
+
+const TableWrapper = styled.div`
+  @media (min-width: ${vars.breakpoints.tablet}) {
+    width: 336px;
+    margin-top: -43px;
+  }
+
+  @media (min-width: ${vars.breakpoints.desktop}) {
+    width: 395px;
+    margin: 0;
+  }
 `
 
 
@@ -52,12 +76,11 @@ const ChartSection = () => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
-  const { totalOutlaySlct, totalIncomeSlct, categoriesStatisticsSlct, getCategories, getFormatcategoriesStatistics } = selectorsFinance;
+  const { totalOutlaySlct, totalIncomeSlct, categoriesStatisticsSlct, getCategories } = selectorsFinance;
   const allCategories = useSelector(getCategories);
   const totalOutlay = useSelector(totalOutlaySlct);
   const totalIncome = useSelector(totalIncomeSlct);
   const categoriesStatistics = useSelector(categoriesStatisticsSlct);
-  const formatCategoriesStatistics = useSelector(getFormatcategoriesStatistics)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -77,13 +100,12 @@ const ChartSection = () => {
       <SectionContent> 
         {totalOutlay !== '0.00'  &&<Chart statistics={categoriesStatistics} outlay={totalOutlay} categories={ allCategories}/> }
         
-        <div>
+        <TableWrapper>
           <Selects setData={setDate} />
-          {(totalIncome!=='0.00'||totalOutlay!=='0.00')?  
-            (<DiagramTable outlay={totalOutlay} income={totalIncome} statistics={formatCategoriesStatistics} categories={allCategories} />)
-          :(<p>Nothing was founded. Please select month and year.</p>)}  
-          
-      </div>  
+          {(totalIncome!=='0.00'||totalOutlay!=='0.00')
+            ? (<DiagramTable outlay={totalOutlay} income={totalIncome} statistics={categoriesStatistics} categories={allCategories} />)
+            : (<p>Nothing was founded. Please select month and year.</p>)}  
+      </TableWrapper>  
       </SectionContent>  
     </StatisticsSection>
   );
