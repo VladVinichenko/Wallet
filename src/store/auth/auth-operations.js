@@ -7,13 +7,17 @@ import { store, token } from 'store'
 const register = createAsyncThunk('auth/signup', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signup', credentials)
+<<<<<<< Updated upstream
 		// token.set(data.token)
 		return data.data
+=======
+		return data.data && data.data
+>>>>>>> Stashed changes
 	} catch (error) {
 		if (error.response.status === 409) {
 			toast.error('A user with this name already exists')
 		}
-		// TODO: Добавить обработку ошибки error.message
+		console.error(error.message)
 	}
 })
 
@@ -24,7 +28,7 @@ const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signin', credentials)
 		token.set(data.data.accessToken)
-		return data
+		return data && data
 	} catch (error) {
 		if (error.response.status !== 401) {
 			toast.error('The service is temporarily unavailable')
@@ -51,30 +55,28 @@ const fetchRefreshToken = createAsyncThunk('auth/refresh-tokens', async (_, thun
 	try {
 		const { data } = await axios.post('auth/refresh-tokens', { refreshToken })
 		token.set(data.data.accessToken)
-		return data
+		return data && data
 	} catch (error) {
 		console.error('NO-REFRESH')
-		// TODO: Добавить обработку ошибки error.message
+		console.error(error.message)
 	}
 })
 
 const fetchCurrentUser = createAsyncThunk('users/current', async () => {
 	try {
 		const { data } = await axios.get('users/current')
-		return data
+		return data && data
 	} catch (error) {
-		// TODO: Добавить обработку ошибки error.message
+		console.error(error.message)
 	}
 })
 
 const fetchVerify = createAsyncThunk('auth/verify', async (verifyToken) => {
 	console.log('verifyToken:', verifyToken)
 	try {
-		const { data } = await axios.get(`auth/verify/${verifyToken}`)
-		// console.log(data)
-		// return data
+		await axios.get(`auth/verify/${verifyToken}`)
 	} catch (error) {
-		// TODO: Добавить обработку ошибки error.message
+		console.error(error.message)
 	}
 })
 

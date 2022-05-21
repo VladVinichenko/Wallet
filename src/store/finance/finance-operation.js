@@ -18,7 +18,7 @@ export const fetchFinance = createAsyncThunk('finance', async (page = 1) => {
 
 export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async () => {
 	const { data } = await getTotal()
-	return data.data
+	return data.data && data.data
 })
 
 export const getStatistics = createAsyncThunk(
@@ -27,7 +27,7 @@ export const getStatistics = createAsyncThunk(
 		const { month, year } = credentials
 		try {
 			const { data } = await getStatisticsApi(month, year)
-			return data.data
+			return data.data && data.data
 		} catch (error) {
 			return rejectWithValue(error.message)
 		}
@@ -35,11 +35,9 @@ export const getStatistics = createAsyncThunk(
 )
 
 export const addTransaction = createAsyncThunk('finance/add', async (transaction, { getState, rejectWithValue }) => {
-	// const state = getState()
-	// const allTransactions = state.finance.data
 	try {
 		const { data } = await axios.post('finance', transaction)
-		return data
+		return data && data
 	} catch (error) {
 		console.dir(error)
 		return rejectWithValue(error.message)
@@ -48,6 +46,5 @@ export const addTransaction = createAsyncThunk('finance/add', async (transaction
 
 export const fetchCategories = createAsyncThunk('finance/categories', async () => {
 	const { data } = await getCategories()
-	// console.log(data)
-	return data.data
+	return data.data && data.data
 })

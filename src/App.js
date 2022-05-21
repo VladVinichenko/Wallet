@@ -21,11 +21,11 @@ import { PublicRoute } from 'lib'
 
 export default function App() {
 	const dispatch = useDispatch()
-	const navigate = useNavigate()
+	// const navigate = useNavigate()
 	const match = useMatch('/verify/:item')
 	if (match) {
+		// navigate(`/${ROUTES.LOGIN}`)
 		dispatch(authOperations.fetchVerify(match.params.item))
-		navigate(`/`)
 	}
 
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
@@ -66,6 +66,7 @@ export default function App() {
 			<Routes>
 				<Route>
 					<Route path='/' element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
+					<Route path={ROUTES.VERIFY} element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
 					<Route
 						path={ROUTES.LOGIN}
 						element={
