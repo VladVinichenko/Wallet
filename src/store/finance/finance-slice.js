@@ -21,11 +21,11 @@ const financeSlice = createSlice({
 	name: 'finance',
 	initialState,
 	reducers: {
-        resetFinance: (state, action) => {
-            console.log('!!!!!!')
-            Object.assign(state, initialState)
-        },
-    },
+		resetFinance: (state, action) => {
+			console.log('!!!!!!')
+			Object.assign(state, initialState)
+		},
+	},
 	extraReducers: {
 		//================AllFinance
 		[fetchFinance.pending]: (state) => {
@@ -35,12 +35,11 @@ const financeSlice = createSlice({
 			state.isLoading = false
 			state.data = [...state.data, ...action.payload]
 			state.page = state.page + 1
-			// toast.success('Ok')
 		},
 		[fetchFinance.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
-			toast.error('Error')
+			toast.error('Error fetch finance')
 		},
 		//=========Statistics
 		[getStatistics.pending]: (state) => {
@@ -51,12 +50,11 @@ const financeSlice = createSlice({
 			state.statistics.incomeTotal = action.payload.incomeStatistics
 			state.statistics.outlayTotal = action.payload.totalOutlayStatistics
 			state.statistics.statisticsByCategory = action.payload.statisticsByCategory
-			// toast.success('Ok')
 		},
 		[getStatistics.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
-			toast.error('Error')
+			toast.error('Error fetch statictics')
 		},
 		//=================Balance
 		[fetchTotalFinance.pending]: (state) => {
@@ -64,14 +62,15 @@ const financeSlice = createSlice({
 			state.totalBalance = []
 		},
 		[fetchTotalFinance.fulfilled]: (state, action) => {
+			console.log('fulfilled', action.payload)
 			state.isLoading = false
-			state.totalBalance = action.payload
-			// toast.success('Ok')
+			state.totalBalance = action.payload.user.balance
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
+			console.log('rejected', action.payload)
 			state.isLoading = false
 			state.error = action.payload
-			toast.error('Error')
+			toast.error('Error fetch balance')
 		},
 		//====================Categories
 		[fetchCategories.pending]: (state) => {
@@ -81,12 +80,11 @@ const financeSlice = createSlice({
 		[fetchCategories.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.categories = action.payload
-			// toast.success('Ok')
 		},
 		[fetchCategories.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
-			toast.error('Error')
+			toast.error('Error fetch categories')
 		},
 		//=======================Add_transaction
 		[addTransaction.pending]: (state) => {
@@ -99,11 +97,10 @@ const financeSlice = createSlice({
 		[addTransaction.rejected]: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
-			toast.error('Error')
+			toast.error('Error add transaction')
 		},
 	},
 })
 
 export default financeSlice.reducer
-export const {resetFinance}=financeSlice.actions
-
+export const { resetFinance } = financeSlice.actions

@@ -14,7 +14,7 @@ import { fetchFinance } from 'store'
 import { ChartSection } from '../../components/diagramSection'
 import { authSelectors } from '../../../store/auth/auth-selectors'
 import authOperations from '../../../store/auth/auth-operations'
-import { fetchTotalFinance } from 'store'
+import { fetchTotalFinance } from '../../../store/finance/finance-operation'
 import { fetchCategories } from 'store'
 
 const Background = styled.div`
@@ -89,7 +89,7 @@ export const Home = ({ page = ROUTES.HOME }) => {
 		isLoggedIn && dispatch(authOperations.fetchCurrentUser())
 		isLoggedIn && dispatch(fetchTotalFinance())
 		isLoggedIn && dispatch(fetchFinance())
-	}, [isLoggedIn, dispatch])
+	}, [isLoggedIn])
 	return (
 		<>
 			{isLoggedIn && (

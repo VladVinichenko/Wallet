@@ -40,6 +40,8 @@ const authSlice = createSlice({
 			state.user = action.payload.data.user
 			state.accessToken = action.payload.data.accessToken
 			state.refreshToken = action.payload.data.refreshToken
+			state.isLoggedIn = true
+			toast.success(`Welome!`)
 		},
 		[authOperation.logOut.fulfilled](state, action) {
 			state.user = { name: null, email: null }
