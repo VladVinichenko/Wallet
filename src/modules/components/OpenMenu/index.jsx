@@ -153,20 +153,24 @@ function renderValue(option) {
 	return <span>{option.value}</span>
 }
 
-export const OpenMenu = ({ data }) => {
-	const [value, setValue] = React.useState()
+export const OpenMenu = ({ data, val, func, lab }) => {
+	const [value, setValue] = React.useState('')
+	// console.log('value:', value)
 
 	return (
-		<StyledEngineProvider injectFirst>
-			<CustomSelect renderValue={renderValue} value={value}>
-				{data.map((category) => {
-					return (
-						<StyledOption value={category.name} key={category._id}>
-							{category.name}
-						</StyledOption>
-					)
-				})}
-			</CustomSelect>
-		</StyledEngineProvider>
+		<>
+			<input type='text' />
+			<StyledEngineProvider injectFirst>
+				<CustomSelect renderValue={renderValue} name={lab} value={val}>
+					{data.map((category) => {
+						return (
+							<StyledOption value={category._id} key={category._id}>
+								{category.name}
+							</StyledOption>
+						)
+					})}
+				</CustomSelect>
+			</StyledEngineProvider>
+		</>
 	)
 }

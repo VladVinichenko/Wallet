@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCloseModal, selectorsFinance, fetchTotalFinance, addTransaction as zuzuzu } from 'store'
 import authOperations from '../../../../src/store/auth/auth-operations'
+import { fetchFinance } from 'store'
 
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
@@ -174,17 +175,18 @@ export const AddTransaction = () => {
 		delete values.isConsumption
 
 		try {
-			postTransaction(values)
-			dispatch(authOperations.fetchCurrentUser())
-			dispatch(fetchTotalFinance())
+			await postTransaction(values)
+			await dispatch(authOperations.fetchCurrentUser())
+			await dispatch(fetchFinance())
+			await dispatch(fetchTotalFinance())
 		} catch (error) {
 			console.log(error.message)
 		}
 		closeModal()
 		console.log(values)
 
-		await new Promise((resolve) => setTimeout(resolve, 500))
-		alert(JSON.stringify(values, null, 2))
+		// await new Promise((resolve) => setTimeout(resolve, 500))
+		// alert(JSON.stringify(values, null, 2))
 	}
 
 	const transactionSchena = Yup.object().shape({
@@ -206,7 +208,7 @@ export const AddTransaction = () => {
 				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
 						<Field type='checkbox' name='isConsumption' onChange={handleChange} />
-						<OpenMenu data={categories} />
+						<OpenMenu data={categories} val={values.category} func={handleChange} lab='category' />
 						{/* {values.isConsumption && (
 							<select name='category' onChange={handleChange}>
 								<option value='' className='select-placeholder' disabled selected hidden>
@@ -243,8 +245,10 @@ export const AddTransaction = () => {
 									dateFormat='DD.MM.YYYY'
 									timeFormat={false}
 									initialValue={values.date}
+									// updateOnView='time'
+									// inputProps={{ disabled: true }}
+									closeOnSelect={true}
 									onChange={handleDateChange}
-									className='groupItem'
 								/>
 								<svg className='calendarIcon' width='24' height='24'>
 									<use href={sprite + '#icon-calendar'}></use>
