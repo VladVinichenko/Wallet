@@ -6,11 +6,11 @@ import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCloseModal, selectorsFinance, fetchTotalFinance, addTransaction as zuzuzu } from 'store'
 import authOperations from '../../../../src/store/auth/auth-operations'
-import { authSelectors } from 'store/auth'
+import { fetchFinance, resetFinance } from 'store'
+
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
-// import { OpenMenu } from '..'
-
+import { OpenMenu } from '..'
 import { sprite } from 'assets'
 import 'react-datetime/css/react-datetime.css'
 
@@ -126,6 +126,11 @@ const FormContainer = styled.div`
 		margin-bottom: 20px;
 	}
 
+	.MuiSelectUnstyled-root {
+		margin-bottom: 40px;
+		width: 100%;
+	}
+
 	select {
 		margin-bottom: 40px;
 		padding-left: 20px;
@@ -162,7 +167,6 @@ export const AddTransaction = () => {
 	}
 
 	const addTransaction = async (values) => {
-		const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 		if (!values.isConsumption) values.category = '628587f997d487932b456397'
 
 		const type = values.isConsumption ? 'outlay' : 'income'
@@ -170,17 +174,20 @@ export const AddTransaction = () => {
 		delete values.isConsumption
 
 		try {
-			postTransaction(values)
-			dispatch(authOperations.fetchCurrentUser())
-			dispatch(fetchTotalFinance())
+			await postTransaction(values)
+			await dispatch(resetFinance())
+			await dispatch(authOperations.fetchCurrentUser())
+
+			await dispatch(fetchFinance())
+			await dispatch(fetchTotalFinance())
 		} catch (error) {
 			console.log(error.message)
 		}
 		closeModal()
 		// console.log(values)
 
-		await new Promise((resolve) => setTimeout(resolve, 500))
-		alert(JSON.stringify(values, null, 2))
+		// await new Promise((resolve) => setTimeout(resolve, 500))
+		// alert(JSON.stringify(values, null, 2))
 	}
 
 	const transactionSchena = Yup.object().shape({
@@ -202,8 +209,8 @@ export const AddTransaction = () => {
 				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
 						<Field type='checkbox' name='isConsumption' onChange={handleChange} />
-						{/* <OpenMenu /> */}
-						{values.isConsumption && (
+						<OpenMenu data={categories} val={values.category} func={handleChange} lab='category' />
+						{/* {values.isConsumption && (
 							<select name='category' onChange={handleChange}>
 								<option value='' className='select-placeholder' disabled selected hidden>
 									choose category
@@ -216,7 +223,7 @@ export const AddTransaction = () => {
 									)
 								})}
 							</select>
-						)}
+						)} */}
 						{/* {errors.category && touched.category && <div className='input-feedback'>{errors.category}</div>} */}
 						{errors.category && touched.category && errors.category}
 						<StyledGroup className='group'>
@@ -239,8 +246,10 @@ export const AddTransaction = () => {
 									dateFormat='DD.MM.YYYY'
 									timeFormat={false}
 									initialValue={values.date}
+									// updateOnView='time'
+									// inputProps={{ disabled: true }}
+									closeOnSelect={true}
 									onChange={handleDateChange}
-									className='groupItem'
 								/>
 								<svg className='calendarIcon' width='24' height='24'>
 									<use href={sprite + '#icon-calendar'}></use>
