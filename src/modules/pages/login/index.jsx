@@ -1,23 +1,25 @@
-import { FormRegistration } from './formRegistration/formRegistration'
+import { FormLogin } from '../../components/FormLogin/'
 import { sprite } from '../../../assets/images/index.js'
-import { StyledLoginPage } from '../../components/formPage/formPage'
+import { StyledLoginPage } from '../../components/formPage'
 import { StyledBlockSvg, StyledPageSvg } from '../../components/svgFormPage/svgFormPage'
 import { useSelector } from 'react-redux'
 import { authSelectors } from 'store/auth/auth-selectors'
+import { StyledTitle } from '../../components/svgFormPage/svgFormPage'
 
-export const Registration = () => {
+export const Login = () => {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
+
 	return (
 		<>
 			{!isLoggedIn && (
 				<StyledLoginPage>
 					<StyledBlockSvg>
 						<StyledPageSvg>
-							<use href={sprite + '#icon-register-img'} />
+							<use href={sprite + '#icon-login-img'} />
 						</StyledPageSvg>
-						<h1>Finance App</h1>
+						<StyledTitle>Finance App</StyledTitle>
 					</StyledBlockSvg>
-					<FormRegistration />
+					<FormLogin />
 				</StyledLoginPage>
 			)}
 		</>
