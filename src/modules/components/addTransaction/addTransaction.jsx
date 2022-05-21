@@ -10,10 +10,17 @@ import { fetchFinance, resetFinance } from 'store'
 
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
-import { OpenMenu } from '..'
 import { sprite } from 'assets'
 import 'react-datetime/css/react-datetime.css'
 
+import Box from '@mui/material/Box'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import FormControl from '@mui/material/FormControl'
+
+////////////
+
+/////////////
 const StyledInput = styled.input`
 	box-sizing: border-box;
 	margin-bottom: 40px;
@@ -130,17 +137,29 @@ const FormContainer = styled.div`
 		margin-bottom: 40px;
 		width: 100%;
 	}
+	.MuiSelect-filled {
+		width: 400px;
+		background: red;
+		border: none;
+		outline: none;
+	}
 
-	select {
+	Select {
 		margin-bottom: 40px;
 		padding-left: 20px;
 		width: 100%;
-
+		border: none;
+		border-bottom: 1px solid red;
+		outline: none;
 		font-size: 18px;
 		line-height: 1.5;
 
 		@media screen and (min-width: 768px) {
 			width: 394px;
+		}
+		option {
+			background-color: yellow;
+			font-size: 18px;
 		}
 	}
 
@@ -177,7 +196,6 @@ export const AddTransaction = () => {
 			await postTransaction(values)
 			await dispatch(resetFinance())
 			await dispatch(authOperations.fetchCurrentUser())
-
 			await dispatch(fetchFinance())
 			await dispatch(fetchTotalFinance())
 		} catch (error) {
@@ -209,21 +227,22 @@ export const AddTransaction = () => {
 				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
 						<Field type='checkbox' name='isConsumption' onChange={handleChange} />
-						<OpenMenu data={categories} val={values.category} func={handleChange} lab='category' />
-						{/* {values.isConsumption && (
-							<select name='category' onChange={handleChange}>
-								<option value='' className='select-placeholder' disabled selected hidden>
-									choose category
-								</option>
-								{categories.map((category, index) => {
-									return (
-										<option value={category._id} key={index}>
-											{category.name}
-										</option>
-									)
-								})}
-							</select>
-						)} */}
+
+						{values.isConsumption && (
+							<Box sx={{ minWidth: 394 }}>
+								<FormControl sx={{ m: 1, width: 300, mt: 3 }}>
+									<Select value={values.category} name='category' variant='outlined' onChange={handleChange}>
+										{categories.map((category, index) => {
+											return (
+												<MenuItem value={category._id} key={index}>
+													{category.name}
+												</MenuItem>
+											)
+										})}
+									</Select>
+								</FormControl>
+							</Box>
+						)}
 						{/* {errors.category && touched.category && <div className='input-feedback'>{errors.category}</div>} */}
 						{errors.category && touched.category && errors.category}
 						<StyledGroup className='group'>
