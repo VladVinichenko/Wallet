@@ -2,7 +2,7 @@ export * from './user'
 export * from './finance'
 export * from './global'
 export * from './session'
-
+import runtimeEnv from '@mars/heroku-js-runtime-env'
 import axios from 'axios'
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
@@ -12,7 +12,7 @@ import authReducer from '../store/auth/auth-slice'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, REGISTER, PURGE, PERSIST } from 'redux-persist'
 
-axios.defaults.baseURL = REACT_APP_API_URL
+axios.defaults.baseURL = process.env.REACT_APP_API_URL
 
 export const token = {
 	set(token) {
