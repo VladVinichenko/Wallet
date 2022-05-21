@@ -103,15 +103,13 @@ const Column = styled.th`
 
 export const DashboardTable = ({ viewport }) => {
 	const [inView, setInView] = useState(false)
-	const [page, setPage] = useState(1)
 	const dataTable = useSelector(selectorsFinance.getFormatData)
-
+	const page = useSelector(selectorsFinance.getPageCount)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		if (inView) {
 			dispatch(fetchFinance(page + 1))
-			setPage(page + 1)
 		}
 	}, [viewport, inView])
 

@@ -1,6 +1,5 @@
-import React from 'react'
-import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Media from 'react-media'
 import styled from 'styled-components'
