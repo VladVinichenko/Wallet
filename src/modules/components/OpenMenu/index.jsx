@@ -159,12 +159,11 @@ export const OpenMenu = ({ data, val, func, lab }) => {
 
 	return (
 		<>
-			<input type='text' />
 			<StyledEngineProvider injectFirst>
-				<CustomSelect renderValue={renderValue} name={lab} value={val}>
+				<CustomSelect renderValue={renderValue} value={value} onChange={setValue}>
 					{data.map((category) => {
 						return (
-							<StyledOption value={category._id} key={category._id}>
+							<StyledOption value={category.name} key={category._id}>
 								{category.name}
 							</StyledOption>
 						)
