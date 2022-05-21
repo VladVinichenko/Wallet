@@ -10,16 +10,12 @@ import globalSlice from './global/global-slice'
 import financeSlice from './finance/finance-slice'
 import authReducer from '../store/auth/auth-slice'
 import storage from 'redux-persist/lib/storage'
-import { CustomLoader } from '../modules/common/CustomLoader'
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, REGISTER, PURGE, PERSIST } from 'redux-persist'
 
-// axios.defaults.baseURL = REACT_APP_API_URL
-axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
-// axios.defaults.baseURL = 'http://localhost:3001/api/'
+axios.defaults.baseURL = REACT_APP_API_URL
 
 export const token = {
 	set(token) {
-		// console.log('token:', token)
 		axios.defaults.headers.common.Authorization = `Bearer ${token}`
 	},
 	unset() {

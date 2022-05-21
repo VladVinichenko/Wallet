@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from 'react'
-import { useNavigate, useMatch } from 'react-router-dom'
+import { useMatch } from 'react-router-dom'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import authOperations from '../src/store/auth/auth-operations'
@@ -21,10 +21,8 @@ import { PublicRoute } from 'lib'
 
 export default function App() {
 	const dispatch = useDispatch()
-	// const navigate = useNavigate()
 	const match = useMatch('/verify/:item')
 	if (match) {
-		// navigate(`/${ROUTES.LOGIN}`)
 		dispatch(authOperations.fetchVerify(match.params.item))
 	}
 
