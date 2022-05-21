@@ -17,7 +17,19 @@ const ButtonPrimary = styled.button`
 	background-color: ${vars.color.accent.primary};
 	border-radius: ${vars.borderRadius.primary};
 	border: none;
-	transition: background-color ${vars.animation.duration};
+	/* transition: background-color ${vars.animation.duration}; */
+	transition: ${vars.animation.duration};
+	box-shadow: ${vars.boxShadow.button};
+
+	&:hover {
+		transform: translateY(-5px);
+		box-shadow: ${vars.boxShadow.buttonHover};
+	}
+
+	&:active {
+		transform: translateY(-2px);
+		box-shadow: ${vars.boxShadow.buttonActive};
+	}
 `
 const ButtonAccent = styled(ButtonPrimary)`
 	color: ${vars.color.font.fourth};
