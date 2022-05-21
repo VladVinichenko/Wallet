@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCloseModal, selectorsFinance, fetchTotalFinance, addTransaction as zuzuzu } from 'store'
 import authOperations from '../../../../src/store/auth/auth-operations'
-import { fetchFinance } from 'store'
+import { fetchFinance, resetFinance } from 'store'
 
 import { vars } from 'stylesheet'
 import { Button } from 'modules'
@@ -176,6 +176,8 @@ export const AddTransaction = () => {
 		try {
 			await postTransaction(values)
 			await dispatch(authOperations.fetchCurrentUser())
+			await dispatch(resetFinance())
+
 			await dispatch(fetchFinance())
 			await dispatch(fetchTotalFinance())
 		} catch (error) {
