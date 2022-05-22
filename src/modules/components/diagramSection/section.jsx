@@ -70,7 +70,10 @@ const TableWrapper = styled.div`
     margin: 0;
   }
 `
-
+const SectionText = styled.p`
+margin-bottom: 10px;
+font-size: 18px;
+`
 
 const ChartSection = () => {
   const date = new Date();
@@ -105,6 +108,7 @@ const ChartSection = () => {
         {totalOutlay !== '0.00'  &&<Chart statistics={categoriesStatistics} outlay={totalOutlay} categories={ allCategories}/> }        
         <TableWrapper>
           <Selects setData={setDate} />
+          <SectionText>Statistics for {month} {year}</SectionText>
           {(totalIncome!=='0.00'||totalOutlay!=='0.00')
             ? (<DiagramTable outlay={totalOutlay} income={totalIncome} statistics={categoriesStatistics} categories={allCategories} />)
             : (<p>Nothing was founded. Please select month and year.</p>)}  
