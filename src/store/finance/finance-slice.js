@@ -15,6 +15,7 @@ const initialState = {
 	data: [],
 	totalBalance: '',
 	categories: [],
+	aviableStatistics: { years: [], months: [] },
 }
 
 const financeSlice = createSlice({
@@ -65,6 +66,8 @@ const financeSlice = createSlice({
 			console.log('fulfilled', action.payload)
 			state.isLoading = false
 			state.totalBalance = action.payload.user.balance
+			state.aviableStatistics = action.payload.aviableStatistics
+			// console.log(action.payload)
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
 			console.log('rejected', action.payload)

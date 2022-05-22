@@ -4,6 +4,7 @@ import { formatNumber } from 'lib'
 const getData = (state) => state.finance.data
 const getTotal = (state) => formatNumber(state.finance.totalBalance)
 const getCategories = (state) => state.finance.categories
+const getAviableStatistics = (state) => state.finance.aviableStatistics
 
 const totalOutlaySlct = (state) => formatNumber(state.finance.statistics.outlayTotal)
 const totalIncomeSlct = (state) => formatNumber(state.finance.statistics.incomeTotal)
@@ -16,14 +17,11 @@ const getFormatData = createSelector([getData], (data) => {
 	})
 })
 
-const getFormatcategoriesStatistics = createSelector (
-	[categoriesStatisticsSlct],
-	(data)=>{
-		return data.map(transaction=>{
-			return {...transaction, sum: formatNumber(transaction.sum)}
-		})
-	}
-)
+const getFormatcategoriesStatistics = createSelector([categoriesStatisticsSlct], (data) => {
+	return data.map((transaction) => {
+		return { ...transaction, sum: formatNumber(transaction.sum) }
+	})
+})
 
 export const selectorsFinance = {
 	getData,
@@ -34,5 +32,6 @@ export const selectorsFinance = {
 	getCategories,
 	getPageCount,
 	getFormatData,
-	getFormatcategoriesStatistics
+	getFormatcategoriesStatistics,
+	getAviableStatistics,
 }
