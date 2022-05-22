@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md'
-
+import { vars } from 'stylesheet/vars.js'
 const ShowPassword = styled.button`
 	position: absolute;
 	top: 50%;
@@ -13,14 +12,13 @@ const ShowPassword = styled.button`
 	width: 36px;
 	height: 36px;
 	color: gray;
-	margin-bottom: 0;
 
 	background-color: transparent;
 	border: 0;
 	border-radius: 50%;
 	cursor: pointer;
 	transform: translate(0, -50%) scale(1);
-	transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all ${vars.animation.duration} ${vars.animation.function};
 
 	&:hover,
 	&:focus {
@@ -34,24 +32,16 @@ const ShowPassword = styled.button`
 	}
 `
 
-const Visibility = styled(MdOutlineVisibility)`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 20px;
-	height: 20px;
-	transform: translate(-50%, -50%);
-	transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-`
-const VisibilityOff = styled(MdOutlineVisibilityOff)`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 20px;
-	height: 20px;
-	transform: translate(-50%, -50%);
-	transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-`
+const Visibility = {
+	position: 'absolute',
+	// opacity: '0',
+	top: ' 50%',
+	left: '50%',
+	width: '20px',
+	height: '20px',
+	transform: 'translate(-50%, -50%)',
+	transition: 'all ${vars.animation.duration} ${vars.animation.function}',
+}
 
 export const ShowPasswordButton = ({ type, onClickBtn, passwordShown, confirmPasswordShown }) => {
 	return (
@@ -63,7 +53,11 @@ export const ShowPasswordButton = ({ type, onClickBtn, passwordShown, confirmPas
 			title={confirmPasswordShown || passwordShown ? 'Hide password' : 'Show password'}
 			arial-label={confirmPasswordShown || passwordShown ? 'Hide password' : 'Show password'}
 		>
-			{confirmPasswordShown || passwordShown ? <Visibility /> : <VisibilityOff />}
+			{confirmPasswordShown || passwordShown ? (
+				<MdOutlineVisibility style={Visibility} />
+			) : (
+				<MdOutlineVisibilityOff style={Visibility} />
+			)}
 		</ShowPassword>
 	)
 }

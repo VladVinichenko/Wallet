@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import styled from 'styled-components'
 import { LogoAuth } from '../logo'
@@ -12,6 +12,7 @@ import { ValidationSchema, RequiredValid } from '../../common/ValidationSchema'
 import { ValidationPassIndicator } from '../../common/validationPassword/validationIndicator'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
+
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -44,11 +45,10 @@ const StyleIconInput = styled.div`
 	position: relative;
 	width: 100%;
 	display: flex;
-	align-items: center;
+
 	&:not(:last-child) {
 		margin-bottom: 40px;
 	}
-
 	button {
 		margin-bottom: 0;
 	}
@@ -57,6 +57,8 @@ const StyleIconInput = styled.div`
 const StyleSvgIcon = styled.svg`
 	position: absolute;
 	margin-left: 12px;
+	width: 24px;
+	height: 24px;
 `
 
 const StyledInput = styled(Field)`
@@ -65,8 +67,7 @@ const StyledInput = styled(Field)`
 	border-top: none;
 	border-left: none;
 	border-right: none;
-	padding-bottom: 12px;
-	padding-top: 12px;
+	padding-bottom: 8px;
 	padding-left: 54px;
 	font-style: normal;
 	font-weight: 400;
@@ -85,6 +86,10 @@ const StyledInput = styled(Field)`
 		line-height: 1.5;
 		color: ${vars.color.font.third};
 	}
+
+	button:not(:last-child) {
+		margin-bottom: 0;
+	}
 `
 
 export const FormRegistration = () => {
@@ -92,8 +97,6 @@ export const FormRegistration = () => {
 	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
 	const [valueConfirmPassword, setValueConfirmPassword] = useState('')
 	const [valuePassword, setValuePassword] = useState('')
-
-	// console.log(valuePassword.length)
 
 	const fontDotsPass = () => {
 		return !passwordShown && valuePassword.length > 0 ? { fontFamily: 'sans-serif' } : null
@@ -103,7 +106,9 @@ export const FormRegistration = () => {
 		return !passwordShown && valueConfirmPassword.length > 0 ? { fontFamily: 'sans-serif' } : null
 	}
 
-	const handleChowPassword = () => {
+	const handleChowPassword = (el) => {
+		el.preventDefault()
+		console.log('first')
 		setPasswordShown(!passwordShown)
 	}
 
@@ -112,6 +117,7 @@ export const FormRegistration = () => {
 	}
 
 	const dispatch = useDispatch()
+
 	return (
 		<Formik
 			initialValues={{
@@ -137,7 +143,7 @@ export const FormRegistration = () => {
 				<StyledFormRegistration>
 					<LogoAuth />
 					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
+						<StyleSvgIcon>
 							<use href={sprite + '#icon-e-mail'} />
 						</StyleSvgIcon>
 						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
@@ -145,7 +151,7 @@ export const FormRegistration = () => {
 					</StyleIconInput>
 
 					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
+						<StyleSvgIcon>
 							<use href={sprite + '#icon-password'} />
 						</StyleSvgIcon>
 						<StyledInput
@@ -156,51 +162,40 @@ export const FormRegistration = () => {
 							required
 							placeholder='Password'
 							value={values.password}
-							onBlur={handleBlur('password')}
-							onChange={handleChange('password')}
+							onChange={handleChange}
+							onBlur={handleBlur}
 						/>
-						<ShowPasswordButton
-							onClick={(el) => {
-								el.preventDefault()
-							}}
-							type={'button'}
-							onClickBtn={handleChowPassword}
-							passwordShown={passwordShown}
-						/>
-
+						<ShowPasswordButton type='button' onClickBtn={handleChowPassword} passwordShown={passwordShown} />
 						<ErrorMessage name='password' />
 					</StyleIconInput>
 
 					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
+						<StyleSvgIcon>
 							<use href={sprite + '#icon-password'} />
 						</StyleSvgIcon>
 
 						<StyledInput
-							style={fontDotsConfPass()}
+							style={fontDotsConfPass}
 							id='passwordConfirm'
 							type={confirmPasswordShown ? 'text' : 'password'}
 							name='passwordConfirm'
 							required
 							value={values.passwordConfirm}
-							onChange={handleChange('passwordConfirm')}
 							placeholder='Confirm password'
+							onBlur={handleBlur}
 						/>
 						<ShowPasswordButton
-							onClick={(el) => {
-								el.preventDefault()
-							}}
 							type={'button'}
 							onClickBtn={handleConfirmPasswordShown}
 							confirmPasswordShown={confirmPasswordShown}
 						/>
 
-						<ValidationPassIndicator passValue={values.password} onChange={setValueConfirmPassword(values.password)} />
+						<ValidationPassIndicator passValue={values.password} />
 						<ErrorMessage name='passwordConfirm' />
 					</StyleIconInput>
 
 					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '18px', height: '18px' }}>
+						<StyleSvgIcon>
 							<use href={sprite + '#icon-user'} />
 						</StyleSvgIcon>
 
