@@ -1,27 +1,13 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import FormControl from '@material-ui/core/FormControl'
-import { makeStyles } from '@material-ui/core/styles'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import NativeSelect from '@material-ui/core/NativeSelect'
-import { Formik, ErrorMessage, Field, useFormik } from 'formik'
+
+import { Formik, ErrorMessage } from 'formik'
 import Datetime from 'react-datetime'
-import { OpenMenu } from '../OpenMenu'
-// import OpenMenu from '../OpenMenu'
+import { OpenMenu } from '..'
 import { Button } from 'modules'
 import { Checkbox } from 'modules/common'
 import styled from 'styled-components'
 import * as Yup from 'yup'
-import { createTheme, ThemeProvider } from '@material-ui/core/styles'
-
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-
-import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
-import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
-import PopperUnstyled from '@mui/base/PopperUnstyled'
 
 import {
 	setCloseModal,
@@ -37,11 +23,6 @@ import { vars } from 'stylesheet'
 import { sprite } from 'assets'
 import 'react-datetime/css/react-datetime.css'
 
-import Box from '@mui/material/Box'
-
-////////////
-
-/////////////
 const StyledInput = styled.input`
 	box-sizing: border-box;
 	width: 100%;
@@ -84,8 +65,8 @@ const StyledGroup = styled.div`
 
 	svg {
 		position: absolute;
-		top: 2px;
-		right: 10px;
+		top: 1px;
+		right: 15px;
 	}
 
 	@media screen and (min-width: 768px) {
@@ -104,6 +85,7 @@ const StyledTextarea = styled.textarea`
 	line-height: 1.5;
 	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 	resize: none;
+	overflow: hidden;
 
 	&::placeholder {
 		color: ${vars.color.font.third};
@@ -125,13 +107,6 @@ const Title = styled.h2`
 		font-size: 30px;
 	}
 `
-
-const theme = createTheme({
-	overrides: {
-		// Style sheet name ⚛️
-	},
-})
-
 const FormContainer = styled.div`
 	padding: 20px 10px;
 	padding-bottom: 0;
@@ -248,35 +223,9 @@ const FormContainer = styled.div`
 `
 
 export const AddTransaction = () => {
-	// const [character, setCharacter] = useState(characters[0])
 	const [date, setDate] = useState(new Date())
-	const [category, setCategory] = useState('628356e997d487932b456343')
-
-	console.log(category)
 	const dispatch = useDispatch()
 
-	const handleChange = (event) => {
-		const name = event.target.name
-		setState({
-			...state,
-			[name]: event.target.value,
-		})
-	}
-	const [state, setState] = useState({
-		age: '',
-		name: 'hai',
-	})
-
-	const useStyles = makeStyles((theme) => ({
-		formControl: {
-			margin: theme.spacing(1),
-			minWidth: 120,
-		},
-		selectEmpty: {
-			marginTop: theme.spacing(2),
-		},
-	}))
-	const classes = useStyles()
 	const closeModal = () => {
 		dispatch(setCloseModal())
 	}
@@ -289,7 +238,7 @@ export const AddTransaction = () => {
 
 	const handleDateChange = ({ _d: time }) => setDate(time)
 
-	const addTransaction = async (values) => {
+	const onSubmitFunc = async (values) => {
 		if (values.isIncome) values.category = '628587f997d487932b456397'
 
 		const type = values.isIncome ? 'income' : 'outlay'
@@ -297,19 +246,18 @@ export const AddTransaction = () => {
 		delete values.isIncome
 
 		try {
-			// await postTransaction(values)
-			// await dispatch(resetFinance())
-			// await dispatch(authOperations.fetchCurrentUser())
-			// await dispatch(fetchTotalFinance())
-			// await dispatch(fetchFinance())
+			await postTransaction(values)
+			await dispatch(resetFinance())
+			await dispatch(authOperations.fetchCurrentUser())
+			await dispatch(fetchTotalFinance())
+			await dispatch(fetchFinance())
 		} catch (error) {
 			console.log(error.message)
 		}
-		// closeModal()
-		// console.log(values)
+		closeModal()
 
-		await new Promise((resolve) => setTimeout(resolve, 500))
-		alert(JSON.stringify(values, null, 2))
+		// await new Promise((resolve) => setTimeout(resolve, 500))
+		// alert(JSON.stringify(values, null, 2))
 	}
 
 	const transactionSchena = Yup.object().shape({
@@ -324,54 +272,24 @@ export const AddTransaction = () => {
 		<FormContainer className='addTransaction'>
 			<Title>Add transaction</Title>
 			<Formik
-				initialValues={{ isIncome: false, category, sum: '', date, comment: '' }}
-				onSubmit={addTransaction}
+				initialValues={{ isIncome: false, category: '628356e997d487932b456343', sum: '', date, comment: '' }}
+				onSubmit={onSubmitFunc}
 				validationSchema={transactionSchena}
 			>
 				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit, setValues }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
-						{/* <Field type='checkbox' name='isConsumption' onChange={handleChange} /> */}
 						<Checkbox className='switch' isChecked={values.isIncome} func={handleChange} val={values.category} />
 						{!values.isIncome && (
 							<OpenMenu
 								data={updtdCategories}
-								val={values.category}
-								func={(e) => setValues({ ...values, category: e })}
+								value={values.category}
+								func={(category) => setValues({ ...values, category })}
 								lab='category'
 							/>
-						)}{' '}
-						{/* <Box sx={{ minWidth: 394 }}> */}
-						{/* <FormControl sx={{ m: 1, width: 300, mt: 3 }} className={classes.formControl}>
-                  <Select value={values.category} name='category' variant='outlined' onChange={handleChange}>
-                    {categories.map((category, index) => {
-                      return (
-                        <MenuItem value={category._id} key={index}>
-                          {category.name}
-                        </MenuItem>
-                      )
-                    })}
-                  </Select>
-                </FormControl> */}
-						{/* </Box> */}
-						{/* {!values.isIncome && (
-             
-            )}{' '} */}
-						{/* {values.isIncome && (
-              <select name='category' onChange={handleChange}>
-                <option value='' className='select-placeholder' disabled selected hidden>
-                  choose category
-                </option>
-                {categories.map((category, index) => {
-                  return (
-                    <option value={category._id} key={index}>
-                      {category.name}
-                    </option>
-                  )
-                })}
-              </select>
-            )} */}
+						)}
 						{/* {errors.category && touched.category && <div className='input-feedback'>{errors.category}</div>} */}
 						{errors.category && touched.category && errors.category}
+
 						<StyledGroup className='group'>
 							<SummInput
 								type='number'
@@ -386,23 +304,23 @@ export const AddTransaction = () => {
 							/>
 							{/* {errors.sum && touched.sum && errors.sum} */}
 							{/* <ErrorMessage name='sum' component='div' /> */}
+
 							<span className='dateInputWrapper'>
 								<Datetime
 									name='date'
 									dateFormat='DD.MM.YYYY'
 									timeFormat={false}
 									initialValue={values.date}
-									// updateOnView='time'
 									closeOnSelect={true}
 									onChange={handleDateChange}
 								/>
-
 								<svg className='calendarIcon' width='24' height='24'>
 									<use href={sprite + '#icon-calendar'}></use>
 								</svg>
 							</span>
 						</StyledGroup>
 						{errors.date && touched.date && errors.date}
+
 						<StyledTextarea
 							type='text'
 							name='comment'
@@ -413,6 +331,7 @@ export const AddTransaction = () => {
 						/>
 						<ErrorMessage name='sum' className='error-message' component='div' />
 						{/* {errors.sum && touched.sum && <div className='error-message'>{errors.sum}</div>} */}
+
 						<ul className='button-list'>
 							<li className='button-item'>
 								<Button type='submit' disabled={isSubmitting}>
@@ -425,7 +344,7 @@ export const AddTransaction = () => {
 								</Button>
 							</li>
 						</ul>
-						<pre>{JSON.stringify(values, null, 2)}</pre>
+						{/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
 					</form>
 				)}
 			</Formik>

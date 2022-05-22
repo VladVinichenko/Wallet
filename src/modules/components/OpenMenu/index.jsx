@@ -147,17 +147,17 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 	return <SelectUnstyled {...props} ref={ref} components={components} />
 })
 
-export const OpenMenu = ({ data, val, func }) => {
-	console.log(val)
+export const OpenMenu = ({ data, value, func }) => {
+	// console.log(value)
 	function renderValue(option) {
 		if (option == null) {
 			return <span>Select category...</span>
 		}
-
-		return <span>{renderName(val)}</span>
+		return <span>{renderName(value)}</span>
 	}
-	const renderName = (el) => {
-		return data.find((e) => e._id === el).name
+
+	const renderName = (id) => {
+		return data.find((category) => category._id === id).name
 	}
 	return (
 		<>
