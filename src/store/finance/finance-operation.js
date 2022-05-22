@@ -18,7 +18,6 @@ export const fetchFinance = createAsyncThunk('finance', async (page = 1) => {
 
 export const fetchTotalFinance = createAsyncThunk('finance/total-finance', async () => {
 	const { data } = await getTotal()
-	console.log(data)
 	return data.data && data.data
 })
 
@@ -40,7 +39,6 @@ export const addTransaction = createAsyncThunk('finance/add', async (transaction
 		const { data } = await axios.post('finance', transaction)
 		return data && data
 	} catch (error) {
-		console.dir(error)
 		return rejectWithValue(error.message)
 	}
 })
