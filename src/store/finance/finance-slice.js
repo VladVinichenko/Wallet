@@ -14,7 +14,7 @@ const initialState = {
 	page: 0,
 	data: [],
 	totalBalance: '',
-	categories: [],
+	// categories: [],
 	aviableStatistics: { years: [], months: [] },
 }
 
