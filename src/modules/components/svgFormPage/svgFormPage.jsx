@@ -1,9 +1,12 @@
 import styled from 'styled-components'
 import { vars } from '../../../stylesheet/vars'
 export const StyledPageSvg = styled.svg`
-	width: 260px;
+	
+	@media screen and (min-width: ${vars.breakpoints.tablet}){
+		width: 260px;
 	height: 250px;
 	margin-right: 40px;
+	}
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		width: 435px;
 		height: 419px;

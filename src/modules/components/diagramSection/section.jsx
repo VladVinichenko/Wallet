@@ -73,9 +73,11 @@ const TableWrapper = styled.div`
 
 
 const ChartSection = () => {
-  
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const currentMonth = date.getMonth() + 1;
+  const [month, setMonth] = useState(currentMonth);
+  const [year, setYear] = useState(currentYear);
 
   const { totalOutlaySlct, totalIncomeSlct, categoriesStatisticsSlct, getCategories } = selectorsFinance;
   const allCategories = useSelector(getCategories);
@@ -85,8 +87,9 @@ const ChartSection = () => {
 
   const dispatch = useDispatch()
   useEffect(() => {
+     
     if (month !== '' && year !== '') {
-      dispatch(getStatistics({month , year}));
+     dispatch(getStatistics({month , year}));
      }
      
   }, [month, year])
@@ -99,8 +102,7 @@ const ChartSection = () => {
     <StatisticsSection>
       <SectionTitle>Statistics</SectionTitle>     
       <SectionContent> 
-        {totalOutlay !== '0.00'  &&<Chart statistics={categoriesStatistics} outlay={totalOutlay} categories={ allCategories}/> }
-        
+        {totalOutlay !== '0.00'  &&<Chart statistics={categoriesStatistics} outlay={totalOutlay} categories={ allCategories}/> }        
         <TableWrapper>
           <Selects setData={setDate} />
           {(totalIncome!=='0.00'||totalOutlay!=='0.00')
