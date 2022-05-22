@@ -32,6 +32,8 @@ const StyledFormRegistration = styled(Form)`
 		border-radius: 20px;
 	}
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
+		margin-top: 136px;
+		margin-bottom: 116px;
 		margin-left: 0;
 		margin-right: 0;
 	}
@@ -62,33 +64,43 @@ const StyledInput = styled(Field)`
 	border-top: none;
 	border-left: none;
 	border-right: none;
-	padding-bottom: 12px;
-	padding-top: 12px;
+	padding-bottom: 8px;
 	padding-left: 54px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 1.5;
+
 	outline: none;
 	&:-webkit-autofill {
 		transition: background-color 5000s ease-in-out 0s;
 	}
+
 	::placeholder {
 		font-style: normal;
 		font-weight: 400;
 		font-size: 18px;
 		line-height: 1.5;
-		margin: 0;
 		color: ${vars.color.font.third};
+	}
+
+	button:not(:last-child) {
+		margin-bottom: 0;
 	}
 `
 
 export const FormLogin = () => {
 	const [passwordShown, setPasswordShown] = useState(false)
+	const [valuePassword, setValuePassword] = useState('')
 
 	const dispatch = useDispatch()
 
+	const fontDotsPass = () => {
+		return !passwordShown && valuePassword.length > 0 ? { fontFamily: 'sans-serif' } : null
+	}
+
 	const handleChowPassword = () => {
 		setPasswordShown(!passwordShown)
-	}
-	const handleChangePass = (e) => {
-		console.log(e.target.value)
 	}
 
 	return (
@@ -98,9 +110,7 @@ export const FormLogin = () => {
 				password: '',
 			}}
 			onSubmit={(values, actions) => {
-				console.log(values)
 				dispatch(authOperations.logIn(values))
-				alert(JSON.stringify(values, null, 2))
 				actions.resetForm({
 					email: '',
 					password: '',
@@ -112,25 +122,29 @@ export const FormLogin = () => {
 					<LogoAuth />
 
 					<StyleIconInput>
+						<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
+							<use href={sprite + '#icon-e-mail'} />
+						</StyleSvgIcon>
 						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
 						<ErrorMessage name='email' />
 					</StyleIconInput>
-					<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
-						<use href={sprite + '#icon-e-mail'} />
-					</StyleSvgIcon>
+
 					<StyleIconInput>
 						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
 							<use href={sprite + '#icon-password'} />
 						</StyleSvgIcon>
 
 						<StyledInput
+							style={fontDotsPass()}
 							id='password'
 							type={passwordShown ? 'text' : 'password'}
 							name='password'
 							aria-label='Password'
 							required
-							value={values.password}
-							onChange={handleChange}
+							onChange={(e) => {
+								setValuePassword(e.target.value)
+								handleChange(e)
+							}}
 							onBlur={handleBlur}
 							placeholder='Password'
 						/>

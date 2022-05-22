@@ -12,7 +12,6 @@ import { ValidationSchema, RequiredValid } from '../../common/ValidationSchema'
 import { ValidationPassIndicator } from '../../common/validationPassword/validationIndicator'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
-
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -95,20 +94,18 @@ const StyledInput = styled(Field)`
 export const FormRegistration = () => {
 	const [passwordShown, setPasswordShown] = useState(false)
 	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
-	const [valueConfirmPassword, setValueConfirmPassword] = useState('')
 	const [valuePassword, setValuePassword] = useState('')
+	const [valueConfirmPassword, setValueConfirmPassword] = useState('')
 
 	const fontDotsPass = () => {
 		return !passwordShown && valuePassword.length > 0 ? { fontFamily: 'sans-serif' } : null
 	}
 
 	const fontDotsConfPass = () => {
-		return !passwordShown && valueConfirmPassword.length > 0 ? { fontFamily: 'sans-serif' } : null
+		return !confirmPasswordShown && valueConfirmPassword.length > 0 ? { fontFamily: 'sans-serif' } : null
 	}
 
-	const handleChowPassword = (el) => {
-		el.preventDefault()
-		console.log('first')
+	const handleChowPassword = () => {
 		setPasswordShown(!passwordShown)
 	}
 
@@ -162,11 +159,14 @@ export const FormRegistration = () => {
 							required
 							placeholder='Password'
 							value={values.password}
-							onChange={handleChange}
+							onChange={(e) => {
+								setValuePassword(e.target.value)
+								handleChange(e)
+							}}
 							onBlur={handleBlur}
 						/>
 						<ShowPasswordButton type='button' onClickBtn={handleChowPassword} passwordShown={passwordShown} />
-						<ErrorMessage name='password' />
+						<ErrorMessage name='password' render={<div>Invalid email address</div>} />
 					</StyleIconInput>
 
 					<StyleIconInput>
@@ -175,7 +175,7 @@ export const FormRegistration = () => {
 						</StyleSvgIcon>
 
 						<StyledInput
-							style={fontDotsConfPass}
+							style={fontDotsConfPass()}
 							id='passwordConfirm'
 							type={confirmPasswordShown ? 'text' : 'password'}
 							name='passwordConfirm'
@@ -183,6 +183,10 @@ export const FormRegistration = () => {
 							value={values.passwordConfirm}
 							placeholder='Confirm password'
 							onBlur={handleBlur}
+							onChange={(e) => {
+								setValueConfirmPassword(e.target.value)
+								handleChange(e)
+							}}
 						/>
 						<ShowPasswordButton
 							type={'button'}

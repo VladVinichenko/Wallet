@@ -17,16 +17,13 @@ const register = createAsyncThunk('auth/signup', async (credentials) => {
 	}
 })
 
-// accessToken
-// refreshToken
-
 const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signin', credentials)
 		token.set(data.data.accessToken)
 		return data && data
 	} catch (error) {
-		if (error.response.status !== 401) {
+		if (error.response.status === 401) {
 			toast.error('The service is temporarily unavailable')
 		} else {
 			toast.error('Invalid login or password')

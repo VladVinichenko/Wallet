@@ -3,11 +3,10 @@ import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md'
 import { vars } from 'stylesheet/vars.js'
 const ShowPassword = styled.button`
 	position: absolute;
-	top: 50%;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	top: 50%;
 	right: 10px;
 	width: 36px;
 	height: 36px;
@@ -34,7 +33,7 @@ const ShowPassword = styled.button`
 
 const Visibility = {
 	position: 'absolute',
-	// opacity: '0',
+
 	top: ' 50%',
 	left: '50%',
 	width: '20px',
