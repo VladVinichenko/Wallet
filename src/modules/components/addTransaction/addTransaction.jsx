@@ -65,8 +65,8 @@ const StyledGroup = styled.div`
 
 	svg {
 		position: absolute;
-		top: 2px;
-		right: 10px;
+		top: 1px;
+		right: 15px;
 	}
 
 	@media screen and (min-width: 768px) {
@@ -85,6 +85,7 @@ const StyledTextarea = styled.textarea`
 	line-height: 1.5;
 	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 	resize: none;
+	overflow: hidden;
 
 	&::placeholder {
 		color: ${vars.color.font.third};
@@ -106,7 +107,6 @@ const Title = styled.h2`
 		font-size: 30px;
 	}
 `
-
 const FormContainer = styled.div`
 	padding: 20px 10px;
 	padding-bottom: 0;
@@ -135,13 +135,73 @@ const FormContainer = styled.div`
 		margin-bottom: 20px;
 	}
 
-	.MuiSelectUnstyled-root {
+	.MuiMenuItem-root {
+		background: red;
+	}
+
+	.MuiFormControl-root {
 		margin-bottom: 40px;
+	}
+
+	.MuiSelect-select-root:before {
+		display: none;
+	}
+
+	.MuiSelect-select {
+		font-family: Circe, sans-serif;
+		font-size: 18px;
+		box-sizing: border-box;
+		min-height: calc(1.5em + 22px);
+		/* width: 280px; */
+		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		background: #ffffff;
+		padding: 10px 0;
+		text-align: left;
+		line-height: 1.5;
+		color: ${vars.color.accent.buttonOpenMenu};
+		&:hover {
+			border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		}
+		&:hover,
+		&:focus,
+		&:active {
+			background: #ffffff;
+			border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		}
+	}
+
+	/* .MuiSelect-filled {
+    width: 400px;
+    background: red;
+    border: none;
+    outline: none;
+  } */
+
+	Select {
+		margin-bottom: 40px;
+		padding-left: 20px;
 		width: 100%;
+		border: none;
+		border-bottom: 1px solid red;
+		outline: none;
+		font-size: 18px;
+		line-height: 1.5;
+
+		@media screen and (min-width: 768px) {
+			width: 394px;
+		}
+		option {
+			background-color: yellow;
+			font-size: 18px;
+		}
 	}
 
 	.switchContainer {
 		margin-bottom: 40px;
+	}
+
+	.MuiFormControl-root {
+		width: 100%;
 	}
 
 	// select {
@@ -164,7 +224,6 @@ const FormContainer = styled.div`
 
 export const AddTransaction = () => {
 	const [date, setDate] = useState(new Date())
-	const [category, setCategory] = useState('628356e997d487932b456343')
 	const dispatch = useDispatch()
 
 	const closeModal = () => {
@@ -179,7 +238,7 @@ export const AddTransaction = () => {
 
 	const handleDateChange = ({ _d: time }) => setDate(time)
 
-	const addTransaction = async (values) => {
+	const onSubmitFunc = async (values) => {
 		if (values.isIncome) values.category = '628587f997d487932b456397'
 
 		const type = values.isIncome ? 'income' : 'outlay'
@@ -196,7 +255,6 @@ export const AddTransaction = () => {
 			console.log(error.message)
 		}
 		closeModal()
-		// console.log(values)
 
 		// await new Promise((resolve) => setTimeout(resolve, 500))
 		// alert(JSON.stringify(values, null, 2))
@@ -214,31 +272,21 @@ export const AddTransaction = () => {
 		<FormContainer className='addTransaction'>
 			<Title>Add transaction</Title>
 			<Formik
-				initialValues={{ isIncome: false, category, sum: '', date, comment: '' }}
-				onSubmit={addTransaction}
+				initialValues={{ isIncome: false, category: '628356e997d487932b456343', sum: '', date, comment: '' }}
+				onSubmit={onSubmitFunc}
 				validationSchema={transactionSchena}
 			>
-				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
+				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit, setValues }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
-						<Checkbox className={'switch'} isChecked={values.isIncome} func={handleChange} />
-
+						<Checkbox className='switch' isChecked={values.isIncome} func={handleChange} val={values.category} />
 						{!values.isIncome && (
-							<OpenMenu data={updtdCategories} val={values.category} func={handleChange} lab='category' />
+							<OpenMenu
+								data={updtdCategories}
+								value={values.category}
+								func={(category) => setValues({ ...values, category })}
+								lab='category'
+							/>
 						)}
-						{/* {values.isIncome && (
-							<select name='category' onChange={handleChange}>
-								<option value='' className='select-placeholder' disabled selected hidden>
-									choose category
-								</option>
-								{categories.map((category, index) => {
-									return (
-										<option value={category._id} key={index}>
-											{category.name}
-										</option>
-									)
-								})}
-							</select>
-						)} */}
 						{/* {errors.category && touched.category && <div className='input-feedback'>{errors.category}</div>} */}
 						{errors.category && touched.category && errors.category}
 
@@ -256,17 +304,16 @@ export const AddTransaction = () => {
 							/>
 							{/* {errors.sum && touched.sum && errors.sum} */}
 							{/* <ErrorMessage name='sum' component='div' /> */}
+
 							<span className='dateInputWrapper'>
 								<Datetime
 									name='date'
 									dateFormat='DD.MM.YYYY'
 									timeFormat={false}
 									initialValue={values.date}
-									// updateOnView='time'
 									closeOnSelect={true}
 									onChange={handleDateChange}
 								/>
-
 								<svg className='calendarIcon' width='24' height='24'>
 									<use href={sprite + '#icon-calendar'}></use>
 								</svg>
@@ -297,6 +344,7 @@ export const AddTransaction = () => {
 								</Button>
 							</li>
 						</ul>
+						{/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
 					</form>
 				)}
 			</Formik>

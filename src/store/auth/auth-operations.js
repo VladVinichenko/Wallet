@@ -53,8 +53,7 @@ const fetchRefreshToken = createAsyncThunk('auth/refresh-tokens', async (_, thun
 		token.set(data.data.accessToken)
 		return data && data
 	} catch (error) {
-		console.error('NO-REFRESH')
-		console.error(error.message)
+		// console.error(error.message)
 	}
 })
 
@@ -63,7 +62,7 @@ const fetchCurrentUser = createAsyncThunk('users/current', async () => {
 		const { data } = await axios.get('users/current')
 		return data && data
 	} catch (error) {
-		console.error(error.message)
+		// console.error(error.message)
 	}
 })
 
@@ -72,7 +71,7 @@ const fetchVerify = createAsyncThunk('auth/verify', async (verifyToken) => {
 	try {
 		await axios.get(`auth/verify/${verifyToken}`)
 	} catch (error) {
-		console.error(error.message)
+		// console.error(error.message)
 	}
 })
 

@@ -39,7 +39,6 @@ export const addTransaction = createAsyncThunk('finance/add', async (transaction
 		const { data } = await axios.post('finance', transaction)
 		return data && data
 	} catch (error) {
-		console.dir(error)
 		return rejectWithValue(error.message)
 	}
 })
