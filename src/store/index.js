@@ -12,6 +12,7 @@ import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, REGISTER, PURGE, PERSIST } from 'redux-persist'
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL
+axios.defaults.withCredentials = true
 
 export const token = {
 	set(token) {
@@ -25,7 +26,7 @@ export const token = {
 const authPersistConfig = {
 	key: 'auth',
 	storage,
-	whitelist: ['accessToken', 'refreshToken'],
+	whitelist: ['accessToken'],
 }
 
 const logger = null
