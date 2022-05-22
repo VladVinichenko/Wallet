@@ -31,7 +31,7 @@ const authSlice = createSlice({
 			state.accessToken = action.payload.accessToken
 			state.refreshToken = action.payload.refreshToken
 			state.isLoggedIn = false
-			toast.success(`Check your email for verify: ${action.payload.user.email}`)
+			// toast.success(`Check your email for verify: ${action.payload.user.email}`)
 		},
 		[authOperation.logIn.pending](state) {
 			state.isLoggedIn = false
@@ -41,7 +41,6 @@ const authSlice = createSlice({
 			state.accessToken = action.payload.data.accessToken
 			state.refreshToken = action.payload.data.refreshToken
 			state.isLoggedIn = true
-			toast.success(`Welome!`)
 		},
 		[authOperation.logOut.fulfilled](state, action) {
 			state.user = { name: null, email: null }
