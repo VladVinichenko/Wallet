@@ -4,8 +4,9 @@ export const tableColumns = [
 		value: 'date',
 		type: 'UnixTime',
 		style: {
-			width: 80,
+			width: 55,
 			justifyContent: 'flex-start',
+			marginRight: '48px',
 		},
 	},
 	{
@@ -15,6 +16,7 @@ export const tableColumns = [
 		style: {
 			width: 40,
 			justifyContent: 'center',
+			marginRight: '54px',
 		},
 	},
 	{
@@ -24,6 +26,7 @@ export const tableColumns = [
 		style: {
 			width: 110,
 			justifyContent: 'flex-start',
+			marginRight: '0',
 		},
 	},
 	{
@@ -36,12 +39,13 @@ export const tableColumns = [
 		},
 	},
 	{
-		label: 'Summa',
+		label: 'Sum',
 		value: 'sum',
-		type: 'Summa',
+		type: 'Sum',
 		style: {
 			width: 110,
 			justifyContent: 'flex-end',
+			marginRight: 'auto',
 		},
 	},
 	{
@@ -51,6 +55,7 @@ export const tableColumns = [
 		style: {
 			width: 110,
 			justifyContent: 'flex-end',
+			marginRight: '0',
 		},
 	},
 ]
