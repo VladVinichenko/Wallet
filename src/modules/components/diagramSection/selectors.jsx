@@ -42,10 +42,12 @@ const yearOptions = [1970, 2020, 2021, 2022]
 
 
 const Selects = ({ setData }) => {
+  
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
   useEffect(() => {
+    
     if (month !== '' && year !== '') { 
       setData({month, year})
     }
