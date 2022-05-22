@@ -1,13 +1,22 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { Formik, ErrorMessage } from 'formik'
+// import FormControl from '@material-ui/core/FormControl'
+import { makeStyles } from '@material-ui/core/styles'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import NativeSelect from '@material-ui/core/NativeSelect'
+import { Formik, ErrorMessage, Field } from 'formik'
 import Datetime from 'react-datetime'
-// import { OpenMenu } from '..'
+import { OpenMenu } from '../OpenMenu'
 import { Button } from 'modules'
 import { Checkbox } from 'modules/common'
 import styled from 'styled-components'
 import * as Yup from 'yup'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles'
+
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
 
 import {
 	setCloseModal,
@@ -24,9 +33,6 @@ import { sprite } from 'assets'
 import 'react-datetime/css/react-datetime.css'
 
 import Box from '@mui/material/Box'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormControl from '@mui/material/FormControl'
 
 ////////////
 
@@ -115,6 +121,12 @@ const Title = styled.h2`
 	}
 `
 
+const theme = createTheme({
+	overrides: {
+		// Style sheet name ⚛️
+	},
+})
+
 const FormContainer = styled.div`
 	padding: 20px 10px;
 	padding-bottom: 0;
@@ -143,16 +155,67 @@ const FormContainer = styled.div`
 		margin-bottom: 20px;
 	}
 
-	.MuiSelectUnstyled-root {
+	.MuiPaper-root {
+		font-family: Circe, sans-serif;
+		font-size: 18px;
+		line-height: 27px;
+		font-weight: 400;
+		box-sizing: border-box;
+		padding: 20px 0;
+		margin: 10px 0;
+		width: 95vw;
+		// height: 352px;
+		background: ${vars.color.background.openMenu};
+		border: 1px solid inherit;
+		border-radius: ${vars.borderRadius.primary};
+		box-shadow: ${vars.boxShadow.openMenu};
+		backdrop-filter: blur(50px);
+		overflow: auto;
+		outline: 0px;
+		cursor: pointer;
+
+		@media (min-width: ${vars.breakpoints.tablet}) {
+			width: 394px;
+			// height: 352px;
+		}
+	}
+
+	.MuiFormControl-root {
 		margin-bottom: 40px;
-		width: 100%;
 	}
-	.MuiSelect-filled {
-		width: 400px;
-		background: red;
-		border: none;
-		outline: none;
+
+	.MuiSelect-select {
+		font-family: Circe, sans-serif;
+		font-size: 18px;
+		box-sizing: border-box;
+		min-height: calc(1.5em + 22px);
+		/* width: 280px; */
+		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		background: #ffffff;
+		padding: 10px 0;
+		text-align: left;
+		line-height: 1.5;
+		color: ${vars.color.accent.buttonOpenMenu};
+		&:hover {
+			border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		}
+		&:hover,
+		&:focus,
+		&:active {
+			background: #ffffff;
+		}
 	}
+
+	.native-option {
+		background: blue;
+	}
+
+	/* .MuiSelect-filled {
+    width: 400px;
+    background: red;
+    border: none;
+    outline: none;
+  } */
 
 	Select {
 		margin-bottom: 40px;
@@ -171,10 +234,58 @@ const FormContainer = styled.div`
 			background-color: yellow;
 			font-size: 18px;
 		}
+	}
 	.switchContainer {
 		margin-bottom: 40px;
 	}
 
+	.MuiFormControl-root {
+		width: 100%;
+	}
+
+	.native-foyrm {
+		font-family: Circe, sans-serif;
+		font-size: 18px;
+		box-sizing: border-box;
+		min-height: calc(1.5em + 22px);
+		width: 280px;
+		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		padding: 10px 0;
+		text-align: left;
+		line-height: 1.5;
+		color: ${vars.color.accent.buttonOpenMenu};
+	}
+
+	.native-selyect {
+		font-family: Circe, sans-serif;
+		font-size: 18px;
+		box-sizing: border-box;
+		min-height: calc(1.5em + 22px);
+		width: 280px;
+		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		padding: 10px 0;
+		text-align: left;
+		line-height: 1.5;
+		color: ${vars.color.accent.buttonOpenMenu};
+
+		@media (min-width: ${vars.breakpoints.tablet}) {
+			width: 394px;
+		}
+	}
+
+	.native-optyion {
+		list-style: none;
+		padding: 8px;
+		border-radius: 30px;
+		&:last-of-type {
+			border-bottom: none;
+		}
+
+		&:hover {
+			background-color: ${vars.color.background.primary};
+			color: ${vars.color.accent.openMenu};
+		}
+	}
 	// select {
 	// 	margin-bottom: 40px;
 	// 	padding-left: 20px;
@@ -196,8 +307,31 @@ const FormContainer = styled.div`
 export const AddTransaction = () => {
 	const [date, setDate] = useState(new Date())
 	const [category, setCategory] = useState('628356e997d487932b456343')
+
 	const dispatch = useDispatch()
 
+	const handleChange = (event) => {
+		const name = event.target.name
+		setState({
+			...state,
+			[name]: event.target.value,
+		})
+	}
+	const [state, setState] = useState({
+		age: '',
+		name: 'hai',
+	})
+
+	const useStyles = makeStyles((theme) => ({
+		formControl: {
+			margin: theme.spacing(1),
+			minWidth: 120,
+		},
+		selectEmpty: {
+			marginTop: theme.spacing(2),
+		},
+	}))
+	const classes = useStyles()
 	const closeModal = () => {
 		dispatch(setCloseModal())
 	}
@@ -218,19 +352,19 @@ export const AddTransaction = () => {
 		delete values.isIncome
 
 		try {
-			await postTransaction(values)
-			await dispatch(resetFinance())
-			await dispatch(authOperations.fetchCurrentUser())
-			await dispatch(fetchTotalFinance())
-			await dispatch(fetchFinance())
+			/* await postTransaction(values)
+      await dispatch(resetFinance())
+      await dispatch(authOperations.fetchCurrentUser())
+      await dispatch(fetchTotalFinance())
+      await dispatch(fetchFinance()) */
 		} catch (error) {
 			console.log(error.message)
 		}
-		closeModal()
+		/* closeModal() */
 		// console.log(values)
 
-		// await new Promise((resolve) => setTimeout(resolve, 500))
-		// alert(JSON.stringify(values, null, 2))
+		await new Promise((resolve) => setTimeout(resolve, 500))
+		alert(JSON.stringify(values, null, 2))
 	}
 
 	const transactionSchena = Yup.object().shape({
@@ -251,45 +385,64 @@ export const AddTransaction = () => {
 			>
 				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
-						<Field type='checkbox' name='isConsumption' onChange={handleChange} />
-
-						{values.isConsumption && (
-							<Box sx={{ minWidth: 394 }}>
-								<FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-									<Select value={values.category} name='category' variant='outlined' onChange={handleChange}>
+						{/* <Field type='checkbox' name='isConsumption' onChange={handleChange} /> */}
+						<Checkbox className={'switch'} isChecked={values.isIncome} func={handleChange} />
+						{values.isIncome && (
+							<ThemeProvider theme={theme}>
+								<FormControl>
+									{/* <InputLabel htmlFor='age-native-helper'>Age</InputLabel> */}
+									<Select
+										value={values.category}
+										onChange={handleChange}
+										name='category'
+										className='native-select'
+										inputProps={{ 'aria-label': 'age' }}
+										variant='filled'
+									>
 										{categories.map((category, index) => {
 											return (
-												<MenuItem value={category._id} key={index}>
+												<MenuItem className='native-option' value={category._id} key={index}>
 													{category.name}
 												</MenuItem>
 											)
 										})}
 									</Select>
+									{/* <FormHelperText>Some important helper text</FormHelperText> */}
 								</FormControl>
-							</Box>
-						)}
-						<Checkbox className={'switch'} isChecked={values.isIncome} func={handleChange} />
-
-						{!values.isIncome && (
-							<OpenMenu data={updtdCategories} val={values.category} func={handleChange} lab='category' />
-						)}
+							</ThemeProvider>
+						)}{' '}
+						{/* <Box sx={{ minWidth: 394 }}> */}
+						{/* <FormControl sx={{ m: 1, width: 300, mt: 3 }} className={classes.formControl}>
+                  <Select value={values.category} name='category' variant='outlined' onChange={handleChange}>
+                    {categories.map((category, index) => {
+                      return (
+                        <MenuItem value={category._id} key={index}>
+                          {category.name}
+                        </MenuItem>
+                      )
+                    })}
+                  </Select>
+                </FormControl> */}
+						{/* </Box> */}
+						{/* {!values.isIncome && (
+              <OpenMenu data={updtdCategories} val={values.category} func={handleChange} lab='category' />
+            )}{' '} */}
 						{/* {values.isIncome && (
-							<select name='category' onChange={handleChange}>
-								<option value='' className='select-placeholder' disabled selected hidden>
-									choose category
-								</option>
-								{categories.map((category, index) => {
-									return (
-										<option value={category._id} key={index}>
-											{category.name}
-										</option>
-									)
-								})}
-							</select>
-						)} */}
+              <select name='category' onChange={handleChange}>
+                <option value='' className='select-placeholder' disabled selected hidden>
+                  choose category
+                </option>
+                {categories.map((category, index) => {
+                  return (
+                    <option value={category._id} key={index}>
+                      {category.name}
+                    </option>
+                  )
+                })}
+              </select>
+            )} */}
 						{/* {errors.category && touched.category && <div className='input-feedback'>{errors.category}</div>} */}
 						{errors.category && touched.category && errors.category}
-
 						<StyledGroup className='group'>
 							<SummInput
 								type='number'
@@ -321,7 +474,6 @@ export const AddTransaction = () => {
 							</span>
 						</StyledGroup>
 						{errors.date && touched.date && errors.date}
-
 						<StyledTextarea
 							type='text'
 							name='comment'
@@ -332,7 +484,6 @@ export const AddTransaction = () => {
 						/>
 						<ErrorMessage name='sum' className='error-message' component='div' />
 						{/* {errors.sum && touched.sum && <div className='error-message'>{errors.sum}</div>} */}
-
 						<ul className='button-list'>
 							<li className='button-item'>
 								<Button type='submit' disabled={isSubmitting}>
