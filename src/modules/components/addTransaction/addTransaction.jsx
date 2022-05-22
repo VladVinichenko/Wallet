@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import NativeSelect from '@material-ui/core/NativeSelect'
-import { Formik, ErrorMessage, Field } from 'formik'
+import { Formik, ErrorMessage, Field, useFormik } from 'formik'
 import Datetime from 'react-datetime'
 import { OpenMenu } from '../OpenMenu'
 // import OpenMenu from '../OpenMenu'
@@ -18,6 +18,10 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+
+import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
+import PopperUnstyled from '@mui/base/PopperUnstyled'
 
 import {
 	setCloseModal,
@@ -156,31 +160,6 @@ const FormContainer = styled.div`
 		margin-bottom: 20px;
 	}
 
-	.MuiPaper-root {
-		font-family: Circe, sans-serif;
-		font-size: 18px;
-		line-height: 27px;
-		font-weight: 400;
-		box-sizing: border-box;
-		padding: 20px 0;
-		margin: 10px 0;
-		width: 95vw;
-		// height: 352px;
-		background: ${vars.color.background.openMenu};
-		border: 1px solid inherit;
-		border-radius: ${vars.borderRadius.primary};
-		box-shadow: ${vars.boxShadow.openMenu};
-		backdrop-filter: blur(50px);
-		overflow: auto;
-		outline: 0px;
-		cursor: pointer;
-
-		@media (min-width: ${vars.breakpoints.tablet}) {
-			width: 394px;
-			// height: 352px;
-		}
-	}
-
 	.MuiMenuItem-root {
 		background: red;
 	}
@@ -241,6 +220,7 @@ const FormContainer = styled.div`
 			font-size: 18px;
 		}
 	}
+
 	.switchContainer {
 		margin-bottom: 40px;
 	}
@@ -268,6 +248,7 @@ const FormContainer = styled.div`
 `
 
 export const AddTransaction = () => {
+	// const [character, setCharacter] = useState(characters[0])
 	const [date, setDate] = useState(new Date())
 	const [category, setCategory] = useState('628356e997d487932b456343')
 
@@ -347,35 +328,17 @@ export const AddTransaction = () => {
 				onSubmit={addTransaction}
 				validationSchema={transactionSchena}
 			>
-				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
+				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit, setValues }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
 						{/* <Field type='checkbox' name='isConsumption' onChange={handleChange} /> */}
-						<Checkbox className={'switch'} isChecked={values.isIncome} func={handleChange} />
+						<Checkbox className='switch' isChecked={values.isIncome} func={handleChange} val={values.category} />
 						{!values.isIncome && (
-							// <OpenMenu data={updtdCategories} val={values.category} func={handleChange} lab='category' />
-
-							<ThemeProvider theme={theme}>
-								<FormControl>
-									{/* <InputLabel htmlFor='age-native-helper'>Age</InputLabel> */}
-									<Select
-										value={values.category}
-										onChange={handleChange}
-										name='category'
-										className='native-select'
-										inputProps={{ 'aria-label': 'age' }}
-										variant='filled'
-									>
-										{categories.map((category, index) => {
-											return (
-												<MenuItem className='native-option' value={category._id} key={index}>
-													{category.name}
-												</MenuItem>
-											)
-										})}
-									</Select>
-									{/* <FormHelperText>Some important helper text</FormHelperText> */}
-								</FormControl>
-							</ThemeProvider>
+							<OpenMenu
+								data={updtdCategories}
+								val={values.category}
+								func={(e) => setValues({ ...values, category: e })}
+								lab='category'
+							/>
 						)}{' '}
 						{/* <Box sx={{ minWidth: 394 }}> */}
 						{/* <FormControl sx={{ m: 1, width: 300, mt: 3 }} className={classes.formControl}>

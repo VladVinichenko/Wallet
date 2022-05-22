@@ -1,26 +1,12 @@
 import * as React from 'react'
-import Select from 'react-select'
-
-// export const OpenMenu = ({ onChange, options, value, classNname }) => {
-// 	const defaultValue = (options, value) => {
-// 		return options ? options.find((options) => options.value === value) : ''
-// 	}
-// 	return (
-// 		<div className={classNname}>
-// 			<Select value={defaultValue(options, value)} onChange={(value) => onChange(value)} options={options} />
-// 		</div>
-// 	)
-// }
 import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
 import { StyledEngineProvider } from '@mui/material/styles'
 import { vars } from 'stylesheet'
-import { Field, useFormik } from 'formik'
-import rowDown from 'assets/images/openMenu/row-down.svg'
 
-import { connect, getIn } from 'formik'
+import rowDown from 'assets/images/openMenu/row-down.svg'
 
 const blue = {
 	100: '#DAECFF',
@@ -49,12 +35,14 @@ const StyledButton = styled('button')(
   font-size: 18px;
   box-sizing: border-box;
   min-height: calc(1.5em + 22px);
-  width: 280px;
+  width: 100%;
   border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
   padding: 10px 0;
   text-align: left;
   line-height: 1.5;
+	margin-bottom:40px;
   color: ${vars.color.accent.buttonOpenMenu};
+
 
   &.${selectUnstyledClasses.focusVisible} {
     outline: 2px solid ${vars.color.accent.buttonOpenMenu};
@@ -70,7 +58,7 @@ const StyledButton = styled('button')(
   &::after {
     content: url(${rowDown});
     float: right;
-
+    
   }
 
   @media (min-width: ${vars.breakpoints.tablet}) {
@@ -112,8 +100,11 @@ const StyledOption = styled(OptionUnstyled)(
   padding: 8px;
 //   border-radius: 30px;
   // cursor: red;
+  
 
-
+  &:last-of-type {
+    border-bottom: none;
+  }
 
 //   &.${optionUnstyledClasses.selected} {
 //     background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
@@ -156,70 +147,31 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 	return <SelectUnstyled {...props} ref={ref} components={components} />
 })
 
-export const OpenMenu = connect((props) => {
-	// export const OpenMenu = ({ data, val, func, lab }) => {
-	// const formik = useFormik({
-	// 	initialValues: {
-	// 		email: 'foobar@example.com',
-	// 		password: 'foobar',
-	// 	},
-	// 	// validationSchema: validationSchema,
-	// 	// onSubmit: (values) => {
-	// 	// 	alert(JSON.stringify(values, null, 2))
-	// 	// },
-	// })
-
-	// console.log(data)
-	// console.log(val)
-	const [value, setValue] = React.useState('')
-
-	console.log('value:', value)
+export const OpenMenu = ({ data, val, func }) => {
+	console.log(val)
 	function renderValue(option) {
 		if (option == null) {
 			return <span>Select category...</span>
 		}
-		// console.log(data.find((e) => e._id))
-		return <span></span>
-	}
 
-	const meow = (e) => {
-		getIn(props.formik.select, props.name)
+		return <span>{renderName(val)}</span>
 	}
-	// 	return (
-	// 		<>
-	// 			<input type='text' />
-	// 			<StyledEngineProvider injectFirst>
-	// 				<CustomSelect renderValue={renderValue} name={lab} value={val}>
-	// 					{data.map((category) => {
-	// 						return (
-	// 							<StyledOption value={category._id} key={category._id}>
-	// 								{category.name}
-	// 							</StyledOption>
-	// 						)
-	// 					})}
-	// 				</CustomSelect>
-	// 			</StyledEngineProvider>
-	// 		</>
-	// 	)
-	// }
+	const renderName = (el) => {
+		return data.find((e) => e._id === el).name
+	}
 	return (
-		<Field
-			name='category'
-			render={({ field }) => {
-				return (
-					<StyledEngineProvider injectFirst>
-						<CustomSelect renderValue={renderValue} onChange={field.onChange}>
-							{props.data.map((category) => {
-								return (
-									<StyledOption value={category._id} key={category._id}>
-										{category.name}
-									</StyledOption>
-								)
-							})}
-						</CustomSelect>
-					</StyledEngineProvider>
-				)
-			}}
-		/>
+		<>
+			<StyledEngineProvider injectFirst>
+				<CustomSelect renderValue={renderValue} onChange={func}>
+					{data.map((category) => {
+						return (
+							<StyledOption value={category._id} key={category._id}>
+								{category.name}
+							</StyledOption>
+						)
+					})}
+				</CustomSelect>
+			</StyledEngineProvider>
+		</>
 	)
-})
+}
