@@ -14,6 +14,7 @@ const StatisticsSection = styled.section`
 @media (min-width:${vars.breakpoints.tablet}) and (max-width:${vars.breakpoints.tabletUp}) {
   /*  position: relative; */
 padding-bottom: 35px;
+min-height: 350px;
 }
 padding-bottom: 50px;
 
