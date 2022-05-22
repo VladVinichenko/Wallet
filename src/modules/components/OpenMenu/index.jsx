@@ -35,11 +35,12 @@ const StyledButton = styled('button')(
   font-size: 18px;
   box-sizing: border-box;
   min-height: calc(1.5em + 22px);
-  width: 280px;
+  width: 100%;
   border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
   padding: 10px 0;
   text-align: left;
   line-height: 1.5;
+	margin-bottom:40px;
   color: ${vars.color.accent.buttonOpenMenu};
 
 
@@ -145,25 +146,26 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 
 	return <SelectUnstyled {...props} ref={ref} components={components} />
 })
-function renderValue(option) {
-	if (option == null) {
-		return <span>Select category...</span>
+
+export const OpenMenu = ({ data, value, func }) => {
+	// console.log(value)
+	function renderValue(option) {
+		if (option == null) {
+			return <span>Select category...</span>
+		}
+		return <span>{renderName(value)}</span>
 	}
 
-	return <span>{option.value}</span>
-}
-
-export const OpenMenu = ({ data, val, func, lab }) => {
-	const [value, setValue] = React.useState('')
-	// console.log('value:', value)
-
+	const renderName = (id) => {
+		return data.find((category) => category._id === id).name
+	}
 	return (
 		<>
 			<StyledEngineProvider injectFirst>
-				<CustomSelect renderValue={renderValue} value={value} onChange={setValue}>
+				<CustomSelect renderValue={renderValue} onChange={func}>
 					{data.map((category) => {
 						return (
-							<StyledOption value={category.name} key={category._id}>
+							<StyledOption value={category._id} key={category._id}>
 								{category.name}
 							</StyledOption>
 						)

@@ -44,17 +44,16 @@ const logOut = createAsyncThunk('auth/signout', async () => {
 	}
 })
 
-const fetchRefreshToken = createAsyncThunk('auth/refresh-tokens', async (_, thunkAPI) => {
-	const state = thunkAPI.getState()
-	const refreshToken = state.auth.refreshToken
-	!refreshToken && thunkAPI.rejectWithValue() //logout
+const fetchRefreshToken = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+	// const state = thunkAPI.getState()
+	// const refreshToken = state.auth.refreshToken
+	// !refreshToken && thunkAPI.rejectWithValue() //logout
 	try {
-		const { data } = await axios.post('auth/refresh-tokens', { refreshToken })
+		const { data } = await axios.get('auth/refresh')
 		token.set(data.data.accessToken)
 		return data && data
 	} catch (error) {
-		console.error('NO-REFRESH')
-		console.error(error.message)
+		// console.error(error.message)
 	}
 })
 
@@ -63,7 +62,7 @@ const fetchCurrentUser = createAsyncThunk('users/current', async () => {
 		const { data } = await axios.get('users/current')
 		return data && data
 	} catch (error) {
-		console.error(error.message)
+		// console.error(error.message)
 	}
 })
 
@@ -72,7 +71,7 @@ const fetchVerify = createAsyncThunk('auth/verify', async (verifyToken) => {
 	try {
 		await axios.get(`auth/verify/${verifyToken}`)
 	} catch (error) {
-		console.error(error.message)
+		// console.error(error.message)
 	}
 })
 
