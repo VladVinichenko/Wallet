@@ -352,19 +352,19 @@ export const AddTransaction = () => {
 		delete values.isIncome
 
 		try {
-			/* await postTransaction(values)
-      await dispatch(resetFinance())
-      await dispatch(authOperations.fetchCurrentUser())
-      await dispatch(fetchTotalFinance())
-      await dispatch(fetchFinance()) */
+			await postTransaction(values)
+			await dispatch(resetFinance())
+			await dispatch(authOperations.fetchCurrentUser())
+			await dispatch(fetchTotalFinance())
+			await dispatch(fetchFinance())
 		} catch (error) {
 			console.log(error.message)
 		}
-		/* closeModal() */
+		closeModal()
 		// console.log(values)
 
-		await new Promise((resolve) => setTimeout(resolve, 500))
-		alert(JSON.stringify(values, null, 2))
+		// await new Promise((resolve) => setTimeout(resolve, 500))
+		// alert(JSON.stringify(values, null, 2))
 	}
 
 	const transactionSchena = Yup.object().shape({
