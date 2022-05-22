@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Formik, ErrorMessage } from 'formik'
 import Datetime from 'react-datetime'
-import { OpenMenu } from '..'
-import { Button } from 'modules'
+import { OpenMenu, Button } from 'modules'
 import { Checkbox } from 'modules/common'
 import styled from 'styled-components'
 import * as Yup from 'yup'
@@ -39,6 +38,7 @@ const StyledInput = styled.input`
 const SummInput = styled(StyledInput)`
 	font-weight: 700;
 	text-align: center;
+	margin-bottom: 40px;
 
 	&::placeholder {
 		text-align: center;
@@ -50,9 +50,9 @@ const SummInput = styled(StyledInput)`
 
 	@media screen and (min-width: 768px) {
 		margin-right: 30px;
+		margin-bottom: unset;
 	}
 `
-
 const StyledGroup = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -135,67 +135,6 @@ const FormContainer = styled.div`
 		margin-bottom: 20px;
 	}
 
-	.MuiMenuItem-root {
-		background: red;
-	}
-
-	.MuiFormControl-root {
-		margin-bottom: 40px;
-	}
-
-	.MuiSelect-select-root:before {
-		display: none;
-	}
-
-	.MuiSelect-select {
-		font-family: Circe, sans-serif;
-		font-size: 18px;
-		box-sizing: border-box;
-		min-height: calc(1.5em + 22px);
-		/* width: 280px; */
-		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
-		background: #ffffff;
-		padding: 10px 0;
-		text-align: left;
-		line-height: 1.5;
-		color: ${vars.color.accent.buttonOpenMenu};
-		&:hover {
-			border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
-		}
-		&:hover,
-		&:focus,
-		&:active {
-			background: #ffffff;
-			border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
-		}
-	}
-
-	/* .MuiSelect-filled {
-    width: 400px;
-    background: red;
-    border: none;
-    outline: none;
-  } */
-
-	Select {
-		margin-bottom: 40px;
-		padding-left: 20px;
-		width: 100%;
-		border: none;
-		border-bottom: 1px solid red;
-		outline: none;
-		font-size: 18px;
-		line-height: 1.5;
-
-		@media screen and (min-width: 768px) {
-			width: 394px;
-		}
-		option {
-			background-color: yellow;
-			font-size: 18px;
-		}
-	}
-
 	.switchContainer {
 		margin-bottom: 40px;
 	}
@@ -203,19 +142,6 @@ const FormContainer = styled.div`
 	.MuiFormControl-root {
 		width: 100%;
 	}
-
-	// select {
-	// 	margin-bottom: 40px;
-	// 	padding-left: 20px;
-	// 	width: 100%;
-
-	// 	font-size: 18px;
-	// 	line-height: 1.5;
-
-	// 	@media screen and (min-width: 768px) {
-	// 		width: 394px;
-	// 	}
-	// }
 
 	.error-message {
 		color: ${vars.color.font.negative};
@@ -344,7 +270,6 @@ export const AddTransaction = () => {
 								</Button>
 							</li>
 						</ul>
-						{/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
 					</form>
 				)}
 			</Formik>
