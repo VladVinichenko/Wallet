@@ -23,7 +23,7 @@ const financeSlice = createSlice({
 	initialState,
 	reducers: {
 		resetFinance: (state, action) => {
-			console.log('!!!!!!')
+			// console.log('!!!!!!')
 			Object.assign(state, initialState)
 		},
 	},
@@ -63,7 +63,7 @@ const financeSlice = createSlice({
 			state.totalBalance = ''
 		},
 		[fetchTotalFinance.fulfilled]: (state, action) => {
-			console.log('fulfilled', action.payload)
+			// console.log('fulfilled', action.payload)
 			state.isLoading = false
 			state.totalBalance = action.payload.user.balance
 			state.aviableStatistics = action.payload.aviableStatistics
