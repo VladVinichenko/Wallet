@@ -35,11 +35,12 @@ const StyledButton = styled('button')(
   font-size: 18px;
   box-sizing: border-box;
   min-height: calc(1.5em + 22px);
-  width: 280px;
+  width: 100%;
   border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
   padding: 10px 0;
   text-align: left;
   line-height: 1.5;
+	margin-bottom:40px;
   color: ${vars.color.accent.buttonOpenMenu};
 
 
@@ -75,8 +76,8 @@ const StyledListbox = styled('ul')(
   box-sizing: border-box;
   padding: 20px 0;
   margin: 10px 0;
-  width: 280px;
-  height: 352px;
+  width: 95vw;
+  // height: 352px;
   background: ${vars.color.background.openMenu};
   border: 1px solid inherit;
   border-radius: ${vars.borderRadius.primary};
@@ -88,7 +89,7 @@ const StyledListbox = styled('ul')(
 
   @media (min-width: ${vars.breakpoints.tablet}) {
     width: 394px;
-    height: 352px;
+    // height: 352px;
   }
   `
 )
@@ -145,28 +146,32 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 
 	return <SelectUnstyled {...props} ref={ref} components={components} />
 })
-function renderValue(option) {
-	if (option == null) {
-		return <span>Select category...</span>
+
+export const OpenMenu = ({ data, value, func }) => {
+	// console.log(value)
+	function renderValue(option) {
+		if (option == null) {
+			return <span>Select category...</span>
+		}
+		return <span>{renderName(value)}</span>
 	}
 
-	return <span>{option.value}</span>
-}
-
-export const OpenMenu = ({ data }) => {
-	const [value, setValue] = React.useState()
-
+	const renderName = (id) => {
+		return data.find((category) => category._id === id).name
+	}
 	return (
-		<StyledEngineProvider injectFirst>
-			<CustomSelect renderValue={renderValue} value={value}>
-				{data.map((category) => {
-					return (
-						<StyledOption value={category.name} key={category._id}>
-							{category.name}
-						</StyledOption>
-					)
-				})}
-			</CustomSelect>
-		</StyledEngineProvider>
+		<>
+			<StyledEngineProvider injectFirst>
+				<CustomSelect renderValue={renderValue} onChange={func}>
+					{data.map((category) => {
+						return (
+							<StyledOption value={category._id} key={category._id}>
+								{category.name}
+							</StyledOption>
+						)
+					})}
+				</CustomSelect>
+			</StyledEngineProvider>
+		</>
 	)
 }

@@ -7,19 +7,19 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 const ChartWrap = styled.div`
 	position: relative;
 	@media (max-width: ${vars.breakpoints.tabletUp}) {
-		margin: 0 30px 0 0;
-		width: 335px;
-		height: 335px;
+		margin: 0 32px 0 0;
+		width: 336px;
+		height: 336px;
 	}
 	@media (max-width: ${vars.breakpoints.mobileUp}) {
 		width: 280px;
 		height: 280px;
-		margin: 0 0 30px 0;
+		margin: 0 0 32px 0;
 	}
 
 	@media (min-width: ${vars.breakpoints.desktop}) {
-		width: 290px;
-		height: 290px;
+		width: 288px;
+		height: 288px;
 		margin: 0 30px 0 0;
 	}
 `

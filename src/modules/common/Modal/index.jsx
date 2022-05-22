@@ -27,7 +27,7 @@ export const ModalContent = styled.div`
 	min-height: 100px;
 	border-radius: ${vars.borderRadius.primary};
 	background-color: ${vars.color.background.primary};
-	overflow: hidden;
+	// overflow: hidden;
 
 	@media screen and (max-width: ${vars.breakpoints.mobileUp}) {
 		border-radius: 0;

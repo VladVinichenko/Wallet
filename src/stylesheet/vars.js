@@ -71,6 +71,9 @@ export const vars = {
 		openMenu: '0px 6px 15px rgba(0, 0, 0, 0.1)',
 		firstCheckbox: '0px 6px 15px rgba(36, 204, 167, 0.5)',
 		secondCheckbox: '0px 6px 15px rgba(255, 101, 150, 0.5);',
+		button: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+		buttonHover: '0px 5px 0px rgb(62, 136, 120)',
+		buttonActive: '0px 2px 0px rgb(62, 136, 120)',
 	},
 	breakpoints: {
 		mobile: '320px',

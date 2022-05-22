@@ -1,22 +1,30 @@
 import { useState } from 'react'
-import styled from 'styled-components'
-import Datetime from 'react-datetime'
-import { Formik, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCloseModal, selectorsFinance, fetchTotalFinance, addTransaction as zuzuzu } from 'store'
-import authOperations from '../../../../src/store/auth/auth-operations'
-import { authSelectors } from 'store/auth'
-import { vars } from 'stylesheet'
-import { Button } from 'modules'
-// import { OpenMenu } from '..'
 
+import { Formik, ErrorMessage } from 'formik'
+import Datetime from 'react-datetime'
+import { OpenMenu } from '..'
+import { Button } from 'modules'
+import { Checkbox } from 'modules/common'
+import styled from 'styled-components'
+import * as Yup from 'yup'
+
+import {
+	setCloseModal,
+	selectorsFinance,
+	fetchTotalFinance,
+	fetchFinance,
+	resetFinance,
+	addTransaction as zuzuzu,
+} from 'store'
+import authOperations from '../../../../src/store/auth/auth-operations'
+
+import { vars } from 'stylesheet'
 import { sprite } from 'assets'
 import 'react-datetime/css/react-datetime.css'
 
 const StyledInput = styled.input`
 	box-sizing: border-box;
-	margin-bottom: 40px;
 	width: 100%;
 
 	font-size: 18px;
@@ -57,8 +65,8 @@ const StyledGroup = styled.div`
 
 	svg {
 		position: absolute;
-		top: 2px;
-		right: 10px;
+		top: 1px;
+		right: 15px;
 	}
 
 	@media screen and (min-width: 768px) {
@@ -77,6 +85,7 @@ const StyledTextarea = styled.textarea`
 	line-height: 1.5;
 	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 	resize: none;
+	overflow: hidden;
 
 	&::placeholder {
 		color: ${vars.color.font.third};
@@ -98,7 +107,6 @@ const Title = styled.h2`
 		font-size: 30px;
 	}
 `
-
 const FormContainer = styled.div`
 	padding: 20px 10px;
 	padding-bottom: 0;
@@ -111,6 +119,7 @@ const FormContainer = styled.div`
 	@media screen and (min-width: 768px) {
 		padding: 40px 75px;
 		width: 540px;
+		min-height: 605px;
 	}
 
 	.form-control {
@@ -126,18 +135,87 @@ const FormContainer = styled.div`
 		margin-bottom: 20px;
 	}
 
-	select {
+	.MuiMenuItem-root {
+		background: red;
+	}
+
+	.MuiFormControl-root {
+		margin-bottom: 40px;
+	}
+
+	.MuiSelect-select-root:before {
+		display: none;
+	}
+
+	.MuiSelect-select {
+		font-family: Circe, sans-serif;
+		font-size: 18px;
+		box-sizing: border-box;
+		min-height: calc(1.5em + 22px);
+		/* width: 280px; */
+		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		background: #ffffff;
+		padding: 10px 0;
+		text-align: left;
+		line-height: 1.5;
+		color: ${vars.color.accent.buttonOpenMenu};
+		&:hover {
+			border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		}
+		&:hover,
+		&:focus,
+		&:active {
+			background: #ffffff;
+			border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		}
+	}
+
+	/* .MuiSelect-filled {
+    width: 400px;
+    background: red;
+    border: none;
+    outline: none;
+  } */
+
+	Select {
 		margin-bottom: 40px;
 		padding-left: 20px;
 		width: 100%;
-
+		border: none;
+		border-bottom: 1px solid red;
+		outline: none;
 		font-size: 18px;
 		line-height: 1.5;
 
 		@media screen and (min-width: 768px) {
 			width: 394px;
 		}
+		option {
+			background-color: yellow;
+			font-size: 18px;
+		}
 	}
+
+	.switchContainer {
+		margin-bottom: 40px;
+	}
+
+	.MuiFormControl-root {
+		width: 100%;
+	}
+
+	// select {
+	// 	margin-bottom: 40px;
+	// 	padding-left: 20px;
+	// 	width: 100%;
+
+	// 	font-size: 18px;
+	// 	line-height: 1.5;
+
+	// 	@media screen and (min-width: 768px) {
+	// 		width: 394px;
+	// 	}
+	// }
 
 	.error-message {
 		color: ${vars.color.font.negative};
@@ -145,7 +223,7 @@ const FormContainer = styled.div`
 `
 
 export const AddTransaction = () => {
-	const [date, setDate] = useState(new Date()) //текущая дата
+	const [date, setDate] = useState(new Date())
 	const dispatch = useDispatch()
 
 	const closeModal = () => {
@@ -156,38 +234,37 @@ export const AddTransaction = () => {
 	}
 
 	const categories = useSelector(selectorsFinance.getCategories)
+	const updtdCategories = categories.filter((cat) => cat.name !== 'Income')
 
-	const handleDateChange = ({ _d: time }) => {
-		setDate(time)
-	}
+	const handleDateChange = ({ _d: time }) => setDate(time)
 
-	const addTransaction = async (values) => {
-		const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
-		if (!values.isConsumption) values.category = '628587f997d487932b456397'
+	const onSubmitFunc = async (values) => {
+		if (values.isIncome) values.category = '628587f997d487932b456397'
 
-		const type = values.isConsumption ? 'outlay' : 'income'
+		const type = values.isIncome ? 'income' : 'outlay'
 		values = { type, ...values, date }
-		delete values.isConsumption
+		delete values.isIncome
 
 		try {
-			postTransaction(values)
-			dispatch(authOperations.fetchCurrentUser())
-			dispatch(fetchTotalFinance())
+			await postTransaction(values)
+			await dispatch(resetFinance())
+			await dispatch(authOperations.fetchCurrentUser())
+			await dispatch(fetchTotalFinance())
+			await dispatch(fetchFinance())
 		} catch (error) {
 			console.log(error.message)
 		}
 		closeModal()
-		// console.log(values)
 
-		await new Promise((resolve) => setTimeout(resolve, 500))
-		alert(JSON.stringify(values, null, 2))
+		// await new Promise((resolve) => setTimeout(resolve, 500))
+		// alert(JSON.stringify(values, null, 2))
 	}
 
 	const transactionSchena = Yup.object().shape({
-		isConsumption: Yup.boolean().required('Required'),
+		isIncome: Yup.boolean().required('Required'),
 		category: Yup.string(),
 		sum: Yup.number().required('Sum is Required'),
-		// date: Yup.date().required('Required').default(date),
+		date: Yup.date().required('Required'),
 		comment: Yup.string(),
 	})
 
@@ -195,30 +272,24 @@ export const AddTransaction = () => {
 		<FormContainer className='addTransaction'>
 			<Title>Add transaction</Title>
 			<Formik
-				initialValues={{ isConsumption: true, category: '628356e997d487932b456343', sum: '', date, comment: '' }}
-				onSubmit={addTransaction}
+				initialValues={{ isIncome: false, category: '628356e997d487932b456343', sum: '', date, comment: '' }}
+				onSubmit={onSubmitFunc}
 				validationSchema={transactionSchena}
 			>
-				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
+				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit, setValues }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
-						<Field type='checkbox' name='isConsumption' onChange={handleChange} />
-						{/* <OpenMenu /> */}
-						{values.isConsumption && (
-							<select name='category' onChange={handleChange}>
-								<option value='' className='select-placeholder' disabled selected hidden>
-									choose category
-								</option>
-								{categories.map((category, index) => {
-									return (
-										<option value={category._id} key={index}>
-											{category.name}
-										</option>
-									)
-								})}
-							</select>
+						<Checkbox className='switch' isChecked={values.isIncome} func={handleChange} val={values.category} />
+						{!values.isIncome && (
+							<OpenMenu
+								data={updtdCategories}
+								value={values.category}
+								func={(category) => setValues({ ...values, category })}
+								lab='category'
+							/>
 						)}
 						{/* {errors.category && touched.category && <div className='input-feedback'>{errors.category}</div>} */}
 						{errors.category && touched.category && errors.category}
+
 						<StyledGroup className='group'>
 							<SummInput
 								type='number'
@@ -233,14 +304,15 @@ export const AddTransaction = () => {
 							/>
 							{/* {errors.sum && touched.sum && errors.sum} */}
 							{/* <ErrorMessage name='sum' component='div' /> */}
+
 							<span className='dateInputWrapper'>
 								<Datetime
 									name='date'
 									dateFormat='DD.MM.YYYY'
 									timeFormat={false}
 									initialValue={values.date}
+									closeOnSelect={true}
 									onChange={handleDateChange}
-									className='groupItem'
 								/>
 								<svg className='calendarIcon' width='24' height='24'>
 									<use href={sprite + '#icon-calendar'}></use>
@@ -248,6 +320,7 @@ export const AddTransaction = () => {
 							</span>
 						</StyledGroup>
 						{errors.date && touched.date && errors.date}
+
 						<StyledTextarea
 							type='text'
 							name='comment'
@@ -258,6 +331,7 @@ export const AddTransaction = () => {
 						/>
 						<ErrorMessage name='sum' className='error-message' component='div' />
 						{/* {errors.sum && touched.sum && <div className='error-message'>{errors.sum}</div>} */}
+
 						<ul className='button-list'>
 							<li className='button-item'>
 								<Button type='submit' disabled={isSubmitting}>
@@ -270,6 +344,7 @@ export const AddTransaction = () => {
 								</Button>
 							</li>
 						</ul>
+						{/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
 					</form>
 				)}
 			</Formik>

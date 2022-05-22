@@ -14,7 +14,8 @@ const initialState = {
 	page: 0,
 	data: [],
 	totalBalance: '',
-	categories: [],
+	// categories: [],
+	aviableStatistics: { years: [], months: [] },
 }
 
 const financeSlice = createSlice({
@@ -22,7 +23,7 @@ const financeSlice = createSlice({
 	initialState,
 	reducers: {
 		resetFinance: (state, action) => {
-			console.log('!!!!!!')
+			// console.log('!!!!!!')
 			Object.assign(state, initialState)
 		},
 	},
@@ -59,12 +60,14 @@ const financeSlice = createSlice({
 		//=================Balance
 		[fetchTotalFinance.pending]: (state) => {
 			state.isLoading = true
-			state.totalBalance = []
+			state.totalBalance = ''
 		},
 		[fetchTotalFinance.fulfilled]: (state, action) => {
-			console.log('fulfilled', action.payload)
+			// console.log('fulfilled', action.payload)
 			state.isLoading = false
 			state.totalBalance = action.payload.user.balance
+			state.aviableStatistics = action.payload.aviableStatistics
+			// console.log(action.payload)
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
 			console.log('rejected', action.payload)
