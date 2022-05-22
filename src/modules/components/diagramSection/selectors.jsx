@@ -37,6 +37,20 @@ const monthOptions = [
 ]
 
 const Selects = ({ setData }) => {
+	// const [month, setMonth] = useState('');
+	// const [year, setYear] = useState('');
+
+	// useEffect(() => {
+
+	//   if (month !== '' && year !== '') {
+	//     setData({month, year})
+	//   }
+	//  },[month, year])
+
+	// return <SelectsContainer>
+	//   <Select name={'month'} data={monthOptions} setValues={setMonth}></Select>
+	//   <Select name={'year'} data={yearOptions} setValues={setYear}></Select>
+	//   </SelectsContainer>
 	const [month, setMonth] = useState('')
 	const [year, setYear] = useState('')
 
