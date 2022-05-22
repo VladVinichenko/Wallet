@@ -6,10 +6,8 @@ import styled from 'styled-components'
 import { vars } from 'stylesheet'
 import { DashboardTable } from 'modules'
 import { Currency, Navigation } from 'modules/components'
-// import { Modal } from 'modules/components'
 import { Balance, Container } from 'modules/common'
 import { ROUTES } from 'lib'
-// import { ButtonAddTransactios } from 'modules/common'
 import { fetchFinance } from 'store'
 import { ChartSection } from '../../components/diagramSection'
 import { authSelectors } from '../../../store/auth/auth-selectors'
@@ -75,21 +73,19 @@ const BalanceWrapper = styled.div`
 		margin-bottom: 32px;
 	}
 
-	@media screen and (min-width: ${vars.breakpoints.tablet})  and (max-width:${vars.breakpoints.tabletUp}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) and (max-width: ${vars.breakpoints.tabletUp}) {
 		display: flex;
-    	flex-direction: column;
-    	justify-content: space-around;
-
+		flex-direction: column;
+		justify-content: space-around;
 	}
 
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		margin-bottom: 32px;
 	}
 `
-export const Home = ({ page = ROUTES.HOME }) => {
+const Home = ({ page = ROUTES.HOME }) => {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const dispatch = useDispatch()
-	// const checkWindowSize = windowSize()
 	const location = useLocation()
 	const navigate = useNavigate()
 	useEffect(() => {
@@ -139,7 +135,6 @@ export const Home = ({ page = ROUTES.HOME }) => {
 														{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
 														{page === ROUTES.DIAGRAM && <ChartSection />}
 													</DashBoardWrapper>
-													{/* <ButtonAddTransactios viewport={matches} /> */}
 												</>
 											)}
 										</>
@@ -157,3 +152,5 @@ export const Home = ({ page = ROUTES.HOME }) => {
 		</>
 	)
 }
+
+export default Home

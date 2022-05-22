@@ -20,7 +20,7 @@ const ImageWrapper = styled.div`
 	backdrop-filter: blur(50px);
 `
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
 	const navigate = useNavigate()
 	const backHome = () => {
 		navigate('/')
@@ -39,3 +39,5 @@ export const NotFoundPage = () => {
 		</>
 	)
 }
+
+export default NotFoundPage

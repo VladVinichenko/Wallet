@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, lazy, Suspense } from 'react'
 import { useNavigate, useMatch } from 'react-router-dom'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,10 +7,10 @@ import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Header, Home, Logout, NotFoundPage } from 'modules'
+import { Header, Logout } from 'modules'
 import { Modal } from 'modules'
-import { Registration } from 'modules'
-import { Login } from 'modules'
+// import { Registration } from 'modules'
+// import { Login } from 'modules'
 import { ButtonAddTransaction } from 'modules'
 import { setIsModalAddTransactionOpen } from 'store'
 import { authSelectors } from './store/auth/auth-selectors'
@@ -18,6 +18,11 @@ import { AddTransaction } from 'modules'
 import { CustomLoader } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
+
+const Home = lazy(() => import('./modules/pages/home' /* webpackChunkName: 'home' */))
+const Registration = lazy(() => import('./modules/pages/registration' /* webpackChunkName: 'registration' */))
+const Login = lazy(() => import('./modules/pages/login' /* webpackChunkName: 'login' */))
+const NotFoundPage = lazy(() => import('./modules/pages/notFoundPage' /* webpackChunkName: 'not-found-page' */))
 
 export default function App() {
 	const dispatch = useDispatch()
@@ -62,90 +67,90 @@ export default function App() {
 			)}
 
 			<ToastContainer autoClose={2000} />
-
-			<Routes>
-				<Route>
-					<Route path='/' element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
-					<Route path={`${ROUTES.VERIFY}`} element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
-					<Route path={`${ROUTES.VERIFY}/:token`} element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
-					<Route
-						path={ROUTES.LOGIN}
-						element={
-							<PublicRoute
-								element={
-									<>
-										<Login /> <Outlet />
-									</>
-								}
-								redirectTo={`/${ROUTES.HOME}`}
-								restricted
-							/>
-						}
-					/>
-					<Route
-						path={ROUTES.REGISTER}
-						element={
-							<PublicRoute
-								element={
-									<>
-										<Registration /> <Outlet />
-									</>
-								}
-								redirectTo={`/${ROUTES.HOME}`}
-								restricted
-							/>
-						}
-					/>
-					<Route
-						path={ROUTES.HOME}
-						element={
-							<PrivateRoute
-								redirectTo={`/${ROUTES.LOGIN}`}
-								element={
-									<>
-										<Home page={ROUTES.HOME} /> <Outlet />
-									</>
-								}
-							/>
-						}
-					/>
-					<Route
-						path={ROUTES.DIAGRAM}
-						element={
-							<PrivateRoute
-								redirectTo={`/${ROUTES.LOGIN}`}
-								element={
-									<>
-										<Home page={ROUTES.DIAGRAM} /> <Outlet />
-									</>
-								}
-							/>
-						}
-					/>
-					<Route
-						path={ROUTES.CURRENCY}
-						element={
-							<PrivateRoute
-								redirectTo={`/${ROUTES.LOGIN}`}
-								element={
-									<>
-										<Home page={ROUTES.CURRENCY} /> <Outlet />
-									</>
-								}
-							/>
-						}
-					/>
-					<Route
-						path='*'
-						element={
-							<>
-								<NotFoundPage /> <Outlet />
-							</>
-						}
-					/>
-				</Route>
-			</Routes>
-
+			<Suspense fallback={<CustomLoader />}>
+				<Routes>
+					<Route>
+						<Route path='/' element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
+						<Route path={`${ROUTES.VERIFY}`} element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
+						<Route path={`${ROUTES.VERIFY}/:token`} element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
+						<Route
+							path={ROUTES.LOGIN}
+							element={
+								<PublicRoute
+									element={
+										<>
+											<Login /> <Outlet />
+										</>
+									}
+									redirectTo={`/${ROUTES.HOME}`}
+									restricted
+								/>
+							}
+						/>
+						<Route
+							path={ROUTES.REGISTER}
+							element={
+								<PublicRoute
+									element={
+										<>
+											<Registration /> <Outlet />
+										</>
+									}
+									redirectTo={`/${ROUTES.HOME}`}
+									restricted
+								/>
+							}
+						/>
+						<Route
+							path={ROUTES.HOME}
+							element={
+								<PrivateRoute
+									redirectTo={`/${ROUTES.LOGIN}`}
+									element={
+										<>
+											<Home page={ROUTES.HOME} /> <Outlet />
+										</>
+									}
+								/>
+							}
+						/>
+						<Route
+							path={ROUTES.DIAGRAM}
+							element={
+								<PrivateRoute
+									redirectTo={`/${ROUTES.LOGIN}`}
+									element={
+										<>
+											<Home page={ROUTES.DIAGRAM} /> <Outlet />
+										</>
+									}
+								/>
+							}
+						/>
+						<Route
+							path={ROUTES.CURRENCY}
+							element={
+								<PrivateRoute
+									redirectTo={`/${ROUTES.LOGIN}`}
+									element={
+										<>
+											<Home page={ROUTES.CURRENCY} /> <Outlet />
+										</>
+									}
+								/>
+							}
+						/>
+						<Route
+							path='*'
+							element={
+								<>
+									<NotFoundPage /> <Outlet />
+								</>
+							}
+						/>
+					</Route>
+				</Routes>
+			</Suspense>
 			{isLoading && <CustomLoader />}
 		</Fragment>
 	)
