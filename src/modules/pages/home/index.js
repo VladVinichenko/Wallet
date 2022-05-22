@@ -53,7 +53,6 @@ const Wrapper = styled.div`
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		display: flex;
 		justify-content: space-between;
-		position: relative;
 		height: calc(100vh - 80px);
 		&&::before {
 			position: absolute;
