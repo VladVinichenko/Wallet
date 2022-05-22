@@ -7,6 +7,7 @@ import NativeSelect from '@material-ui/core/NativeSelect'
 import { Formik, ErrorMessage, Field } from 'formik'
 import Datetime from 'react-datetime'
 import { OpenMenu } from '../OpenMenu'
+// import OpenMenu from '../OpenMenu'
 import { Button } from 'modules'
 import { Checkbox } from 'modules/common'
 import styled from 'styled-components'
@@ -180,8 +181,16 @@ const FormContainer = styled.div`
 		}
 	}
 
+	.MuiMenuItem-root {
+		background: red;
+	}
+
 	.MuiFormControl-root {
 		margin-bottom: 40px;
+	}
+
+	.MuiSelect-select-root:before {
+		display: none;
 	}
 
 	.MuiSelect-select {
@@ -203,11 +212,8 @@ const FormContainer = styled.div`
 		&:focus,
 		&:active {
 			background: #ffffff;
+			border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
 		}
-	}
-
-	.native-option {
-		background: blue;
 	}
 
 	/* .MuiSelect-filled {
@@ -243,49 +249,6 @@ const FormContainer = styled.div`
 		width: 100%;
 	}
 
-	.native-foyrm {
-		font-family: Circe, sans-serif;
-		font-size: 18px;
-		box-sizing: border-box;
-		min-height: calc(1.5em + 22px);
-		width: 280px;
-		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
-		padding: 10px 0;
-		text-align: left;
-		line-height: 1.5;
-		color: ${vars.color.accent.buttonOpenMenu};
-	}
-
-	.native-selyect {
-		font-family: Circe, sans-serif;
-		font-size: 18px;
-		box-sizing: border-box;
-		min-height: calc(1.5em + 22px);
-		width: 280px;
-		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
-		padding: 10px 0;
-		text-align: left;
-		line-height: 1.5;
-		color: ${vars.color.accent.buttonOpenMenu};
-
-		@media (min-width: ${vars.breakpoints.tablet}) {
-			width: 394px;
-		}
-	}
-
-	.native-optyion {
-		list-style: none;
-		padding: 8px;
-		border-radius: 30px;
-		&:last-of-type {
-			border-bottom: none;
-		}
-
-		&:hover {
-			background-color: ${vars.color.background.primary};
-			color: ${vars.color.accent.openMenu};
-		}
-	}
 	// select {
 	// 	margin-bottom: 40px;
 	// 	padding-left: 20px;
@@ -308,6 +271,7 @@ export const AddTransaction = () => {
 	const [date, setDate] = useState(new Date())
 	const [category, setCategory] = useState('628356e997d487932b456343')
 
+	console.log(category)
 	const dispatch = useDispatch()
 
 	const handleChange = (event) => {
@@ -352,19 +316,19 @@ export const AddTransaction = () => {
 		delete values.isIncome
 
 		try {
-			await postTransaction(values)
-			await dispatch(resetFinance())
-			await dispatch(authOperations.fetchCurrentUser())
-			await dispatch(fetchTotalFinance())
-			await dispatch(fetchFinance())
+			// await postTransaction(values)
+			// await dispatch(resetFinance())
+			// await dispatch(authOperations.fetchCurrentUser())
+			// await dispatch(fetchTotalFinance())
+			// await dispatch(fetchFinance())
 		} catch (error) {
 			console.log(error.message)
 		}
-		closeModal()
+		// closeModal()
 		// console.log(values)
 
-		// await new Promise((resolve) => setTimeout(resolve, 500))
-		// alert(JSON.stringify(values, null, 2))
+		await new Promise((resolve) => setTimeout(resolve, 500))
+		alert(JSON.stringify(values, null, 2))
 	}
 
 	const transactionSchena = Yup.object().shape({
@@ -387,7 +351,9 @@ export const AddTransaction = () => {
 					<form className='transactionForm' onSubmit={handleSubmit}>
 						{/* <Field type='checkbox' name='isConsumption' onChange={handleChange} /> */}
 						<Checkbox className={'switch'} isChecked={values.isIncome} func={handleChange} />
-						{values.isIncome && (
+						{!values.isIncome && (
+							// <OpenMenu data={updtdCategories} val={values.category} func={handleChange} lab='category' />
+
 							<ThemeProvider theme={theme}>
 								<FormControl>
 									{/* <InputLabel htmlFor='age-native-helper'>Age</InputLabel> */}
@@ -425,7 +391,7 @@ export const AddTransaction = () => {
                 </FormControl> */}
 						{/* </Box> */}
 						{/* {!values.isIncome && (
-              <OpenMenu data={updtdCategories} val={values.category} func={handleChange} lab='category' />
+             
             )}{' '} */}
 						{/* {values.isIncome && (
               <select name='category' onChange={handleChange}>
@@ -496,6 +462,7 @@ export const AddTransaction = () => {
 								</Button>
 							</li>
 						</ul>
+						<pre>{JSON.stringify(values, null, 2)}</pre>
 					</form>
 				)}
 			</Formik>
