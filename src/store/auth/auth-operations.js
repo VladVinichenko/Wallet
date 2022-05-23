@@ -21,7 +21,7 @@ const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signin', credentials)
 		token.set(data.data.accessToken)
-		toast.success(`Welome!`)
+		toast.success(`Welcome!`)
 		return data && data
 	} catch (error) {
 		if (error.response.status === 401) {
@@ -46,10 +46,11 @@ const logOut = createAsyncThunk('auth/signout', async () => {
 })
 
 const fetchRefreshToken = createAsyncThunk('auth/refresh', async () => {
+	console.log('refresh')
 	try {
 		const { data } = await axios.get('auth/refresh')
-		token.set(data?.data.accessToken)
-		data && data
+		token.set(data.data.accessToken)
+		return data
 	} catch (error) {
 		return rejectWithValue(error.message)
 	}
