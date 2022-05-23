@@ -107,7 +107,6 @@ export const FormLogin = () => {
 	return (
 		<Formik
 			initialValues={{
-				name: '',
 				email: '',
 				password: '',
 			}}
@@ -116,7 +115,6 @@ export const FormLogin = () => {
 				console.log(values)
 				dispatch(authOperations.logIn(values))
 				actions.resetForm({
-					name: '',
 					email: '',
 					password: '',
 				})
