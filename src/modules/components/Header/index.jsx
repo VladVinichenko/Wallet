@@ -125,7 +125,7 @@ const ButtonLabel = styled.span`
 	}
 `
 
-export const Header = () => {
+const Header = () => {
 	const dispatch = useDispatch()
 
 	const name = useSelector(authSelectors.getUsername)
@@ -150,3 +150,5 @@ export const Header = () => {
 		</Head>
 	)
 }
+
+export default Header

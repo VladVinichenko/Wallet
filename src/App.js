@@ -1,5 +1,5 @@
 import { Fragment, useEffect, lazy, Suspense } from 'react'
-import { useNavigate, useMatch } from 'react-router-dom'
+import { useMatch } from 'react-router-dom'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import authOperations from '../src/store/auth/auth-operations'
@@ -7,10 +7,8 @@ import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Header, Logout } from 'modules'
+import { Logout } from 'modules'
 import { Modal } from 'modules'
-// import { Registration } from 'modules'
-// import { Login } from 'modules'
 import { ButtonAddTransaction } from 'modules'
 import { setIsModalAddTransactionOpen } from 'store'
 import { authSelectors } from './store/auth/auth-selectors'
@@ -19,6 +17,7 @@ import { CustomLoader } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
 
+const Header = lazy(() => import('./modules/components/Header'))
 const Home = lazy(() => import('./modules/pages/home' /* webpackChunkName: 'home' */))
 const Registration = lazy(() => import('./modules/pages/registration' /* webpackChunkName: 'registration' */))
 const Login = lazy(() => import('./modules/pages/login' /* webpackChunkName: 'login' */))
@@ -26,13 +25,11 @@ const NotFoundPage = lazy(() => import('./modules/pages/notFoundPage' /* webpack
 
 export default function App() {
 	const dispatch = useDispatch()
-	// const navigate = useNavigate()
-	const match = useMatch('/verify/:item')
+	const match = useMatch(`/${ROUTES.VERIFY}/:item`)
 	if (match) {
-		// navigate(`/${ROUTES.LOGIN}`)
 		dispatch(authOperations.fetchVerify(match.params.item))
 	}
-
+	const userName = useSelector(authSelectors.getUsername)
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
@@ -44,30 +41,29 @@ export default function App() {
 
 	useEffect(() => {
 		!isLoggedIn && dispatch(authOperations.fetchRefreshToken())
-	}, [isLoggedIn])
+	}, [])
 
 	return (
 		<Fragment>
-			{isModalLogOut && (
-				<Modal>
-					<Logout name='Bayraktar' />
-				</Modal>
-			)}
-			{isLoggedIn && <Header />}
-			{isLoggedIn && <ButtonAddTransaction onClickButton={showModalAddTransaction} />}
-			{isModalLogOut && (
-				<Modal>
-					<Logout />
-				</Modal>
-			)}
-			{isModalAddTransaction && (
-				<Modal>
-					<AddTransaction />
-				</Modal>
-			)}
-
-			<ToastContainer autoClose={2000} />
 			<Suspense fallback={<CustomLoader />}>
+				{isModalLogOut && (
+					<Modal>
+						<Logout name={userName} />
+					</Modal>
+				)}
+				{isLoggedIn && <Header />}
+				{isLoggedIn && <ButtonAddTransaction onClickButton={showModalAddTransaction} />}
+				{isModalLogOut && (
+					<Modal>
+						<Logout />
+					</Modal>
+				)}
+				{isModalAddTransaction && (
+					<Modal>
+						<AddTransaction />
+					</Modal>
+				)}
+				<ToastContainer autoClose={2000} />
 				<Routes>
 					<Route>
 						<Route path='/' element={<Navigate replace to={`/${ROUTES.LOGIN}`} />} />
@@ -150,8 +146,9 @@ export default function App() {
 						/>
 					</Route>
 				</Routes>
+
+				{isLoading && <CustomLoader />}
 			</Suspense>
-			{isLoading && <CustomLoader />}
 		</Fragment>
 	)
 }

@@ -177,9 +177,7 @@ export const AddTransaction = () => {
 			await dispatch(authOperations.fetchCurrentUser())
 			await dispatch(fetchTotalFinance())
 			await dispatch(fetchFinance())
-		} catch (error) {
-			console.log(error.message)
-		}
+		} catch (error) {}
 		closeModal()
 
 		// await new Promise((resolve) => setTimeout(resolve, 500))
