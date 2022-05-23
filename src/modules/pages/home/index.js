@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, lazy } from 'react'
 import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Media from 'react-media'
@@ -9,11 +9,14 @@ import { Currency, Navigation } from 'modules/components'
 import { Balance, Container } from 'modules/common'
 import { ROUTES } from 'lib'
 import { fetchFinance } from 'store'
-import { ChartSection } from '../../components/diagramSection'
 import { authSelectors } from '../../../store/auth/auth-selectors'
 import authOperations from '../../../store/auth/auth-operations'
 import { fetchTotalFinance } from '../../../store/finance/finance-operation'
 import { fetchCategories } from 'store'
+
+const ChartSection = lazy(() =>
+	import('../../components/diagramSection/section' /* webpackChunkName: 'ChartSection' */)
+)
 
 const Background = styled.div`
 	position: fixed;

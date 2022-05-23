@@ -1,4 +1,3 @@
-export * from './diagramSection'
 export * from './Currency'
 export * from './OpenMenu'
 export * from './DashboardTable'
