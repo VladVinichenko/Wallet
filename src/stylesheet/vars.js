@@ -1,4 +1,4 @@
-export const vars = {
+export const vars1 = {
 	color: {
 		background: {
 			primary: '#FFFFFF',
@@ -63,6 +63,96 @@ export const vars = {
 		secondLine: '1px solid #E7E5F2',
 		thirdLine: '1px solid #BDBDBD',
 		forthLine: '1px solid #000000',
+		button: '1px solid #4A56E2',
+	},
+	boxShadow: {
+		firstLine: `0px 1px 0px rgba(255, 255, 255, 0.6)`,
+		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px rgba(255, 255, 255, 0.6)`,
+		openMenu: '0px 6px 15px rgba(0, 0, 0, 0.1)',
+		firstCheckbox: '0px 6px 15px rgba(36, 204, 167, 0.5)',
+		secondCheckbox: '0px 6px 15px rgba(255, 101, 150, 0.5);',
+		button: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+		buttonHover: '0px 5px 0px rgb(62, 136, 120)',
+		buttonActive: '0px 2px 0px rgb(62, 136, 120)',
+	},
+	breakpoints: {
+		mobile: '320px',
+		mobileUp: '767px',
+		tablet: '768px',
+		tabletUp: '1279px',
+		desktop: '1280px',
+		desktopUp: '1919px',
+		FHD: '1920px',
+		FHDUp: '2559px',
+		QHD: '2560px',
+	},
+}
+
+export const vars = {
+	color: {
+		background: {
+			primary: '#00000F',
+			seconary: '#E7EAF2',
+			page: 'rgba(255, 255, 255, 0.4)',
+			card: '#4A56E2',
+			currency: 'rgba(255, 255, 255, 0.2)',
+			openMenu: 'rgba(255, 255, 255, 0.7)',
+			cardGradient: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) -8.67%, rgba(255, 255, 255, 0) 116.22%)',
+			backdrop: 'rgba(0, 0, 0, 0.25)',
+			tableLine: '#DCDCDF',
+		},
+		font: {
+			primary: '#ffffff',
+			seconary: '#A6A6A6',
+			third: '#BDBDBD',
+			fourth: '#4A56E2',
+			fifth: '#00000F',
+			positive: '#24CCA7',
+			negative: '#FF6596',
+			colorTitle: '#ffffff',
+		},
+		accent: {
+			primary: '#24CCA7',
+			seconary: '#4A56E2',
+			fourth: '#6E78E8',
+			firstEllipse: '#FFD8D0',
+			secondEllipse: '#C5BAFF',
+			openMenu: '#FF6596',
+			buttonOpenMenu: '#000000',
+		},
+		chart: {
+			basic: '#FED057',
+			products: '#FFD8D0',
+			car: '#FD9498',
+			careAbout: '#C5BAFF',
+			careChild: '#6E78E8',
+			forHome: '#4A56E2',
+			education: '#81E1FF',
+			leisure: '#24CCA7',
+			other: '#00AD84',
+		},
+	},
+	filter: {
+		pageBackgroundFilter: 'blur(50px)',
+		shadowButton: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
+		navigationFilter: 'drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));',
+	},
+	animation: {
+		duration: '250ms',
+		function: 'cubic-bezier(0.4, 0, 0.2, 1)',
+	},
+	borderRadius: {
+		primary: '20px',
+		seconary: '30px',
+		third: '2px',
+		fourth: '10px',
+		fifth: '6px',
+	},
+	border: {
+		firstLine: '1px solid #DCDCDF',
+		secondLine: '1px solid #E7E5F2',
+		thirdLine: '1px solid #BDBDBD',
+		forthLine: '1px solid #ffffff',
 		button: '1px solid #4A56E2',
 	},
 	boxShadow: {
