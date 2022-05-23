@@ -22,6 +22,9 @@ export const Backdrop = styled.div`
 `
 
 export const ModalContent = styled.div`
+	max-height: 100vh;
+	overflow-y: auto;
+	padding-bottom: 30px;
 	position: relative;
 	min-width: 100px;
 	min-height: 100px;
