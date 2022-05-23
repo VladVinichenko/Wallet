@@ -107,13 +107,16 @@ export const FormLogin = () => {
 	return (
 		<Formik
 			initialValues={{
+				name: '',
 				email: '',
 				password: '',
 			}}
-			// validationSchema={ValidationSchema}
+			validationSchema={ValidationSchema}
 			onSubmit={(values, actions) => {
+				console.log(values)
 				dispatch(authOperations.logIn(values))
 				actions.resetForm({
+					name: '',
 					email: '',
 					password: '',
 				})
@@ -128,7 +131,7 @@ export const FormLogin = () => {
 						<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
 							<use href={sprite + '#icon-e-mail'} />
 						</StyleSvgIcon>
-						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
+						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' value={values.email} />
 						<ErrorMessage name='email' />
 					</StyleIconInput>
 
@@ -143,6 +146,7 @@ export const FormLogin = () => {
 							type={passwordShown ? 'text' : 'password'}
 							name='password'
 							aria-label='Password'
+							value={values.password}
 							required
 							onChange={(e) => {
 								setValuePassword(e.target.value)
