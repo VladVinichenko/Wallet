@@ -4,6 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { sprite } from '../../../assets/images/index.js'
 import { Button } from '../../common/Button/index'
 import { ShowPasswordButton } from 'modules/common'
+import { ValidationSchema } from '../../common/ValidationSchema'
 import { LogoAuth } from 'modules/components/logo/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from 'store/auth/auth-operations'
@@ -109,6 +110,7 @@ export const FormLogin = () => {
 				email: '',
 				password: '',
 			}}
+			validationSchema={ValidationSchema}
 			onSubmit={(values, actions) => {
 				dispatch(authOperations.logIn(values))
 				actions.resetForm({
