@@ -3,7 +3,7 @@ import { vars } from 'stylesheet'
 import { sprite } from 'assets'
 
 const Back = styled.div`
-	background-color: ${vars.color.background.seconary};
+	background-color: ${vars.color.background.primary};
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -11,6 +11,9 @@ const Back = styled.div`
 	height: 100vh;
 	z-index: -1000;
 	overflow: hidden;
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+		background-color: ${vars.color.background.seconary};
+	}
 `
 
 const Ellipse1 = styled.svg`
