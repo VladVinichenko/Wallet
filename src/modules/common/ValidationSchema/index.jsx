@@ -15,17 +15,15 @@ const validationErrorText = {
 }
 
 const emailValid = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/i
-
+const nameValid = /^[A-Za-z]+$/
 export const ValidationSchema = () => {
 	return Yup.object({
 		name: Yup.string()
 			.test('name', <div style={validationErrorText}>Invalid name, only letters</div>, (value) => {
-				console.log(value)
 				let error
 				if (!value) {
 					error = 'Required'
-					console.log('noname')
-				} else if (/^[A-Za-z\s]+$/.test(value)) {
+				} else if (nameValid.test(value)) {
 					error = 'ok'
 				}
 				return error
@@ -54,7 +52,6 @@ export const ValidationSchema = () => {
 				if (!value) {
 					error = 'Required'
 				} else if (emailValid.test(value)) {
-					console.log('valid')
 					error = 'ok'
 				}
 				return error
