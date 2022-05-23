@@ -21,6 +21,7 @@ const Currenc = styled.div`
 
 	table {
 		width: 100%;
+		table-layout: fixed;
 		text-align: center;
 		border-collapse: collapse;
 		font-style: normal;

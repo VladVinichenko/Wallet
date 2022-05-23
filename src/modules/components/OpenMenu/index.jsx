@@ -8,49 +8,29 @@ import { vars } from 'stylesheet'
 
 import rowDown from 'assets/images/openMenu/row-down.svg'
 
-const blue = {
-	100: '#DAECFF',
-	200: '#99CCF3',
-	400: '#3399FF',
-	500: '#007FFF',
-	600: '#0072E5',
-	900: '#003A75',
-}
-
-const grey = {
-	100: '#E7EBF0',
-	200: '#E0E3E7',
-	300: '#CDD2D7',
-	400: '#B2BAC2',
-	500: '#A0AAB4',
-	600: '#6F7E8C',
-	700: '#3E5060',
-	800: '#2D3843',
-	900: '#1A2027',
-}
-
 const StyledButton = styled('button')(
 	({ theme }) => `
   font-family: Circe, sans-serif;
   font-size: 18px;
+  font-style: normal;
   box-sizing: border-box;
-  min-height: calc(1.5em + 22px);
   width: 100%;
+  height: 32px;
   border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
-  padding: 10px 0;
   text-align: left;
-  line-height: 1.5;
+  line-height: 27px;
+  padding: 0 20px;
 	margin-bottom:40px;
   color: ${vars.color.accent.buttonOpenMenu};
 
 
   &.${selectUnstyledClasses.focusVisible} {
-    outline: 2px solid ${vars.color.accent.buttonOpenMenu};
+    outline: 1px solid ${vars.color.accent.buttonOpenMenu};
   }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
-      content: url(${rowDown};
+      content: url(${rowDown});
       color: ${vars.color.accent.buttonOpenMenu};
     }
   }
@@ -72,12 +52,12 @@ const StyledListbox = styled('ul')(
   font-family: Circe, sans-serif;
   font-size: 18px;
   line-height: 27px;
-  font-weight: 400;
+  font-weight: normal;
   box-sizing: border-box;
   padding: 20px 0;
-  margin: 10px 0;
+  margin: 4px 0 0;
   width: 95vw;
-  // height: 352px;
+  height: 352px;
   background: ${vars.color.background.openMenu};
   border: 1px solid inherit;
   border-radius: ${vars.borderRadius.primary};
@@ -89,7 +69,6 @@ const StyledListbox = styled('ul')(
 
   @media (min-width: ${vars.breakpoints.tablet}) {
     width: 394px;
-    // height: 352px;
   }
   `
 )
@@ -98,32 +77,10 @@ const StyledOption = styled(OptionUnstyled)(
 	({ theme }) => `
   list-style: none;
   padding: 8px;
-//   border-radius: 30px;
-  // cursor: red;
-  
 
   &:last-of-type {
     border-bottom: none;
   }
-
-//   &.${optionUnstyledClasses.selected} {
-//     background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-//     color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
-//   }
-
-//   &.${optionUnstyledClasses.highlighted} {
-//     background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
-//     color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-//   }
-
-//   &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
-//     background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-//     color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
-//   }
-
-//   &.${optionUnstyledClasses.disabled} {
-//     color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
-//   }
 
   &:hover:not(.${optionUnstyledClasses.disabled}) {
     background-color: ${vars.color.background.primary};
@@ -148,7 +105,6 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 })
 
 export const OpenMenu = ({ data, value, func }) => {
-	// console.log(value)
 	function renderValue(option) {
 		if (option == null) {
 			return <span>Select category...</span>
