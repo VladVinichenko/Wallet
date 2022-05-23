@@ -5,11 +5,8 @@ import { toast } from 'react-toastify'
 import { store, token } from 'store'
 
 const register = createAsyncThunk('auth/signup', async (credentials) => {
-	console.log('registerCredentials:', credentials)
-
 	try {
 		const { data } = await axios.post('auth/signup', credentials)
-		console.log('register:', data)
 		// toast.success(`Check your email for verify: ${data.email}`)
 
 		return data.data && data.data
@@ -33,6 +30,7 @@ const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 		} else {
 			toast.error('Invalid login or password')
 		}
+		return rejectWithValue(error.message)
 	}
 })
 
@@ -44,19 +42,17 @@ const logOut = createAsyncThunk('auth/signout', async () => {
 		toast.success('You are logging out')
 	} catch (error) {
 		toast.error('Sorry, you can not log out')
+		return rejectWithValue(error.message)
 	}
 })
 
-const fetchRefreshToken = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
-	// const state = thunkAPI.getState()
-	// const refreshToken = state.auth.refreshToken
-	// !refreshToken && thunkAPI.rejectWithValue() //logout
+const fetchRefreshToken = createAsyncThunk('auth/refresh', async () => {
 	try {
 		const { data } = await axios.get('auth/refresh')
-		token.set(data.data.accessToken)
-		return data && data
+		token.set(data?.data.accessToken)
+		data && data
 	} catch (error) {
-		// console.error(error.message)
+		return rejectWithValue(error.message)
 	}
 })
 
@@ -65,16 +61,15 @@ const fetchCurrentUser = createAsyncThunk('users/current', async () => {
 		const { data } = await axios.get('users/current')
 		return data && data
 	} catch (error) {
-		// console.error(error.message)
+		return rejectWithValue(error.message)
 	}
 })
 
 const fetchVerify = createAsyncThunk('auth/verify', async (verifyToken) => {
-	console.log('verifyToken:', verifyToken)
 	try {
 		await axios.get(`auth/verify/${verifyToken}`)
 	} catch (error) {
-		// console.error(error.message)
+		return rejectWithValue(error.message)
 	}
 })
 

@@ -87,7 +87,18 @@ const Currenc = styled.div`
 			padding-top: 23px;
 		}
 	}
-	/* @keyframes ${animation.keyframes.currencyShow}; */
+	@keyframes currency-show {
+		0% {
+			opacity: 0;
+			transform: translateX(-50px);
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			transform: translateX(0);
+		}
+	} ;
 `
 
 export const Currency = () => {

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { authSelectors } from 'store/auth/auth-selectors'
 import { StyledTitle } from '../../components/svgFormPage/svgFormPage'
 
-export const Login = () => {
+const Login = () => {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 
 	return (
@@ -25,3 +25,5 @@ export const Login = () => {
 		</>
 	)
 }
+
+export default Login

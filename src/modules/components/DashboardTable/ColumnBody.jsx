@@ -55,7 +55,7 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 			case 'Category':
 				return data[elem.value].name
 			case 'Comment':
-				return <EllipsisText text={`${data[elem.value]}`} length={'10'} />
+				return <EllipsisText text={`${data[elem.value]}`} length={10} />
 			default:
 				return data[elem.value]
 		}
