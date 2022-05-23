@@ -21,7 +21,7 @@ const logIn = createAsyncThunk('auth/signin', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signin', credentials)
 		token.set(data.data.accessToken)
-		toast.success(`Welome!`)
+		toast.success(`Welcome!`)
 		return data && data
 	} catch (error) {
 		if (error.response.status === 401) {
