@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Media from 'react-media'
@@ -75,11 +75,10 @@ const BalanceWrapper = styled.div`
 		margin-bottom: 32px;
 	}
 
-	@media screen and (min-width: ${vars.breakpoints.tablet})  and (max-width:${vars.breakpoints.tabletUp}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) and (max-width: ${vars.breakpoints.tabletUp}) {
 		display: flex;
-    	flex-direction: column;
-    	justify-content: space-around;
-
+		flex-direction: column;
+		justify-content: space-around;
 	}
 
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
@@ -88,6 +87,7 @@ const BalanceWrapper = styled.div`
 `
 export const Home = ({ page = ROUTES.HOME }) => {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
+	const [isReadyToRended, setIsReadyToRended] = useState(false)
 	const dispatch = useDispatch()
 	// const checkWindowSize = windowSize()
 	const location = useLocation()
@@ -121,7 +121,13 @@ export const Home = ({ page = ROUTES.HOME }) => {
 												<>
 													<Navigation />
 													<BalanceWrapper visible>{page === ROUTES.HOME && <Balance />}</BalanceWrapper>
-													{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+													{page === ROUTES.HOME && (
+														<DashboardTable
+															viewport={matches}
+															isReadyToRended={isReadyToRended}
+															setIsReadyToRended={setIsReadyToRended}
+														/>
+													)}
 													{page === ROUTES.DIAGRAM && <ChartSection />}
 													{page === ROUTES.CURRENCY && <Currency />}
 												</>
@@ -136,7 +142,13 @@ export const Home = ({ page = ROUTES.HOME }) => {
 														<Currency />
 													</LeftBlock>
 													<DashBoardWrapper>
-														{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+														{page === ROUTES.HOME && (
+															<DashboardTable
+																viewport={matches}
+																isReadyToRended={isReadyToRended}
+																setIsReadyToRended={setIsReadyToRended}
+															/>
+														)}
 														{page === ROUTES.DIAGRAM && <ChartSection />}
 													</DashBoardWrapper>
 													{/* <ButtonAddTransactios viewport={matches} /> */}

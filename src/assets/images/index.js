@@ -1,2 +1,3 @@
 import sprite from './sprite.svg'
-export { sprite }
+import { NoDataAvailable } from './noDataAvailable'
+export { sprite, NoDataAvailable }
