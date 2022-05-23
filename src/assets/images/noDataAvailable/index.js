@@ -1,2 +1,2 @@
-import NoDataAvailable from './NoDataAvailable.png'
+import NoDataAvailable from './NoDataAvailable.webp'
 export { NoDataAvailable }
