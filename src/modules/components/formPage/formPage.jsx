@@ -4,7 +4,6 @@ import { StyledTitle } from '../svgFormPage/svgFormPage'
 
 export const StyledLoginPage = styled.section`
 	background-color: ${vars.color.background.primary};
-	/* height: 100vh; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
