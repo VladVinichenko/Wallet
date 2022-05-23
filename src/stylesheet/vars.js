@@ -1,4 +1,10 @@
-export const vars1 = {
+export const vars = (theme = 'light') => {
+	// theme === 'light' && varsLight
+	// theme === 'dark' && varsDark
+	return varsLight
+}
+
+export const varsLight = {
 	color: {
 		background: {
 			primary: '#FFFFFF',
@@ -88,12 +94,12 @@ export const vars1 = {
 	},
 }
 
-export const vars = {
+export const varsDark = {
 	color: {
 		background: {
-			primary: '#00000F',
-			seconary: '#E7EAF2',
-			page: 'rgba(255, 255, 255, 0.4)',
+			primary: '#1A1D35',
+			seconary: '#00000F',
+			page: 'rgba(10, 10, 10, 0.4)',
 			card: '#4A56E2',
 			currency: 'rgba(255, 255, 255, 0.2)',
 			openMenu: 'rgba(255, 255, 255, 0.7)',
@@ -106,7 +112,7 @@ export const vars = {
 			seconary: '#A6A6A6',
 			third: '#BDBDBD',
 			fourth: '#4A56E2',
-			fifth: '#00000F',
+			fifth: '#1A1D35',
 			positive: '#24CCA7',
 			negative: '#FF6596',
 			colorTitle: '#ffffff',
@@ -115,10 +121,10 @@ export const vars = {
 			primary: '#24CCA7',
 			seconary: '#4A56E2',
 			fourth: '#6E78E8',
-			firstEllipse: '#FFD8D0',
-			secondEllipse: '#C5BAFF',
-			openMenu: '#FF6596',
-			buttonOpenMenu: '#000000',
+			firstEllipse: '#5B243D',
+			secondEllipse: '#3E3477',
+			openMenu: '#686287',
+			buttonOpenMenu: '#ffffff',
 		},
 		chart: {
 			basic: '#FED057',
@@ -150,14 +156,14 @@ export const vars = {
 	},
 	border: {
 		firstLine: '1px solid #DCDCDF',
-		secondLine: '1px solid #E7E5F2',
+		secondLine: '1px solid #201c36',
 		thirdLine: '1px solid #BDBDBD',
 		forthLine: '1px solid #ffffff',
 		button: '1px solid #4A56E2',
 	},
 	boxShadow: {
 		firstLine: `0px 1px 0px rgba(255, 255, 255, 0.6)`,
-		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px rgba(255, 255, 255, 0.6)`,
+		secondLine: `-1px 0px 0px rgba(0, 0, 0, 0.05), 1px 0px 0px rgba(70, 70, 70, 0.6)`,
 		openMenu: '0px 6px 15px rgba(0, 0, 0, 0.1)',
 		firstCheckbox: '0px 6px 15px rgba(36, 204, 167, 0.5)',
 		secondCheckbox: '0px 6px 15px rgba(255, 101, 150, 0.5);',

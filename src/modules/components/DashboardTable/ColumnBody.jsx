@@ -5,7 +5,7 @@ import { InView } from 'react-intersection-observer'
 import { vars } from 'stylesheet'
 import EllipsisText from 'react-ellipsis-text'
 
-const { color, breakpoints } = vars
+const { color, breakpoints } = vars()
 const Component = styled.td`
 	position: relative;
 	display: flex;

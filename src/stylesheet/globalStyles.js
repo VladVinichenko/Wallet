@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { vars } from './vars'
 
 export const GlobalStyle = createGlobalStyle`
 html {
@@ -7,15 +8,22 @@ html {
   
   ::-webkit-scrollbar {
     width: 5px;
+    background-color: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #000;
+    background: transparent;
     border-radius: 10px;
   }
 
   ::-webkit-scrollbar-track {
     background: transparent;
   }
+  ::-webkit-scrollbar-button:vertical:start:decrement {}
+  ::-webkit-scrollbar-button:vertical:end:increment {}
+  ::-webkit-scrollbar-button:horizontal:start:decrement {}
+  ::-webkit-scrollbar-button:horizontal:end:increment {
+    
+}
 }
 
 body {
@@ -65,6 +73,7 @@ button {
 
 input,
 textarea {
+  color: ${vars().color.font.primary};
     outline: none;
     margin: 0;
     border: 0;
@@ -85,7 +94,7 @@ textarea {
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    -webkit-box-shadow: 0 0 0px 1000px ${vars().color.background.primary} inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 }

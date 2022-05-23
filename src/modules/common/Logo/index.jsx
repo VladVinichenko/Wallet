@@ -11,7 +11,7 @@ const LogoSvg = styled.svg`
 	height: 30px;
 	margin-right: 15px;
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		width: 40px;
 		height: 40px;
 		margin-right: 20px;
@@ -28,9 +28,9 @@ const LogoName = styled.span`
 	font-size: 18px;
 	line-height: 1.5;
 
-	color: ${vars.color.font.primary};
+	color: ${vars().color.font.primary};
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		font-size: 30px;
 		line-height: 1.33;
 	}

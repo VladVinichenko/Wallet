@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { vars } from 'stylesheet'
 import { selectorsFinance } from 'store'
-const { color, borderRadius, breakpoints } = vars
+const { color, borderRadius, breakpoints } = vars()
 const Component = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -30,7 +30,7 @@ const Title = styled.h2`
 	color: ${color.font.seconary};
 `
 const Currency = styled.span`
-	font-family: 'Poppins',sans-serif;
+	font-family: 'Poppins', sans-serif;
 	font-weight: 400;
 `
 

@@ -5,24 +5,28 @@ import { vars } from '../../../stylesheet'
 import { Select } from './select'
 import { selectorsFinance } from 'store'
 import { monthOptions } from './monthOptions'
+
 const SelectsContainer = styled.div`
+	color: ${vars().color.accent.openMenu};
 	margin-bottom: 20px;
 
-	@media (max-width: ${vars.breakpoints.mobileUp}) {
+	@media (max-width: ${vars().breakpoints.mobileUp}) {
 		width: 280px;
 	}
-	@media (min-width: ${vars.breakpoints.tablet}) {
+	@media (min-width: ${vars().breakpoints.tablet}) {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		width: 335px;
 	}
-	@media (min-width: ${vars.breakpoints.desktop}) {
+	@media (min-width: ${vars().breakpoints.desktop}) {
 		width: 395px;
 	}
+
+	button {
+		color: ${vars().color.font.primary};
+	}
 `
-
-
 
 const Selects = ({ setData }) => {
 	const [month, setMonth] = useState('')

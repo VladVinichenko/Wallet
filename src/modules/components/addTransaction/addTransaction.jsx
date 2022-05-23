@@ -27,10 +27,10 @@ const StyledInput = styled.input`
 
 	font-size: 18px;
 	line-height: 1.5;
-	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+	border-bottom: 1px solid ${vars().color.accent.buttonOpenMenu};
 
 	&::placeholder {
-		color: ${vars.color.font.third};
+		color: ${vars().color.font.third};
 	}
 `
 
@@ -38,13 +38,14 @@ const SummInput = styled(StyledInput)`
 	font-weight: 700;
 	text-align: center;
 	margin-bottom: 40px;
+	background: ${vars().color.background.primary};
 
 	&::placeholder {
 		text-align: center;
 	}
 
 	&.error {
-		border-color: ${vars.color.font.negative};
+		border-color: ${vars().color.font.negative};
 	}
 
 	@media screen and (min-width: 768px) {
@@ -78,16 +79,17 @@ const StyledTextarea = styled.textarea`
 	margin-bottom: 40px;
 	padding-left: 20px;
 
+	background: ${vars().color.background.primary};
 	width: 100%;
 	height: 86px;
 	font-size: 18px;
 	line-height: 1.5;
-	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+	border-bottom: 1px solid ${vars().color.accent.buttonOpenMenu};
 	resize: none;
 	overflow: hidden;
 
 	&::placeholder {
-		color: ${vars.color.font.third};
+		color: ${vars().color.font.third};
 	}
 
 	@media screen and (min-width: 768px) {
@@ -95,6 +97,7 @@ const StyledTextarea = styled.textarea`
 	}
 `
 const Title = styled.h2`
+	color: ${vars().color.font.primary};
 	font-family: 'Poppins';
 	font-weight: 400;
 	font-size: 24px;
@@ -123,11 +126,11 @@ const FormContainer = styled.div`
 
 	.form-control {
 		padding-left: 20px;
-
+		background: ${vars().color.background.primary};
 		width: 100%;
 		font-size: 18px;
 		line-height: 1.5;
-		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		border-bottom: 1px solid ${vars().color.accent.buttonOpenMenu};
 	}
 
 	.button-item:not(:last-child) {
@@ -143,7 +146,7 @@ const FormContainer = styled.div`
 	}
 
 	.error-message {
-		color: ${vars.color.font.negative};
+		color: ${vars().color.font.negative};
 	}
 `
 

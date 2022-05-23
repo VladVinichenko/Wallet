@@ -20,19 +20,19 @@ const StyledFormRegistration = styled(Form)`
 	padding: 107px 20px 107px 20px;
 	margin-left: auto;
 	margin-right: auto;
-	color: ${vars.color.accent.buttonOpenMenu};
-	background-color: ${vars.color.font.fifth};
+	color: ${vars().color.accent.buttonOpenMenu};
+	background-color: ${vars().color.font.fifth};
 
-	@media screen and (max-width: ${vars.breakpoints.tablet}) {
+	@media screen and (max-width: ${vars().breakpoints.tablet}) {
 		max-width: 320px;
 	}
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		width: 533px;
 		padding: 40px 58px 66px 65px;
 		border-radius: 20px;
 	}
-	@media screen and (min-width: ${vars.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars().breakpoints.desktop}) {
 		margin-top: 136px;
 		margin-bottom: 116px;
 		margin-left: 0;
@@ -60,8 +60,9 @@ const StyleSvgIcon = styled.svg`
 `
 
 const StyledInput = styled(Field)`
+	background: ${vars().color.background.primary};
 	width: 100%;
-	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+	border-bottom: 1px solid ${vars().color.accent.buttonOpenMenu};
 	border-top: none;
 	border-left: none;
 	border-right: none;
@@ -82,7 +83,7 @@ const StyledInput = styled(Field)`
 		font-weight: 400;
 		font-size: 18px;
 		line-height: 1.5;
-		color: ${vars.color.font.third};
+		color: ${vars().color.font.third};
 	}
 
 	button:not(:last-child) {

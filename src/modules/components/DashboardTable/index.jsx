@@ -28,6 +28,7 @@ const Title = styled.caption`
 	overflow: hidden;
 `
 const HederTable = styled.thead`
+	color: ${vars().color.font.primary};
 	tr {
 		background-color: ${color.background.primary};
 		border-radius: ${borderRadius.seconary};

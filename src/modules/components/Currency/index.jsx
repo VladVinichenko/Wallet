@@ -12,9 +12,9 @@ const Currenc = styled.div`
 	position: relative;
 	width: 280px;
 	height: 174px;
-	border-radius: ${vars.borderRadius.seconary};
-	color: ${vars.color.background.primary};
-	background-color: ${vars.color.background.card};
+	border-radius: ${vars().borderRadius.seconary};
+	color: ${vars().color.background.primary};
+	background-color: ${vars().color.background.card};
 	background-image: url(${currency_mob});
 	background-repeat: no-repeat;
 	background-position: right bottom;
@@ -44,24 +44,24 @@ const Currenc = styled.div`
 	}
 
 	thead td:nth-child(1) {
-		border-top-left-radius: ${vars.borderRadius.seconary};
-		background-color: ${vars.color.background.currency};
+		border-top-left-radius: ${vars().borderRadius.seconary};
+		background-color: ${vars().color.background.currency};
 	}
 
 	thead td:nth-child(2) {
-		background-color: ${vars.color.background.currency};
+		background-color: ${vars().color.background.currency};
 	}
 
 	thead td:nth-child(3) {
-		border-top-right-radius: ${vars.borderRadius.seconary};
-		background-color: ${vars.color.background.currency};
+		border-top-right-radius: ${vars().borderRadius.seconary};
+		background-color: ${vars().color.background.currency};
 	}
 
 	td {
 		padding-top: 10px;
 	}
 
-	@media (min-width: ${vars.breakpoints.tablet}) {
+	@media (min-width: ${vars().breakpoints.tablet}) {
 		width: 336px;
 		height: 182px;
 		background-image: url(${currency_tab});
@@ -71,7 +71,7 @@ const Currenc = styled.div`
 		}
 	}
 
-	@media (min-width: ${vars.breakpoints.desktop}) {
+	@media (min-width: ${vars().breakpoints.desktop}) {
 		width: 393px;
 		height: 347px;
 		background-image: url(${currency_desk});

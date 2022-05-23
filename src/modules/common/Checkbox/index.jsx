@@ -32,7 +32,7 @@ const Label = styled.label`
 
 const LabelText = styled.span`
 	display: inline-flex;
-	color: ${vars.color.font.third};
+	color: ${vars().color.font.third};
 	padding: 0;
 
 	font-weight: 700;
@@ -44,13 +44,13 @@ const LabelText = styled.span`
 			case 'expenses':
 				return css`
 					${Input}:not(:checked) ~ && {
-						color: ${vars.color.font.negative};
+						color: ${vars().color.font.negative};
 					}
 				`
 			default:
 				return css`
 					${Input}:checked ~ && {
-						color: ${vars.color.font.positive};
+						color: ${vars().color.font.positive};
 					}
 				`
 		}
@@ -63,9 +63,9 @@ const ToggleField = styled.div`
 	width: 80px;
 	margin-left: 20px;
 	margin-right: 20px;
-	border: 1px solid ${vars.color.font.third};
+	border: 1px solid ${vars().color.font.third};
 	border-radius: 30px;
-	transition: all ${vars.animation.duration};
+	transition: all ${vars().animation.duration};
 `
 
 const ToggleIcon = styled.div`
@@ -75,24 +75,24 @@ const ToggleIcon = styled.div`
 	align-items: center;
 	width: 44px;
 	height: 44px;
-	background-color: ${vars.color.font.positive};
-	background: ${vars.color.font.negative};
+	background-color: ${vars().color.font.positive};
+	background: ${vars().color.font.negative};
 	left: 108px;
 	border-radius: 50%;
-	transition: all ${vars.animation.duration};
+	transition: all ${vars().animation.duration};
 	z-index: 4;
-	box-shadow: ${vars.boxShadow.secondCheckbox};
+	box-shadow: ${vars().boxShadow.secondCheckbox};
 
 	${Input}:checked ~ & {
 		left: 64px;
-		background: ${vars.color.font.positive};
-		box-shadow: ${vars.boxShadow.firstCheckbox};
+		background: ${vars().color.font.positive};
+		box-shadow: ${vars().boxShadow.firstCheckbox};
 	}
 
 	svg {
 		width: 20px;
 		height: 20px;
-		fill: ${vars.color.background.primary};
+		fill: ${vars().color.background.primary};
 	}
 `
 

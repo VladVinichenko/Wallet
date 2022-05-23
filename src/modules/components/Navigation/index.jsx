@@ -11,7 +11,7 @@ const Nav = styled.ul`
 	align-items: center;
 	padding: 0 14px;
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		flex-direction: column;
 		align-items: flex-start;
 		padding: 0;
@@ -19,7 +19,7 @@ const Nav = styled.ul`
 `
 
 const Item = styled.li`
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		display: ${(props) => props.visib};
 
 		&:not(:first-child) {
@@ -29,6 +29,7 @@ const Item = styled.li`
 `
 
 const StyledLink = styled(NavLink)`
+	color: ${vars().color.font.primary};
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
@@ -37,15 +38,15 @@ const StyledLink = styled(NavLink)`
 
 	cursor: pointer;
 
-	transition: all ${vars.animation.duration} ${vars.animation.function};
+	transition: all ${vars().animation.duration} ${vars().animation.function};
 
 	&:hover,
 	&:focus,
 	&.${(props) => props.className} {
 		& div div {
-			fill: ${vars.color.accent.seconary};
-			background-color: ${vars.color.background.primary};
-			filter: ${vars.filter.navigationFilter};
+			fill: ${vars().color.accent.seconary};
+			background-color: ${vars().color.background.primary};
+			filter: ${vars().filter.navigationFilter};
 		}
 	}
 
@@ -61,7 +62,7 @@ const Wrapper = styled.div`
 	width: 44px;
 	height: 44px;
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		width: 24px;
 		height: 24px;
 		margin-right: 20px;
@@ -77,19 +78,19 @@ const Background = styled.div`
 
 	overflow: hidden;
 
-	fill: ${vars.color.accent.fourth};
+	fill: ${vars().color.accent.fourth};
 	background-color: transparent;
 	filter: none;
 
-	border-radius: ${vars.borderRadius.fifth};
+	border-radius: ${vars().borderRadius.fifth};
 
-	transition: all ${vars.animation.duration} ${vars.animation.function};
+	transition: all ${vars().animation.duration} ${vars().animation.function};
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		width: 18px;
 		height: 18px;
 
-		border-radius: ${vars.borderRadius.third};
+		border-radius: ${vars().borderRadius.third};
 	}
 `
 
@@ -97,7 +98,7 @@ const Svg = styled.svg`
 	width: 38px;
 	height: 38px;
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		width: 18px;
 		height: 18px;
 	}
@@ -106,9 +107,9 @@ const Svg = styled.svg`
 const Label = styled.p`
 	display: none;
 
-	transition: all ${vars.animation.duration} ${vars.animation.function};
+	transition: all ${vars().animation.duration} ${vars().animation.function};
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		display: contents;
 
 		font-family: 'Poppins', sans-serif;

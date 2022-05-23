@@ -17,25 +17,25 @@ import { fetchCategories } from 'store'
 
 const Background = styled.div`
 	position: fixed;
-	background-color: ${vars.color.background.page};
-	backdrop-filter: ${vars.filter.pageBackgroundFilter};
+	background-color: ${vars().color.background.page};
+	backdrop-filter: ${vars().filter.pageBackgroundFilter};
 	height: 100vh;
 	width: 100vw;
 	z-index: -100;
 `
 const DashBoardWrapper = styled.div`
-	@media screen and (min-width: ${vars.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars().breakpoints.desktop}) {
 		padding-top: 40px;
 	}
 `
 const LeftBlock = styled.div`
-	@media screen and (max-width: ${vars.breakpoints.tabletUp}) {
+	@media screen and (max-width: ${vars().breakpoints.tabletUp}) {
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 20px;
 		padding-top: 32px;
 	}
-	@media screen and (min-width: ${vars.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars().breakpoints.desktop}) {
 		padding-top: 40px;
 		padding-right: 70px;
 	}
@@ -44,41 +44,41 @@ const LeftBlock = styled.div`
 	}
 `
 const Wrapper = styled.div`
-	@media screen and (max-width: ${vars.breakpoints.mobileUp}) {
+	@media screen and (max-width: ${vars().breakpoints.mobileUp}) {
 		padding-top: 12px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
-	@media screen and (min-width: ${vars.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars().breakpoints.desktop}) {
 		display: flex;
 		justify-content: space-between;
 		height: calc(100vh - 80px);
 		&&::before {
 			position: absolute;
 			content: '';
-			border-right: ${vars.border.secondLine};
+			border-right: ${vars().border.secondLine};
 			width: 0px;
 			/* height: calc(100vh - 80px); */
 			height: 100%;
 			left: 480px;
-			box-shadow: ${vars.boxShadow.secondLine};
+			box-shadow: ${vars().boxShadow.secondLine};
 		}
 	}
 `
 const BalanceWrapper = styled.div`
-	@media screen and (max-width: ${vars.breakpoints.mobileUp}) {
+	@media screen and (max-width: ${vars().breakpoints.mobileUp}) {
 		padding-top: 12px;
 		margin-bottom: 32px;
 	}
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) and (max-width: ${vars.breakpoints.tabletUp}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) and (max-width: ${vars().breakpoints.tabletUp}) {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
 	}
 
-	@media screen and (min-width: ${vars.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars().breakpoints.desktop}) {
 		margin-bottom: 32px;
 	}
 `

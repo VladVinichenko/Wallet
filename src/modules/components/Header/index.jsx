@@ -17,9 +17,9 @@ const Head = styled.header`
 	padding-top: 15px;
 	padding-bottom: 15px;
 
-	background-color: ${vars.color.background.primary};
+	background-color: ${vars().color.background.primary};
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		max-height: 80px;
 		padding-top: 20px;
 		padding-bottom: 20px;
@@ -56,9 +56,9 @@ const Name = styled.span`
 	line-height: 1.5;
 	text-align: right;
 
-	color: ${vars.color.font.third};
+	color: ${vars().color.font.third};
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		position: relative;
 		margin-right: 0;
 		padding-right: 12px;
@@ -70,7 +70,7 @@ const Name = styled.span`
 			right: 0;
 			width: 1px;
 			height: 30px;
-			background-color: ${vars.color.font.third};
+			background-color: ${vars().color.font.third};
 		}
 	}
 `
@@ -87,8 +87,8 @@ const ExitButton = styled.button`
 	font-size: 18px;
 	line-height: 27px;
 
-	color: ${vars.color.font.third};
-	fill: ${vars.color.font.third};
+	color: ${vars().color.font.third};
+	fill: ${vars().color.font.third};
 
 	background-color: transparent;
 
@@ -96,15 +96,15 @@ const ExitButton = styled.button`
 
 	cursor: pointer;
 
-	transition: all ${vars.animation.duration} ${vars.animation.function};
+	transition: all ${vars().animation.duration} ${vars().animation.function};
 
 	&:hover,
 	&:focus {
-		color: ${vars.color.font.negative};
-		fill: ${vars.color.font.negative};
+		color: ${vars().color.font.negative};
+		fill: ${vars().color.font.negative};
 	}
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		margin-left: 12px;
 	}
 `
@@ -112,7 +112,7 @@ const ButtonSvg = styled.svg`
 	width: 18px;
 	height: 18px;
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		margin-right: 8px;
 	}
 `
@@ -120,7 +120,7 @@ const ButtonSvg = styled.svg`
 const ButtonLabel = styled.span`
 	display: none;
 
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars().breakpoints.tablet}) {
 		display: contents;
 	}
 `
