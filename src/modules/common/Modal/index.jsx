@@ -18,7 +18,7 @@ export const Backdrop = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: ${vars().color.background.backdrop};
+	background-color: ${(props) => props.theme.color.background.backdrop};
 `
 
 export const ModalContent = styled.div`
@@ -28,11 +28,11 @@ export const ModalContent = styled.div`
 	position: relative;
 	min-width: 100px;
 	min-height: 100px;
-	border-radius: ${vars().borderRadius.primary};
-	background-color: ${vars().color.background.primary};
+	border-radius: ${(props) => props.theme.borderRadius.primary};
+	background-color: ${(props) => props.theme.color.background.primary};
 	// overflow: hidden;
 
-	@media screen and (max-width: ${vars().breakpoints.mobileUp}) {
+	@media screen and (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 		border-radius: 0;
 		width: 100%;
 		height: 100%;
@@ -51,12 +51,12 @@ export const IconButton = styled.button`
 	border: 1px solid transparent;
 	cursor: pointer;
 
-	@media screen and (max-width: ${vars().breakpoints.mobileUp}) {
+	@media screen and (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 		display: none;
 	}
 
 	svg {
-		fill: ${vars().color.font.primary};
+		fill: ${(props) => props.theme.color.font.primary};
 		width: 25px;
 		height: 25px;
 	}

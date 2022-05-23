@@ -23,16 +23,16 @@ const StyledFormRegistration = styled(Form)`
 	margin-right: auto;
 
 	width: 320px;
-	color: ${vars().color.accent.buttonOpenMenu};
-	background-color: ${vars().color.background.primary};
+	color: ${(props) => props.theme.color.accent.buttonOpenMenu};
+	background-color: ${(props) => props.theme.color.background.primary};
 
-	@media screen and (min-width: ${vars().breakpoints.tablet}) {
+	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 		width: 530px;
 		padding: 40px 58px 66px 65px;
 		border-radius: 20px;
 	}
 
-	@media screen and (min-width: ${vars().breakpoints.desktop}) {
+	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		margin: 0;
 	}
 
@@ -62,9 +62,9 @@ const StyleSvgIcon = styled.svg`
 `
 
 const StyledInput = styled(Field)`
-	background: ${vars().color.background.primary};
+	background: ${(props) => props.theme.color.background.primary};
 	width: 100%;
-	border-bottom: 1px solid ${vars().color.accent.buttonOpenMenu};
+	border-bottom: 1px solid ${(props) => props.theme.color.accent.buttonOpenMenu};
 	border-top: none;
 	border-left: none;
 	border-right: none;
@@ -85,7 +85,7 @@ const StyledInput = styled(Field)`
 		font-weight: 400;
 		font-size: 18px;
 		line-height: 1.5;
-		color: ${vars().color.font.third};
+		color: ${(props) => props.theme.color.font.third};
 	}
 
 	button:not(:last-child) {

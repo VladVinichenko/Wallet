@@ -1,8 +1,8 @@
-export const vars = (theme = 'light') => {
-	// theme === 'light' && varsLight
-	// theme === 'dark' && varsDark
-	return varsDark
-}
+// export const vars = (theme = 'light') => {
+// theme === 'light' && varsLight
+// theme === 'dark' && varsDark
+// return varsDark
+// }
 
 export const varsLight = {
 	color: {

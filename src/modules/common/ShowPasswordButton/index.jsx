@@ -17,7 +17,7 @@ const ShowPassword = styled.button`
 	border-radius: 50%;
 	cursor: pointer;
 	transform: translate(0, -50%) scale(1);
-	transition: all ${vars().animation.duration} ${vars().animation.function};
+	transition: all ${(props) => props.theme.animation.duration} ${(props) => props.theme.animation.function};
 
 	&:hover,
 	&:focus {
@@ -39,7 +39,7 @@ const Visibility = {
 	width: '20px',
 	height: '20px',
 	transform: 'translate(-50%, -50%)',
-	transition: 'all ${vars().animation.duration} ${vars().animation.function}',
+	transition: 'all ${props => props.theme.animation.duration} ${props => props.theme.animation.function}',
 }
 
 export const ShowPasswordButton = ({ type, onClickBtn, passwordShown, confirmPasswordShown }) => {

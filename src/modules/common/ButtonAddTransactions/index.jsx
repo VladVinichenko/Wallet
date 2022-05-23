@@ -13,9 +13,9 @@ const Button = styled.button`
 	align-items: center;
 	padding: 0;
 	cursor: pointer;
-	background-color: ${vars().color.accent.primary};
+	background-color: ${(props) => props.theme.color.accent.primary};
 	border-radius: 50%;
-	filter: ${vars().filter.shadowButton};
+	filter: ${(props) => props.theme.filter.shadowButton};
 	z-index: 1;
 
 	&:hover,
@@ -33,7 +33,7 @@ const Button = styled.button`
 	svg {
 		width: 20px;
 		height: 20px;
-		fill: ${vars().color.background.primary};
+		fill: ${(props) => props.theme.color.background.primary};
 		transition: transform 0.8s ease-in-out;
 	}
 `

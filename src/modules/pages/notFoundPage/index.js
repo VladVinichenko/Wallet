@@ -22,7 +22,7 @@ const ImageWrapper = styled.div`
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-color: ${vars().color.background.page};
+	background-color: ${(props) => props.theme.color.background.page};
 	backdrop-filter: blur(50px);
 `
 

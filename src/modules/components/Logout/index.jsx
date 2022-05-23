@@ -7,7 +7,7 @@ import { Button } from 'modules'
 import authOperations from '../../../store/auth/auth-operations'
 
 const Form = styled.div`
-	color: ${vars().color.font.primary};
+	color: ${(props) => props.theme.color.font.primary};
 	max-width: 100vh;
 	position: absolute;
 	top: 50%;
@@ -18,7 +18,7 @@ const Form = styled.div`
 
 	text-align: center;
 
-	@media screen and (min-width: ${vars().breakpoints.tablet}) {
+	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 		position: relative;
 		top: 0;
 		left: 0;
@@ -38,7 +38,7 @@ const Title = styled.h2`
 	font-size: 30px;
 	line-height: 1.5;
 
-	color: ${vars().color.font.primary};
+	color: ${(props) => props.theme.color.font.primary};
 `
 
 const Message = styled.p`

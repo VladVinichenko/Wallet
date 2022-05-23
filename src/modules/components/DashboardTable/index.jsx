@@ -6,10 +6,10 @@ import { tableColumns } from 'lib/config'
 import { NoDataAvailable } from 'assets'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectorsFinance, fetchFinance } from 'store'
-import { vars } from 'stylesheet'
+// import { vars } from 'stylesheet'
 import { selectorsGlobal } from 'store'
 
-const { color, border, borderRadius, breakpoints } = vars()
+// const { color, border, borderRadius, breakpoints } = vars()
 const Component = styled.table`
 	thead {
 		display: block;
@@ -73,7 +73,7 @@ const BodyTable = styled.tbody`
 const Row = styled.tr`
 	display: flex;
 	flex-direction: column;
-	background: ${(prop) => prop.background};
+	background: ${(props) => props.theme.background};
 
 	@media screen and (max-width: ${breakpoints.mobileUp}) {
 		border-radius: ${borderRadius.fourth};
@@ -99,9 +99,9 @@ const Row = styled.tr`
 `
 const Column = styled.th`
 	display: flex;
-	justify-content: ${(prop) => prop.justifyContent};
-	width: ${(prop) => prop.width};
-	margin-right: ${(prop) => prop.marginRight};
+	justify-content: ${(props) => props.theme.justifyContent};
+	width: ${(props) => props.theme.width};
+	margin-right: ${(props) => props.theme.marginRight};
 	font-family: 'Circe';
 	font-style: normal;
 	font-weight: 700;

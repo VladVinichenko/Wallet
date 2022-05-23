@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { vars } from 'stylesheet'
+// import { vars } from 'stylesheet'
 import { selectorsFinance } from 'store'
 const { color, borderRadius, breakpoints } = vars()
 const Component = styled.div`
@@ -27,7 +27,7 @@ const Title = styled.h2`
 	font-size: 12px;
 	line-height: 1.5;
 	text-transform: uppercase;
-	color: ${color.font.seconary};
+	color: ${(props) => props.theme.color.font.seconary};
 `
 const Currency = styled.span`
 	font-family: 'Poppins', sans-serif;

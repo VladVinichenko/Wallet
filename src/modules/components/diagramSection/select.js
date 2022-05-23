@@ -16,8 +16,8 @@ const StyledButton = styled('button')(
 line-height: 24px;
 height:50px;
 padding-left: 15px;
-border: ${vars().border.forthLine}; 
-border-radius: ${vars().borderRadius.seconary};
+border: ${(props) => props.theme.border.forthLine}; 
+border-radius: ${(props) => props.theme.borderRadius.seconary};
 background-color: transparent;
 appearance: none;
 width: 100%;
@@ -27,13 +27,13 @@ cursor: pointer;
   
 
   &.${selectUnstyledClasses.focusVisible} {
-    outline: 2px solid ${vars().color.accent.buttonOpenMenu};
+    outline: 2px solid ${(props) => props.theme.color.accent.buttonOpenMenu};
   }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
       content: '';
-      color: ${vars().color.accent.buttonOpenMenu};
+      color: ${(props) => props.theme.color.accent.buttonOpenMenu};
     }
   }
 
@@ -42,18 +42,18 @@ cursor: pointer;
     float: right;
   }
 
-  @media (max-width: ${vars().breakpoints.mobileUp}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 width: 100%;
 }
-@media (min-width: ${vars().breakpoints.tablet}) {
+@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 width: 160px;
 }
-@media(min-width: ${vars().breakpoints.desktop}){
+@media(min-width: ${(props) => props.theme.breakpoints.desktop}){
 width:180px;
 }
 
 &:not(:last-child){
-  @media (max-width: ${vars().breakpoints.mobileUp}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 margin-bottom: 20px;
 }}
 
@@ -70,21 +70,21 @@ const StyledListbox = styled('ul')(
   padding: 20px 0;
   margin: 10px 0;
   max-height: 250px;
-  background: ${vars().color.background.openMenu};
+  background: ${(props) => props.theme.color.background.openMenu};
   border: 1px solid inherit;
-  border-radius: ${vars().borderRadius.primary};
-  box-shadow: ${vars().boxShadow.openMenu};
+  border-radius: ${(props) => props.theme.borderRadius.primary};
+  box-shadow: ${(props) => props.theme.boxShadow.openMenu};
   backdrop-filter: blur(50px);
   overflow: auto;
   outline: 0px;
 
-  @media (max-width: ${vars().breakpoints.mobileUp}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 width: 280px;
 }
-@media (min-width: ${vars().breakpoints.tablet}) {
+@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 width: 160px;
 }
-@media(min-width: ${vars().breakpoints.desktop}){
+@media(min-width: ${(props) => props.theme.breakpoints.desktop}){
 width:180px;
 }
 
@@ -102,8 +102,8 @@ const StyledOption = styled(OptionUnstyled)(
   }
 
   &:hover:not(.${optionUnstyledClasses.disabled}) {
-    background-color: ${vars().color.background.primary};
-    color: ${vars().color.accent.openMenu};
+    background-color: ${(props) => props.theme.color.background.primary};
+    color: ${(props) => props.theme.color.accent.openMenu};
   }
   `
 )

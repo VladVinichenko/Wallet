@@ -9,7 +9,7 @@ export const ValidationSchemaLogIn = () => {
 		textAlign: 'right',
 		fontStyle: 'normal',
 		fontFamily: 'Circe,sans-serif',
-		color: vars().color.font.negative,
+		color: (props) => props.theme.color.font.negative,
 		transition: '1s linear',
 		fontSize: '15px',
 		lineHeight: '1.1',

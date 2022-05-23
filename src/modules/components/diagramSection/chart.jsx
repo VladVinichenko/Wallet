@@ -6,25 +6,25 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 const ChartWrap = styled.div`
 	position: relative;
-	@media (max-width: ${vars().breakpoints.tabletUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
 		margin: 0 32px 0 0;
 		width: 336px;
 		height: 336px;
 	}
-	@media (max-width: ${vars().breakpoints.mobileUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 		width: 280px;
 		height: 280px;
 		margin: 0 0 32px 0;
 	}
 
-	@media (min-width: ${vars().breakpoints.desktop}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		width: 288px;
 		height: 288px;
 		margin: 0 30px 0 0;
 	}
 `
 const TotalBalance = styled.p`
-	color: ${vars().color.font.primary};
+	color: ${(props) => props.theme.color.font.primary};
 	font-weight: 700;
 	font-size: 18px;
 	line-height: 27px;

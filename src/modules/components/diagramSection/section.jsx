@@ -10,19 +10,20 @@ import { selectorsFinance } from '../../../store/finance/finance-selectors'
 import { monthOptions } from './monthOptions'
 
 const StatisticsSection = styled.section`
-	color: ${vars().color.font.primary};
-	@media (min-width: ${vars().breakpoints.tablet}) and (max-width: ${vars().breakpoints.tabletUp}) {
+	color: ${(props) => props.theme.color.font.primary};
+	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) and (max-width: ${(props) =>
+			props.theme.breakpoints.tabletUp}) {
 		padding-bottom: 35px;
 		min-height: 350px;
 	}
 	padding-bottom: 50px;
 
-	@media (min-width: ${vars().breakpoints.tablet}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 		/* padding-top: 45px; */
 		width: 704px;
 	}
 
-	@media (min-width: ${vars().breakpoints.desktop}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		/* padding-top: 45px; */
 		width: 715px;
 	}
@@ -35,13 +36,13 @@ const SectionTitle = styled.h2`
 	line-height: 45px;
 	margin-bottom: 20px;
 
-	@media (max-width: ${vars().breakpoints.mobileUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 		margin-bottom: 5px;
 	}
 `
 
 const SectionContent = styled.div`
-	@media (min-width: ${vars().breakpoints.tablet}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 		display: flex;
 		justify-content: space-between;
 
@@ -52,19 +53,19 @@ const SectionContent = styled.div`
 `
 
 const TableWrapper = styled.div`
-	color: ${vars().color.font.primary};
-	@media (min-width: ${vars().breakpoints.tablet}) {
+	color: ${(props) => props.theme.color.font.primary};
+	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 		width: 336px;
 		margin-top: -43px;
 	}
 
-	@media (min-width: ${vars().breakpoints.desktop}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		width: 395px;
 		margin: 0;
 	}
 `
 const SectionText = styled.p`
-	color: ${vars().color.font.primary};
+	color: ${(props) => props.theme.color.font.primary};
 	margin-bottom: 10px;
 	font-size: 18px;
 `

@@ -14,7 +14,10 @@ const Loader = styled.div`
 export const CustomLoader = ({ inBlock, size, color }) => {
 	return (
 		<Loader inBlock={inBlock}>
-			<RotatingLines strokeColor={color ? color : vars().color.accent.primary} width={size ? size : 100} />
+			<RotatingLines
+				strokeColor={color ? color : (props) => props.theme.color.accent.primary}
+				width={size ? size : 100}
+			/>
 		</Loader>
 	)
 }

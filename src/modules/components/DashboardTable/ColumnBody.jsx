@@ -2,27 +2,27 @@ import { useState, useEffect, useMemo } from 'react'
 import { nanoid } from 'nanoid'
 import styled from 'styled-components'
 import { InView } from 'react-intersection-observer'
-import { vars } from 'stylesheet'
+// import { vars } from 'stylesheet'
 import EllipsisText from 'react-ellipsis-text'
 
-const { color, breakpoints } = vars()
+// const { color, breakpoints } = vars()
 const Component = styled.td`
 	position: relative;
 	display: flex;
 	justify-content: space-between;
 	padding: 0 20px;
-	margin-right: ${(prop) => prop.marginRight};
+	margin-right: ${(props) => props.theme.marginRight};
 
-	color: ${(prop) => prop.color};
-	border-left: 5px solid ${(prop) => prop.colorBorder};
+	color: ${(props) => props.theme.color};
+	border-left: 5px solid ${(props) => props.theme.colorBorder};
 
 	font-family: 'Circe';
 	font-size: 16px;
 	line-height: 1.5;
-	font-weight: ${(prop) => prop.weight};
+	font-weight: ${(props) => props.theme.weight};
 
 	@media screen and (min-width: ${breakpoints.tablet}) {
-		justify-content: ${(prop) => prop.justifyContent};
+		justify-content: ${(props) => props.theme.justifyContent};
 		border-left: none;
 		padding: 0;
 	}

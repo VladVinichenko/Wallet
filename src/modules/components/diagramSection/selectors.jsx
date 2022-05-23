@@ -7,24 +7,24 @@ import { selectorsFinance } from 'store'
 import { monthOptions } from './monthOptions'
 
 const SelectsContainer = styled.div`
-	color: ${vars().color.accent.openMenu};
+	color: ${(props) => props.theme.color.accent.openMenu};
 	margin-bottom: 20px;
 
-	@media (max-width: ${vars().breakpoints.mobileUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 		width: 280px;
 	}
-	@media (min-width: ${vars().breakpoints.tablet}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		width: 335px;
 	}
-	@media (min-width: ${vars().breakpoints.desktop}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		width: 395px;
 	}
 
 	button {
-		color: ${vars().color.font.primary};
+		color: ${(props) => props.theme.color.font.primary};
 	}
 `
 

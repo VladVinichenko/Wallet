@@ -27,7 +27,7 @@ ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
-				<ThemeProvider theme={theme}>
+				<ThemeProvider theme={varsLight}>
 					<Background />
 					<GlobalStyle />
 					<Fonts />

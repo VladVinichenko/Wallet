@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import { vars } from '../../../stylesheet/vars'
 export const StyledPageSvg = styled.svg`
-	@media screen and (min-width: ${vars().breakpoints.tablet}) {
+	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 		width: 260px;
 		height: 250px;
 		margin-right: 40px;
 	}
-	@media screen and (min-width: ${vars().breakpoints.desktop}) {
+	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		width: 435px;
 		height: 419px;
 		margin-right: 0;
@@ -14,7 +13,7 @@ export const StyledPageSvg = styled.svg`
 `
 export const StyledBlockSvg = styled.div`
 	display: none;
-	@media screen and (min-width: ${vars().breakpoints.tablet}) {
+	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -22,7 +21,7 @@ export const StyledBlockSvg = styled.div`
 		margin-bottom: 50px;
 	}
 
-	@media screen and (min-width: ${vars().breakpoints.desktop}) {
+	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		flex-direction: column;
 		margin-bottom: 0;
 		margin-right: 145px;
@@ -35,5 +34,5 @@ export const StyledTitle = styled.h1`
 	font-size: 30px;
 	line-height: 1.15;
 	margin-top: 28px;
-	color: ${vars().color.font.primary};
+	color: ${(props) => props.theme.color.font.primary};
 `

@@ -73,7 +73,7 @@ button {
 
 input,
 textarea {
-  color: ${vars().color.font.primary};
+  color: ${(props) => props.theme.color.font.primary};
     outline: none;
     margin: 0;
     border: 0;
@@ -94,7 +94,7 @@ textarea {
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px ${vars().color.background.primary} inset;
+    -webkit-box-shadow: 0 0 0px 1000px ${(props) => props.theme.color.background.primary} inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 }

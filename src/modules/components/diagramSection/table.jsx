@@ -2,58 +2,58 @@ import styled from 'styled-components'
 import { vars } from '../../../stylesheet'
 
 const Table = styled.table`
-	color: ${vars().color.font.primary};
+	color: ${(props) => props.theme.color.font.primary};
 	font-size: 16px;
 	line-height: 24px;
 	border-collapse: collapse;
 
-	@media (max-width: ${vars().breakpoints.tabletUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
 		width: 340px;
 	}
-	@media (max-width: ${vars().breakpoints.mobileUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 		width: 280px;
 	}
-	@media (min-width: ${vars().breakpoints.desktop}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		width: 395px;
 	}
 `
 const THead = styled.thead`
 	border-radius: 30px;
-	background-color: ${vars().color.background.primary};
+	background-color: ${(props) => props.theme.color.background.primary};
 	font-size: 18px;
 	line-height: 27px;
 `
 
 const THeadCategory = styled.th`
-	border-top-left-radius: ${vars().borderRadius.seconary};
-	border-bottom-left-radius: ${vars().borderRadius.seconary};
+	border-top-left-radius: ${(props) => props.theme.borderRadius.seconary};
+	border-bottom-left-radius: ${(props) => props.theme.borderRadius.seconary};
 	height: 58px;
 	padding-left: 28px;
 	text-align: left;
 	width: 60%;
 `
 const THeadSum = styled.th`
-	border-top-right-radius: ${vars().borderRadius.seconary};
-	border-bottom-right-radius: ${vars().borderRadius.seconary};
+	border-top-right-radius: ${(props) => props.theme.borderRadius.seconary};
+	border-bottom-right-radius: ${(props) => props.theme.borderRadius.seconary};
 	padding-right: 28px;
 	text-align: right;
 	width: 40%;
 `
 
 const TRow = styled.tr`
-	border-bottom: ${vars().border.firstLine};
+	border-bottom: ${(props) => props.theme.border.firstLine};
 `
 const TBodyCategory = styled.td`
 	height: 50px;
 
-	@media (max-width: ${vars().breakpoints.tabletUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
 		padding-left: 20px;
 	}
-	@media (max-width: ${vars().breakpoints.mobileUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 		padding-left: 15px;
 	}
 
-	@media (min-width: ${vars().breakpoints.desktop}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		padding-left: 25px;
 	}
 `
@@ -63,10 +63,10 @@ const CategoryContents = styled.div`
 `
 const TBodySum = styled.td`
 	text-align: right;
-	@media (max-width: ${vars().breakpoints.tabletUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
 		padding-right: 20px;
 	}
-	@media (min-width: ${vars().breakpoints.desktop}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		padding-right: 30px;
 	}
 `
@@ -77,14 +77,14 @@ const TFootRow = styled.tr`
 const TFootCategory = styled.td`
 	height: 40px;
 	font-weight: 700;
-	@media (max-width: ${vars().breakpoints.tabletUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
 		padding-left: 20px;
 	}
-	@media (max-width: ${vars().breakpoints.mobileUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
 		padding-left: 15px;
 	}
 
-	@media (min-width: ${vars().breakpoints.desktop}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		padding-left: 25px;
 	}
 `
@@ -92,19 +92,19 @@ const TFootCategory = styled.td`
 const TFootSum = styled.td`
 	text-align: right;
 	color: ${(props) => {
-		return props.Outlay ? vars().color.font.negative : vars().color.font.positive
+		return props.Outlay ? (props) => props.theme.color.font.negative : (props) => props.theme.color.font.positive
 	}};
-	@media (max-width: ${vars().breakpoints.tabletUp}) {
+	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
 		padding-right: 20px;
 	}
-	@media (min-width: ${vars().breakpoints.desktop}) {
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		padding-right: 30px;
 	}
 `
 const ColorSquare = styled.span`
 	width: 24px;
 	height: 24px;
-	border-radius: ${vars().borderRadius.third};
+	border-radius: ${(props) => props.theme.borderRadius.third};
 	margin-right: 16px;
 `
 
