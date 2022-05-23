@@ -7,6 +7,7 @@ import { NoDataAvailable } from 'assets'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectorsFinance, fetchFinance } from 'store'
 import { vars } from 'stylesheet'
+import { selectorsGlobal } from 'store'
 
 const { color, border, borderRadius, breakpoints } = vars
 const Component = styled.table`
@@ -111,8 +112,8 @@ const NoDataAvailableImage = styled.img`
 	width: 280px;
 
 	@media screen and (min-width: ${breakpoints.tablet}) {
+		padding-top: 40px;
 		width: 704px;
-		height: 285px;
 	}
 	@media screen and (min-width: ${breakpoints.desktop}) {
 		width: 715px;
@@ -124,14 +125,14 @@ export const DashboardTable = ({ viewport, isReadyToRended, setIsReadyToRended }
 	const dataTable = useSelector(selectorsFinance.getFormatData)
 	const page = useSelector(selectorsFinance.getPageCount)
 	const dispatch = useDispatch()
-
+	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	useEffect(() => {
 		if (inView) {
 			dispatch(fetchFinance(page + 1))
 		}
 	}, [viewport, inView])
 	useEffect(() => {
-		setIsReadyToRended(true)
+		!isLoading && setIsReadyToRended(true)
 	}, [dataTable])
 	return useMemo(() => {
 		return (
@@ -153,7 +154,7 @@ export const DashboardTable = ({ viewport, isReadyToRended, setIsReadyToRended }
 						</Row>
 					</HederTable>
 				)}
-				{dataTable.length !== 0 ? (
+				{!isLoading & (dataTable.length !== 0) ? (
 					<BodyTable inView={inView}>
 						{dataTable.map((data, idx) => (
 							<Row key={nanoid()} background={viewport.anotherScreen ? `transparent` : `${color.background.primary}`}>
@@ -168,7 +169,7 @@ export const DashboardTable = ({ viewport, isReadyToRended, setIsReadyToRended }
 							</Row>
 						))}
 					</BodyTable>
-				) : isReadyToRended ? (
+				) : !isLoading & isReadyToRended ? (
 					<tbody>
 						<tr>
 							<td>

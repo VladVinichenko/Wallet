@@ -1,9 +1,7 @@
 import styled, { css } from 'styled-components'
 import { BsPlusLg } from 'react-icons/bs'
 import { FaMinus } from 'react-icons/fa'
-
 import { vars } from 'stylesheet'
-import { useState } from 'react'
 
 const Container = styled.div`
 	position: relative;
@@ -17,7 +15,7 @@ const ToggleContainer = styled.div`
 	}
 `
 
-const FormForButton = styled.form`
+const BoxForButton = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -99,25 +97,18 @@ const ToggleIcon = styled.div`
 `
 
 export const Checkbox = ({ isChecked, func }) => {
-	const [icon, setIcon] = useState(true)
-
-	const onCheck = (e) => {
-		const block = document.querySelector('#checkbox')
-		// setPlus(block.checked)
-	}
-
 	return (
 		<Container className='switchContainer'>
 			<ToggleContainer>
-				<FormForButton>
+				<BoxForButton>
 					<Label>
-						<Input onClick={onCheck} onChange={func} aria-label='transaction' />
+						<Input onChange={func} aria-label='transaction' />
 						<LabelText>Income</LabelText>
 						<ToggleIcon>{isChecked ? <BsPlusLg /> : <FaMinus />}</ToggleIcon>
 						<ToggleField />
 						<LabelText $mode='expenses'>Outlay</LabelText>
 					</Label>
-				</FormForButton>
+				</BoxForButton>
 			</ToggleContainer>
 		</Container>
 	)
