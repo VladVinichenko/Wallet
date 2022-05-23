@@ -119,9 +119,8 @@ const NoDataAvailableImage = styled.img`
 	}
 `
 
-export const DashboardTable = ({ viewport }) => {
+export const DashboardTable = ({ viewport, isReadyToRended, setIsReadyToRended }) => {
 	const [inView, setInView] = useState(false)
-	const [isReadyToRended, setIsReadyToRended] = useState(false)
 	const dataTable = useSelector(selectorsFinance.getFormatData)
 	const page = useSelector(selectorsFinance.getPageCount)
 	const dispatch = useDispatch()

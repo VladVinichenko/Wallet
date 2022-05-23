@@ -44,8 +44,8 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 		switch (elem.type) {
 			case 'UnixTime':
 				const currentData = new Date(data[elem.value])
-				const dataTransaction = currentData.toLocaleDateString().split('.')
-				return `${dataTransaction[0]}.${dataTransaction[1]}.${dataTransaction[2].substr(2, 3)}`
+				const dataTransaction = currentData.toLocaleDateString('en-GB')?.split('/')
+				return `${dataTransaction[0]}.${dataTransaction[1]}.${dataTransaction[2]?.substr(2, 3)}`
 			case 'Action':
 				if (data[elem.value] === 'outlay') {
 					return '-'
