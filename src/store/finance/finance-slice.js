@@ -67,7 +67,6 @@ const financeSlice = createSlice({
 			state.aviableStatistics = action.payload.aviableStatistics
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
-			console.log('rejected', action.payload)
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error fetch balance')
@@ -92,7 +91,6 @@ const financeSlice = createSlice({
 		},
 		[addTransaction.fulfilled]: (state) => {
 			state.isLoading = false
-			toast.success('Transaction added')
 		},
 		[addTransaction.rejected]: (state, action) => {
 			state.isLoading = false

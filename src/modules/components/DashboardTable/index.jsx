@@ -9,7 +9,7 @@ import { selectorsFinance, fetchFinance } from 'store'
 import { vars } from 'stylesheet'
 import { selectorsGlobal } from 'store'
 
-const { color, border, borderRadius, breakpoints } = vars
+const { color, border, borderRadius, breakpoints } = vars()
 const Component = styled.table`
 	thead {
 		display: block;
@@ -28,7 +28,7 @@ const Title = styled.caption`
 	overflow: hidden;
 `
 const HederTable = styled.thead`
-	color: ${vars().color.font.primary};
+	color: ${color.font.primary};
 	tr {
 		background-color: ${color.background.primary};
 		border-radius: ${borderRadius.seconary};

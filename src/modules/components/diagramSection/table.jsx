@@ -92,7 +92,7 @@ const TFootCategory = styled.td`
 const TFootSum = styled.td`
 	text-align: right;
 	color: ${(props) => {
-		return props.Outlay ? vars.color.font.negative : vars.color.font.positive
+		return props.Outlay ? vars().color.font.negative : vars().color.font.positive
 	}};
 	@media (max-width: ${vars().breakpoints.tabletUp}) {
 		padding-right: 20px;

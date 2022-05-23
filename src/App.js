@@ -11,11 +11,13 @@ import { Logout } from 'modules'
 import { Modal } from 'modules'
 import { ButtonAddTransaction } from 'modules'
 import { setIsModalAddTransactionOpen } from 'store'
+import { setTheme } from 'store'
 import { authSelectors } from './store/auth/auth-selectors'
 import { AddTransaction } from 'modules'
 import { CustomLoader } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
+import globalSlice from 'store/global/global-slice'
 
 const Header = lazy(() => import('./modules/components/Header'))
 const Home = lazy(() => import('./modules/pages/home' /* webpackChunkName: 'home' */))
@@ -34,13 +36,16 @@ export default function App() {
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
+	// const theme = useSelector(selectorsGlobal.getTheme)
 
 	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
 	}
-
+	localStorage.setItem('theme', 'varsDark')
 	useEffect(() => {
+		const theme = localStorage.getItem('theme')
 		!isLoggedIn && dispatch(authOperations.fetchRefreshToken())
+		dispatch(setTheme(theme))
 	}, [])
 
 	return (

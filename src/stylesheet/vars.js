@@ -1,7 +1,7 @@
 export const vars = (theme = 'light') => {
 	// theme === 'light' && varsLight
 	// theme === 'dark' && varsDark
-	return varsLight
+	return varsDark
 }
 
 export const varsLight = {
