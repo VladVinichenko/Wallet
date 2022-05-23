@@ -98,7 +98,7 @@ export const Currency = () => {
 			const filteredCurrencies = []
 			const currencies = ['USD', 'EUR', 'RUR']
 			currencies.forEach((currency) => {
-				data.forEach((element) => {
+				data?.forEach((element) => {
 					parseInt(element.buy).toFixed(2)
 					if (element.ccy === currency) {
 						filteredCurrencies.push({
