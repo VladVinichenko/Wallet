@@ -17,11 +17,11 @@ import { CustomLoader } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
 
-const Header = lazy(() => import('./modules/components/Header'))
-const Home = lazy(() => import('./modules/pages/home' /* webpackChunkName: 'home' */))
-const Registration = lazy(() => import('./modules/pages/registration' /* webpackChunkName: 'registration' */))
-const Login = lazy(() => import('./modules/pages/login' /* webpackChunkName: 'login' */))
-const NotFoundPage = lazy(() => import('./modules/pages/notFoundPage' /* webpackChunkName: 'not-found-page' */))
+const Header = lazy(() => import('./modules/components/Header' /* webpackChunkName: 'Header' */))
+const Home = lazy(() => import('./modules/pages/home' /* webpackChunkName: 'Home' */))
+const Registration = lazy(() => import('./modules/pages/registration' /* webpackChunkName: 'Registration' */))
+const Login = lazy(() => import('./modules/pages/login' /* webpackChunkName: 'Login' */))
+const NotFoundPage = lazy(() => import('./modules/pages/notFoundPage' /* webpackChunkName: 'Not_found_page' */))
 
 export default function App() {
 	const dispatch = useDispatch()
