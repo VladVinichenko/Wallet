@@ -6,21 +6,33 @@ import { useState } from 'react'
 const validationErrorText = {
 	position: 'absolute',
 	left: ' 0%',
-	top: '128%',
-	fontWeight: 'bold',
+	top: '105%',
 	textAlign: 'right',
+	fontStyle: 'normal',
+	fontFamily: 'Circe,sans-serif',
 	color: vars.color.font.negative,
 	transition: '1s linear',
-	fontSize: '12px',
+	fontSize: '15px',
 	lineHeight: '1.1',
 }
+
 const emailValid = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/
 
 export const ValidationSchema = () => {
 	return Yup.object({
 		name: Yup.string()
-			.required(<div style={validationErrorText}>At least 1 character</div>)
-			.min(1, <div style={validationErrorText}>At least 1 character</div>)
+			.test('name', <div style={validationErrorText}>Invalid name, only letters</div>, (value) => {
+				console.log(value)
+				let error
+				if (!value) {
+					error = 'Required'
+					console.log('noname')
+				} else if (/^[A-Za-z\s]+$/.test(value)) {
+					error = 'ok'
+				}
+				return error
+			})
+			.min(2, <div style={validationErrorText}>At least 2 character</div>)
 			.max(12, <div style={validationErrorText}>No more than 12 characters</div>)
 			.required(<div style={validationErrorText}>Required</div>),
 
@@ -32,14 +44,25 @@ export const ValidationSchema = () => {
 		passwordConfirm: Yup.string()
 
 			.default('')
-			.oneOf([Yup.ref('password'), null], <div style={validationErrorText}>Passwords do not match</div>)
+			.oneOf(
+				[Yup.ref('password'), null],
+				<div style={{ ...validationErrorText, top: '128%' }}>Passwords do not match</div>
+			)
 			.required(<div style={validationErrorText}>Required</div>),
 
 		email: Yup.string()
-			// .matches(!emailValid && <div style={validationErrorText}>Invalid email address</div>)
+			.test('email', <div style={validationErrorText}>Invalid email address</div>, (value) => {
+				let error = ''
+				if (!value) {
+					error = 'Required'
+				} else if (/^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/i.test(value)) {
+					console.log('valid')
+					error = 'ok'
+				}
+				return error
+			})
+			.required(<div style={validationErrorText}>Required</div>)
 			.min(10, <div style={validationErrorText}>At least 10 character</div>)
-			.max(64, <div style={validationErrorText}>No more than 64 characters</div>)
-			.email(<div style={validationErrorText}>Invalid email address</div>)
-			.required(<div style={validationErrorText}>Required</div>),
+			.max(64, <div style={validationErrorText}>No more than 64 characters</div>),
 	})
 }

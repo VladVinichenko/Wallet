@@ -115,6 +115,7 @@ export const FormLogin = () => {
 					email: '',
 					password: '',
 				})
+				setValuePassword('')
 			}}
 		>
 			{({ values, handleChange, isSubmitting, handleBlur }) => (

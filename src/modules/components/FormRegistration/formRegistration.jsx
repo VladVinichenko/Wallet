@@ -8,8 +8,8 @@ import { vars } from 'stylesheet'
 import { useDispatch } from 'react-redux'
 import { ShowPasswordButton } from '../../common/ShowPasswordButton'
 import authOperations from 'store/auth/auth-operations'
-import { ValidationSchema, RequiredValid } from '../../common/ValidationSchema'
-import { ValidationPassIndicator } from '../../common/validationPassword/validationIndicator'
+import { ValidationSchema } from '../../common/ValidationSchema'
+import { ValidationPassIndicator } from '../../common/ValidationPassword/validationIndicator'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
 const StyledFormRegistration = styled(Form)`
@@ -115,6 +115,16 @@ export const FormRegistration = () => {
 
 	const dispatch = useDispatch()
 
+	// function validateEmail(value) {
+	// 	let error
+	// 	if (!value) {
+	// 		error = 'Required'
+	// 	} else if (!/^[A-Z0-9.]+@[A-Z0-9.]+\.[A-Z]{2,4}$/i.test(value)) {
+	// 		error = 'Invalid email address'
+	// 	}
+	// 	return error
+	// }
+
 	return (
 		<Formik
 			initialValues={{
@@ -134,9 +144,11 @@ export const FormRegistration = () => {
 					password: '',
 					passwordConfirm: '',
 				})
+				setValuePassword('')
+				setValueConfirmPassword('')
 			}}
 		>
-			{({ values, handleChange, isSubmitting, handleBlur }) => (
+			{({ values, handleChange, isSubmitting, handleBlur, validateField, validateForm }) => (
 				<StyledFormRegistration>
 					<LogoAuth />
 					<StyleIconInput>
@@ -166,7 +178,7 @@ export const FormRegistration = () => {
 							onBlur={handleBlur}
 						/>
 						<ShowPasswordButton type='button' onClickBtn={handleChowPassword} passwordShown={passwordShown} />
-						<ErrorMessage name='password' render={<div>Invalid email address</div>} />
+						<ErrorMessage name='password' />
 					</StyleIconInput>
 
 					<StyleIconInput>
