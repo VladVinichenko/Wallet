@@ -4,7 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { sprite } from '../../../assets/images/index.js'
 import { Button } from '../../common/Button/index'
 import { ShowPasswordButton } from 'modules/common'
-import { ValidationSchema } from '../../common/ValidationSchema'
+import { ValidationSchemaLogIn } from '../../common/ValidationSchemaLogIn'
 import { LogoAuth } from 'modules/components/logo/index.js'
 import { useDispatch } from 'react-redux'
 import authOperations from 'store/auth/auth-operations'
@@ -110,8 +110,9 @@ export const FormLogin = () => {
 				email: '',
 				password: '',
 			}}
-			validationSchema={ValidationSchema}
+			validationSchema={ValidationSchemaLogIn}
 			onSubmit={(values, actions) => {
+				console.log(values)
 				dispatch(authOperations.logIn(values))
 				actions.resetForm({
 					email: '',
@@ -128,7 +129,7 @@ export const FormLogin = () => {
 						<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
 							<use href={sprite + '#icon-e-mail'} />
 						</StyleSvgIcon>
-						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
+						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' value={values.email} />
 						<ErrorMessage name='email' />
 					</StyleIconInput>
 
@@ -143,6 +144,7 @@ export const FormLogin = () => {
 							type={passwordShown ? 'text' : 'password'}
 							name='password'
 							aria-label='Password'
+							value={values.password}
 							required
 							onChange={(e) => {
 								setValuePassword(e.target.value)
