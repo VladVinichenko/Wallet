@@ -1,7 +1,5 @@
 import * as Yup from 'yup'
-import styled from 'styled-components'
 import { vars } from 'stylesheet'
-import { useState } from 'react'
 
 const validationErrorText = {
 	position: 'absolute',
@@ -16,7 +14,7 @@ const validationErrorText = {
 	lineHeight: '1.1',
 }
 
-const emailValid = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/
+const emailValid = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/i
 
 export const ValidationSchema = () => {
 	return Yup.object({
@@ -55,7 +53,7 @@ export const ValidationSchema = () => {
 				let error = ''
 				if (!value) {
 					error = 'Required'
-				} else if (/^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/i.test(value)) {
+				} else if (emailValid.test(value)) {
 					console.log('valid')
 					error = 'ok'
 				}
