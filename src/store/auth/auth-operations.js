@@ -46,10 +46,11 @@ const logOut = createAsyncThunk('auth/signout', async () => {
 })
 
 const fetchRefreshToken = createAsyncThunk('auth/refresh', async () => {
+	console.log('refresh')
 	try {
 		const { data } = await axios.get('auth/refresh')
-		token.set(data?.data.accessToken)
-		return data && data
+		token.set(data.data.accessToken)
+		return data
 	} catch (error) {
 		return rejectWithValue(error.message)
 	}

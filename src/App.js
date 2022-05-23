@@ -40,7 +40,7 @@ export default function App() {
 	}
 
 	useEffect(() => {
-		!isLoggedIn && dispatch(authOperations.fetchRefreshToken())
+		dispatch(authOperations.fetchRefreshToken())
 	}, [])
 
 	return (
