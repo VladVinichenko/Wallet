@@ -74,9 +74,7 @@ const Background = styled.div`
 	align-items: center;
 	width: 38px;
 	height: 38px;
-
 	overflow: hidden;
-
 	fill: ${vars.color.accent.fourth};
 	background-color: transparent;
 	filter: none;
@@ -105,12 +103,14 @@ const Svg = styled.svg`
 
 const Label = styled.p`
 	display: none;
-
 	transition: all ${vars.animation.duration} ${vars.animation.function};
-
+	&:hover,
+	&:focus {
+		color: ${vars.color.font.fourth};
+		fill: ${vars.color.font.fourth};
+	}
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: contents;
-
 		font-family: 'Poppins', sans-serif;
 		font-size: 18px;
 		font-weight: 400;
