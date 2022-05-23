@@ -14,8 +14,8 @@ const validationErrorText = {
 	lineHeight: '1.1',
 }
 
-const emailValid = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/i
-
+const emailValid = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{1,3})+$/i
+const nameValid = /^[A-Za-z]+$/
 export const ValidationSchema = () => {
 	return Yup.object({
 		name: Yup.string()
@@ -23,7 +23,7 @@ export const ValidationSchema = () => {
 				let error
 				if (!value) {
 					error = 'Required'
-				} else if (/^[A-Za-z\s]+$/.test(value)) {
+				} else if (nameValid.test(value)) {
 					error = 'ok'
 				}
 				return error
@@ -57,7 +57,7 @@ export const ValidationSchema = () => {
 				return error
 			})
 			.min(10, <div style={validationErrorText}>At least 10 character</div>)
-			.max(64, <div style={validationErrorText}>No more than 64 characters</div>)
+			.max(63, <div style={validationErrorText}>No more than 64 characters</div>)
 			.required(<div style={validationErrorText}>Required</div>),
 	})
 }

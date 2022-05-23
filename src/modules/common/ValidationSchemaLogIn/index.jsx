@@ -20,7 +20,7 @@ export const ValidationSchemaLogIn = () => {
 		password: Yup.string()
 			.min(6, <div style={validationErrorText}>At least 6 character</div>)
 			.max(16, <div style={validationErrorText}>No more than 16 characters</div>)
-			.required(<div style={validationErrorText}>Required</div>),
+			.required(<div style={validationErrorText}>Please fill out this field</div>),
 
 		email: Yup.string()
 			.test('email', <div style={validationErrorText}>Invalid email address</div>, (value) => {
@@ -34,6 +34,6 @@ export const ValidationSchemaLogIn = () => {
 			})
 			.min(10, <div style={validationErrorText}>At least 10 character</div>)
 			.max(64, <div style={validationErrorText}>No more than 64 characters</div>)
-			.required(<div style={validationErrorText}>Required</div>),
+			.required(<div style={validationErrorText}>Please fill out this field</div>),
 	})
 }
