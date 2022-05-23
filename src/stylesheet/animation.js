@@ -4,7 +4,6 @@ export const animation = {
 	},
 
 	keyframes: {
-		currencyShow:
-			'currency-show {0% {opacity: 0; transform: translateX(-50px);} 50% {opacity: 1;} 100% {transform: translateX(0);}}',
+		currencyShow: '',
 	},
 }

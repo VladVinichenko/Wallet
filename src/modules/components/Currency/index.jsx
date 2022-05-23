@@ -21,6 +21,7 @@ const Currenc = styled.div`
 
 	table {
 		width: 100%;
+		table-layout: fixed;
 		text-align: center;
 		border-collapse: collapse;
 		font-style: normal;
@@ -86,7 +87,18 @@ const Currenc = styled.div`
 			padding-top: 23px;
 		}
 	}
-	/* @keyframes ${animation.keyframes.currencyShow}; */
+	@keyframes currency-show {
+		0% {
+			opacity: 0;
+			transform: translateX(-50px);
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			transform: translateX(0);
+		}
+	} ;
 `
 
 export const Currency = () => {
@@ -97,7 +109,7 @@ export const Currency = () => {
 			const filteredCurrencies = []
 			const currencies = ['USD', 'EUR', 'RUR']
 			currencies.forEach((currency) => {
-				data.forEach((element) => {
+				data?.forEach((element) => {
 					parseInt(element.buy).toFixed(2)
 					if (element.ccy === currency) {
 						filteredCurrencies.push({

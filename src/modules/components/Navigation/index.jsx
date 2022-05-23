@@ -1,7 +1,8 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useMatch } from 'react-router-dom'
 import styled from 'styled-components'
 import { vars } from 'stylesheet'
 import { sprite } from 'assets'
+import { ROUTES } from 'lib'
 
 const Nav = styled.ul`
 	display: flex;
@@ -40,7 +41,7 @@ const StyledLink = styled(NavLink)`
 
 	&:hover,
 	&:focus,
-	&.${(props) => props.activeClassName} {
+	&.${(props) => props.className} {
 		& div div {
 			fill: ${vars.color.accent.seconary};
 			background-color: ${vars.color.background.primary};
@@ -48,7 +49,7 @@ const StyledLink = styled(NavLink)`
 		}
 	}
 
-	&.${(props) => props.activeClassName} {
+	&.${(props) => props.className} {
 		text-shadow: 1.5px 0 0 currentColor;
 	}
 `
@@ -118,10 +119,14 @@ const Label = styled.p`
 `
 
 export const Navigation = () => {
+	const matchHome = useMatch(`/${ROUTES.HOME}`)
+	const matchDiagram = useMatch(`/${ROUTES.DIAGRAM}`)
+	const matchCurrency = useMatch(`/${ROUTES.CURRENCY}`)
+
 	return (
 		<Nav>
 			<Item>
-				<StyledLink to='/home' activeClassName='active'>
+				<StyledLink to='/home' className={matchHome && 'active'}>
 					<Wrapper>
 						<Background>
 							<Svg width='18' height='18'>
@@ -133,7 +138,7 @@ export const Navigation = () => {
 				</StyledLink>
 			</Item>
 			<Item>
-				<StyledLink to='/diagram' activeClassName='active'>
+				<StyledLink to='/diagram' className={matchDiagram && 'active'}>
 					<Wrapper>
 						<Background>
 							<Svg width='18' height='18'>
@@ -145,7 +150,7 @@ export const Navigation = () => {
 				</StyledLink>
 			</Item>
 			<Item visib='none'>
-				<StyledLink to='/currency' activeClassName='active'>
+				<StyledLink to='/currency' className={matchCurrency && 'active'}>
 					<Wrapper>
 						<Background>
 							<Svg width='18' height='18'>

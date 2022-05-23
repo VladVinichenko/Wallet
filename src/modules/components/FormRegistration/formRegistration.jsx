@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import styled from 'styled-components'
 import { LogoAuth } from '../logo'
@@ -8,10 +8,11 @@ import { vars } from 'stylesheet'
 import { useDispatch } from 'react-redux'
 import { ShowPasswordButton } from '../../common/ShowPasswordButton'
 import authOperations from 'store/auth/auth-operations'
-import { ValidationSchema, RequiredValid } from '../../common/ValidationSchema'
+import { ValidationSchema } from '../../common/ValidationSchema'
 import { ValidationPassIndicator } from '../../common/validationPassword/validationIndicator'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
+
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -44,11 +45,10 @@ const StyleIconInput = styled.div`
 	position: relative;
 	width: 100%;
 	display: flex;
-	align-items: center;
+
 	&:not(:last-child) {
 		margin-bottom: 40px;
 	}
-
 	button {
 		margin-bottom: 0;
 	}
@@ -57,6 +57,8 @@ const StyleIconInput = styled.div`
 const StyleSvgIcon = styled.svg`
 	position: absolute;
 	margin-left: 12px;
+	width: 24px;
+	height: 24px;
 `
 
 const StyledInput = styled(Field)`
@@ -65,8 +67,7 @@ const StyledInput = styled(Field)`
 	border-top: none;
 	border-left: none;
 	border-right: none;
-	padding-bottom: 12px;
-	padding-top: 12px;
+	padding-bottom: 8px;
 	padding-left: 54px;
 	font-style: normal;
 	font-weight: 400;
@@ -85,22 +86,24 @@ const StyledInput = styled(Field)`
 		line-height: 1.5;
 		color: ${vars.color.font.third};
 	}
+
+	button:not(:last-child) {
+		margin-bottom: 0;
+	}
 `
 
 export const FormRegistration = () => {
 	const [passwordShown, setPasswordShown] = useState(false)
 	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
-	const [valueConfirmPassword, setValueConfirmPassword] = useState('')
 	const [valuePassword, setValuePassword] = useState('')
-
-	// console.log(valuePassword.length)
+	const [valueConfirmPassword, setValueConfirmPassword] = useState('')
 
 	const fontDotsPass = () => {
 		return !passwordShown && valuePassword.length > 0 ? { fontFamily: 'sans-serif' } : null
 	}
 
 	const fontDotsConfPass = () => {
-		return !passwordShown && valueConfirmPassword.length > 0 ? { fontFamily: 'sans-serif' } : null
+		return !confirmPasswordShown && valueConfirmPassword.length > 0 ? { fontFamily: 'sans-serif' } : null
 	}
 
 	const handleChowPassword = () => {
@@ -112,6 +115,7 @@ export const FormRegistration = () => {
 	}
 
 	const dispatch = useDispatch()
+
 	return (
 		<Formik
 			initialValues={{
@@ -131,13 +135,15 @@ export const FormRegistration = () => {
 					password: '',
 					passwordConfirm: '',
 				})
+				setValuePassword('')
+				setValueConfirmPassword('')
 			}}
 		>
-			{({ values, handleChange, isSubmitting, handleBlur }) => (
+			{({ values, handleChange, isSubmitting, handleBlur, validateField, validateForm }) => (
 				<StyledFormRegistration>
 					<LogoAuth />
 					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '20px', height: '16px' }}>
+						<StyleSvgIcon>
 							<use href={sprite + '#icon-e-mail'} />
 						</StyleSvgIcon>
 						<StyledInput id='email' type='text' name='email' required placeholder='E-mail' />
@@ -145,7 +151,7 @@ export const FormRegistration = () => {
 					</StyleIconInput>
 
 					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
+						<StyleSvgIcon>
 							<use href={sprite + '#icon-password'} />
 						</StyleSvgIcon>
 						<StyledInput
@@ -156,23 +162,18 @@ export const FormRegistration = () => {
 							required
 							placeholder='Password'
 							value={values.password}
-							onBlur={handleBlur('password')}
-							onChange={handleChange('password')}
-						/>
-						<ShowPasswordButton
-							onClick={(el) => {
-								el.preventDefault()
+							onChange={(e) => {
+								setValuePassword(e.target.value)
+								handleChange(e)
 							}}
-							type={'button'}
-							onClickBtn={handleChowPassword}
-							passwordShown={passwordShown}
+							onBlur={handleBlur}
 						/>
-
+						<ShowPasswordButton type='button' onClickBtn={handleChowPassword} passwordShown={passwordShown} />
 						<ErrorMessage name='password' />
 					</StyleIconInput>
 
 					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '16px', height: '21px' }}>
+						<StyleSvgIcon>
 							<use href={sprite + '#icon-password'} />
 						</StyleSvgIcon>
 
@@ -183,24 +184,25 @@ export const FormRegistration = () => {
 							name='passwordConfirm'
 							required
 							value={values.passwordConfirm}
-							onChange={handleChange('passwordConfirm')}
 							placeholder='Confirm password'
+							onBlur={handleBlur}
+							onChange={(e) => {
+								setValueConfirmPassword(e.target.value)
+								handleChange(e)
+							}}
 						/>
 						<ShowPasswordButton
-							onClick={(el) => {
-								el.preventDefault()
-							}}
 							type={'button'}
 							onClickBtn={handleConfirmPasswordShown}
 							confirmPasswordShown={confirmPasswordShown}
 						/>
 
-						<ValidationPassIndicator passValue={values.password} onChange={setValueConfirmPassword(values.password)} />
+						<ValidationPassIndicator passValue={values.password} />
 						<ErrorMessage name='passwordConfirm' />
 					</StyleIconInput>
 
 					<StyleIconInput>
-						<StyleSvgIcon style={{ width: '18px', height: '18px' }}>
+						<StyleSvgIcon>
 							<use href={sprite + '#icon-user'} />
 						</StyleSvgIcon>
 

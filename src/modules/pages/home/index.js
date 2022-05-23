@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Media from 'react-media'
@@ -6,10 +6,8 @@ import styled from 'styled-components'
 import { vars } from 'stylesheet'
 import { DashboardTable } from 'modules'
 import { Currency, Navigation } from 'modules/components'
-// import { Modal } from 'modules/components'
 import { Balance, Container } from 'modules/common'
 import { ROUTES } from 'lib'
-// import { ButtonAddTransactios } from 'modules/common'
 import { fetchFinance } from 'store'
 import { ChartSection } from '../../components/diagramSection'
 import { authSelectors } from '../../../store/auth/auth-selectors'
@@ -55,7 +53,6 @@ const Wrapper = styled.div`
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		display: flex;
 		justify-content: space-between;
-		position: relative;
 		height: calc(100vh - 80px);
 		&&::before {
 			position: absolute;
@@ -75,21 +72,20 @@ const BalanceWrapper = styled.div`
 		margin-bottom: 32px;
 	}
 
-	@media screen and (min-width: ${vars.breakpoints.tablet})  and (max-width:${vars.breakpoints.tabletUp}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) and (max-width: ${vars.breakpoints.tabletUp}) {
 		display: flex;
-    	flex-direction: column;
-    	justify-content: space-around;
-
+		flex-direction: column;
+		justify-content: space-around;
 	}
 
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		margin-bottom: 32px;
 	}
 `
-export const Home = ({ page = ROUTES.HOME }) => {
+const Home = ({ page = ROUTES.HOME }) => {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
+	const [isReadyToRended, setIsReadyToRended] = useState(false)
 	const dispatch = useDispatch()
-	// const checkWindowSize = windowSize()
 	const location = useLocation()
 	const navigate = useNavigate()
 	useEffect(() => {
@@ -121,7 +117,13 @@ export const Home = ({ page = ROUTES.HOME }) => {
 												<>
 													<Navigation />
 													<BalanceWrapper visible>{page === ROUTES.HOME && <Balance />}</BalanceWrapper>
-													{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+													{page === ROUTES.HOME && (
+														<DashboardTable
+															viewport={matches}
+															isReadyToRended={isReadyToRended}
+															setIsReadyToRended={setIsReadyToRended}
+														/>
+													)}
 													{page === ROUTES.DIAGRAM && <ChartSection />}
 													{page === ROUTES.CURRENCY && <Currency />}
 												</>
@@ -136,10 +138,15 @@ export const Home = ({ page = ROUTES.HOME }) => {
 														<Currency />
 													</LeftBlock>
 													<DashBoardWrapper>
-														{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+														{page === ROUTES.HOME && (
+															<DashboardTable
+																viewport={matches}
+																isReadyToRended={isReadyToRended}
+																setIsReadyToRended={setIsReadyToRended}
+															/>
+														)}
 														{page === ROUTES.DIAGRAM && <ChartSection />}
 													</DashBoardWrapper>
-													{/* <ButtonAddTransactios viewport={matches} /> */}
 												</>
 											)}
 										</>
@@ -157,3 +164,5 @@ export const Home = ({ page = ROUTES.HOME }) => {
 		</>
 	)
 }
+
+export default Home

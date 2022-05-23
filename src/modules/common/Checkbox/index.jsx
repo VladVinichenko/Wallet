@@ -1,9 +1,7 @@
 import styled, { css } from 'styled-components'
 import { BsPlusLg } from 'react-icons/bs'
 import { FaMinus } from 'react-icons/fa'
-
 import { vars } from 'stylesheet'
-import { useState } from 'react'
 
 const Container = styled.div`
 	position: relative;
@@ -17,7 +15,7 @@ const ToggleContainer = styled.div`
 	}
 `
 
-const FormForButton = styled.form`
+const BoxForButton = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -79,7 +77,7 @@ const ToggleIcon = styled.div`
 	height: 44px;
 	background-color: ${vars.color.font.positive};
 	background: ${vars.color.font.negative};
-	left: 104px;
+	left: 108px;
 	border-radius: 50%;
 	transition: all ${vars.animation.duration};
 	z-index: 4;
@@ -99,25 +97,18 @@ const ToggleIcon = styled.div`
 `
 
 export const Checkbox = ({ isChecked, func }) => {
-	const [icon, setIcon] = useState(true)
-
-	const onCheck = (e) => {
-		const block = document.querySelector('#checkbox')
-		// setPlus(block.checked)
-	}
-
 	return (
 		<Container className='switchContainer'>
 			<ToggleContainer>
-				<FormForButton>
+				<BoxForButton>
 					<Label>
-						<Input onClick={onCheck} onChange={func} aria-label='transaction' />
-						<LabelText>Доход</LabelText>
+						<Input onChange={func} aria-label='transaction' />
+						<LabelText>Income</LabelText>
 						<ToggleIcon>{isChecked ? <BsPlusLg /> : <FaMinus />}</ToggleIcon>
 						<ToggleField />
-						<LabelText $mode='expenses'>Расход</LabelText>
+						<LabelText $mode='expenses'>Outlay</LabelText>
 					</Label>
-				</FormForButton>
+				</BoxForButton>
 			</ToggleContainer>
 		</Container>
 	)
