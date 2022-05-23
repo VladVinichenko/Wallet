@@ -48,7 +48,7 @@ export const ValidationSchema = () => {
 				[Yup.ref('password'), null],
 				<div style={{ ...validationErrorText, top: '128%' }}>Passwords do not match</div>
 			)
-			.required(<div style={validationErrorText}>Required</div>),
+			.required(<div style={{ ...validationErrorText, top: '128%' }}>Required</div>),
 
 		email: Yup.string()
 			.test('email', <div style={validationErrorText}>Invalid email address</div>, (value) => {
@@ -61,8 +61,8 @@ export const ValidationSchema = () => {
 				}
 				return error
 			})
-			.required(<div style={validationErrorText}>Required</div>)
 			.min(10, <div style={validationErrorText}>At least 10 character</div>)
-			.max(64, <div style={validationErrorText}>No more than 64 characters</div>),
+			.max(64, <div style={validationErrorText}>No more than 64 characters</div>)
+			.required(<div style={validationErrorText}>Required</div>),
 	})
 }

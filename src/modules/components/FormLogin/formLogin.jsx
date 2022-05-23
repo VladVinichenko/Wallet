@@ -118,7 +118,7 @@ export const FormLogin = () => {
 				setValuePassword('')
 			}}
 		>
-			{({ values, handleChange, isSubmitting, handleBlur }) => (
+			{({ values, handleChange, handleBlur }) => (
 				<StyledFormRegistration>
 					<LogoAuth />
 

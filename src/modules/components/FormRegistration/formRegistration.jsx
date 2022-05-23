@@ -12,6 +12,7 @@ import { ValidationSchema } from '../../common/ValidationSchema'
 import { ValidationPassIndicator } from '../../common/ValidationPassword/validationIndicator'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
+
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
@@ -114,16 +115,6 @@ export const FormRegistration = () => {
 	}
 
 	const dispatch = useDispatch()
-
-	// function validateEmail(value) {
-	// 	let error
-	// 	if (!value) {
-	// 		error = 'Required'
-	// 	} else if (!/^[A-Z0-9.]+@[A-Z0-9.]+\.[A-Z]{2,4}$/i.test(value)) {
-	// 		error = 'Invalid email address'
-	// 	}
-	// 	return error
-	// }
 
 	return (
 		<Formik
