@@ -112,7 +112,6 @@ export const FormLogin = () => {
 			}}
 			validationSchema={ValidationSchemaLogIn}
 			onSubmit={(values, actions) => {
-				console.log(values)
 				dispatch(authOperations.logIn(values))
 				actions.resetForm({
 					email: '',

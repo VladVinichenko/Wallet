@@ -46,7 +46,7 @@ function renderColors(listStatistics, listCategories) {
 	const colors = listStatistics
 		.map((item) => listCategories.find((cat) => item.category === cat._id))
 		.map((item) => item.color)
-	// console.log('colors',colors)
+
 	return colors
 }
 const Chart = ({ categories, outlay, statistics }) => {

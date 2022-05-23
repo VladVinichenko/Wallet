@@ -20,7 +20,6 @@ axios.defaults.withCredentials = true
 
 export const token = {
 	set(token) {
-		// console.log('token:', token)
 		axios.defaults.headers.common.Authorization = `Bearer ${token}`
 	},
 	unset() {

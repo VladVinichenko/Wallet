@@ -5,7 +5,8 @@ import { StyledBlockSvg, StyledPageSvg } from '../../components/svgFormPage/svgF
 import { useSelector } from 'react-redux'
 import { authSelectors } from 'store/auth/auth-selectors'
 import { StyledTitle } from '../../components/svgFormPage/svgFormPage'
-export const Registration = () => {
+
+const Registration = () => {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 	return (
 		<>
@@ -23,3 +24,5 @@ export const Registration = () => {
 		</>
 	)
 }
+
+export default Registration

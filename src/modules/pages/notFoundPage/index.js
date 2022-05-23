@@ -9,6 +9,11 @@ const PageWrapper = styled.div`
 	width: 100vw;
 	height: 100vh;
 `
+
+const ContainerPage = styled(Container)`
+	padding: 20px 0;
+`
+
 const ImageWrapper = styled.div`
 	background-image: url(${notFoundImage});
 	height: 100%;
@@ -20,7 +25,7 @@ const ImageWrapper = styled.div`
 	backdrop-filter: blur(50px);
 `
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
 	const navigate = useNavigate()
 	const backHome = () => {
 		navigate('/')
@@ -29,13 +34,15 @@ export const NotFoundPage = () => {
 		<>
 			<PageWrapper>
 				<ImageWrapper>
-					<Container>
+					<ContainerPage>
 						<Button onClickButton={backHome} type='button' title={'back home'} label={'back home'}>
 							Back home
 						</Button>
-					</Container>
+					</ContainerPage>
 				</ImageWrapper>
 			</PageWrapper>
 		</>
 	)
 }
+
+export default NotFoundPage
