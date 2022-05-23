@@ -49,7 +49,7 @@ const fetchRefreshToken = createAsyncThunk('auth/refresh', async () => {
 	try {
 		const { data } = await axios.get('auth/refresh')
 		token.set(data?.data.accessToken)
-		data && data
+		return data && data
 	} catch (error) {
 		return rejectWithValue(error.message)
 	}
