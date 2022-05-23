@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Media from 'react-media'
@@ -84,6 +84,7 @@ const BalanceWrapper = styled.div`
 `
 const Home = ({ page = ROUTES.HOME }) => {
 	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
+	const [isReadyToRended, setIsReadyToRended] = useState(false)
 	const dispatch = useDispatch()
 	const location = useLocation()
 	const navigate = useNavigate()
@@ -116,7 +117,13 @@ const Home = ({ page = ROUTES.HOME }) => {
 												<>
 													<Navigation />
 													<BalanceWrapper visible>{page === ROUTES.HOME && <Balance />}</BalanceWrapper>
-													{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+													{page === ROUTES.HOME && (
+														<DashboardTable
+															viewport={matches}
+															isReadyToRended={isReadyToRended}
+															setIsReadyToRended={setIsReadyToRended}
+														/>
+													)}
 													{page === ROUTES.DIAGRAM && <ChartSection />}
 													{page === ROUTES.CURRENCY && <Currency />}
 												</>
@@ -131,7 +138,13 @@ const Home = ({ page = ROUTES.HOME }) => {
 														<Currency />
 													</LeftBlock>
 													<DashBoardWrapper>
-														{page === ROUTES.HOME && <DashboardTable viewport={matches} />}
+														{page === ROUTES.HOME && (
+															<DashboardTable
+																viewport={matches}
+																isReadyToRended={isReadyToRended}
+																setIsReadyToRended={setIsReadyToRended}
+															/>
+														)}
 														{page === ROUTES.DIAGRAM && <ChartSection />}
 													</DashBoardWrapper>
 												</>

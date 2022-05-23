@@ -21,6 +21,7 @@ const Currenc = styled.div`
 
 	table {
 		width: 100%;
+		table-layout: fixed;
 		text-align: center;
 		border-collapse: collapse;
 		font-style: normal;
@@ -97,7 +98,7 @@ export const Currency = () => {
 			const filteredCurrencies = []
 			const currencies = ['USD', 'EUR', 'RUR']
 			currencies.forEach((currency) => {
-				data.forEach((element) => {
+				data?.forEach((element) => {
 					parseInt(element.buy).toFixed(2)
 					if (element.ccy === currency) {
 						filteredCurrencies.push({

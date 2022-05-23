@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-const BlockCheck = styled.div`
-	position: absolute;
-	bottom: -8px;
-	border-radius: 10px;
-	transition: 1s linear;
-`
+const BlockCheck = {
+	position: 'absolute',
+	bottom: '-8px',
+	borderRadius: '10px',
+	transition: '1s linear',
+}
 
 export const ValidationPassIndicator = ({ passValue }) => {
 	const [rating, setRating] = useState(0)
@@ -119,41 +119,68 @@ export const ValidationPassIndicator = ({ passValue }) => {
 	return (
 		<>
 			{passValue.length > 0 && rating < 3 ? (
-				<BlockCheck
+				<div
 					style={{
+						...BlockCheck,
 						width: '10%',
 						border: '2px solid #e7140d',
 						boxShadow: '0px 1px 8px rgba(208, 49, 44, 0.5)',
 					}}
-				/>
+				></div>
 			) : passValue.length < 6 && rating >= 3 ? (
-				<BlockCheck
-					style={{ width: '50%', border: '2px solid #ffc727', boxShadow: '0px 1px 8px rgba(255, 202, 51, 0.5)' }}
-				/>
-			) : passValue.length >= 8 && rating < 3 ? (
-				<BlockCheck
-					style={{ width: '50%', border: '2px solid #ffc727', boxShadow: '0px 1px 8px rgba(255, 202, 51, 0.5)' }}
-				/>
-			) : passValue.length >= 8 && rating > 3 ? (
-				<BlockCheck
+				<div
 					style={{
+						...BlockCheck,
+						width: '50%',
+						border: '2px solid #ffc727',
+						boxShadow: '0px 1px 8px rgba(255, 202, 51, 0.5)',
+					}}
+				></div>
+			) : passValue.length >= 8 && rating < 3 ? (
+				<div
+					style={{
+						...BlockCheck,
+						width: '50%',
+						border: '2px solid #ffc727',
+						boxShadow: '0px 1px 8px rgba(255, 202, 51, 0.5)',
+					}}
+				></div>
+			) : passValue.length >= 8 && rating > 3 ? (
+				<div
+					style={{
+						...BlockCheck,
 						width: '100%',
 						border: '2px solid #24CCA7',
 						boxShadow: '0px 1px 8px rgba(36, 204, 167, 0.5)',
 					}}
 				/>
 			) : passValue.length >= 6 && rating === 1 ? (
-				<BlockCheck
-					style={{ width: '10%', border: '2px solid #FF6596', boxShadow: '0px 1px 8px rgba(208, 49, 44, 0.5)' }}
-				/>
+				<div
+					style={{
+						...BlockCheck,
+						width: '10%',
+						border: '2px solid #FF6596',
+						boxShadow: '0px 1px 8px rgba(208, 49, 44, 0.5)',
+					}}
+				></div>
 			) : passValue.length >= 6 && rating > 1 && rating < 4 ? (
-				<BlockCheck
-					style={{ width: '50%', border: '2px solid #ffc727', boxShadow: '0px 1px 8px rgba(255, 202, 51, 0.5)' }}
-				/>
+				<div
+					style={{
+						...BlockCheck,
+						width: '50%',
+						border: '2px solid #ffc727',
+						boxShadow: '0px 1px 8px rgba(255, 202, 51, 0.5)',
+					}}
+				></div>
 			) : passValue.length >= 6 && rating === 4 ? (
-				<BlockCheck
-					style={{ width: '100%', border: '2px solid #24CCA7', boxShadow: '0px 1px 8px rgba(36, 204, 167, 0.5)' }}
-				/>
+				<div
+					style={{
+						...BlockCheck,
+						width: '100%',
+						border: '2px solid #24CCA7',
+						boxShadow: '0px 1px 8px rgba(36, 204, 167, 0.5)',
+					}}
+				></div>
 			) : null}
 		</>
 	)

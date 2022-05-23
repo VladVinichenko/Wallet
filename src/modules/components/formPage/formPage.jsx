@@ -4,25 +4,25 @@ import { StyledTitle } from '../svgFormPage/svgFormPage'
 
 export const StyledLoginPage = styled.section`
 	background-color: ${vars.color.background.primary};
-	height: 100vh;
+	/* height: 100vh; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
-		display: block;
 		background-color: transparent;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		overflow-y: scroll;
-		padding-top: 20px;
-		padding-bottom: 20px;
+		padding-top: 60px;
+		padding-bottom: 50px;
 	}
 
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
+		padding-top: 50px;
 	}
 `
 

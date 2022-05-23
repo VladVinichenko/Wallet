@@ -79,7 +79,7 @@ const ToggleIcon = styled.div`
 	height: 44px;
 	background-color: ${vars.color.font.positive};
 	background: ${vars.color.font.negative};
-	left: 104px;
+	left: 108px;
 	border-radius: 50%;
 	transition: all ${vars.animation.duration};
 	z-index: 4;
@@ -112,10 +112,10 @@ export const Checkbox = ({ isChecked, func }) => {
 				<FormForButton>
 					<Label>
 						<Input onClick={onCheck} onChange={func} aria-label='transaction' />
-						<LabelText>Доход</LabelText>
+						<LabelText>Income</LabelText>
 						<ToggleIcon>{isChecked ? <BsPlusLg /> : <FaMinus />}</ToggleIcon>
 						<ToggleField />
-						<LabelText $mode='expenses'>Расход</LabelText>
+						<LabelText $mode='expenses'>Outlay</LabelText>
 					</Label>
 				</FormForButton>
 			</ToggleContainer>

@@ -1,67 +1,66 @@
 import * as Yup from 'yup'
-import styled from 'styled-components'
 import { vars } from 'stylesheet'
-import { useState } from 'react'
-
-const ValidationError = styled.div`
-	position: absolute;
-	bottom: -35px;
-	right: 30%;
-	text-align: right;
-`
 
 const validationErrorText = {
 	position: 'absolute',
-	top: '-15px',
-	right: '30%',
+	left: ' 0%',
+	top: '105%',
 	textAlign: 'right',
+	fontStyle: 'normal',
+	fontFamily: 'Circe,sans-serif',
 	color: vars.color.font.negative,
-	fontWeight: 'bold',
 	transition: '1s linear',
+	fontSize: '15px',
+	lineHeight: '1.1',
 }
 
-const validationMessage = {
-	position: 'absolute',
-	left: ' 35%',
-	top: '-15%',
-	color: vars.color.font.negative,
-	fontWeight: 'bold',
-	transition: '1s linear',
-}
+const emailValid = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/i
 
 export const ValidationSchema = () => {
 	return Yup.object({
 		name: Yup.string()
-			.min(
-				1,
-
-				<div style={validationErrorText}>At least 1 character</div>
-			)
-			.max(
-				12,
-
-				<div style={validationErrorText}>No more than 12 characters</div>
-			)
-			.required(<div style={validationMessage}>Required</div>),
+			.test('name', <div style={validationErrorText}>Invalid name, only letters</div>, (value) => {
+				console.log(value)
+				let error
+				if (!value) {
+					error = 'Required'
+					console.log('noname')
+				} else if (/^[A-Za-z\s]+$/.test(value)) {
+					error = 'ok'
+				}
+				return error
+			})
+			.min(2, <div style={validationErrorText}>At least 2 character</div>)
+			.max(12, <div style={validationErrorText}>No more than 12 characters</div>)
+			.required(<div style={validationErrorText}>Required</div>),
 
 		password: Yup.string()
 			.min(6, <div style={validationErrorText}>At least 6 character</div>)
 			.max(16, <div style={validationErrorText}>No more than 16 characters</div>)
-
-			.required(<div style={validationMessage}>Required</div>),
+			.required(<div style={validationErrorText}>Required</div>),
 
 		passwordConfirm: Yup.string()
 
 			.default('')
 			.oneOf(
 				[Yup.ref('password'), null],
-
-				<div style={validationErrorText}>Passwords do not match</div>
+				<div style={{ ...validationErrorText, top: '128%' }}>Passwords do not match</div>
 			)
-			.required(<div style={validationMessage}>Required</div>),
+			.required(<div style={{ ...validationErrorText, top: '128%' }}>Required</div>),
 
 		email: Yup.string()
-			.email(<div style={validationErrorText}>Invalid email address</div>)
-			.required(<div style={validationMessage}>Required</div>),
+			.test('email', <div style={validationErrorText}>Invalid email address</div>, (value) => {
+				let error = ''
+				if (!value) {
+					error = 'Required'
+				} else if (emailValid.test(value)) {
+					console.log('valid')
+					error = 'ok'
+				}
+				return error
+			})
+			.min(10, <div style={validationErrorText}>At least 10 character</div>)
+			.max(64, <div style={validationErrorText}>No more than 64 characters</div>)
+			.required(<div style={validationErrorText}>Required</div>),
 	})
 }
