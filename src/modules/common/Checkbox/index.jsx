@@ -115,7 +115,7 @@ export const Checkbox = ({ isChecked, func }) => {
 						<LabelText>Income</LabelText>
 						<ToggleIcon>{isChecked ? <BsPlusLg /> : <FaMinus />}</ToggleIcon>
 						<ToggleField />
-						<LabelText $mode='expenses'>Expense</LabelText>
+						<LabelText $mode='expenses'>Outlay</LabelText>
 					</Label>
 				</FormForButton>
 			</ToggleContainer>
