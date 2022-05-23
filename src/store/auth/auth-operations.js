@@ -7,7 +7,6 @@ import { store, token } from 'store'
 const register = createAsyncThunk('auth/signup', async (credentials) => {
 	try {
 		const { data } = await axios.post('auth/signup', credentials)
-		// toast.success(`Check your email for verify: ${data.email}`)
 
 		return data.data && data.data
 	} catch (error) {
