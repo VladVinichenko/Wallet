@@ -28,7 +28,6 @@ export const ValidationSchemaLogIn = () => {
 				if (!value) {
 					error = 'Required'
 				} else if (emailValid.test(value)) {
-					console.log('valid')
 					error = 'ok'
 				}
 				return error

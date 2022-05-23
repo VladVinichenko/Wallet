@@ -20,11 +20,9 @@ export const ValidationSchema = () => {
 	return Yup.object({
 		name: Yup.string()
 			.test('name', <div style={validationErrorText}>Invalid name, only letters</div>, (value) => {
-				console.log(value)
 				let error
 				if (!value) {
 					error = 'Required'
-					console.log('noname')
 				} else if (/^[A-Za-z\s]+$/.test(value)) {
 					error = 'ok'
 				}
@@ -54,7 +52,6 @@ export const ValidationSchema = () => {
 				if (!value) {
 					error = 'Required'
 				} else if (emailValid.test(value)) {
-					console.log('valid')
 					error = 'ok'
 				}
 				return error
