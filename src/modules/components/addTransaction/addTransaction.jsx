@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Formik, ErrorMessage } from 'formik'
@@ -223,26 +222,19 @@ const FormContainer = styled.div`
 `
 
 export const AddTransaction = () => {
-	const [date, setDate] = useState(new Date())
 	const dispatch = useDispatch()
 
-	const closeModal = () => {
-		dispatch(setCloseModal())
-	}
-	const postTransaction = (body) => {
-		dispatch(zuzuzu(body))
-	}
+	const closeModal = () => dispatch(setCloseModal())
+	const postTransaction = (body) => dispatch(zuzuzu(body))
 
 	const categories = useSelector(selectorsFinance.getCategories)
 	const updtdCategories = categories.filter((cat) => cat.name !== 'Income')
-
-	const handleDateChange = ({ _d: time }) => setDate(time)
 
 	const onSubmitFunc = async (values) => {
 		if (values.isIncome) values.category = '628587f997d487932b456397'
 
 		const type = values.isIncome ? 'income' : 'outlay'
-		values = { type, ...values, date }
+		values = { type, ...values }
 		delete values.isIncome
 
 		try {
@@ -263,16 +255,34 @@ export const AddTransaction = () => {
 	const transactionSchena = Yup.object().shape({
 		isIncome: Yup.boolean().required('Required'),
 		category: Yup.string(),
-		sum: Yup.number().required('Sum is Required'),
-		date: Yup.date().required('Required'),
-		comment: Yup.string(),
+		sum: Yup.number().positive().required('Sum is Required'),
+		date: Yup.date()
+			.transform(function (value, originalValue) {
+				if (this.isType(value)) {
+					return value
+				}
+				const result = parse(originalValue, 'dd.MM.yyyy', new Date())
+				return result
+			})
+			.typeError('please enter a valid date')
+			.required('Date is Required'),
+		comment: Yup.string()
+			// .trim()
+			// .matches(/^[a-z]+$/, 'Is not in correct format')
+			.optional(),
 	})
 
 	return (
 		<FormContainer className='addTransaction'>
 			<Title>Add transaction</Title>
 			<Formik
-				initialValues={{ isIncome: false, category: '628356e997d487932b456343', sum: '', date, comment: '' }}
+				initialValues={{
+					isIncome: false,
+					category: '628356e997d487932b456343',
+					sum: '',
+					date: new Date(),
+					comment: '',
+				}}
 				onSubmit={onSubmitFunc}
 				validationSchema={transactionSchena}
 			>
@@ -287,22 +297,21 @@ export const AddTransaction = () => {
 								lab='category'
 							/>
 						)}
-						{/* {errors.category && touched.category && <div className='input-feedback'>{errors.category}</div>} */}
 						{errors.category && touched.category && errors.category}
 
 						<StyledGroup className='group'>
 							<SummInput
 								type='number'
 								name='sum'
-								min='0'
-								step='0,01'
+								min={0}
+								step={0.01}
 								placeholder='0.00'
+								autoComplete='off'
 								value={values.sum}
 								onChange={handleChange}
 								onBlur={handleBlur}
 								className={['summInput', errors.sum && touched.sum ? 'error' : null].join(' ')}
 							/>
-							{/* {errors.sum && touched.sum && errors.sum} */}
 							{/* <ErrorMessage name='sum' component='div' /> */}
 
 							<span className='dateInputWrapper'>
@@ -312,24 +321,25 @@ export const AddTransaction = () => {
 									timeFormat={false}
 									initialValue={values.date}
 									closeOnSelect={true}
-									onChange={handleDateChange}
+									onChange={({ _d: time }) => setValues({ ...values, date: time })}
 								/>
 								<svg className='calendarIcon' width='24' height='24'>
 									<use href={sprite + '#icon-calendar'}></use>
 								</svg>
 							</span>
 						</StyledGroup>
-						{errors.date && touched.date && errors.date}
 
 						<StyledTextarea
 							type='text'
 							name='comment'
-							value={values.comment}
 							placeholder='Comment'
 							autoComplete='off'
+							pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+							value={values.comment}
 							onChange={handleChange}
 						/>
 						<ErrorMessage name='sum' className='error-message' component='div' />
+						<ErrorMessage name='date' className='error-message' component='div' />
 						{/* {errors.sum && touched.sum && <div className='error-message'>{errors.sum}</div>} */}
 
 						<ul className='button-list'>
