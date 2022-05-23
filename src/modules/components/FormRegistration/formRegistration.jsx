@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 import { ShowPasswordButton } from '../../common/ShowPasswordButton'
 import authOperations from 'store/auth/auth-operations'
 import { ValidationSchema } from '../../common/ValidationSchema'
-import { ValidationPassIndicator } from '../../common/ValidationPassword/validationIndicator'
+import { ValidationPassIndicator } from '../../common/validationPassword/validationIndicator'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'lib'
 
