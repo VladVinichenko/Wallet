@@ -29,6 +29,7 @@ const ButtomSwtichBox = styled.div`
 	position: fixed;
 	bottom: 40px;
 	left: 50px;
+	z-index: 100;
 `
 
 export default function App({ switchTheme }) {

@@ -55,7 +55,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export const CustomizedSwitches = () => {
 	const theme = useSelector(selectorsGlobal.getTheme)
-	const [getTh, setTh] = React.useState()
+	const [getTh, setTh] = React.useState(false)
 	const dispatch = useDispatch()
 
 	React.useEffect(() => {
@@ -66,5 +66,5 @@ export const CustomizedSwitches = () => {
 		theme === 'varsDark' ? dispatch(setTheme('varsLight')) : dispatch(setTheme('varsDark'))
 		theme === 'varsDark' ? localStorage.setItem('theme', 'varsLight') : localStorage.setItem('theme', 'varsDark')
 	}
-	return <MaterialUISwitch sx={{ m: 1 }} checked={getTh} onClick={switchThemes} />
+	return <MaterialUISwitch checked={getTh} sx={{ m: 1 }} onChange={switchThemes} />
 }

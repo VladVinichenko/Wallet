@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components'
-import { vars } from './vars'
 
 export const GlobalStyle = createGlobalStyle`
 html {
@@ -18,7 +17,7 @@ html {
   -webkit-scrollbar-track {
     background: transparent;
   }
-  -webkit-scrollbar-button:{
+  -webkit-scrollbar-button {
     display: none;
   }
   

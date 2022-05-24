@@ -77,6 +77,7 @@ const Row = styled.tr`
 	@media screen and (max-width: ${vars.breakpoints.mobileUp}) {
 		border-radius: ${(props) => props.theme.borderRadius.fourth};
 		overflow: hidden;
+		background: ${(props) => props.theme.color.background.primary};
 		td + td {
 			position: relative;
 			::after {
