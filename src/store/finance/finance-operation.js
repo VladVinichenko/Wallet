@@ -47,3 +47,13 @@ export const fetchCategories = createAsyncThunk('finance/categories', async () =
 	const { data } = await getCategories()
 	return data.data && data.data
 })
+
+export const fetchPrivat = createAsyncThunk('finances/courses', async () => {
+	try {
+		const { data } = await axios.get('finances/courses')
+		// console.log(data)
+		// return data && data
+	} catch (error) {
+		return rejectWithValue(error.message)
+	}
+})
