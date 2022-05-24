@@ -10,31 +10,31 @@ const ButtonPrimary = styled.button`
 	align-content: center;
 	text-transform: uppercase;
 
-	color: ${vars.color.background.primary};
+	color: ${(props) => props.theme.color.background.primary};
 	size: 18px;
 	font-weight: 400;
 	line-height: 1.5;
-	background-color: ${vars.color.accent.primary};
-	border-radius: ${vars.borderRadius.primary};
+	background-color: ${(props) => props.theme.color.accent.primary};
+	border-radius: ${(props) => props.theme.borderRadius.primary};
 	border: none;
 	/* transition: background-color ${vars.animation.duration}; */
 	transition: ${vars.animation.duration};
-	box-shadow: ${vars.boxShadow.button};
+	box-shadow: ${(props) => props.theme.boxShadow.button};
 
 	&:hover {
 		transform: translateY(-5px);
-		box-shadow: ${vars.boxShadow.buttonHover};
+		box-shadow: ${(props) => props.theme.boxShadow.buttonHover};
 	}
 
 	&:active {
 		transform: translateY(-2px);
-		box-shadow: ${vars.boxShadow.buttonActive};
+		box-shadow: ${(props) => props.theme.boxShadow.buttonActive};
 	}
 `
 const ButtonAccent = styled(ButtonPrimary)`
-	color: ${vars.color.font.fourth};
-	border: ${vars.border.button};
-	background-color: ${vars.color.background.primary};
+	color: ${(props) => props.theme.color.font.fourth};
+	border: ${(props) => props.theme.border.button};
+	background-color: ${(props) => props.theme.color.background.primary};
 `
 
 export const Button = ({ color = true, children, type = 'button', ariaLabel, onClickButton, style }) => {

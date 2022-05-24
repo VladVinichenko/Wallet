@@ -3,23 +3,36 @@ import { nanoid } from 'nanoid'
 import styled from 'styled-components'
 import { InView } from 'react-intersection-observer'
 import { vars } from 'stylesheet'
+import { varsRef } from 'stylesheet'
 import EllipsisText from 'react-ellipsis-text'
+import { useSelector } from 'react-redux'
+import { selectorsGlobal } from 'store'
 
-const { color, breakpoints } = vars
+const { breakpoints } = vars
 const Component = styled.td`
+	&.null {
+		color: ${(props) => props.theme.color.font.primary};
+	}
+
+	&.positive {
+		color: ${(props) => props.theme.color.font.positive};
+	}
+
+	&.negative {
+		color: ${(props) => props.theme.color.font.negative};
+	}
+
 	position: relative;
 	display: flex;
 	justify-content: space-between;
 	padding: 0 20px;
 	margin-right: ${(prop) => prop.marginRight};
-
-	color: ${(prop) => prop.color};
 	border-left: 5px solid ${(prop) => prop.colorBorder};
 
 	font-family: 'Circe';
 	font-size: 16px;
 	line-height: 1.5;
-	font-weight: ${(prop) => prop.weight};
+	font-weight: ${(props) => props.theme.weight};
 
 	@media screen and (min-width: ${breakpoints.tablet}) {
 		justify-content: ${(prop) => prop.justifyContent};
@@ -36,10 +49,11 @@ const Title = styled.span`
 	font-weight: 700;
 	font-size: 18px;
 	line-height: 1.5;
-	color: ${color.font.colorTitle};
+	color: ${(props) => props.theme.color.font.colorTitle};
 `
 
 export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLast }) => {
+	const theme = useSelector(selectorsGlobal.getTheme)
 	const formateData = (elem) => {
 		switch (elem.type) {
 			case 'UnixTime':
@@ -67,14 +81,10 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 					return (
 						<Component
 							key={idx}
-							colorBorder={type === 'income' ? `${color.font.positive}` : `${color.font.negative}`}
-							color={
-								el.type === 'Sum'
-									? type === 'income'
-										? `${color.font.positive}`
-										: `${color.font.negative}`
-									: `${color.font.primary}`
+							colorBorder={
+								type === 'income' ? `${varsRef(theme).color.font.positive}` : `${varsRef(theme).color.font.negative}`
 							}
+							className={el.type === 'Sum' ? (type === 'income' ? `positive` : `negative`) : `null`}
 							weight={el.type === 'Sum' ? '700' : '400'}
 							width={viewport.anotherScreen ? el.style.width : undefined}
 							justifyContent={el.style.justifyContent}

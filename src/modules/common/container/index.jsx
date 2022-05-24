@@ -8,10 +8,8 @@ export const Container = styled.div`
 	overflow-x: hidden;
 	min-width: 320px;
 
-	@media screen and (min-width: 320px) and (max-width: 767px) {
+	@media screen and (min-width: ${vars.breakpoints.mobile}) and (max-width: ${vars.breakpoints.mobileUp}) {
 		min-width: ${vars.breakpoints.mobile};
-		/* overflow-x: hidden; */
-		/* min-width: ${vars.breakpoints.mobile}; */
 	}
 	@media screen and (min-width: ${vars.breakpoints.mobile}) and (max-width: ${vars.breakpoints.mobileUp}) {
 		padding-left: 20px;

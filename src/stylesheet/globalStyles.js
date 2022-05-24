@@ -5,17 +5,22 @@ html {
   overflow: overlay;
   scrollbar-width: thin;
   
-  ::-webkit-scrollbar {
+  -webkit-scrollbar {
     width: 5px;
+    background-color: transparent;
   }
-  ::-webkit-scrollbar-thumb {
-    background: #000;
+  -webkit-scrollbar-thumb {
+    background: transparent;
     border-radius: 10px;
   }
 
-  ::-webkit-scrollbar-track {
+  -webkit-scrollbar-track {
     background: transparent;
   }
+  -webkit-scrollbar-button {
+    display: none;
+  }
+  
 }
 
 body {
@@ -65,6 +70,7 @@ button {
 
 input,
 textarea {
+  color: ${(props) => props.theme.color.font.primary};
     outline: none;
     margin: 0;
     border: 0;
@@ -85,7 +91,7 @@ textarea {
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    -webkit-box-shadow: 0 0 0px 1000px ${(props) => props.theme.color.background.primary} inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 }

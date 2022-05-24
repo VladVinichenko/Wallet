@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { vars } from 'stylesheet'
 import { selectorsFinance } from 'store'
-const { color, borderRadius, breakpoints } = vars
+const { breakpoints } = vars
 const Component = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -12,8 +12,8 @@ const Component = styled.div`
 	height: 80px;
 	padding: 8px 0 12px 32px;
 
-	background: ${color.background.primary};
-	border-radius: ${borderRadius.seconary};
+	background: ${(props) => props.theme.color.background.primary};
+	border-radius: ${(props) => props.theme.borderRadius.seconary};
 
 	@media screen and (min-width: ${breakpoints.tablet}) {
 		width: 336px;
@@ -27,10 +27,10 @@ const Title = styled.h2`
 	font-size: 12px;
 	line-height: 1.5;
 	text-transform: uppercase;
-	color: ${color.font.seconary};
+	color: ${(props) => props.theme.color.font.seconary};
 `
 const Currency = styled.span`
-	font-family: 'Poppins',sans-serif;
+	font-family: 'Poppins', sans-serif;
 	font-weight: 400;
 `
 
@@ -40,7 +40,7 @@ const Counter = styled.p`
 	font-size: 30px;
 	line-height: 1.5;
 
-	color: ${color.font.primary};
+	color: ${(props) => props.theme.color.font.primary};
 `
 
 export const Balance = () => {

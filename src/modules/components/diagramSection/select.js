@@ -5,9 +5,11 @@ import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
 import { StyledEngineProvider } from '@mui/material/styles'
 import { vars } from 'stylesheet'
+import { varsRef } from 'stylesheet'
 
 import rowDown from 'assets/images/openMenu/row-down.svg'
-
+import { useSelector } from 'react-redux'
+import { selectorsGlobal } from 'store'
 
 const StyledButton = styled('button')(
 	({ theme }) => `
@@ -17,8 +19,8 @@ const StyledButton = styled('button')(
 line-height: 24px;
 height:50px;
 padding-left: 15px;
-border: ${vars.border.forthLine}; 
-border-radius: ${vars.borderRadius.seconary};
+border: ${varsRef().border.forthLine}; 
+border-radius: ${varsRef().borderRadius.seconary};
 background-color: transparent;
 appearance: none;
 width: 100%;
@@ -28,13 +30,13 @@ cursor: pointer;
   
 
   &.${selectUnstyledClasses.focusVisible} {
-    outline: 2px solid ${vars.color.accent.buttonOpenMenu};
+    outline: 2px solid ${varsRef().color.accent.buttonOpenMenu};
   }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
       content: '';
-      color: ${vars.color.accent.buttonOpenMenu};
+      color: ${varsRef().color.accent.buttonOpenMenu};
     }
   }
 
@@ -63,6 +65,18 @@ margin-bottom: 20px;
 
 const StyledListbox = styled('ul')(
 	({ theme }) => `
+  scrollbar-width: thin;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
   font-family: Circe, sans-serif;
   font-size: 18px;
   line-height: 27px;
@@ -71,10 +85,10 @@ const StyledListbox = styled('ul')(
   padding: 20px 0;
   margin: 10px 0;
   max-height: 250px;
-  background: ${vars.color.background.openMenu};
+  background: ${varsRef().color.background.openMenu};
   border: 1px solid inherit;
-  border-radius: ${vars.borderRadius.primary};
-  box-shadow: ${vars.boxShadow.openMenu};
+  border-radius: ${varsRef().borderRadius.primary};
+  box-shadow: ${varsRef().boxShadow.openMenu};
   backdrop-filter: blur(50px);
   overflow: auto;
   outline: 0px;
@@ -103,8 +117,8 @@ const StyledOption = styled(OptionUnstyled)(
   }
 
   &:hover:not(.${optionUnstyledClasses.disabled}) {
-    background-color: ${vars.color.background.primary};
-    color: ${vars.color.accent.openMenu};
+    background-color: ${varsRef().color.background.primary};
+    color: ${varsRef().color.accent.openMenu};
   }
   `
 )
@@ -124,41 +138,44 @@ const CustomSelect = forwardRef(function CustomSelect(props, ref) {
 	return <SelectUnstyled {...props} ref={ref} components={components} />
 })
 
-export const Select = ({name, data, setValues }) => {
-    const [value, setValue] = useState('')
-       
-    useEffect(() => { 
-setValues(value)
-    }, [value])
-    
-    function renderValue(option) {
-	
-        if (name === 'month') {
-            if (option == null) { return <span>Month </span> }
-           return <span>{option.value.string}</span>
-        }
-        if (name === 'year') {
-            if (option == null) {return <span>Year </span> }
-            return <span>{option.value}</span>
-        }
-	return 
-    }
-    
+export const Select = ({ name, data, setValues, setTheme }) => {
+	const [value, setValue] = useState('')
+
+	useEffect(() => {
+		setValues(value)
+	}, [value])
+
+	function renderValue(option) {
+		if (name === 'month') {
+			if (option == null) {
+				return <span>Month </span>
+			}
+			return <span>{option.value.string}</span>
+		}
+		if (name === 'year') {
+			if (option == null) {
+				return <span>Year </span>
+			}
+			return <span>{option.value}</span>
+		}
+		return
+	}
+
 	return (
 		<StyledEngineProvider injectFirst>
-            <CustomSelect renderValue={renderValue}  value={value} onChange={setValue}>
-                {data.map((key) => (
-                    name === 'month'?
-                        (<StyledOption value={key} key={key.number} text={key.string } >
-						{key.string}
-                        </StyledOption>) :
-                     (<StyledOption value={key} key={key}>
-						{key}
-                        </StyledOption>)   
-                     
-				))}
+			<CustomSelect renderValue={renderValue} value={value} onChange={setValue}>
+				{data.map((key) =>
+					name === 'month' ? (
+						<StyledOption value={key} key={key.number} text={key.string}>
+							{key.string}
+						</StyledOption>
+					) : (
+						<StyledOption value={key} key={key}>
+							{key}
+						</StyledOption>
+					)
+				)}
 			</CustomSelect>
 		</StyledEngineProvider>
 	)
 }
-

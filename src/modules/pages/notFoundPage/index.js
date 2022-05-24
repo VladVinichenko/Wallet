@@ -3,6 +3,7 @@ import notFoundImage from 'assets/images/notFound/notFoundImage.webp'
 import { Button } from 'modules/common'
 import styled from 'styled-components'
 import { Container } from 'modules/common'
+import { vars } from 'stylesheet'
 
 const PageWrapper = styled.div`
 	position: fixed;
@@ -21,7 +22,7 @@ const ImageWrapper = styled.div`
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-color: rgba(255, 255, 255, 0.4);
+	background-color: ${(props) => props.theme.color.background.page};
 	backdrop-filter: blur(50px);
 `
 
