@@ -14,10 +14,10 @@ const Component = styled.td`
 	display: flex;
 	justify-content: space-between;
 	padding: 0 20px;
-	margin-right: ${(props) => props.theme.marginRight};
+	margin-right: ${(prop) => prop.marginRight};
 
 	color: ${(props) => props.theme.color.font.primary};
-	border-left: 5px solid ${(props) => props.theme.colorBorder};
+	border-left: 5px solid ${(prop) => prop.colorBorder};
 
 	font-family: 'Circe';
 	font-size: 16px;
@@ -25,7 +25,7 @@ const Component = styled.td`
 	font-weight: ${(props) => props.theme.weight};
 
 	@media screen and (min-width: ${breakpoints.tablet}) {
-		justify-content: ${(props) => props.theme.justifyContent};
+		justify-content: ${(prop) => prop.justifyContent};
 		border-left: none;
 		padding: 0;
 	}

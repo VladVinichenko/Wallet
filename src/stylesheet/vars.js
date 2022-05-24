@@ -153,7 +153,7 @@ export const varsDark = {
 			page: 'rgba(10, 10, 10, 0.4)',
 			card: '#4A56E2',
 			currency: 'rgba(255, 255, 255, 0.2)',
-			openMenu: 'rgba(255, 255, 255, 0.7)',
+			openMenu: 'rgba(255, 255, 255, 0.2)',
 			cardGradient: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) -8.67%, rgba(255, 255, 255, 0) 116.22%)',
 			backdrop: 'rgba(0, 0, 0, 0.25)',
 			tableLine: '#DCDCDF',
@@ -191,7 +191,7 @@ export const varsDark = {
 		fifth: '6px',
 	},
 	border: {
-		firstLine: '1px solid #DCDCDF',
+		firstLine: '1px solid #201c36',
 		secondLine: '1px solid #201c36',
 		thirdLine: '1px solid #BDBDBD',
 		forthLine: '1px solid #ffffff',
