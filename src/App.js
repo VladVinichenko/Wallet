@@ -27,8 +27,8 @@ const NotFoundPage = lazy(() => import('./modules/pages/notFoundPage' /* webpack
 
 const ButtomSwtichBox = styled.div`
 	position: fixed;
-	bottom: 40px;
-	left: 50px;
+	bottom: 20px;
+	left: 20px;
 	z-index: 100;
 `
 
