@@ -7,6 +7,7 @@ import { setIsModalLogoutOpen } from 'store'
 import { Container } from 'modules/common'
 import { Logo } from 'modules/common'
 import { sprite } from 'assets'
+import { CustomizedSwitches } from 'modules/common/themeSwitcher'
 
 const Head = styled.header`
 	position: sticky;
@@ -17,7 +18,7 @@ const Head = styled.header`
 	padding-top: 15px;
 	padding-bottom: 15px;
 
-	background-color: ${vars.color.background.primary};
+	background-color: ${(props) => props.theme.color.background.primary};
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		max-height: 80px;
@@ -56,7 +57,7 @@ const Name = styled.span`
 	line-height: 1.5;
 	text-align: right;
 
-	color: ${vars.color.font.third};
+	color: ${(props) => props.theme.color.font.third};
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		position: relative;
@@ -70,7 +71,7 @@ const Name = styled.span`
 			right: 0;
 			width: 1px;
 			height: 30px;
-			background-color: ${vars.color.font.third};
+			background-color: ${(props) => props.theme.color.font.third};
 		}
 	}
 `
@@ -87,8 +88,8 @@ const ExitButton = styled.button`
 	font-size: 18px;
 	line-height: 27px;
 
-	color: ${vars.color.font.third};
-	fill: ${vars.color.font.third};
+	color: ${(props) => props.theme.color.font.third};
+	fill: ${(props) => props.theme.color.font.third};
 
 	background-color: transparent;
 
@@ -100,8 +101,8 @@ const ExitButton = styled.button`
 
 	&:hover,
 	&:focus {
-		color: ${vars.color.font.negative};
-		fill: ${vars.color.font.negative};
+		color: ${(props) => props.theme.color.font.negative};
+		fill: ${(props) => props.theme.color.font.negative};
 	}
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {

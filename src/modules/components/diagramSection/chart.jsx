@@ -24,6 +24,7 @@ const ChartWrap = styled.div`
 	}
 `
 const TotalBalance = styled.p`
+	color: ${(props) => props.theme.color.font.primary};
 	font-weight: 700;
 	font-size: 18px;
 	line-height: 27px;

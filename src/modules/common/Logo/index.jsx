@@ -28,9 +28,10 @@ const LogoName = styled.span`
 	font-size: 18px;
 	line-height: 1.5;
 
-	color: ${vars.color.font.primary};
+	color: ${(props) => props.theme.color.font.primary};
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+		display: flex;
 		font-size: 30px;
 		line-height: 1.33;
 	}
@@ -41,6 +42,7 @@ export const Logo = () => (
 		<LogoSvg width='40' height='40'>
 			<use href={`${sprite}#icon-wallet`}></use>
 		</LogoSvg>
+
 		<LogoName>Wallet</LogoName>
 	</Wrapper>
 )

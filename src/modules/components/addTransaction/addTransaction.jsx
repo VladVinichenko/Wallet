@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Formik, ErrorMessage } from 'formik'
 import Datetime from 'react-datetime'
 import { OpenMenu, Button } from 'modules'
-import { Checkbox } from 'modules/common'
+import { Checkbox as CustomCheckbox } from 'modules/common'
 import styled from 'styled-components'
 import * as Yup from 'yup'
 
@@ -27,27 +27,27 @@ const StyledInput = styled.input`
 
 	font-size: 18px;
 	line-height: 1.5;
-	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+	border-bottom: 1px solid ${(props) => props.theme.color.accent.buttonOpenMenu};
 
 	&::placeholder {
-		color: ${vars.color.font.third};
+		color: ${(props) => props.theme.color.font.third};
 	}
 `
-
 const SummInput = styled(StyledInput)`
 	font-weight: 700;
 	text-align: center;
 	margin-bottom: 40px;
+	background: ${(props) => props.theme.color.background.primary};
 
 	&::placeholder {
 		text-align: center;
 	}
 
 	&.error {
-		border-color: ${vars.color.font.negative};
+		border-color: ${(props) => props.theme.color.font.negative};
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		margin-right: 30px;
 		margin-bottom: unset;
 	}
@@ -68,7 +68,7 @@ const StyledGroup = styled.div`
 		right: 15px;
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		flex-wrap: nowrap;
 	}
 `
@@ -78,23 +78,29 @@ const StyledTextarea = styled.textarea`
 	margin-bottom: 40px;
 	padding-left: 20px;
 
+	background: ${(props) => props.theme.color.background.primary};
 	width: 100%;
 	height: 86px;
 	font-size: 18px;
 	line-height: 1.5;
-	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+	border-bottom: 1px solid ${(props) => props.theme.color.accent.buttonOpenMenu};
 	resize: none;
 	overflow: hidden;
 
-	&::placeholder {
-		color: ${vars.color.font.third};
+	&.error {
+		border-color: ${vars.color.font.negative};
 	}
 
-	@media screen and (min-width: 768px) {
+	&::placeholder {
+		color: ${(props) => props.theme.color.font.third};
+	}
+
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		height: 32px;
 	}
 `
 const Title = styled.h2`
+	color: ${(props) => props.theme.color.font.primary};
 	font-family: 'Poppins';
 	font-weight: 400;
 	font-size: 24px;
@@ -102,7 +108,7 @@ const Title = styled.h2`
 	text-align: center;
 	margin-bottom: 40px;
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		font-size: 30px;
 	}
 `
@@ -115,7 +121,7 @@ const FormContainer = styled.div`
 	line-height: 1.5;
 	text-align: center;
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		padding: 40px 75px;
 		width: 540px;
 		min-height: 605px;
@@ -123,11 +129,11 @@ const FormContainer = styled.div`
 
 	.form-control {
 		padding-left: 20px;
-
+		background: ${(props) => props.theme.color.background.primary};
 		width: 100%;
 		font-size: 18px;
 		line-height: 1.5;
-		border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+		border-bottom: 1px solid ${(props) => props.theme.color.accent.buttonOpenMenu};
 	}
 
 	.button-item:not(:last-child) {
@@ -143,7 +149,7 @@ const FormContainer = styled.div`
 	}
 
 	.error-message {
-		color: ${vars.color.font.negative};
+		color: ${(props) => props.theme.color.font.negative};
 	}
 `
 
@@ -176,6 +182,8 @@ export const AddTransaction = () => {
 		// alert(JSON.stringify(values, null, 2))
 	}
 
+	const line = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/
+
 	const transactionSchena = Yup.object().shape({
 		isIncome: Yup.boolean().required('Required'),
 		category: Yup.string(),
@@ -191,8 +199,13 @@ export const AddTransaction = () => {
 			.typeError('please enter a valid date')
 			.required('Date is Required'),
 		comment: Yup.string()
-			// .trim()
-			// .matches(/^[a-z]+$/, 'Is not in correct format')
+			.test('Comment', 'Comment is invalid', (value) => {
+				let error
+				if (line.test(value)) {
+					error = 'ok'
+				}
+				return error
+			})
 			.optional(),
 	})
 
@@ -212,7 +225,8 @@ export const AddTransaction = () => {
 			>
 				{({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit, setValues }) => (
 					<form className='transactionForm' onSubmit={handleSubmit}>
-						<Checkbox className='switch' isChecked={values.isIncome} func={handleChange} val={values.category} />
+						<CustomCheckbox className='switch' isChecked={values.isIncome} func={handleChange} val={values.category} />
+
 						{!values.isIncome && (
 							<OpenMenu
 								data={updtdCategories}
@@ -221,7 +235,6 @@ export const AddTransaction = () => {
 								lab='category'
 							/>
 						)}
-						{errors.category && touched.category && errors.category}
 
 						<StyledGroup className='group'>
 							<SummInput
@@ -234,9 +247,8 @@ export const AddTransaction = () => {
 								value={values.sum}
 								onChange={handleChange}
 								onBlur={handleBlur}
-								className={['summInput', errors.sum && touched.sum ? 'error' : null].join(' ')}
+								className={errors.sum && touched.sum ? 'error' : null}
 							/>
-							{/* <ErrorMessage name='sum' component='div' /> */}
 
 							<span className='dateInputWrapper'>
 								<Datetime
@@ -247,6 +259,7 @@ export const AddTransaction = () => {
 									closeOnSelect={true}
 									onChange={({ _d: time }) => setValues({ ...values, date: time })}
 								/>
+
 								<svg className='calendarIcon' width='24' height='24'>
 									<use href={sprite + '#icon-calendar'}></use>
 								</svg>
@@ -258,13 +271,13 @@ export const AddTransaction = () => {
 							name='comment'
 							placeholder='Comment'
 							autoComplete='off'
-							pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
 							value={values.comment}
 							onChange={handleChange}
+							className={[errors.comment && touched.comment ? 'error' : null].join(' ')}
 						/>
 						<ErrorMessage name='sum' className='error-message' component='div' />
-						<ErrorMessage name='date' className='error-message' component='div' />
-						{/* {errors.sum && touched.sum && <div className='error-message'>{errors.sum}</div>} */}
+						{errors.date && touched.date && <div className='error-message'>Date is invalid</div>}
+						<ErrorMessage name='comment' className='error-message' component='div' />
 
 						<ul className='button-list'>
 							<li className='button-item'>

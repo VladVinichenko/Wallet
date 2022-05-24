@@ -6,9 +6,11 @@ const getIsLoading = (state) => {
 
 const getIsModalLogoutOpen = (state) => state.global.isModalLogoutOpen
 const getIsModalAddTransactionOpen = (state) => state.global.isModalAddTransactionOpen
+const getTheme = (state) => state.global.theme
 
 export const selectorsGlobal = {
 	getIsLoading,
 	getIsModalLogoutOpen,
 	getIsModalAddTransactionOpen,
+	getTheme,
 }

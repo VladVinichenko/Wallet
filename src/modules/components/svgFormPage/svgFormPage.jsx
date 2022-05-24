@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { vars } from '../../../stylesheet/vars'
+import { vars } from 'stylesheet'
+
 export const StyledPageSvg = styled.svg`
-	
-	@media screen and (min-width: ${vars.breakpoints.tablet}){
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		width: 260px;
-	height: 250px;
-	margin-right: 40px;
+		height: 250px;
+		margin-right: 40px;
 	}
 	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		width: 435px;
@@ -36,5 +36,5 @@ export const StyledTitle = styled.h1`
 	font-size: 30px;
 	line-height: 1.15;
 	margin-top: 28px;
-	color: ${vars.color.font.primary};
+	color: ${(props) => props.theme.color.font.primary};
 `

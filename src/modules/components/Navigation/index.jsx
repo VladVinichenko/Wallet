@@ -29,6 +29,7 @@ const Item = styled.li`
 `
 
 const StyledLink = styled(NavLink)`
+	color: ${(props) => props.theme.color.font.primary};
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
@@ -43,9 +44,9 @@ const StyledLink = styled(NavLink)`
 	&:focus,
 	&.${(props) => props.className} {
 		& div div {
-			fill: ${vars.color.accent.seconary};
-			background-color: ${vars.color.background.primary};
-			filter: ${vars.filter.navigationFilter};
+			fill: ${(props) => props.theme.color.accent.seconary};
+			background-color: ${(props) => props.theme.color.background.primary};
+			filter: ${(props) => props.theme.filter.navigationFilter};
 		}
 	}
 
@@ -74,14 +75,13 @@ const Background = styled.div`
 	align-items: center;
 	width: 38px;
 	height: 38px;
-
 	overflow: hidden;
 
-	fill: ${vars.color.accent.fourth};
+	fill: ${(props) => props.theme.color.accent.fourth};
 	background-color: transparent;
 	filter: none;
 
-	border-radius: ${vars.borderRadius.fifth};
+	border-radius: ${(props) => props.theme.borderRadius.fifth};
 
 	transition: all ${vars.animation.duration} ${vars.animation.function};
 
@@ -89,7 +89,7 @@ const Background = styled.div`
 		width: 18px;
 		height: 18px;
 
-		border-radius: ${vars.borderRadius.third};
+		border-radius: ${(props) => props.theme.borderRadius.third};
 	}
 `
 
@@ -105,12 +105,14 @@ const Svg = styled.svg`
 
 const Label = styled.p`
 	display: none;
-
 	transition: all ${vars.animation.duration} ${vars.animation.function};
-
+	&:hover,
+	&:focus {
+		color: ${vars.color.font.fourth};
+		fill: ${vars.color.font.fourth};
+	}
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: contents;
-
 		font-family: 'Poppins', sans-serif;
 		font-size: 18px;
 		font-weight: 400;
