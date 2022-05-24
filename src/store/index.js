@@ -14,8 +14,8 @@ import { CustomLoader } from '../modules/common/CustomLoader'
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, REGISTER, PURGE, PERSIST } from 'redux-persist'
 
 // axios.defaults.baseURL = REACT_APP_API_URL
-// axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
-axios.defaults.baseURL = 'http://localhost:3005/api/'
+axios.defaults.baseURL = 'https://wallet-api-goit.herokuapp.com/api/'
+// axios.defaults.baseURL = 'http://localhost:3005/api/'
 axios.defaults.withCredentials = true
 
 export const token = {
