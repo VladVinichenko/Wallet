@@ -39,7 +39,7 @@ const Visibility = {
 	width: '20px',
 	height: '20px',
 	transform: 'translate(-50%, -50%)',
-	transition: 'all ${vars.animation.duration} ${vars.animation.function}',
+	transition: `all ${vars.animation.duration} ${vars.animation.function}`,
 }
 
 export const ShowPasswordButton = ({ type, onClickBtn, passwordShown, confirmPasswordShown }) => {

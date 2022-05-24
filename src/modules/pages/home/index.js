@@ -20,8 +20,8 @@ const ChartSection = lazy(() =>
 
 const Background = styled.div`
 	position: fixed;
-	background-color: ${vars.color.background.page};
-	backdrop-filter: ${vars.filter.pageBackgroundFilter};
+	background-color: ${(props) => props.theme.color.background.page};
+	backdrop-filter: ${(props) => props.theme.filter.pageBackgroundFilter};
 	height: 100vh;
 	width: 100vw;
 	z-index: -100;
@@ -60,12 +60,12 @@ const Wrapper = styled.div`
 		&&::before {
 			position: absolute;
 			content: '';
-			border-right: ${vars.border.secondLine};
+			border-right: ${(props) => props.theme.border.secondLine};
 			width: 0px;
 			/* height: calc(100vh - 80px); */
 			height: 100%;
 			left: 480px;
-			box-shadow: ${vars.boxShadow.secondLine};
+			box-shadow: ${(props) => props.theme.boxShadow.secondLine};
 		}
 	}
 `

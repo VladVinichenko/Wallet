@@ -3,6 +3,16 @@ import { fetchFinance, getStatistics, fetchTotalFinance, fetchCategories, addTra
 
 import { toast } from 'react-toastify'
 
+const restoreState = {
+	statistics: {
+		statisticsByCategory: [],
+		incomeTotal: 0,
+		outlayTotal: 0,
+	},
+	page: 0,
+	data: [],
+}
+
 const initialState = {
 	isLoading: false,
 	error: null,
@@ -13,8 +23,8 @@ const initialState = {
 	},
 	page: 0,
 	data: [],
-	totalBalance: '',
-	// categories: [],
+	totalBalance: 0,
+	categories: [],
 	aviableStatistics: { years: [], months: [] },
 }
 
@@ -23,7 +33,7 @@ const financeSlice = createSlice({
 	initialState,
 	reducers: {
 		resetFinance: (state, action) => {
-			Object.assign(state, initialState)
+			Object.assign(state, restoreState)
 		},
 	},
 	extraReducers: {
@@ -63,11 +73,11 @@ const financeSlice = createSlice({
 		},
 		[fetchTotalFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
-			state.totalBalance = action.payload.user.balance
+			const balance = action.payload.user?.balance ? action.payload.user.balance : 0
+			state.totalBalance = balance
 			state.aviableStatistics = action.payload.aviableStatistics
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
-			console.log('rejected', action.payload)
 			state.isLoading = false
 			state.error = action.payload
 			toast.error('Error fetch balance')
@@ -92,7 +102,6 @@ const financeSlice = createSlice({
 		},
 		[addTransaction.fulfilled]: (state) => {
 			state.isLoading = false
-			toast.success('Transaction added')
 		},
 		[addTransaction.rejected]: (state, action) => {
 			state.isLoading = false

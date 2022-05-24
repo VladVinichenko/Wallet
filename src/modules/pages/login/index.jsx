@@ -1,4 +1,4 @@
-import { FormLogin } from '../../components/FormLogin/'
+import { FormLogin } from '../../components/FormLogin'
 import { sprite } from '../../../assets/images/index.js'
 import { StyledLoginPage } from '../../components/formPage'
 import { StyledBlockSvg, StyledPageSvg } from '../../components/svgFormPage/svgFormPage'

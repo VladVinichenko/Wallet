@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 import { vars } from 'stylesheet'
 import { sprite } from 'assets'
-
 const Back = styled.div`
-	background-color: ${vars.color.background.primary};
+	background-color: ${(props) => props.theme.color.background.seconary};
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -11,13 +10,10 @@ const Back = styled.div`
 	height: 100vh;
 	z-index: -1000;
 	overflow: hidden;
-	@media screen and (min-width: ${vars.breakpoints.tablet}) {
-		background-color: ${vars.color.background.seconary};
-	}
 `
 
 const Ellipse1 = styled.svg`
-	fill: ${vars.color.accent.secondEllipse};
+	fill: ${(props) => props.theme.color.accent.secondEllipse};
 	height: 700px;
 	width: 600px;
 	position: absolute;
@@ -46,7 +42,7 @@ const Ellipse1 = styled.svg`
 `
 
 const Ellipse2 = styled.svg`
-	fill: ${vars.color.accent.firstEllipse};
+	fill: ${(props) => props.theme.color.accent.firstEllipse};
 	height: 700px;
 	width: 600px;
 	position: absolute;

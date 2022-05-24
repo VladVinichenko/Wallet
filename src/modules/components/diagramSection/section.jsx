@@ -8,8 +8,10 @@ import { vars } from '../../../stylesheet'
 import { getStatistics } from '../../../store/finance/finance-operation'
 import { selectorsFinance } from '../../../store/finance/finance-selectors'
 import { monthOptions } from './monthOptions'
+import { selectorsGlobal } from 'store'
 
 const StatisticsSection = styled.section`
+	color: ${(props) => props.theme.color.font.primary};
 	@media (min-width: ${vars.breakpoints.tablet}) and (max-width: ${vars.breakpoints.tabletUp}) {
 		padding-bottom: 35px;
 		min-height: 350px;
@@ -51,6 +53,7 @@ const SectionContent = styled.div`
 `
 
 const TableWrapper = styled.div`
+	color: ${(props) => props.theme.color.font.primary};
 	@media (min-width: ${vars.breakpoints.tablet}) {
 		width: 336px;
 		margin-top: -43px;
@@ -62,6 +65,7 @@ const TableWrapper = styled.div`
 	}
 `
 const SectionText = styled.p`
+	color: ${(props) => props.theme.color.font.primary};
 	margin-bottom: 10px;
 	font-size: 18px;
 `
@@ -77,6 +81,7 @@ const ChartSection = () => {
 	const allCategories = useSelector(getCategories)
 	const totalOutlay = useSelector(totalOutlaySlct)
 	const totalIncome = useSelector(totalIncomeSlct)
+	const balance = useSelector(selectorsFinance.getTotal)
 	const categoriesStatistics = useSelector(categoriesStatisticsSlct)
 	const dispatch = useDispatch()
 
@@ -86,7 +91,7 @@ const ChartSection = () => {
 		if (month !== '' && year !== '') {
 			dispatch(getStatistics({ month, year }))
 		}
-	}, [month, year])
+	}, [month, year, balance])
 
 	const setDate = (data) => {
 		setMonth(data.month.number)

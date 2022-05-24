@@ -12,9 +12,9 @@ const Currenc = styled.div`
 	position: relative;
 	width: 280px;
 	height: 174px;
-	border-radius: ${vars.borderRadius.seconary};
-	color: ${vars.color.background.primary};
-	background-color: ${vars.color.background.card};
+	border-radius: ${(props) => props.theme.borderRadius.seconary};
+	color: ${(props) => props.theme.color.background.primary};
+	background-color: ${(props) => props.theme.color.background.card};
 	background-image: url(${currency_mob});
 	background-repeat: no-repeat;
 	background-position: right bottom;
@@ -44,17 +44,17 @@ const Currenc = styled.div`
 	}
 
 	thead td:nth-child(1) {
-		border-top-left-radius: ${vars.borderRadius.seconary};
-		background-color: ${vars.color.background.currency};
+		border-top-left-radius: ${(props) => props.theme.borderRadius.seconary};
+		background-color: ${(props) => props.theme.color.background.currency};
 	}
 
 	thead td:nth-child(2) {
-		background-color: ${vars.color.background.currency};
+		background-color: ${(props) => props.theme.color.background.currency};
 	}
 
 	thead td:nth-child(3) {
-		border-top-right-radius: ${vars.borderRadius.seconary};
-		background-color: ${vars.color.background.currency};
+		border-top-right-radius: ${(props) => props.theme.borderRadius.seconary};
+		background-color: ${(props) => props.theme.color.background.currency};
 	}
 
 	td {

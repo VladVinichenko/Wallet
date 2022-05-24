@@ -20,8 +20,8 @@ const StyledFormRegistration = styled(Form)`
 	padding: 107px 20px 107px 20px;
 	margin-left: auto;
 	margin-right: auto;
-	color: ${vars.color.accent.buttonOpenMenu};
-	background-color: ${vars.color.font.fifth};
+	color: ${(props) => props.theme.color.accent.buttonOpenMenu};
+	background-color: ${(props) => props.theme.color.font.fifth};
 
 	@media screen and (max-width: ${vars.breakpoints.tablet}) {
 		max-width: 320px;
@@ -60,8 +60,9 @@ const StyleSvgIcon = styled.svg`
 `
 
 const StyledInput = styled(Field)`
+	background: ${(props) => props.theme.color.background.primary};
 	width: 100%;
-	border-bottom: 1px solid ${vars.color.accent.buttonOpenMenu};
+	border-bottom: 1px solid ${(props) => props.theme.color.accent.buttonOpenMenu};
 	border-top: none;
 	border-left: none;
 	border-right: none;
@@ -82,7 +83,7 @@ const StyledInput = styled(Field)`
 		font-weight: 400;
 		font-size: 18px;
 		line-height: 1.5;
-		color: ${vars.color.font.third};
+		color: ${(props) => props.theme.color.font.third};
 	}
 
 	button:not(:last-child) {
