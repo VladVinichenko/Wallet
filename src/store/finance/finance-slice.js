@@ -73,7 +73,8 @@ const financeSlice = createSlice({
 		},
 		[fetchTotalFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
-			state.totalBalance = action.payload.user.balance
+			const balance = action.payload.user?.balance ? action.payload.user.balance : 0
+			state.totalBalance = balance
 			state.aviableStatistics = action.payload.aviableStatistics
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
