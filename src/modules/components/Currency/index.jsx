@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { CustomLoader } from 'modules'
 import styled from 'styled-components'
-import fetchCourse from 'servises/fetchCourse'
 import { animation, vars } from 'stylesheet'
-
+import Cookies from 'js-cookie'
 import currency_mob from 'assets/images/currency/currency_mob.svg'
 import currency_tab from 'assets/images/currency/currency_tab.svg'
 import currency_desk from 'assets/images/currency/currency_desk.svg'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchPrivat } from 'store'
+import { authSelectors } from 'store/auth'
 
 const Currenc = styled.div`
 	position: relative;
 	width: 280px;
 	height: 174px;
-	border-radius: ${(props) => props.theme.borderRadius.seconary};
-	color: ${(props) => props.theme.color.background.primary};
+	border-radius: ${vars.borderRadius.seconary};
+	color: ${vars.color.background.primary};
 	background-color: ${(props) => props.theme.color.background.card};
 	background-image: url(${currency_mob});
 	background-repeat: no-repeat;
@@ -103,9 +105,13 @@ const Currenc = styled.div`
 
 export const Currency = () => {
 	const [currency, setCurrency] = useState([])
-	useEffect(() => {
-		const fetchCurrency = async () => {
-			const data = await fetchCourse()
+	const dispatch = useDispatch()
+	const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
+	useEffect(async () => {
+		isLoggedIn & !Cookies.get('courses') && (await dispatch(fetchPrivat()))
+		const data = Cookies.get('courses')
+		const fetchCurrency = (courses) => {
+			const data = JSON.parse(courses)
 			const filteredCurrencies = []
 			const currencies = ['USD', 'EUR', 'RUR']
 			currencies.forEach((currency) => {
@@ -120,20 +126,9 @@ export const Currency = () => {
 					}
 				})
 			})
-			setCurrency(filteredCurrencies)
-			localStorage.setItem('currency', JSON.stringify(filteredCurrencies))
-			localStorage.setItem('currencyTime', Date.now())
+			return filteredCurrencies
 		}
-		let currencyLS = JSON.parse(localStorage.getItem('currency'))
-		let currencyTime = JSON.parse(localStorage.getItem('currencyTime'))
-		if (!currencyLS) {
-			fetchCurrency()
-		}
-		if (Date.now() - currencyTime > 3600000) {
-			fetchCurrency()
-		} else {
-			setCurrency(currencyLS)
-		}
+		data && setCurrency(fetchCurrency(data))
 	}, [])
 
 	return (
