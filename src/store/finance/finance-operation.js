@@ -36,7 +36,7 @@ export const getStatistics = createAsyncThunk(
 
 export const addTransaction = createAsyncThunk('finance/add', async (transaction, { getState, rejectWithValue }) => {
 	try {
-		const { data } = await axios.post('finance', transaction)
+		const { data } = await axios.post('transactions', transaction)
 		return data && data
 	} catch (error) {
 		return rejectWithValue(error.message)
