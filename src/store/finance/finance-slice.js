@@ -48,8 +48,8 @@ const financeSlice = createSlice({
 		[getStatistics.fulfilled]: (state, action) => {
 			state.isLoading = false
 			state.statistics.incomeTotal = action.payload.incomeStatistics
-			state.statistics.outlayTotal = action.payload.totalOutlayStatistics
-			state.statistics.statisticsByCategory = action.payload.statisticsByCategory
+			state.statistics.outlayTotal = action.payload.outlayStatistics
+			state.statistics.statisticsByCategory = action.payload.statisticsByDate
 		},
 		[getStatistics.rejected]: (state, action) => {
 			state.isLoading = false
