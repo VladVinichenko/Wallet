@@ -5,8 +5,8 @@ import { getFinance, getTotal, getStatisticsApi, getCategories } from 'api'
 export const fetchFinance = createAsyncThunk('finance', async (page = 1) => {
 	const { data } = await getFinance(page)
 	const categoryArr = await getCategories()
-	const { transition } = data.data
-	return [...transition].map((elem) => {
+	const { transactions } = data.data
+	return [...transactions].map((elem) => {
 		const category = categoryArr.data.data.filter((el) => {
 			if (el._id === elem.category) {
 				return el
