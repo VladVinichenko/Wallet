@@ -77,14 +77,14 @@ const ChartSection = () => {
 	const [month, setMonth] = useState(currentMonth)
 	const [year, setYear] = useState(currentYear)
 
-	const { totalOutlaySlct, totalIncomeSlct, categoriesStatisticsSlct, getCategories } = selectorsFinance
+	const { totalOutlaySlct, totalIncomeSlct, categoriesStatisticsSlct, getCategories, getFormatcategoriesStatistics } =
+		selectorsFinance
 	const allCategories = useSelector(getCategories)
 	const totalOutlay = useSelector(totalOutlaySlct)
 	const totalIncome = useSelector(totalIncomeSlct)
 	const balance = useSelector(selectorsFinance.getTotal)
-	const categoriesStatistics = useSelector(categoriesStatisticsSlct)
+	const categoriesStatistics = useSelector(getFormatcategoriesStatistics)
 	const dispatch = useDispatch()
-
 	const monthString = monthOptions.find((m) => m.number === month).string
 
 	useEffect(() => {
