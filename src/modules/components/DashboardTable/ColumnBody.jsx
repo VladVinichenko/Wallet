@@ -10,13 +10,23 @@ import { selectorsGlobal } from 'store'
 
 const { breakpoints } = vars
 const Component = styled.td`
+	&.null {
+		color: ${(props) => props.theme.color.font.primary};
+	}
+
+	&.positive {
+		color: ${(props) => props.theme.color.font.positive};
+	}
+
+	&.negative {
+		color: ${(props) => props.theme.color.font.negative};
+	}
+
 	position: relative;
 	display: flex;
 	justify-content: space-between;
 	padding: 0 20px;
 	margin-right: ${(prop) => prop.marginRight};
-
-	color: ${(props) => props.theme.color.font.primary};
 	border-left: 5px solid ${(prop) => prop.colorBorder};
 
 	font-family: 'Circe';
@@ -74,13 +84,7 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 							colorBorder={
 								type === 'income' ? `${varsRef(theme).color.font.positive}` : `${varsRef(theme).color.font.negative}`
 							}
-							color={
-								el.type === 'Sum'
-									? type === 'income'
-										? `${varsRef(theme).color.font.positive}`
-										: `${varsRef(theme).color.font.negative}`
-									: `${varsRef(theme).color.font.primary}`
-							}
+							className={el.type === 'Sum' ? (type === 'income' ? `positive` : `negative`) : `null`}
 							weight={el.type === 'Sum' ? '700' : '400'}
 							width={viewport.anotherScreen ? el.style.width : undefined}
 							justifyContent={el.style.justifyContent}
