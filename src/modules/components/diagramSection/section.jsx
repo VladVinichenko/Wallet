@@ -8,6 +8,7 @@ import { vars } from '../../../stylesheet'
 import { getStatistics } from '../../../store/finance/finance-operation'
 import { selectorsFinance } from '../../../store/finance/finance-selectors'
 import { monthOptions } from './monthOptions'
+import { selectorsGlobal } from 'store'
 
 const StatisticsSection = styled.section`
 	color: ${(props) => props.theme.color.font.primary};

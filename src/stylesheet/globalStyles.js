@@ -6,24 +6,18 @@ html {
   overflow: overlay;
   scrollbar-width: thin;
   
-  ::-webkit-scrollbar {
-    width: 5px;
-    background-color: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: transparent;
-    border-radius: 10px;
-  }
+  scrollbar-width: thin;
+		::-webkit-scrollbar {
+			width: 5px;
+		}
+		::-webkit-scrollbar-thumb {
+			background: gray;
+			border-radius: 10px;
+		}
 
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-button:vertical:start:decrement {}
-  ::-webkit-scrollbar-button:vertical:end:increment {}
-  ::-webkit-scrollbar-button:horizontal:start:decrement {}
-  ::-webkit-scrollbar-button:horizontal:end:increment {
-    
-}
+		::-webkit-scrollbar-track {
+			background: transparent;
+		}
 }
 
 body {

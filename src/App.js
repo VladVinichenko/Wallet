@@ -25,7 +25,7 @@ const Registration = lazy(() => import('./modules/pages/registration' /* webpack
 const Login = lazy(() => import('./modules/pages/login' /* webpackChunkName: 'login' */))
 const NotFoundPage = lazy(() => import('./modules/pages/notFoundPage' /* webpackChunkName: 'not-found-page' */))
 
-export default function App() {
+export default function App({ switchTheme }) {
 	const dispatch = useDispatch()
 	const match = useMatch(`/${ROUTES.VERIFY}/:item`)
 	if (match) {
@@ -36,15 +36,23 @@ export default function App() {
 	const isLoading = useSelector(selectorsGlobal.getIsLoading)
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
-	// const theme = useSelector(selectorsGlobal.getTheme)
+	const themeG = useSelector(selectorsGlobal.getTheme)
 
 	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
 	}
-	localStorage.setItem('theme', 'varsDark')
+
+	useEffect(() => {
+		!isLoggedIn && dispatch(authOperations.fetchRefreshToken())
+	}, [])
+
+	useEffect(() => {
+		;() => switchTheme(themeG)
+		dispatch(setTheme(themeG))
+	}, [themeG])
+
 	useEffect(() => {
 		const theme = localStorage.getItem('theme')
-		!isLoggedIn && dispatch(authOperations.fetchRefreshToken())
 		dispatch(setTheme(theme))
 	}, [])
 

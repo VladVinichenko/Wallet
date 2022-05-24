@@ -50,6 +50,18 @@ const StyledButton = styled('button')(
 
 const StyledListbox = styled('ul')(
 	({ theme }) => `
+  scrollbar-width: thin;
+		::-webkit-scrollbar {
+			width: 5px;
+		}
+		::-webkit-scrollbar-thumb {
+			background: gray;
+			border-radius: 10px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: transparent;
+		}
   font-family: Circe, sans-serif;
   font-size: 18px;
   line-height: 27px;

@@ -78,7 +78,7 @@ export const vars = {
 }
 
 export const varsRef = (theme = 'varsLight') => {
-	return theme === 'dark' ? varsDark : varsLight
+	return theme === 'varsDark' ? varsDark : varsLight
 }
 
 export const varsLight = {

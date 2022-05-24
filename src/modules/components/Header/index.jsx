@@ -7,6 +7,7 @@ import { setIsModalLogoutOpen } from 'store'
 import { Container } from 'modules/common'
 import { Logo } from 'modules/common'
 import { sprite } from 'assets'
+import { CustomizedSwitches } from 'modules/common/themeSwitcher'
 
 const Head = styled.header`
 	position: sticky;
@@ -138,6 +139,7 @@ const Header = () => {
 					</Link>
 					<UserMenu>
 						<Name>{name}</Name>
+						<CustomizedSwitches />
 						<ExitButton onClick={() => dispatch(setIsModalLogoutOpen(true))} type='button' arial-label='Log out'>
 							<ButtonSvg width='18' height='18'>
 								<use href={`${sprite}#icon-exit`}></use>

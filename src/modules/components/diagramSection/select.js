@@ -8,6 +8,8 @@ import { vars } from 'stylesheet'
 import { varsRef } from 'stylesheet'
 
 import rowDown from 'assets/images/openMenu/row-down.svg'
+import { useSelector } from 'react-redux'
+import { selectorsGlobal } from 'store'
 
 const StyledButton = styled('button')(
 	({ theme }) => `
@@ -63,6 +65,18 @@ margin-bottom: 20px;
 
 const StyledListbox = styled('ul')(
 	({ theme }) => `
+  scrollbar-width: thin;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
   font-family: Circe, sans-serif;
   font-size: 18px;
   line-height: 27px;
@@ -124,7 +138,7 @@ const CustomSelect = forwardRef(function CustomSelect(props, ref) {
 	return <SelectUnstyled {...props} ref={ref} components={components} />
 })
 
-export const Select = ({ name, data, setValues }) => {
+export const Select = ({ name, data, setValues, setTheme }) => {
 	const [value, setValue] = useState('')
 
 	useEffect(() => {

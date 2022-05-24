@@ -5,6 +5,7 @@ import { vars } from '../../../stylesheet'
 import { Select } from './select'
 import { selectorsFinance } from 'store'
 import { monthOptions } from './monthOptions'
+import { selectorsGlobal } from 'store'
 
 const SelectsContainer = styled.div`
 	color: ${(props) => props.theme.color.accent.openMenu};
@@ -29,6 +30,8 @@ const SelectsContainer = styled.div`
 `
 
 const Selects = ({ setData }) => {
+	const setTheme = useSelector(selectorsGlobal.getTheme)
+
 	const [month, setMonth] = useState('')
 	const [year, setYear] = useState('')
 
@@ -46,8 +49,8 @@ const Selects = ({ setData }) => {
 
 	return (
 		<SelectsContainer>
-			<Select name={'month'} data={monthArray} setValues={setMonth}></Select>
-			<Select name={'year'} data={aviableStatistics.years} setValues={setYear}></Select>
+			<Select name={'month'} data={monthArray} setValues={setMonth} setTheme={setTheme}></Select>
+			<Select name={'year'} data={aviableStatistics.years} setValues={setYear} setTheme={setTheme}></Select>
 		</SelectsContainer>
 	)
 }

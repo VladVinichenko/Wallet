@@ -14,27 +14,27 @@ import './stylesheet/animation.js'
 import './stylesheet/globalStyles.js'
 import './stylesheet/vars.js'
 
-const theme = {
-	dark: varsDark,
-	light: varsLight,
+const setTheme = (theme = 'varsLight') => {
+	return theme === 'varsDark' ? varsDark : varsLight
 }
 
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Background } from 'modules/components/background'
+import { ThemeWallet } from 'ThemeWallet'
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
-				<ThemeProvider theme={varsDark}>
+				<ThemeWallet>
 					<Background />
 					<GlobalStyle />
 					<Fonts />
 					<BrowserRouter>
 						<App />
 					</BrowserRouter>
-				</ThemeProvider>
+				</ThemeWallet>
 			</PersistGate>
 		</Provider>
 	</React.StrictMode>,
