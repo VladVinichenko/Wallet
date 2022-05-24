@@ -99,9 +99,9 @@ const Row = styled.tr`
 `
 const Column = styled.th`
 	display: flex;
-	justify-content: ${(props) => props.theme.justifyContent};
-	width: ${(props) => props.theme.width};
-	margin-right: ${(props) => props.theme.marginRight};
+	justify-content: ${(prop) => prop.justifyContent};
+	width: ${(prop) => prop.width};
+	margin-right: ${(prop) => prop.marginRight};
 	font-family: 'Circe';
 	font-style: normal;
 	font-weight: 700;
