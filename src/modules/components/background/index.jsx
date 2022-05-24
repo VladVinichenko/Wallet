@@ -11,7 +11,7 @@ const Back = styled.div`
 	height: 100vh;
 	z-index: -1000;
 	overflow: hidden;
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		background-color: ${(props) => props.theme.color.background.seconary};
 	}
 `
@@ -22,23 +22,22 @@ const Ellipse1 = styled.svg`
 	width: 600px;
 	position: absolute;
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.mobile}) and (max-width: ${(props) =>
-			props.theme.breakpoints.mobileUp}) {
+	@media screen and (min-width: ${vars.breakpoints.mobile}) and (max-width: ${vars.breakpoints.mobileUp}) {
 		display: none;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		bottom: -280px;
 		left: -150px;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		bottom: -280px;
 		left: -150px;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.FHD}) {
+	@media screen and (min-width: ${vars.breakpoints.FHD}) {
 		height: 1000px;
 		width: 800px;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.QHD}) {
+	@media screen and (min-width: ${vars.breakpoints.QHD}) {
 		height: 1400px;
 		width: 1200px;
 		bottom: -480px;
@@ -52,23 +51,22 @@ const Ellipse2 = styled.svg`
 	width: 600px;
 	position: absolute;
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.mobile}) and (max-width: ${(props) =>
-			props.theme.breakpoints.mobileUp}) {
+	@media screen and (min-width: ${vars.breakpoints.mobile}) and (max-width: ${vars.breakpoints.mobileUp}) {
 		display: none;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		top: -220px;
 		right: -220px;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		top: -220px;
 		right: -100px;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.FHD}) {
+	@media screen and (min-width: ${vars.breakpoints.FHD}) {
 		height: 1000px;
 		width: 800px;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.QHD}) {
+	@media screen and (min-width: ${vars.breakpoints.QHD}) {
 		height: 1400px;
 		width: 1200px;
 		top: -420px;

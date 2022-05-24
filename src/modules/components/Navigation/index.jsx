@@ -11,7 +11,7 @@ const Nav = styled.ul`
 	align-items: center;
 	padding: 0 14px;
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		flex-direction: column;
 		align-items: flex-start;
 		padding: 0;
@@ -19,7 +19,7 @@ const Nav = styled.ul`
 `
 
 const Item = styled.li`
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: ${(props) => props.visib};
 
 		&:not(:first-child) {
@@ -38,7 +38,7 @@ const StyledLink = styled(NavLink)`
 
 	cursor: pointer;
 
-	transition: all ${(props) => props.theme.animation.duration} ${(props) => props.theme.animation.function};
+	transition: all ${vars.animation.duration} ${vars.animation.function};
 
 	&:hover,
 	&:focus,
@@ -62,7 +62,7 @@ const Wrapper = styled.div`
 	width: 44px;
 	height: 44px;
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		width: 24px;
 		height: 24px;
 		margin-right: 20px;
@@ -84,9 +84,9 @@ const Background = styled.div`
 
 	border-radius: ${(props) => props.theme.borderRadius.fifth};
 
-	transition: all ${(props) => props.theme.animation.duration} ${(props) => props.theme.animation.function};
+	transition: all ${vars.animation.duration} ${vars.animation.function};
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		width: 18px;
 		height: 18px;
 
@@ -98,7 +98,7 @@ const Svg = styled.svg`
 	width: 38px;
 	height: 38px;
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		width: 18px;
 		height: 18px;
 	}
@@ -107,9 +107,9 @@ const Svg = styled.svg`
 const Label = styled.p`
 	display: none;
 
-	transition: all ${(props) => props.theme.animation.duration} ${(props) => props.theme.animation.function};
+	transition: all ${vars.animation.duration} ${vars.animation.function};
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: contents;
 
 		font-family: 'Poppins', sans-serif;

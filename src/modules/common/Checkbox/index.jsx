@@ -65,7 +65,7 @@ const ToggleField = styled.div`
 	margin-right: 20px;
 	border: 1px solid ${(props) => props.theme.color.font.third};
 	border-radius: 30px;
-	transition: all ${(props) => props.theme.animation.duration};
+	transition: all ${vars.animation.duration};
 `
 
 const ToggleIcon = styled.div`
@@ -79,7 +79,7 @@ const ToggleIcon = styled.div`
 	background: ${(props) => props.theme.color.font.negative};
 	left: 108px;
 	border-radius: 50%;
-	transition: all ${(props) => props.theme.animation.duration};
+	transition: all ${vars.animation.duration};
 	z-index: 4;
 	box-shadow: ${(props) => props.theme.boxShadow.secondCheckbox};
 

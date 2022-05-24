@@ -25,7 +25,7 @@ const Button = styled.button`
 		}
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.mobileUp}) {
 		right: 40px;
 		bottom: 40px;
 	}

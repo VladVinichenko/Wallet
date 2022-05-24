@@ -24,18 +24,18 @@ const Background = styled.div`
 	z-index: -100;
 `
 const DashBoardWrapper = styled.div`
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		padding-top: 40px;
 	}
 `
 const LeftBlock = styled.div`
-	@media screen and (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
+	@media screen and (max-width: ${vars.breakpoints.tabletUp}) {
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 20px;
 		padding-top: 32px;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		padding-top: 40px;
 		padding-right: 70px;
 	}
@@ -44,13 +44,13 @@ const LeftBlock = styled.div`
 	}
 `
 const Wrapper = styled.div`
-	@media screen and (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+	@media screen and (max-width: ${vars.breakpoints.mobileUp}) {
 		padding-top: 12px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		display: flex;
 		justify-content: space-between;
 		height: calc(100vh - 80px);
@@ -67,19 +67,18 @@ const Wrapper = styled.div`
 	}
 `
 const BalanceWrapper = styled.div`
-	@media screen and (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+	@media screen and (max-width: ${vars.breakpoints.mobileUp}) {
 		padding-top: 12px;
 		margin-bottom: 32px;
 	}
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) and (max-width: ${(props) =>
-			props.theme.breakpoints.tabletUp}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) and (max-width: ${vars.breakpoints.tabletUp}) {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
 	}
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		margin-bottom: 32px;
 	}
 `

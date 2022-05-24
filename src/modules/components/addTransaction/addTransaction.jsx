@@ -48,7 +48,7 @@ const SummInput = styled(StyledInput)`
 		border-color: ${(props) => props.theme.color.font.negative};
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		margin-right: 30px;
 		margin-bottom: unset;
 	}
@@ -69,7 +69,7 @@ const StyledGroup = styled.div`
 		right: 15px;
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		flex-wrap: nowrap;
 	}
 `
@@ -92,7 +92,7 @@ const StyledTextarea = styled.textarea`
 		color: ${(props) => props.theme.color.font.third};
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		height: 32px;
 	}
 `
@@ -105,7 +105,7 @@ const Title = styled.h2`
 	text-align: center;
 	margin-bottom: 40px;
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		font-size: 30px;
 	}
 `
@@ -118,7 +118,7 @@ const FormContainer = styled.div`
 	line-height: 1.5;
 	text-align: center;
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		padding: 40px 75px;
 		width: 540px;
 		min-height: 605px;

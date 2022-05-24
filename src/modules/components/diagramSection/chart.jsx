@@ -6,18 +6,18 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 const ChartWrap = styled.div`
 	position: relative;
-	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
+	@media (max-width: ${vars.breakpoints.tabletUp}) {
 		margin: 0 32px 0 0;
 		width: 336px;
 		height: 336px;
 	}
-	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+	@media (max-width: ${vars.breakpoints.mobileUp}) {
 		width: 280px;
 		height: 280px;
 		margin: 0 0 32px 0;
 	}
 
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		width: 288px;
 		height: 288px;
 		margin: 0 30px 0 0;

@@ -18,7 +18,7 @@ const Form = styled.div`
 
 	text-align: center;
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		position: relative;
 		top: 0;
 		left: 0;

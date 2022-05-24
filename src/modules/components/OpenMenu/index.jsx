@@ -5,6 +5,7 @@ import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
 import { StyledEngineProvider } from '@mui/material/styles'
 import { vars } from 'stylesheet'
+import { varsRef } from 'stylesheet'
 
 import rowDown from 'assets/images/openMenu/row-down.svg'
 
@@ -16,22 +17,22 @@ const StyledButton = styled('button')(
   box-sizing: border-box;
   width: 100%;
   height: 32px;
-  border-bottom: 1px solid ${(props) => props.theme.color.accent.buttonOpenMenu};
+  border-bottom: 1px solid ${varsRef().color.accent.buttonOpenMenu};
   text-align: left;
   line-height: 27px;
   padding: 0 20px;
 	margin-bottom:40px;
-  color: ${(props) => props.theme.color.accent.buttonOpenMenu};
+  color: ${varsRef().color.accent.buttonOpenMenu};
 
 
   &.${selectUnstyledClasses.focusVisible} {
-    outline: 1px solid ${(props) => props.theme.color.accent.buttonOpenMenu};
+    outline: 1px solid ${varsRef().color.accent.buttonOpenMenu};
   }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
       content: url(${rowDown});
-      color: ${(props) => props.theme.color.accent.buttonOpenMenu};
+      color: ${varsRef().color.accent.buttonOpenMenu};
     }
   }
 
@@ -41,7 +42,7 @@ const StyledButton = styled('button')(
     
   }
 
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+  @media (min-width: ${vars.breakpoints.tablet}) {
     width: 394px;
   }
   `
@@ -58,16 +59,16 @@ const StyledListbox = styled('ul')(
   margin: 4px 0 0;
   width: 95vw;
   height: 352px;
-  background: ${(props) => props.theme.color.background.openMenu};
+  background: ${varsRef().color.background.openMenu};
   border: 1px solid inherit;
-  border-radius: ${(props) => props.theme.borderRadius.primary};
-  box-shadow: ${(props) => props.theme.boxShadow.openMenu};
+  border-radius: ${varsRef().borderRadius.primary};
+  box-shadow: ${varsRef().boxShadow.openMenu};
   backdrop-filter: blur(50px);
   overflow: auto;
   outline: 0px;
   cursor: pointer;
 
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+  @media (min-width: ${vars.breakpoints.tablet}) {
     width: 394px;
   }
   `
@@ -83,8 +84,8 @@ const StyledOption = styled(OptionUnstyled)(
   }
 
   &:hover:not(.${optionUnstyledClasses.disabled}) {
-    background-color: ${(props) => props.theme.color.background.primary};
-    color: ${(props) => props.theme.color.accent.openMenu};
+    background-color: ${varsRef().color.background.primary};
+    color: ${varsRef().color.accent.openMenu};
   }
   `
 )

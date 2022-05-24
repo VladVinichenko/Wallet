@@ -17,8 +17,8 @@ const ButtonPrimary = styled.button`
 	background-color: ${(props) => props.theme.color.accent.primary};
 	border-radius: ${(props) => props.theme.borderRadius.primary};
 	border: none;
-	/* transition: background-color ${(props) => props.theme.animation.duration}; */
-	transition: ${(props) => props.theme.animation.duration};
+	/* transition: background-color ${vars.animation.duration}; */
+	transition: ${vars.animation.duration};
 	box-shadow: ${(props) => props.theme.boxShadow.button};
 
 	&:hover {

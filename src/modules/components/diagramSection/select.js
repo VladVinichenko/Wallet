@@ -5,6 +5,7 @@ import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
 import { StyledEngineProvider } from '@mui/material/styles'
 import { vars } from 'stylesheet'
+import { varsRef } from 'stylesheet'
 
 import rowDown from 'assets/images/openMenu/row-down.svg'
 
@@ -16,8 +17,8 @@ const StyledButton = styled('button')(
 line-height: 24px;
 height:50px;
 padding-left: 15px;
-border: ${(props) => props.theme.border.forthLine}; 
-border-radius: ${(props) => props.theme.borderRadius.seconary};
+border: ${varsRef().border.forthLine}; 
+border-radius: ${varsRef().borderRadius.seconary};
 background-color: transparent;
 appearance: none;
 width: 100%;
@@ -27,13 +28,13 @@ cursor: pointer;
   
 
   &.${selectUnstyledClasses.focusVisible} {
-    outline: 2px solid ${(props) => props.theme.color.accent.buttonOpenMenu};
+    outline: 2px solid ${varsRef().color.accent.buttonOpenMenu};
   }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
       content: '';
-      color: ${(props) => props.theme.color.accent.buttonOpenMenu};
+      color: ${varsRef().color.accent.buttonOpenMenu};
     }
   }
 
@@ -42,18 +43,18 @@ cursor: pointer;
     float: right;
   }
 
-  @media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+  @media (max-width: ${vars.breakpoints.mobileUp}) {
 width: 100%;
 }
-@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+@media (min-width: ${vars.breakpoints.tablet}) {
 width: 160px;
 }
-@media(min-width: ${(props) => props.theme.breakpoints.desktop}){
+@media(min-width: ${vars.breakpoints.desktop}){
 width:180px;
 }
 
 &:not(:last-child){
-  @media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+  @media (max-width: ${vars.breakpoints.mobileUp}) {
 margin-bottom: 20px;
 }}
 
@@ -70,21 +71,21 @@ const StyledListbox = styled('ul')(
   padding: 20px 0;
   margin: 10px 0;
   max-height: 250px;
-  background: ${(props) => props.theme.color.background.openMenu};
+  background: ${varsRef().color.background.openMenu};
   border: 1px solid inherit;
-  border-radius: ${(props) => props.theme.borderRadius.primary};
-  box-shadow: ${(props) => props.theme.boxShadow.openMenu};
+  border-radius: ${varsRef().borderRadius.primary};
+  box-shadow: ${varsRef().boxShadow.openMenu};
   backdrop-filter: blur(50px);
   overflow: auto;
   outline: 0px;
 
-  @media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+  @media (max-width: ${vars.breakpoints.mobileUp}) {
 width: 280px;
 }
-@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+@media (min-width: ${vars.breakpoints.tablet}) {
 width: 160px;
 }
-@media(min-width: ${(props) => props.theme.breakpoints.desktop}){
+@media(min-width: ${vars.breakpoints.desktop}){
 width:180px;
 }
 
@@ -102,8 +103,8 @@ const StyledOption = styled(OptionUnstyled)(
   }
 
   &:hover:not(.${optionUnstyledClasses.disabled}) {
-    background-color: ${(props) => props.theme.color.background.primary};
-    color: ${(props) => props.theme.color.accent.openMenu};
+    background-color: ${varsRef().color.background.primary};
+    color: ${varsRef().color.accent.openMenu};
   }
   `
 )

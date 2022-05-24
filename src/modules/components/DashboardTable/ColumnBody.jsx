@@ -2,10 +2,13 @@ import { useState, useEffect, useMemo } from 'react'
 import { nanoid } from 'nanoid'
 import styled from 'styled-components'
 import { InView } from 'react-intersection-observer'
-// import { vars } from 'stylesheet'
+import { vars } from 'stylesheet'
+import { varsRef } from 'stylesheet'
 import EllipsisText from 'react-ellipsis-text'
+import { useSelector } from 'react-redux'
+import { selectorsGlobal } from 'store'
 
-// const { color, breakpoints } = vars()
+const { breakpoints } = vars
 const Component = styled.td`
 	position: relative;
 	display: flex;
@@ -13,7 +16,7 @@ const Component = styled.td`
 	padding: 0 20px;
 	margin-right: ${(props) => props.theme.marginRight};
 
-	color: ${(props) => props.theme.color};
+	color: ${(props) => props.theme.color.font.primary};
 	border-left: 5px solid ${(props) => props.theme.colorBorder};
 
 	font-family: 'Circe';
@@ -36,10 +39,11 @@ const Title = styled.span`
 	font-weight: 700;
 	font-size: 18px;
 	line-height: 1.5;
-	color: ${color.font.colorTitle};
+	color: ${(props) => props.theme.color.font.colorTitle};
 `
 
 export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLast }) => {
+	const theme = useSelector(selectorsGlobal.getTheme)
 	const formateData = (elem) => {
 		switch (elem.type) {
 			case 'UnixTime':
@@ -67,13 +71,15 @@ export const ColumnBody = ({ data, tableColumns, type, viewport, setInView, isLa
 					return (
 						<Component
 							key={idx}
-							colorBorder={type === 'income' ? `${color.font.positive}` : `${color.font.negative}`}
+							colorBorder={
+								type === 'income' ? `${varsRef(theme).color.font.positive}` : `${varsRef(theme).color.font.negative}`
+							}
 							color={
 								el.type === 'Sum'
 									? type === 'income'
-										? `${color.font.positive}`
-										: `${color.font.negative}`
-									: `${color.font.primary}`
+										? `${varsRef(theme).color.font.positive}`
+										: `${varsRef(theme).color.font.negative}`
+									: `${varsRef(theme).color.font.primary}`
 							}
 							weight={el.type === 'Sum' ? '700' : '400'}
 							width={viewport.anotherScreen ? el.style.width : undefined}

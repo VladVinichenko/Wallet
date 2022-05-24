@@ -10,16 +10,16 @@ const SelectsContainer = styled.div`
 	color: ${(props) => props.theme.color.accent.openMenu};
 	margin-bottom: 20px;
 
-	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+	@media (max-width: ${vars.breakpoints.mobileUp}) {
 		width: 280px;
 	}
-	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media (min-width: ${vars.breakpoints.tablet}) {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		width: 335px;
 	}
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		width: 395px;
 	}
 

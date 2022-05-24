@@ -26,13 +26,13 @@ const StyledFormRegistration = styled(Form)`
 	color: ${(props) => props.theme.color.accent.buttonOpenMenu};
 	background-color: ${(props) => props.theme.color.background.primary};
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		width: 530px;
 		padding: 40px 58px 66px 65px;
 		border-radius: 20px;
 	}
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		margin: 0;
 	}
 

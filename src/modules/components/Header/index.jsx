@@ -19,7 +19,7 @@ const Head = styled.header`
 
 	background-color: ${(props) => props.theme.color.background.primary};
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		max-height: 80px;
 		padding-top: 20px;
 		padding-bottom: 20px;
@@ -58,7 +58,7 @@ const Name = styled.span`
 
 	color: ${(props) => props.theme.color.font.third};
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		position: relative;
 		margin-right: 0;
 		padding-right: 12px;
@@ -96,7 +96,7 @@ const ExitButton = styled.button`
 
 	cursor: pointer;
 
-	transition: all ${(props) => props.theme.animation.duration} ${(props) => props.theme.animation.function};
+	transition: all ${vars.animation.duration} ${vars.animation.function};
 
 	&:hover,
 	&:focus {
@@ -104,7 +104,7 @@ const ExitButton = styled.button`
 		fill: ${(props) => props.theme.color.font.negative};
 	}
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		margin-left: 12px;
 	}
 `
@@ -112,7 +112,7 @@ const ButtonSvg = styled.svg`
 	width: 18px;
 	height: 18px;
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		margin-right: 8px;
 	}
 `
@@ -120,7 +120,7 @@ const ButtonSvg = styled.svg`
 const ButtonLabel = styled.span`
 	display: none;
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: contents;
 	}
 `

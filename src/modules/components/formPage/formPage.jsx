@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-// import { vars } from '../../../stylesheet/vars'
+import { vars } from '../../../stylesheet/vars'
 import { StyledTitle } from '../svgFormPage/svgFormPage'
 
 export const StyledLoginPage = styled.section`
@@ -7,7 +7,7 @@ export const StyledLoginPage = styled.section`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		background-color: transparent;
 		display: flex;
 		flex-direction: column;
@@ -17,7 +17,7 @@ export const StyledLoginPage = styled.section`
 		padding-bottom: 50px;
 	}
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
@@ -27,7 +27,7 @@ export const StyledLoginPage = styled.section`
 
 const StyledBlockSvg = styled.div`
 	display: none;
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -35,7 +35,7 @@ const StyledBlockSvg = styled.div`
 		margin-bottom: 50px;
 	}
 
-	@media screen and (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media screen and (min-width: ${vars.breakpoints.desktop}) {
 		flex-direction: column;
 		margin-bottom: 0;
 		margin-top: 40px;

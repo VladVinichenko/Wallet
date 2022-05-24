@@ -7,13 +7,13 @@ const Table = styled.table`
 	line-height: 24px;
 	border-collapse: collapse;
 
-	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
+	@media (max-width: ${vars.breakpoints.tabletUp}) {
 		width: 340px;
 	}
-	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+	@media (max-width: ${vars.breakpoints.mobileUp}) {
 		width: 280px;
 	}
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		width: 395px;
 	}
 `
@@ -46,14 +46,14 @@ const TRow = styled.tr`
 const TBodyCategory = styled.td`
 	height: 50px;
 
-	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
+	@media (max-width: ${vars.breakpoints.tabletUp}) {
 		padding-left: 20px;
 	}
-	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+	@media (max-width: ${vars.breakpoints.mobileUp}) {
 		padding-left: 15px;
 	}
 
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		padding-left: 25px;
 	}
 `
@@ -63,10 +63,10 @@ const CategoryContents = styled.div`
 `
 const TBodySum = styled.td`
 	text-align: right;
-	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
+	@media (max-width: ${vars.breakpoints.tabletUp}) {
 		padding-right: 20px;
 	}
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		padding-right: 30px;
 	}
 `
@@ -77,14 +77,14 @@ const TFootRow = styled.tr`
 const TFootCategory = styled.td`
 	height: 40px;
 	font-weight: 700;
-	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
+	@media (max-width: ${vars.breakpoints.tabletUp}) {
 		padding-left: 20px;
 	}
-	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+	@media (max-width: ${vars.breakpoints.mobileUp}) {
 		padding-left: 15px;
 	}
 
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		padding-left: 25px;
 	}
 `
@@ -94,10 +94,10 @@ const TFootSum = styled.td`
 	color: ${(props) => {
 		return props.Outlay ? (props) => props.theme.color.font.negative : (props) => props.theme.color.font.positive
 	}};
-	@media (max-width: ${(props) => props.theme.breakpoints.tabletUp}) {
+	@media (max-width: ${vars.breakpoints.tabletUp}) {
 		padding-right: 20px;
 	}
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		padding-right: 30px;
 	}
 `

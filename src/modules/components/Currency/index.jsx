@@ -61,7 +61,7 @@ const Currenc = styled.div`
 		padding-top: 10px;
 	}
 
-	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media (min-width: ${vars.breakpoints.tablet}) {
 		width: 336px;
 		height: 182px;
 		background-image: url(${currency_tab});
@@ -71,7 +71,7 @@ const Currenc = styled.div`
 		}
 	}
 
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		width: 393px;
 		height: 347px;
 		background-image: url(${currency_desk});

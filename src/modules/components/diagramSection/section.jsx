@@ -11,19 +11,18 @@ import { monthOptions } from './monthOptions'
 
 const StatisticsSection = styled.section`
 	color: ${(props) => props.theme.color.font.primary};
-	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) and (max-width: ${(props) =>
-			props.theme.breakpoints.tabletUp}) {
+	@media (min-width: ${vars.breakpoints.tablet}) and (max-width: ${vars.breakpoints.tabletUp}) {
 		padding-bottom: 35px;
 		min-height: 350px;
 	}
 	padding-bottom: 50px;
 
-	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media (min-width: ${vars.breakpoints.tablet}) {
 		/* padding-top: 45px; */
 		width: 704px;
 	}
 
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		/* padding-top: 45px; */
 		width: 715px;
 	}
@@ -36,13 +35,13 @@ const SectionTitle = styled.h2`
 	line-height: 45px;
 	margin-bottom: 20px;
 
-	@media (max-width: ${(props) => props.theme.breakpoints.mobileUp}) {
+	@media (max-width: ${vars.breakpoints.mobileUp}) {
 		margin-bottom: 5px;
 	}
 `
 
 const SectionContent = styled.div`
-	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media (min-width: ${vars.breakpoints.tablet}) {
 		display: flex;
 		justify-content: space-between;
 
@@ -54,12 +53,12 @@ const SectionContent = styled.div`
 
 const TableWrapper = styled.div`
 	color: ${(props) => props.theme.color.font.primary};
-	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+	@media (min-width: ${vars.breakpoints.tablet}) {
 		width: 336px;
 		margin-top: -43px;
 	}
 
-	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+	@media (min-width: ${vars.breakpoints.desktop}) {
 		width: 395px;
 		margin: 0;
 	}
