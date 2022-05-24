@@ -125,4 +125,4 @@ const ChartSection = () => {
 	)
 }
 
-export { ChartSection }
+export default ChartSection
