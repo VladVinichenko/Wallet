@@ -66,5 +66,5 @@ export const CustomizedSwitches = () => {
 		theme === 'varsDark' ? dispatch(setTheme('varsLight')) : dispatch(setTheme('varsDark'))
 		theme === 'varsDark' ? localStorage.setItem('theme', 'varsLight') : localStorage.setItem('theme', 'varsDark')
 	}
-	return <FormControlLabel control={<MaterialUISwitch sx={{ m: 1 }} checked={getTh} onChange={switchThemes} />} />
+	return <MaterialUISwitch sx={{ m: 1 }} checked={getTh} onClick={switchThemes} />
 }

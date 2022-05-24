@@ -7,7 +7,7 @@ import { selectorsGlobal } from 'store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ROUTES } from 'lib'
-import { Logout } from 'modules'
+import { CustomizedSwitches, Logout } from 'modules'
 import { Modal } from 'modules'
 import { ButtonAddTransaction } from 'modules'
 import { setIsModalAddTransactionOpen } from 'store'
@@ -17,12 +17,19 @@ import { AddTransaction } from 'modules'
 import { CustomLoader } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
+import styled from 'styled-components'
 
 const Header = lazy(() => import('./modules/components/Header' /* webpackChunkName: 'Header' */))
 const Home = lazy(() => import('./modules/pages/home' /* webpackChunkName: 'Home' */))
 const Registration = lazy(() => import('./modules/pages/registration' /* webpackChunkName: 'Registration' */))
 const Login = lazy(() => import('./modules/pages/login' /* webpackChunkName: 'Login' */))
 const NotFoundPage = lazy(() => import('./modules/pages/notFoundPage' /* webpackChunkName: 'Not_found_page' */))
+
+const ButtomSwtichBox = styled.div`
+	position: fixed;
+	bottom: 40px;
+	left: 50px;
+`
 
 export default function App({ switchTheme }) {
 	const dispatch = useDispatch()
@@ -65,6 +72,9 @@ export default function App({ switchTheme }) {
 				)}
 				{isLoggedIn && <Header />}
 				{isLoggedIn && <ButtonAddTransaction onClickButton={showModalAddTransaction} />}
+				<ButtomSwtichBox>
+					<CustomizedSwitches />
+				</ButtomSwtichBox>
 				{isModalLogOut && (
 					<Modal>
 						<Logout />

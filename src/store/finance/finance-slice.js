@@ -23,7 +23,7 @@ const initialState = {
 	},
 	page: 0,
 	data: [],
-	totalBalance: '',
+	totalBalance: 0,
 	categories: [],
 	aviableStatistics: { years: [], months: [] },
 }
@@ -73,7 +73,7 @@ const financeSlice = createSlice({
 		},
 		[fetchTotalFinance.fulfilled]: (state, action) => {
 			state.isLoading = false
-			state.totalBalance = action.payload?.user?.balance
+			state.totalBalance = action.payload.user.balance
 			state.aviableStatistics = action.payload.aviableStatistics
 		},
 		[fetchTotalFinance.rejected]: (state, action) => {
