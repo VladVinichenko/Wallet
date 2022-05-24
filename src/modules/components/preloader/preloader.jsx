@@ -4,12 +4,12 @@ export const Preloader = () => {
 	return (
 		<Loading>
 			<After>
-				<span class='loading__text-words'>W</span>
-				<span class='loading__text-words'>A</span>
-				<span class='loading__text-words'>L</span>
-				<span class='loading__text-words'>L</span>
-				<span class='loading__text-words'>E</span>
-				<span class='loading__text-words'>T</span>
+				<span>W</span>
+				<span>A</span>
+				<span>L</span>
+				<span>L</span>
+				<span>E</span>
+				<span>T</span>
 			</After>
 		</Loading>
 	)

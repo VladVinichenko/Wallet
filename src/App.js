@@ -1,4 +1,4 @@
-import { Fragment, useEffect, lazy, Suspense } from 'react'
+import { Fragment, useEffect, lazy, Suspense, useState } from 'react'
 import { useMatch } from 'react-router-dom'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -35,6 +35,8 @@ const ButtomSwtichBox = styled.div`
 
 export default function App({ switchTheme }) {
 	const dispatch = useDispatch()
+	const [isReadyToRender, setIsReadyToRender] = useState(false)
+
 	const match = useMatch(`/${ROUTES.VERIFY}/:item`)
 	if (match) {
 		dispatch(authOperations.fetchVerify(match.params.item))
@@ -45,6 +47,10 @@ export default function App({ switchTheme }) {
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
 	const themeG = useSelector(selectorsGlobal.getTheme)
+
+	window.onload = function () {
+		setIsReadyToRender(true)
+	}
 
 	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
@@ -66,7 +72,8 @@ export default function App({ switchTheme }) {
 
 	return (
 		<Fragment>
-			<Suspense fallback={<Preloader />}>
+			{!isReadyToRender && <Preloader />}
+			<Suspense fallback={<CustomLoader />}>
 				{isModalLogOut && (
 					<Modal>
 						<Logout name={userName} />
