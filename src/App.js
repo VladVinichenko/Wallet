@@ -18,6 +18,7 @@ import { CustomLoader } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
 import styled from 'styled-components'
+import { Preloader } from './modules/components/preloader/preloader.jsx'
 
 const Header = lazy(() => import('./modules/components/Header' /* webpackChunkName: 'Header' */))
 const Home = lazy(() => import('./modules/pages/home' /* webpackChunkName: 'Home' */))
@@ -65,7 +66,7 @@ export default function App({ switchTheme }) {
 
 	return (
 		<Fragment>
-			<Suspense fallback={<CustomLoader />}>
+			<Suspense fallback={<Preloader />}>
 				{isModalLogOut && (
 					<Modal>
 						<Logout name={userName} />
