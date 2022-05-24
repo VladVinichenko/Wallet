@@ -3,9 +3,10 @@ import { vars } from '../../../stylesheet/vars'
 import { StyledTitle } from '../svgFormPage/svgFormPage'
 
 export const StyledLoginPage = styled.section`
+	height: 100vh;
 	background-color: ${(props) => props.theme.color.background.primary};
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
 		background-color: transparent;

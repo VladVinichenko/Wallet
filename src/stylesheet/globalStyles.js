@@ -6,18 +6,22 @@ html {
   overflow: overlay;
   scrollbar-width: thin;
   
-  scrollbar-width: thin;
-		::-webkit-scrollbar {
-			width: 5px;
-		}
-		::-webkit-scrollbar-thumb {
-			background: gray;
-			border-radius: 10px;
-		}
+  -webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+  }
+  -webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+  }
 
-		::-webkit-scrollbar-track {
-			background: transparent;
-		}
+  -webkit-scrollbar-track {
+    background: transparent;
+  }
+  -webkit-scrollbar-button:{
+    display: none;
+  }
+  
 }
 
 body {

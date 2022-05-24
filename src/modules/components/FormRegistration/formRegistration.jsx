@@ -16,7 +16,7 @@ import { ROUTES } from 'lib'
 const StyledFormRegistration = styled(Form)`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	padding: 38px 20px 36px 20px;
 	margin-left: auto;
@@ -27,6 +27,7 @@ const StyledFormRegistration = styled(Form)`
 	background-color: ${(props) => props.theme.color.background.primary};
 
 	@media screen and (min-width: ${vars.breakpoints.tablet}) {
+		align-items: center;
 		width: 530px;
 		padding: 40px 58px 66px 65px;
 		border-radius: 20px;

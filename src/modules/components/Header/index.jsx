@@ -139,7 +139,6 @@ const Header = () => {
 					</Link>
 					<UserMenu>
 						<Name>{name}</Name>
-						<CustomizedSwitches />
 						<ExitButton onClick={() => dispatch(setIsModalLogoutOpen(true))} type='button' arial-label='Log out'>
 							<ButtonSvg width='18' height='18'>
 								<use href={`${sprite}#icon-exit`}></use>

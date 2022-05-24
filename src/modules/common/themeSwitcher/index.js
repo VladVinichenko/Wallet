@@ -53,7 +53,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 	},
 }))
 
-export function CustomizedSwitches() {
+export const CustomizedSwitches = () => {
 	const theme = useSelector(selectorsGlobal.getTheme)
 	const [getTh, setTh] = React.useState()
 	const dispatch = useDispatch()

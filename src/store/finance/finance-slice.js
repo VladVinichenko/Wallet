@@ -3,6 +3,16 @@ import { fetchFinance, getStatistics, fetchTotalFinance, fetchCategories, addTra
 
 import { toast } from 'react-toastify'
 
+const restoreState = {
+	statistics: {
+		statisticsByCategory: [],
+		incomeTotal: 0,
+		outlayTotal: 0,
+	},
+	page: 0,
+	data: [],
+}
+
 const initialState = {
 	isLoading: false,
 	error: null,
@@ -14,7 +24,7 @@ const initialState = {
 	page: 0,
 	data: [],
 	totalBalance: '',
-	// categories: [],
+	categories: [],
 	aviableStatistics: { years: [], months: [] },
 }
 
@@ -23,7 +33,7 @@ const financeSlice = createSlice({
 	initialState,
 	reducers: {
 		resetFinance: (state, action) => {
-			Object.assign(state, initialState)
+			Object.assign(state, restoreState)
 		},
 	},
 	extraReducers: {

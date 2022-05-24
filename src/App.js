@@ -17,7 +17,6 @@ import { AddTransaction } from 'modules'
 import { CustomLoader } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
-import globalSlice from 'store/global/global-slice'
 
 const Header = lazy(() => import('./modules/components/Header' /* webpackChunkName: 'Header' */))
 const Home = lazy(() => import('./modules/pages/home' /* webpackChunkName: 'Home' */))
