@@ -1,4 +1,4 @@
-import { Fragment, useEffect, lazy, Suspense } from 'react'
+import { Fragment, useEffect, lazy, Suspense, useState } from 'react'
 import { useMatch } from 'react-router-dom'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,6 +18,7 @@ import { CustomLoader } from 'modules'
 import { PrivateRoute } from 'lib'
 import { PublicRoute } from 'lib'
 import styled from 'styled-components'
+import { Preloader } from './modules/components/preloader/preloader.jsx'
 
 const Header = lazy(() => import('./modules/components/Header' /* webpackChunkName: 'Header' */))
 const Home = lazy(() => import('./modules/pages/home' /* webpackChunkName: 'Home' */))
@@ -34,6 +35,8 @@ const ButtomSwtichBox = styled.div`
 
 export default function App({ switchTheme }) {
 	const dispatch = useDispatch()
+	const [isReadyToRender, setIsReadyToRender] = useState(false)
+
 	const match = useMatch(`/${ROUTES.VERIFY}/:item`)
 	if (match) {
 		dispatch(authOperations.fetchVerify(match.params.item))
@@ -44,6 +47,10 @@ export default function App({ switchTheme }) {
 	const isModalLogOut = useSelector(selectorsGlobal.getIsModalLogoutOpen)
 	const isModalAddTransaction = useSelector(selectorsGlobal.getIsModalAddTransactionOpen)
 	const themeG = useSelector(selectorsGlobal.getTheme)
+
+	window.onload = function () {
+		setIsReadyToRender(true)
+	}
 
 	const showModalAddTransaction = () => {
 		dispatch(setIsModalAddTransactionOpen(true))
@@ -65,6 +72,7 @@ export default function App({ switchTheme }) {
 
 	return (
 		<Fragment>
+			{!isReadyToRender && <Preloader />}
 			<Suspense fallback={<CustomLoader />}>
 				{isModalLogOut && (
 					<Modal>
