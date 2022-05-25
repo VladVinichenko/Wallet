@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { getFinance, getTotal, getStatisticsApi, getCategories } from 'api'
-
+import Cookies from 'js-cookie'
 export const fetchFinance = createAsyncThunk('finance', async (page = 1) => {
 	const { data } = await getFinance(page)
 	const categoryArr = await getCategories()
@@ -51,8 +51,8 @@ export const fetchCategories = createAsyncThunk('finance/categories', async () =
 export const fetchPrivat = createAsyncThunk('finances/courses', async () => {
 	try {
 		const { data } = await axios.get('finances/courses')
-		// console.log(data)
-		// return data && data
+		const cookieData = JSON.stringify(data.data)
+		data.data && Cookies.set('courses', cookieData, { expires: 1 })
 	} catch (error) {
 		return rejectWithValue(error.message)
 	}
