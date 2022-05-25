@@ -22,6 +22,7 @@
 		"debug": "^4.3.4",
 		"formik": "^2.2.9",
 		"indicative": "^7.4.4",
+		"js-cookie": "^3.0.1",
 		"nanoid": "^3.3.4",
 		"react": "^17.0.2",
 		"react-chartjs-2": "^4.1.0",
