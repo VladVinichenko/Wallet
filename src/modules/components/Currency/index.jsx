@@ -113,7 +113,7 @@ export const Currency = () => {
 		const fetchCurrency = (courses) => {
 			const data = JSON.parse(courses)
 			const filteredCurrencies = []
-			const currencies = ['USD', 'EUR', 'RUR']
+			const currencies = ['USD', 'EUR', 'BTC']
 			currencies.forEach((currency) => {
 				data?.forEach((element) => {
 					parseInt(element.buy).toFixed(2)
